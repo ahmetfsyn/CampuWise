@@ -1,0 +1,11 @@
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/bin/Debug/net9.0/CampuWise.Infrastructure.deps.json
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/bin/Debug/net9.0/CampuWise.Infrastructure.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/bin/Debug/net9.0/CampuWise.Infrastructure.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/obj/Debug/net9.0/CampuWise.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/obj/Debug/net9.0/CampuWise.Infrastructure.AssemblyInfoInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/obj/Debug/net9.0/CampuWise.Infrastructure.AssemblyInfo.cs
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/obj/Debug/net9.0/CampuWise.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/obj/Debug/net9.0/CampuWise.Infrastructure.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/obj/Debug/net9.0/refint/CampuWise.Infrastructure.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/obj/Debug/net9.0/CampuWise.Infrastructure.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Infrastructure/obj/Debug/net9.0/ref/CampuWise.Infrastructure.dll

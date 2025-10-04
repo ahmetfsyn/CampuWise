@@ -1,0 +1,90 @@
+# OSX
+#
+mobile/.DS_Store
+
+# Xcode
+#
+mobile/build/
+mobile/*.pbxuser
+!mobile/default.pbxuser
+mobile/*.mode1v3
+!mobile/default.mode1v3
+mobile/*.mode2v3
+!mobile/default.mode2v3
+mobile/*.perspectivev3
+!mobile/default.perspectivev3
+mobile/xcuserdata
+mobile/*.xccheckout
+mobile/*.moved-aside
+mobile/DerivedData
+mobile/*.hmap
+mobile/*.ipa
+mobile/*.xcuserstate
+mobile/**/.xcode.env.local
+
+# Android/IntelliJ
+#
+mobile/build/
+mobile/.idea
+mobile/.gradle
+mobile/local.properties
+mobile/*.iml
+mobile/*.hprof
+mobile/.cxx/
+mobile/*.keystore
+!mobile/debug.keystore
+mobile/.kotlin/
+
+# node.js
+#
+mobile/node_modules/
+mobile/npm-debug.log
+mobile/yarn-error.log
+
+# fastlane
+#
+mobile/**/fastlane/report.xml
+mobile/**/fastlane/Preview.html
+mobile/**/fastlane/screenshots
+mobile/**/fastlane/test_output
+
+# Bundle artifact
+mobile/*.jsbundle
+
+# Ruby / CocoaPods
+mobile/**/Pods/
+mobile/vendor/bundle/
+
+# Temporary files created by Metro to check the health of the file watcher
+mobile/.metro-health-check*
+
+# testing
+mobile/coverage
+
+# Yarn
+mobile/.yarn/*
+!mobile/.yarn/patches
+!mobile/.yarn/plugins
+!mobile/.yarn/releases
+!mobile/.yarn/sdks
+!mobile/.yarn/versions
+
+# .NET Core / ASP.NET
+backend/bin/
+backend/obj/
+backend/**/*.user
+backend/**/*.suo
+backend/**/*.vspscc
+backend/**/*.vssscc
+backend/**/*.csproj.user
+backend/.vs/
+backend/**/*.dbmdl
+backend/**/*.log
+backend/**/*.ldf
+backend/**/*.mdf
+backend/**/*.ndf
+backend/**/*.cache
+backend/**/*.pdb
+backend/**/*.exe
+backend/**/*.dll
+backend/**/*.appsettings*.json.local

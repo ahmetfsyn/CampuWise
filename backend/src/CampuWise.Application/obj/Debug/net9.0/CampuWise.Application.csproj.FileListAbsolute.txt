@@ -1,0 +1,11 @@
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/bin/Debug/net9.0/CampuWise.Application.deps.json
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/bin/Debug/net9.0/CampuWise.Application.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/bin/Debug/net9.0/CampuWise.Application.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/obj/Debug/net9.0/CampuWise.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/obj/Debug/net9.0/CampuWise.Application.AssemblyInfoInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/obj/Debug/net9.0/CampuWise.Application.AssemblyInfo.cs
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/obj/Debug/net9.0/CampuWise.Application.csproj.CoreCompileInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/obj/Debug/net9.0/CampuWise.Application.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/obj/Debug/net9.0/refint/CampuWise.Application.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/obj/Debug/net9.0/CampuWise.Application.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/src/CampuWise.Application/obj/Debug/net9.0/ref/CampuWise.Application.dll
