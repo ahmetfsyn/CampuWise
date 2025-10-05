@@ -6,4 +6,7 @@ export type MarkerCardProps = {
     latitude: number;
     longitude: number;
   };
+  address?: string;
+  phone?: string;
+  workingHouse?: string;
 };
