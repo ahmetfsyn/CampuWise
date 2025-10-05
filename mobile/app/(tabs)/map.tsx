@@ -4,144 +4,39 @@ import { useTheme } from "@react-navigation/native";
 import { FlatList, ScrollView, TouchableOpacity } from "react-native";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Text } from "@/components/ui/text";
-import { MarkerCardProps } from "@/types/props";
-import { Card } from "@/components/ui/card";
-import { Heading } from "@/components/ui/heading";
-
-const mapFilters = [
-  {
-    id: "1",
-    name: "Food",
-    displayName: "Yemekler",
-    icon: "food",
-  },
-  {
-    id: "2",
-    name: "Cafe",
-    displayName: "Kafeler",
-    icon: "coffee",
-  },
-  {
-    id: "3",
-    name: "Faculties",
-    displayName: "Fakülteler",
-    icon: "school",
-  },
-  {
-    id: "4",
-    name: "Library",
-    displayName: "Kütüphaneler",
-    icon: "library",
-  },
-  {
-    id: "7",
-    name: "BookStore",
-    displayName: "Sahaflar & Kırtasiyeler",
-    icon: "book",
-  },
-  {
-    id: "8",
-    name: "Dorm",
-    displayName: "Yurtlar",
-    icon: "office-building",
-  },
-  {
-    id: "5",
-    name: "Sport",
-    displayName: "Spor Yerleri",
-    icon: "football",
-  },
-  {
-    id: "6",
-    name: "Hospital",
-    displayName: "Hastaneler & Sağlık Ocakları",
-    icon: "hospital-building",
-  },
-];
-
-const markers = [
-  {
-    id: "m1",
-    category: "Food",
-    title: "Bartın Balık Restaurant",
-    coordinate: { latitude: 41.6345, longitude: 32.3378 },
-  },
-  {
-    id: "m2",
-    category: "Cafe",
-    title: "Köşe Kahve Evi",
-    coordinate: { latitude: 41.6351, longitude: 32.3382 },
-  },
-  {
-    id: "m3",
-    category: "Faculties",
-    title: "Bartın Üniversitesi Mühendislik Fakültesi",
-    coordinate: { latitude: 41.6348, longitude: 32.3495 },
-  },
-  {
-    id: "m4",
-    category: "Library",
-    title: "Bartın Üniversitesi Kütüphanesi",
-    coordinate: { latitude: 41.6352, longitude: 32.3501 },
-  },
-  {
-    id: "m5",
-    category: "BookStore",
-    title: "Bartın Kırtasiye",
-    coordinate: { latitude: 41.636, longitude: 32.3387 },
-  },
-  {
-    id: "m6",
-    category: "Dorm",
-    title: "Bartın KYK Öğrenci Yurdu",
-    coordinate: { latitude: 41.6372, longitude: 32.3485 },
-  },
-  {
-    id: "m7",
-    category: "Sport",
-    title: "Bartın Kapalı Spor Salonu",
-    coordinate: { latitude: 41.6385, longitude: 32.341 },
-  },
-  {
-    id: "m8",
-    category: "Hospital",
-    title: "Bartın Devlet Hastanesi",
-    coordinate: { latitude: 41.6302, longitude: 32.3399 },
-  },
-];
-
-const MarkerCard = ({ category, title }: MarkerCardProps) => {
-  const { colors } = useTheme();
-  return (
-    <Card
-      variant={"filled"}
-      className="p-4 gap-2 rounded-lg "
-      style={{
-        backgroundColor: colors.border,
-
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-      }}
-    >
-      <Heading size={"md"}> {title}</Heading>
-    </Card>
-  );
-};
-
+import NoData from "@/assets/images/no-data.svg";
+import MarkerCard from "@/components/MarkerCard";
+import { mapFilters, markers } from "@/mocks/mockData";
 const MapScreen = () => {
   const { colors } = useTheme();
   const [selectedFilter, setSelectedFilter] = useState(mapFilters[0]);
   const filteredMarkers = markers.filter(
     (marker) => marker.category === selectedFilter.name
   );
+  const mapRef = useRef<MapView>(null);
+
+  useEffect(() => {
+    if (filteredMarkers.length > 0 && mapRef.current) {
+      mapRef.current.fitToCoordinates(
+        filteredMarkers.map((marker) => marker.coordinate),
+        {
+          edgePadding: { top: 80, right: 80, bottom: 80, left: 80 },
+          animated: true,
+        }
+      );
+
+      setTimeout(() => {
+        mapRef.current?.getCamera().then((camera) => {
+          mapRef.current?.animateCamera(
+            { zoom: camera.zoom },
+            { duration: 1000 }
+          );
+        });
+      }, 500);
+    }
+  }, [filteredMarkers]);
 
   return (
     <Box className="flex-1 p-4 gap-4">
@@ -155,11 +50,17 @@ const MapScreen = () => {
           {mapFilters.map((item) => (
             <TouchableOpacity
               key={item.id}
+              activeOpacity={0.5}
               onPress={() => setSelectedFilter(item)}
             >
               <Badge
-                className="gap-2 p-2 rounded-lg"
+                className="gap-2 p-2 rounded-xl"
                 style={{
+                  borderWidth: selectedFilter.id === item.id ? 0 : 0.2,
+                  borderColor:
+                    selectedFilter.id === item.id
+                      ? colors.primary
+                      : colors.secondary,
                   backgroundColor:
                     selectedFilter.id === item.id
                       ? colors.primary
@@ -194,6 +95,7 @@ const MapScreen = () => {
       </Box>
       <Box className="flex-[0.6]">
         <MapView
+          ref={mapRef}
           style={{ flex: 1 }}
           initialRegion={{
             latitude: 39.0,
@@ -216,11 +118,20 @@ const MapScreen = () => {
           ))}
         </MapView>
       </Box>
-      <Box className="flex-[0.4">
+      <Box className="flex-[0.4]">
         <FlatList
+          ListEmptyComponent={() => (
+            <Box className="flex flex-col p-4 items-center gap-2 justify-center w-full">
+              <NoData width={128} height={128} />
+              <Text style={{ color: colors.secondary }}>Konum bulunamadı</Text>
+            </Box>
+          )}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingVertical: 8, gap: 8, flexGrow: 1 }}
+          keyExtractor={(item) => item.id}
           data={filteredMarkers}
           renderItem={({ item }) => <MarkerCard {...item}></MarkerCard>}
-        ></FlatList>
+        />
       </Box>
     </Box>
   );
