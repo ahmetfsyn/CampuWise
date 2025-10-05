@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CampuWise.WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43c987d91ec3170b3b685b8ade2dc51a12027250")]
 [assembly: System.Reflection.AssemblyProductAttribute("CampuWise.WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CampuWise.WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
