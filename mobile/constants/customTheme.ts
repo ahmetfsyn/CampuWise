@@ -8,7 +8,7 @@ export const LightTheme: Theme = {
     text: "#11181c", // genel text
     secondary: "#687076",
     primary: "#0a7ea4", // buton, aktif tab, accent
-    border: "#e5e7eb", // ayırıcı çizgi
+    border: "lightgray", // ayırıcı çizgi
     notification: "#ff5a5f", // uyarılar
   },
   fonts: {
