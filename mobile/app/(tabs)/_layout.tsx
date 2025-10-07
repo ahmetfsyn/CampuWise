@@ -4,7 +4,12 @@ import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import CustomTabBar from "@/components/CustomTabBar";
 import { Box } from "@/components/ui/box";
-import { Avatar } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallbackText,
+  AvatarImage,
+} from "@/components/ui/avatar";
 import Logo from "@/assets/images/campuwise-logo-transparent.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import { Platform, TouchableOpacity, View } from "react-native";
@@ -102,7 +107,20 @@ export default function TabLayout() {
             >
               <Box className="flex flex-row justify-between w-full items-center">
                 <Logo width={160} />
-                <Avatar />
+                <Avatar size="md">
+                  <AvatarFallbackText>Jane Doe</AvatarFallbackText>
+                  <AvatarImage
+                    source={{
+                      uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                    }}
+                  />
+                  <AvatarBadge
+                    className="border-0 items-center justify-center flex  "
+                    size={"lg"}
+                  >
+                    <Text>12</Text>
+                  </AvatarBadge>
+                </Avatar>
               </Box>
             </LinearGradient>
           ),
