@@ -105,7 +105,7 @@ const MapScreen = () => {
           }}
         >
           <UrlTile
-            urlTemplate="http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
+            urlTemplate="https://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
             zIndex={-1}
           />
           {filteredMarkers.map((marker) => (

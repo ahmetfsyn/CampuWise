@@ -1,7 +1,5 @@
 import { Tabs } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
 import CustomTabBar from "@/components/CustomTabBar";
 import { Box } from "@/components/ui/box";
 import {
@@ -15,9 +13,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Platform, TouchableOpacity, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Text } from "@/components/ui/text";
+import { Button, ButtonIcon } from "@/components/ui/button";
+import { BellIcon } from "@/components/ui/icon";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
   const { colors } = useTheme();
   return (
     <Tabs
@@ -107,20 +106,32 @@ export default function TabLayout() {
             >
               <Box className="flex flex-row justify-between w-full items-center">
                 <Logo width={160} />
-                <Avatar size="md">
-                  <AvatarFallbackText>Jane Doe</AvatarFallbackText>
-                  <AvatarImage
-                    source={{
-                      uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-                    }}
-                  />
-                  <AvatarBadge
-                    className="border-0 items-center justify-center flex  "
-                    size={"lg"}
+                <Box className="flex-row gap-6 items-center">
+                  <TouchableOpacity
+                    activeOpacity={0.5}
+                    onPress={() => console.log("Bell clicked")}
                   >
-                    <Text>12</Text>
-                  </AvatarBadge>
-                </Avatar>
+                    <MaterialCommunityIcons
+                      name="bell"
+                      size={24}
+                      color={colors.background}
+                    />
+                  </TouchableOpacity>
+                  <Avatar size="md">
+                    <AvatarFallbackText>Jane Doe</AvatarFallbackText>
+                    <AvatarImage
+                      source={{
+                        uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+                      }}
+                    />
+                    <AvatarBadge
+                      className="border-0 items-center justify-center flex"
+                      size={"lg"}
+                    >
+                      <Text>12</Text>
+                    </AvatarBadge>
+                  </Avatar>
+                </Box>
               </Box>
             </LinearGradient>
           ),

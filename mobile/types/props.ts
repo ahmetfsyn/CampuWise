@@ -1,3 +1,5 @@
+import { Event } from "./models";
+
 export type MarkerCardProps = {
   id: string;
   category: string;
@@ -10,3 +12,5 @@ export type MarkerCardProps = {
   phone?: string;
   workingHouse?: string;
 };
+
+export type EventDeadLineCardProps = Event & {};

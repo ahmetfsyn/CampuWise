@@ -23,7 +23,9 @@ const ShortcutButton = ({ icon, id, name, title }: ShortcutButtonProps) => {
         <MaterialCommunityIcons name={icon} size={32} color="white" />
 
         <Text
-          className="text-lg font-semibold"
+          className="text-lg text-center font-semibold flex-wrap"
+          numberOfLines={1}
+          ellipsizeMode="tail"
           style={{ color: colors.background }}
         >
           {title}

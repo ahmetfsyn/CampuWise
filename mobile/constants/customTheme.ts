@@ -10,6 +10,7 @@ export const LightTheme: Theme = {
     primary: "#0a7ea4", // buton, aktif tab, accent
     border: "lightgray", // ayırıcı çizgi
     notification: "#ff5a5f", // uyarılar
+    success: "#489766",
   },
   fonts: {
     heavy: {
@@ -41,6 +42,7 @@ export const DarkTheme: Theme = {
     primary: "#38bdf8", // buton, aktif tab, accent
     border: "#1a4f73", // ayırıcı çizgi
     notification: "#ff5a5f", // uyarılar
+    success: "#489766",
   },
   fonts: {
     heavy: {
