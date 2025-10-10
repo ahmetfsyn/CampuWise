@@ -26,3 +26,28 @@ export type Marker = {
   imageUrl?: string;
   website?: string;
 };
+
+export type Event = {
+  id: string;
+  place: string;
+  title: string;
+  date: string;
+  description: string;
+  imageUrl?: string;
+  participants: User[];
+};
+
+export type Topic = {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string | undefined;
+};
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  imageUrl?: string;
+};

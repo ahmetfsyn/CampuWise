@@ -1,4 +1,4 @@
-import { Marker, MarkerCategory } from "@/types/models";
+import { Event, Marker, MarkerCategory, Topic, User } from "@/types/models";
 
 export const mapFilters = [
   {
@@ -235,5 +235,122 @@ export const markers: Marker[] = [
     workingHours: "Pzt - Cum 08:00 - 17:00",
     description: "Şehir merkezi diş hastanesi",
     imageUrl: "https://picsum.photos/1280/720?random=15",
+  },
+];
+
+export const users: User[] = [
+  {
+    id: "u1",
+    name: "Alice Doe",
+    email: "G0gm9f@example.com",
+    imageUrl: "https://picsum.photos/1280/720?random=1",
+    phone: "+90 123 456 78 90",
+  },
+  {
+    id: "u2",
+    name: "John Doe",
+    email: "Ga0m9f@example.com",
+    imageUrl: "https://picsum.photos/1280/720?random=2",
+    phone: "+90 123 456 78 92",
+  },
+  {
+    id: "u3",
+    name: "Kate Doe",
+    email: "G0m9f@example.com",
+    imageUrl: "https://picsum.photos/1280/720?random=3",
+    phone: "+90 123 456 78 93",
+  },
+];
+
+export const events: Event[] = [
+  {
+    id: "e1",
+    place: "m1",
+    title: "Bartın Balık Restaurant",
+    date: "2025-10-10",
+    description: "Merkezde uygun fiyatlı balık restoranı",
+    imageUrl: "https://picsum.photos/1280/720?random=1",
+    participants: [users[0], users[1]],
+  },
+  {
+    id: "e2",
+    place: "m2",
+    title: "Bartın Balık Restaurant",
+    date: "2025-10-11",
+    description: "Merkezde uygun fiyatlı balık restoranı",
+    imageUrl: "https://picsum.photos/1280/720?random=2",
+    participants: [users[1]],
+  },
+  {
+    id: "e3",
+    place: "m3",
+    title: "Bartın Balık Restaurant",
+    date: "2025-10-12",
+    description: "Merkezde uygun fiyatlı balık restoranı",
+    imageUrl: "https://picsum.photos/1280/720?random=3",
+    participants: [users[0], users[1], users[2]],
+  },
+];
+
+export const topics: Topic[] = [
+  {
+    id: "t1",
+    title: "Yemek Paylaşımı",
+    imageUrl:
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/eat-together-min.png?updatedAt=1760007997701",
+    description:
+      "Yemek hakkını paylaşarak yurt arkadaşlarına destek olabilirsin.",
+  },
+  {
+    id: "t2",
+    title: "Yurt Önerileri & Şikayetler",
+    description:
+      "Yurt ile ilgili öneri veya şikayette bulunarak yurt hayatını daha iyi hale getirebilirsin.",
+    imageUrl:
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/dorm-problems-min.png?updatedAt=1760007997767",
+  },
+  {
+    id: "t3",
+    title: "Üniversite Soruları",
+    description: "Üniversite ile iligli aklına takılan soruları sorabilirsin.",
+    imageUrl:
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png?updatedAt=1760007997891",
+  },
+  {
+    id: "t4",
+    title: "Anketler",
+    description: "Bir sürü konudan anketi burda bulabilirsin.",
+    imageUrl:
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png?updatedAt=1760007997891",
+  },
+  {
+    id: "t5",
+    title: "Staj & İş Fırsatları",
+    description:
+      "Kariyerine yardımcı olacak her türlü bilgiyi burda bulabilirsin.",
+    imageUrl:
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png?updatedAt=1760007997891",
+  },
+  {
+    id: "t6",
+    title: "İkinci El Satış & Takas",
+    description: "Kullanmadığın eşyaları satabilir veya takas edebilirsin.",
+    imageUrl:
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png?updatedAt=1760007997891",
+  },
+  {
+    id: "t7",
+    title: "Ödev & Ders Yardımı",
+    description: "Notlarını paylaşarak arkadaşlarına yardımcı olabilirsin.",
+    imageUrl:
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png?updatedAt=1760007997891",
+  },
+  {
+    id: "t8",
+    title: "Geri Bildirim",
+    description:
+      "Uygulama hakkında geri bildirimde bulunarak uygulamayı geliştirmemizde yardımcı olabilirsin.",
+    imageUrl:
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png?updatedAt=1760007997891",
   },
 ];
