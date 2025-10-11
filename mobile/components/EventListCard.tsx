@@ -1,32 +1,57 @@
-import { Button, ButtonText } from "./ui/button";
-import { useRouter } from "expo-router";
+import { useTheme } from "@react-navigation/native";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
 import { EventListCardProps } from "@/types/props";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import { useCallback } from "react";
+import { TouchableOpacity } from "react-native";
 
-const EventListCard = ({ title, id }: EventListCardProps) => {
+const EventListCard = ({
+  title,
+  date,
+  place,
+  id,
+  imageUrl,
+}: EventListCardProps) => {
   const router = useRouter();
+  const { colors } = useTheme();
+  const handleEventDetails = useCallback(() => {
+    router.push(`/${id}`);
+  }, [router, id]);
+
   return (
-    <Box>
-      <Box
-        className="flex-1 p-2 rounded-xl mb-4"
-        style={{
-          height: 256,
-        }}
-      >
+    <TouchableOpacity activeOpacity={0.5} onPress={handleEventDetails}>
+      <Box className="mb-4 rounded-xl overflow-hidden h-64 relative">
         <Image
-          source={{ uri: "https://picsum.photos/1080/1920?random=" + id }}
-          contentFit="fill"
+          source={{ uri: imageUrl || "https://picsum.photos/200/200" }}
+          contentFit="cover"
           style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             width: "100%",
             height: "100%",
-            borderRadius: 10,
-            marginBottom: 10,
           }}
         />
+
+        <Box className="absolute bottom-0 left-0 right-0 p-3 bg-black/50">
+          <Text
+            style={{
+              color: colors.background,
+            }}
+            className=" text-lg font-bold mb-1"
+          >
+            {title}
+          </Text>
+          <Text className=" text-sm">
+            {date} · {place}
+          </Text>
+        </Box>
       </Box>
-    </Box>
+    </TouchableOpacity>
   );
 };
 

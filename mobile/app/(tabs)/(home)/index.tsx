@@ -67,6 +67,10 @@ export default function HomeScreen() {
     console.log("show more discussions");
   }, []);
 
+  const upcomingEvents = events.filter(
+    (event) => new Date(event.date).getTime() >= Date.now()
+  );
+
   return (
     <ScrollView showsVerticalScrollIndicator={false} className="flex-1  p-4 ">
       <Box className=" p-2 mb-4 flex-row justify-between items-center">
@@ -180,7 +184,7 @@ export default function HomeScreen() {
         contentContainerStyle={{
           flexGrow: 1,
         }}
-        data={events}
+        data={upcomingEvents}
         ListEmptyComponent={EmptyEventListComponent}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => <EventPreviewCard {...item} />}

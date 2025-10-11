@@ -32,8 +32,10 @@ export type Event = {
   place: string;
   title: string;
   date: string;
+  category: string;
   description: string;
   imageUrl?: string;
+  tags?: string[];
   participants: User[];
 };
 

@@ -1,6 +1,5 @@
 import { Box } from "@/components/ui/box";
 import { useTheme } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native";
 import { Event } from "@/types/models";
 import { Image } from "expo-image";
 import { Badge, BadgeText } from "@/components/ui/badge";
