@@ -10,7 +10,7 @@ const CustomInnerHeader = ({
 }: StackHeaderProps | any) => {
   const { colors } = useTheme();
   const title = options?.title || route.name || "Başlık";
-
+  // console.log(options?.title);
   return (
     <View
       style={{
