@@ -23,6 +23,7 @@ export const shortcuts = [
     name: "events",
     title: "Etkinlikler",
     icon: "calendar",
+    link: "/events",
   },
   {
     id: "2",

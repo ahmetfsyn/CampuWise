@@ -1,78 +1,17 @@
 import { Tabs } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CustomTabBar from "@/components/CustomTabBar";
-import { Box } from "@/components/ui/box";
-import {
-  Avatar,
-  AvatarBadge,
-  AvatarFallbackText,
-  AvatarImage,
-} from "@/components/ui/avatar";
-import Logo from "@/assets/images/campuwise-logo-transparent.svg";
-import { LinearGradient } from "expo-linear-gradient";
-import { Platform, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Text } from "@/components/ui/text";
-import { Button, ButtonIcon } from "@/components/ui/button";
-import { BellIcon } from "@/components/ui/icon";
+import CustomMainHeader from "@/components/CustomMainHeader";
+import CustomInnerHeader from "@/components/CustomInnerHeader";
 
 export default function TabLayout() {
-  const { colors } = useTheme();
   return (
     <Tabs
       screenOptions={{
         headerShown: true,
-        header: ({ navigation, options }) => {
-          const title = options.title ?? options.tabBarLabel ?? options.name;
-
-          return (
-            <View
-              style={{
-                backgroundColor: colors.primary,
-                height: 90,
-                flexDirection: "row",
-                alignItems: "center",
-                paddingTop: 30, // status bar boşluğu
-                paddingHorizontal: 16,
-                justifyContent: "space-between",
-              }}
-              className="rounded-b-[32px]"
-            >
-              {/* Geri Butonu */}
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                disabled={!navigation.canGoBack()}
-                style={{
-                  opacity: navigation.canGoBack() ? 1 : 0,
-                  padding: 4,
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="arrow-left"
-                  size={24}
-                  color={colors.background}
-                />
-              </TouchableOpacity>
-
-              {/* Başlık */}
-              <Text
-                style={{
-                  color: colors.background,
-                  fontSize: 20,
-                  fontWeight: "600",
-                  textAlign: "center",
-                  flex: 1,
-                }}
-                numberOfLines={1}
-              >
-                {title}
-              </Text>
-
-              {/* Sağ boşluk (geri tuşu hizası için) */}
-              <View style={{ width: 28 }} />
-            </View>
-          );
-        },
         tabBarStyle: {
           borderTopWidth: 0,
           elevation: 0,
@@ -81,66 +20,11 @@ export default function TabLayout() {
       tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
-          title: "Home",
-          headerShown: true,
-          header: ({ layout, navigation, options, route }) => (
-            <LinearGradient
-              colors={["#0a7ea4", "#38bdf8"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{
-                height: 90,
-                borderBottomLeftRadius: 32,
-                borderBottomRightRadius: 32,
-                paddingHorizontal: 20,
-                flexDirection: "row",
-                alignItems: "flex-end",
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.5,
-                shadowRadius: 10,
-                elevation: Platform.OS === "android" ? 10 : 0,
-              }}
-            >
-              <Box className="flex flex-row justify-between w-full items-center">
-                <Logo width={160} />
-                <Box className="flex-row gap-6 items-center">
-                  <TouchableOpacity
-                    activeOpacity={0.5}
-                    onPress={() => console.log("Bell clicked")}
-                  >
-                    <MaterialCommunityIcons
-                      name="bell"
-                      size={24}
-                      color={colors.background}
-                    />
-                  </TouchableOpacity>
-                  <Avatar size="md">
-                    <AvatarFallbackText>Jane Doe</AvatarFallbackText>
-                    <AvatarImage
-                      source={{
-                        uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-                      }}
-                    />
-                    <AvatarBadge
-                      className="border-0 items-center justify-center flex"
-                      size={"lg"}
-                    >
-                      <Text>12</Text>
-                    </AvatarBadge>
-                  </Avatar>
-                </Box>
-              </Box>
-            </LinearGradient>
-          ),
+          headerShown: false,
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="home"
-              color={color}
-              size={24}
-            ></MaterialCommunityIcons>
+            <MaterialCommunityIcons name="home" color={color} size={24} />
           ),
         }}
       />
@@ -149,11 +33,7 @@ export default function TabLayout() {
         options={{
           title: "Harita",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="map-marker"
-              color={color}
-              size={24}
-            ></MaterialCommunityIcons>
+            <MaterialCommunityIcons name="map-marker" color={color} size={24} />
           ),
         }}
       />
@@ -162,11 +42,7 @@ export default function TabLayout() {
         options={{
           title: "Hesabım",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="account"
-              color={color}
-              size={24}
-            ></MaterialCommunityIcons>
+            <MaterialCommunityIcons name="account" color={color} size={24} />
           ),
         }}
       />
