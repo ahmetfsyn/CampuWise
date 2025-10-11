@@ -14,3 +14,4 @@ export type MarkerCardProps = {
 };
 
 export type EventDeadLineCardProps = Event & {};
+export type EventListCardProps = Event & {};

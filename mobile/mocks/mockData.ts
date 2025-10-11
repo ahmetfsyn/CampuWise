@@ -321,7 +321,7 @@ export const topics: Topic[] = [
     title: "Anketler",
     description: "Bir sürü konudan anketi burda bulabilirsin.",
     imageUrl:
-      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png?updatedAt=1760007997891",
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/survey-min.png?updatedAt=1760100672705",
   },
   {
     id: "t5",
@@ -329,7 +329,7 @@ export const topics: Topic[] = [
     description:
       "Kariyerine yardımcı olacak her türlü bilgiyi burda bulabilirsin.",
     imageUrl:
-      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png?updatedAt=1760007997891",
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/internships-and-jobs-min.png?updatedAt=1760102310200",
   },
   {
     id: "t6",
