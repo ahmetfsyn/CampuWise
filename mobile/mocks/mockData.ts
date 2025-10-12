@@ -385,7 +385,7 @@ export const topics: Topic[] = [
     description:
       "Yemek hakkını paylaşarak yurt arkadaşlarına destek olabilirsin.",
     imageUrl:
-      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/eat-together-min.png",
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/eat-together.png",
   },
   {
     id: "t2",
@@ -399,7 +399,7 @@ export const topics: Topic[] = [
     title: "Üniversite Soruları",
     description: "Üniversite ile ilgili sorularını sorabilirsin.",
     imageUrl:
-      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png",
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/frequenly-asks-abobut-university-min.png",
   },
   {
     id: "t4",
@@ -420,7 +420,7 @@ export const topics: Topic[] = [
     title: "İkinci El Satış & Takas",
     description: "Kullanmadığın eşyaları satabilir veya takas edebilirsin.",
     imageUrl:
-      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png",
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/image-min.png",
   },
   {
     id: "t7",
@@ -435,6 +435,6 @@ export const topics: Topic[] = [
     description:
       "Uygulama hakkında geri bildirim vererek geliştirmeye yardımcı olabilirsin.",
     imageUrl:
-      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png",
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/feedback-min.png",
   },
 ];

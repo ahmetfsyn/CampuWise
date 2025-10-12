@@ -28,6 +28,7 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="map"
         options={{
@@ -37,10 +38,11 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
-        name="profile"
+        name="(profile)"
         options={{
-          title: "Hesabım",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={24} />
           ),

@@ -12,17 +12,86 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 import { Badge, BadgeText } from "@/components/ui/badge";
+import { useCallback, useState } from "react";
+import AnimatedButton from "@/components/AnimatedButton";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  Modal,
+  ModalBackdrop,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from "@/components/ui/modal";
+import { Heading } from "@/components/ui/heading";
+import { CloseIcon, Icon } from "@/components/ui/icon";
+import { Textarea, TextareaInput } from "@/components/ui/textarea";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogBody,
+  AlertDialogBackdrop,
+} from "@/components/ui/alert-dialog";
 
 const EventDetailsScreen = () => {
   const { id } = useLocalSearchParams();
   const { colors } = useTheme();
-  console.log(id);
+  const [isJoinedEvent, setJoinedEvent] = useState<boolean>(false);
+  const [isReportedEvent, setIsReportedEvent] = useState<boolean>(false);
+  const [showReportModal, setShowReportModal] = useState<boolean>(false);
+  const [showCancelJoiningDialog, setShowCancelJoiningDialog] =
+    useState<boolean>(false);
+
+  const [reportText, setReportText] = useState<string>("");
+
   const event = events.find((event) => event.id === id);
-  // console.log(event);
+
+  const handleCloseCancelJoiningDialog = useCallback(() => {
+    setShowCancelJoiningDialog(false);
+  }, []);
+
+  const handleLeaveEvent = useCallback(() => {
+    setJoinedEvent(false);
+    setShowCancelJoiningDialog(false);
+    console.log("You have left the event. Thank u");
+  }, []);
+
+  const handleJoinEvent = useCallback(() => {
+    if (!isJoinedEvent) {
+      setJoinedEvent(true);
+      console.log("You have joined the event. Thank u");
+    } else {
+      // setJoinedEvent(false);
+      setShowCancelJoiningDialog(true);
+    }
+  }, [isJoinedEvent]);
+
+  const handleShowReportModal = useCallback(() => {
+    if (!isReportedEvent) {
+      setShowReportModal(true);
+    } else {
+      console.log("You have already reported this event. Thank u");
+    }
+  }, [isReportedEvent]);
+
+  const handleReportEvent = useCallback(() => {
+    if (reportText) {
+      console.log("event is reported. Thank u");
+      setIsReportedEvent(true);
+      setShowReportModal(false);
+    }
+  }, [reportText]);
+
+  const handleCancelReport = useCallback(() => {
+    setShowReportModal(false);
+  }, []);
+
   return (
     <ScrollView
-      contentContainerStyle={{ flexGrow: 1 }}
-      contentContainerClassName="py-4"
+      contentContainerClassName="py-4 "
       showsVerticalScrollIndicator={false}
     >
       <Box className="h-64 w-full relative">
@@ -43,6 +112,7 @@ const EventDetailsScreen = () => {
           </Text>
         </Box>
       </Box>
+
       <Box className="p-6 gap-4">
         <Box className="gap-2">
           <Text
@@ -51,7 +121,7 @@ const EventDetailsScreen = () => {
           >
             Tarih & Saat
           </Text>
-          <Text style={{ color: colors.text }} className="text-lg font-normal">
+          <Text style={{ color: colors.text }} className="text-lg font-medium">
             {event?.date}
           </Text>
         </Box>
@@ -63,7 +133,7 @@ const EventDetailsScreen = () => {
           >
             Konum
           </Text>
-          <Text style={{ color: colors.text }} className="text-lg font-normal">
+          <Text style={{ color: colors.text }} className="text-lg font-medium">
             {event?.place}
           </Text>
         </Box>
@@ -75,7 +145,7 @@ const EventDetailsScreen = () => {
           >
             Açıklama
           </Text>
-          <Text style={{ color: colors.text }} className="text-lg font-normal">
+          <Text style={{ color: colors.text }} className="text-lg font-medium">
             {event?.description}
           </Text>
         </Box>
@@ -87,7 +157,7 @@ const EventDetailsScreen = () => {
           >
             Organizatör
           </Text>
-          <Text style={{ color: colors.text }} className="text-lg font-normal">
+          <Text style={{ color: colors.text }} className="text-lg font-medium">
             {event?.participants
               .map((participant) => participant.name)
               .join(", ")}
@@ -169,7 +239,7 @@ const EventDetailsScreen = () => {
                   style={{
                     color: colors.background,
                   }}
-                  className="normal-case font-bold"
+                  className="uppercase  font-bold"
                 >
                   {tag}
                 </BadgeText>
@@ -178,6 +248,154 @@ const EventDetailsScreen = () => {
           </Box>
         </Box>
       </Box>
+
+      <Box className="px-6 flex-row gap-2">
+        <AnimatedButton
+          buttonClassName="h-16 rounded-xl"
+          onPress={handleShowReportModal}
+          style={{
+            backgroundColor: isReportedEvent
+              ? colors.border
+              : colors.notification,
+          }}
+          icon={
+            <MaterialCommunityIcons
+              name="block-helper"
+              size={24}
+              color={colors.background}
+            />
+          }
+        />
+
+        <AnimatedButton
+          buttonClassName="flex-1 h-16 rounded-xl"
+          textClassName="uppercase"
+          style={{
+            backgroundColor: isJoinedEvent
+              ? colors.notification
+              : colors.primary,
+          }}
+          onPress={handleJoinEvent}
+        >
+          {!isJoinedEvent ? "Hemen Katıl" : "Etkinlikten Ayrıl"}
+        </AnimatedButton>
+      </Box>
+
+      <Modal
+        isOpen={showReportModal}
+        onClose={() => {
+          setShowReportModal(false);
+        }}
+        size="lg"
+      >
+        <ModalBackdrop />
+        <ModalContent
+          className="border-0"
+          style={{ backgroundColor: colors.card }}
+        >
+          <ModalHeader>
+            <Heading style={{ color: colors.text }} size="lg">
+              Etkinliği Rapor Et
+            </Heading>
+            <ModalCloseButton>
+              <Icon as={CloseIcon} />
+            </ModalCloseButton>
+          </ModalHeader>
+          <ModalBody>
+            <Box className="gap-4">
+              <Text style={{ color: colors.text }}>
+                Etkinlik hakkında bir sorun mu var ? Nedenini belirterek
+                incelememiz için bize rapor edebilirsin.
+              </Text>
+              <Textarea isRequired size={"lg"}>
+                <TextareaInput
+                  style={{ color: colors.text }}
+                  value={reportText}
+                  onChangeText={(text) => setReportText(text)}
+                  placeholder="Raporlama nedeniniz..."
+                />
+              </Textarea>
+            </Box>
+          </ModalBody>
+          <ModalFooter>
+            <AnimatedButton
+              className="rounded-xl"
+              style={{
+                backgroundColor: colors.secondary,
+              }}
+              onPress={handleCancelReport}
+            >
+              Vazgeç
+            </AnimatedButton>
+
+            <AnimatedButton
+              className="rounded-xl"
+              style={{
+                backgroundColor: colors.primary,
+              }}
+              onPress={handleReportEvent}
+            >
+              Gönder
+            </AnimatedButton>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <AlertDialog
+        isOpen={showCancelJoiningDialog}
+        onClose={handleCloseCancelJoiningDialog}
+        size="lg"
+      >
+        <AlertDialogBackdrop />
+        <AlertDialogContent
+          style={{
+            backgroundColor: colors.card,
+          }}
+          className="border-0"
+        >
+          <AlertDialogHeader>
+            <Heading
+              style={{
+                color: colors.text,
+              }}
+              className="text-typography-950 font-semibold"
+              size="lg"
+            >
+              Etkinlikten ayrılmak istediğinize emin misiniz ?
+            </Heading>
+          </AlertDialogHeader>
+          <AlertDialogBody className="mt-3 mb-4">
+            <Text
+              style={{
+                color: colors.text,
+              }}
+              size="md"
+            >
+              Etkinlikten ayrılırsanız, katılımcılar arasından silineceksiniz.
+              İsterseniz tekrar katılabilirsiniz.
+            </Text>
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <AnimatedButton
+              className="rounded-xl"
+              style={{
+                backgroundColor: colors.notification,
+              }}
+              onPress={handleLeaveEvent}
+            >
+              Ayrıl
+            </AnimatedButton>
+            <AnimatedButton
+              className="rounded-xl"
+              style={{
+                backgroundColor: colors.secondary,
+              }}
+              onPress={handleCloseCancelJoiningDialog}
+            >
+              Vazgeç
+            </AnimatedButton>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </ScrollView>
   );
 };
