@@ -10,6 +10,12 @@ export default function EventsLayout() {
       }}
     >
       <Stack.Screen name="events" options={{ title: "Etkinlikler" }} />
+
+      <Stack.Screen
+        name="create-event"
+        options={{ title: "Etkinlik Oluştur" }}
+      />
+
       <Stack.Screen name="[id]" options={{ title: "Etkinlik Detayları" }} />
     </Stack>
   );

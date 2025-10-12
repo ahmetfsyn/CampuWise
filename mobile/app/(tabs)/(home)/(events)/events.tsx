@@ -2,14 +2,19 @@ import EmptyEventListComponent from "@/components/EmptyEventListComponent";
 import EventListCard from "@/components/EventListCard";
 import EventsFlatListHeader from "@/components/EventsFlatListHeader";
 import { Box } from "@/components/ui/box";
+import { Fab, FabIcon, FabLabel } from "@/components/ui/fab";
+import { AddIcon } from "@/components/ui/icon";
 import { eventFilters, events } from "@/mocks/mockData";
-import { useMemo, useState } from "react";
+import { useTheme } from "@react-navigation/native";
+import { useRouter } from "expo-router";
+import { useCallback, useMemo, useState } from "react";
 import { FlatList } from "react-native";
 
 const EventsScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState(eventFilters[0]);
   const [searchString, setSearchString] = useState<string>("");
-
+  const router = useRouter();
+  const { colors } = useTheme();
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const matchesSearch = event.title
@@ -22,6 +27,10 @@ const EventsScreen = () => {
       return matchesSearch && matchesCategory;
     });
   }, [selectedFilter, searchString]);
+
+  const handleCreateEvent = useCallback(() => {
+    router.push("/create-event");
+  }, [router]);
 
   return (
     <Box className="flex-1 p-4">
@@ -45,6 +54,20 @@ const EventsScreen = () => {
         renderItem={({ item }) => <EventListCard {...item} />}
         keyExtractor={(item) => item.id}
       />
+      <Fab
+        style={{
+          backgroundColor: colors.primary,
+        }}
+        className="right-4 bottom-8"
+        size="md"
+        placement="bottom right"
+        onPress={handleCreateEvent}
+      >
+        <FabIcon style={{ color: colors.background }} as={AddIcon} />
+        <FabLabel style={{ color: colors.background }}>
+          Etkinlik Oluştur
+        </FabLabel>
+      </Fab>
     </Box>
   );
 };
