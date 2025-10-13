@@ -29,8 +29,15 @@ const EventsScreen = () => {
   }, [selectedFilter, searchString]);
 
   const handleCreateEvent = useCallback(() => {
-    router.push("/create-event");
+    router.push("/events/create-event");
   }, [router]);
+
+  const handleGoEventDetails = useCallback(
+    (eventId: string) => {
+      router.push(`/events/${eventId}`);
+    },
+    [router]
+  );
 
   return (
     <Box className="flex-1 p-4">
@@ -51,7 +58,12 @@ const EventsScreen = () => {
         windowSize={5}
         ListEmptyComponent={<EmptyEventListComponent />}
         data={filteredEvents}
-        renderItem={({ item }) => <EventListCard {...item} />}
+        renderItem={({ item }) => (
+          <EventListCard
+            onPress={() => handleGoEventDetails(item.id)}
+            {...item}
+          />
+        )}
         keyExtractor={(item) => item.id}
       />
       <Fab

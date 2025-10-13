@@ -1,5 +1,4 @@
 import { Box } from "@/components/ui/box";
-import { useTheme } from "@react-navigation/native";
 import { Event } from "@/types/models";
 import { Image } from "expo-image";
 import { Badge, BadgeText } from "@/components/ui/badge";
@@ -7,30 +6,30 @@ import { memo, useCallback, useEffect, useState } from "react";
 import AnimatedPressableComponent from "./AnimatedPressable";
 
 export type EventPreviewCardProps = Event & {
-  onPress?: () => void;
+  onPress: () => void;
 };
 
 const EventPreviewCard = ({
-  title,
   imageUrl,
   date,
   participants,
   onPress,
 }: EventPreviewCardProps) => {
-  const { colors } = useTheme();
   const [remainDays, setRemainDays] = useState(-1);
 
   const getRemainingDays = useCallback(() => {
-    if (!date) return null; // date prop boşsa
+    if (!date) return null;
     const today = new Date();
     const eventDate = new Date(date);
 
     // Gün farkını hesapla
     const diffTime = eventDate.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    console.log(diffDays);
+    // console.log(diffDays);
     setRemainDays(diffDays);
   }, [date]);
+
+  console.log("render oldu");
 
   useEffect(() => {
     getRemainingDays();

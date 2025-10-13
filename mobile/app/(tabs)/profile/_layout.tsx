@@ -14,6 +14,18 @@ export default function ProfileLayout() {
           title: "Hesabım",
         }}
       />
+      <Stack.Screen
+        name="edit"
+        options={{
+          title: "Profilini Düzenle",
+        }}
+      />
+      <Stack.Screen
+        name="settings"
+        options={{
+          title: "Ayarlar",
+        }}
+      />
     </Stack>
   );
 }

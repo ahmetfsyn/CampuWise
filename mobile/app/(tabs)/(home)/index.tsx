@@ -71,6 +71,20 @@ export default function HomeScreen() {
     (event) => new Date(event.date).getTime() >= Date.now()
   );
 
+  const handleGoEvents = useCallback(() => {
+    router.push("/events");
+  }, [router]);
+
+  const handleGoEventDetails = useCallback(
+    (eventId: string) => {
+      router.push({
+        pathname: "/events/[id]",
+        params: { id: eventId },
+      });
+    },
+    [router]
+  );
+
   return (
     <ScrollView showsVerticalScrollIndicator={false} className="flex-1  p-4 ">
       <Box className=" p-2 mb-4 flex-row justify-between items-center">
@@ -118,7 +132,11 @@ export default function HomeScreen() {
         {shortcuts.map((shortcut, index) => {
           return (
             index < 4 && (
-              <ShortcutButton {...shortcut} key={shortcut.id}></ShortcutButton>
+              <ShortcutButton
+                onPress={handleGoEvents}
+                {...shortcut}
+                key={shortcut.id}
+              ></ShortcutButton>
             )
           );
         })}
@@ -140,7 +158,7 @@ export default function HomeScreen() {
       <FlatList
         horizontal
         getItemLayout={(data, index) => ({
-          length: 192,
+          length: ITEM_WIDTH,
           offset: ITEM_WIDTH * index,
           index,
         })}
@@ -156,7 +174,7 @@ export default function HomeScreen() {
         style={{
           marginBottom: 24,
         }}
-      ></FlatList>
+      />
 
       <Box className="flex-row mt-4 mb-2 justify-between items-center">
         <Text className="text-xl font-semibold" style={{ color: colors.text }}>
@@ -187,7 +205,12 @@ export default function HomeScreen() {
         data={upcomingEvents}
         ListEmptyComponent={EmptyEventListComponent}
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => <EventPreviewCard {...item} />}
+        renderItem={({ item }) => (
+          <EventPreviewCard
+            {...item}
+            onPress={() => handleGoEventDetails(item.id)}
+          />
+        )}
         nestedScrollEnabled
         keyExtractor={(item) => item.id}
         style={{

@@ -16,21 +16,24 @@ const AnimatedPressableComponent = ({
   onPress,
 }: AnimatedPressable) => {
   const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
-
+  const opacity = useSharedValue(1);
   const scale = useSharedValue(1); // varsayılan boyut
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
+    opacity: opacity.value,
   }));
 
   return (
     <AnimatedPressable
       style={[animatedStyle]}
       onPressIn={() => {
-        scale.value = withSpring(0.95, { stiffness: 200, damping: 15 });
+        scale.value = withSpring(0.95);
+        opacity.value = withSpring(0.8);
       }}
       onPressOut={() => {
-        scale.value = withSpring(1, { stiffness: 200, damping: 15 });
+        scale.value = withSpring(1);
+        opacity.value = withSpring(1);
       }}
       onPress={onPress}
     >
