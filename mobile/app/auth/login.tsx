@@ -21,13 +21,17 @@ const LoginScreen = () => {
   const router = useRouter();
   const handleLogin = async () => {
     // backend'den token alındığını varsayalım
-    await AsyncStorage.setItem("token", "fake_token");
-    router.replace("(tabs)");
+    // await AsyncStorage.setItem("token", "fake_token");
+    // router.replace("(tabs)");
+    // todo: backend'den token alınacak
+
+    console.log("Giriş yapıldı");
   };
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const handleNewAccount = () => {
-    return router.push("/(auth)/register");
+    return router.push("/auth/register");
   };
+
   return (
     <SafeAreaView
       className="p-6 flex justify-center"
@@ -54,7 +58,7 @@ const LoginScreen = () => {
           <Input
             variant="rounded"
             size="xl"
-            className="h-16 rounded-xl"
+            className="h-14 rounded-xl"
             style={{
               borderColor: colors.border,
             }}
@@ -63,7 +67,7 @@ const LoginScreen = () => {
           </Input>
           <Input
             variant="rounded"
-            className="h-16 rounded-xl"
+            className="h-14 rounded-xl"
             size="xl"
             style={{
               borderColor: colors.border,
@@ -100,7 +104,7 @@ const LoginScreen = () => {
         <Button
           onPress={handleLogin}
           size={"xl"}
-          className="rounded-xl h-16"
+          className="rounded-xl h-14"
           style={{
             backgroundColor: colors.primary,
           }}

@@ -29,8 +29,6 @@ const EventPreviewCard = ({
     setRemainDays(diffDays);
   }, [date]);
 
-  console.log("render oldu");
-
   useEffect(() => {
     getRemainingDays();
   }, [getRemainingDays]);

@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 import { Box } from "@/components/ui/box";
 import { events, users } from "@/mocks/mockData";
 import { Text } from "@/components/ui/text";

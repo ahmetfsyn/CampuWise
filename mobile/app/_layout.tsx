@@ -11,19 +11,19 @@ import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const unstable_settings = {
-  initialRouteName: "(auth)",
+  initialRouteName: "auth",
   anchor: "(tabs)",
 };
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-  const [showSplash, setShowSplash] = useState<boolean>(true);
+  const [showSplash, setShowSplash] = useState<boolean>(false);
 
   useEffect(() => {
     const checkAuth = async () => {
       const token = await AsyncStorage.getItem("token");
-      setIsAuthenticated(!!token);
+      setIsAuthenticated(false);
       setShowSplash(false);
     };
     checkAuth();
@@ -40,7 +40,7 @@ export default function RootLayout() {
           {isAuthenticated ? (
             <Stack.Screen name="(tabs)" />
           ) : (
-            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="auth" />
           )}
         </Stack>
         <StatusBar style={colorScheme === "light" ? "dark" : "light"} />
