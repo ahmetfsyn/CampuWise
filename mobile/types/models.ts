@@ -20,7 +20,7 @@ export type Marker = {
   title: string;
   coordinate: Coordinate;
   address?: string;
-  phone?: string;
+  phoneNumber?: string;
   workingHours?: string;
   description?: string;
   imageUrl?: string;
@@ -48,8 +48,8 @@ export type Topic = {
 
 export type User = {
   id: string;
-  name: string;
+  fullName: string;
   email: string;
-  phone?: string;
+  phoneNumber?: string;
   imageUrl?: string;
 };

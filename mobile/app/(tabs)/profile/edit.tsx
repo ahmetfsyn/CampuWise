@@ -3,22 +3,32 @@ import { Input, InputField } from "@/components/ui/input";
 import AnimatedButton from "@/components/AnimatedButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useTheme } from "@react-navigation/native";
-import { useState } from "react";
-import { users } from "@/mocks/mockData";
 import { ScrollView, KeyboardAvoidingView, Platform } from "react-native";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { users } from "@/mocks/mockData";
+import { editProfileFormSchema } from "@/validations/edit-profile-form";
+import { Text } from "@/components/ui/text";
 
 const EditProfileScreen = () => {
   const { colors } = useTheme();
+  const { email, fullName, phoneNumber, imageUrl } = users[0];
 
-  const user = users[0];
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      fullName: fullName,
+      email: email,
+      phoneNumber: phoneNumber,
+    },
+    resolver: yupResolver(editProfileFormSchema),
+  });
 
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [phone, setPhone] = useState(user.phone);
-  const [imageUrl, setImageUrl] = useState(user.imageUrl);
-
-  const handleSave = () => {
-    console.log("Profile saved:", { name, email, phone, imageUrl });
+  const handleSave = (data: any) => {
+    console.log("Profile saved:", data);
   };
 
   const handleChangeAvatar = () => {
@@ -49,60 +59,106 @@ const EditProfileScreen = () => {
         </Box>
 
         <Box className="gap-4">
-          <Input
-            variant="rounded"
-            size="lg"
-            id="fullName"
-            className="h-14 rounded-xl"
-            style={{
-              borderColor: colors.border,
-            }}
-          >
-            <InputField
-              onChangeText={(text) => setName(text)}
-              placeholder="Ad-Soyad"
-              style={{ color: colors.text }}
-            />
-          </Input>
+          {/* Name */}
+          <Controller
+            control={control}
+            name="fullName"
+            render={({ field: { onChange, value } }) => (
+              <>
+                <Input
+                  variant="rounded"
+                  isInvalid={errors.fullName ? true : false}
+                  size="lg"
+                  className="h-14 rounded-xl"
+                  style={{ borderColor: colors.border }}
+                >
+                  <InputField
+                    value={value}
+                    onChangeText={onChange}
+                    placeholder="Ad-Soyad"
+                    style={{ color: colors.text }}
+                  />
+                </Input>
+                {errors.fullName && (
+                  <Box className="px-2">
+                    <Text style={{ color: "red" }}>
+                      {errors.fullName.message}
+                    </Text>
+                  </Box>
+                )}
+              </>
+            )}
+          />
 
-          <Input
-            variant="rounded"
-            size="lg"
-            id="email"
-            className="h-14 rounded-xl"
-            style={{
-              borderColor: colors.border,
-            }}
-          >
-            <InputField
-              onChangeText={(text) => setEmail(text)}
-              placeholder="Email"
-              style={{ color: colors.text }}
-            />
-          </Input>
+          {/* Email */}
+          <Controller
+            control={control}
+            name="email"
+            render={({ field: { onChange, value } }) => (
+              <>
+                <Input
+                  variant="rounded"
+                  isInvalid={errors.email ? true : false}
+                  size="lg"
+                  className="h-14 rounded-xl"
+                  style={{ borderColor: colors.border }}
+                >
+                  <InputField
+                    value={value}
+                    onChangeText={onChange}
+                    placeholder="Email"
+                    style={{ color: colors.text }}
+                    keyboardType="email-address"
+                  />
+                </Input>
+                {errors.email && (
+                  <Box className="mt-1">
+                    <Text style={{ color: "red" }}>{errors.email.message}</Text>
+                  </Box>
+                )}
+              </>
+            )}
+          />
 
-          <Input
-            variant="rounded"
-            size="lg"
-            id="phoneNumber"
-            className="h-14 rounded-xl"
-            style={{
-              borderColor: colors.border,
-            }}
-          >
-            <InputField
-              onChangeText={(text) => setPhone(text)}
-              placeholder="Telefon Numarası"
-              style={{ color: colors.text }}
-            />
-          </Input>
+          {/* Phone */}
+          <Controller
+            control={control}
+            name="phoneNumber"
+            render={({ field: { onChange, value } }) => (
+              <>
+                <Input
+                  variant="rounded"
+                  size="lg"
+                  isInvalid={errors.phoneNumber ? true : false}
+                  className="h-14 rounded-xl"
+                  style={{ borderColor: colors.border }}
+                >
+                  <InputField
+                    value={value}
+                    onChangeText={onChange}
+                    placeholder="Telefon Numarası"
+                    style={{ color: colors.text }}
+                    keyboardType="phone-pad"
+                  />
+                </Input>
+                {errors.phoneNumber && (
+                  <Box className="mt-1">
+                    <Text style={{ color: "red" }}>
+                      {errors.phoneNumber.message}
+                    </Text>
+                  </Box>
+                )}
+              </>
+            )}
+          />
 
           <AnimatedButton
             size={"lg"}
             buttonClassName="rounded-xl h-14 mt-6"
-            onPress={handleSave}
+            onPress={handleSubmit(handleSave)}
             style={{ backgroundColor: colors.primary }}
-            textClassName=" font-semibold"
+            textClassName="font-semibold"
+            disabled={Object.keys(errors).length > 0 ? true : false}
           >
             Kaydet
           </AnimatedButton>

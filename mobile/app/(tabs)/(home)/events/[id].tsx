@@ -155,11 +155,11 @@ const EventDetailsScreen = () => {
             style={{ color: colors.primary }}
             className="text-md font-semibold"
           >
-            Organizatör
+            Organizatör(ler)
           </Text>
           <Text style={{ color: colors.text }} className="text-lg font-medium">
             {event?.participants
-              .map((participant) => participant.name)
+              .map((participant) => participant.fullName)
               .join(", ")}
           </Text>
         </Box>
@@ -191,7 +191,7 @@ const EventDetailsScreen = () => {
                         <AvatarImage source={{ uri: participant.imageUrl }} />
                       ) : (
                         <AvatarFallbackText>
-                          {participant.name
+                          {participant.fullName
                             .split(" ")
                             .map((n) => n[0])
                             .join("")

@@ -18,15 +18,15 @@ const ProfileFlatListHeaderComponent = ({
   handleGoSettings,
 }: ProfileFlatListHeaderComponentProps) => {
   const { colors } = useTheme();
-  const { name, imageUrl } = users[0];
+  const { fullName, imageUrl } = users[0];
 
   return (
     <>
       {/* PROFILE HEADER */}
       <ProfileHeaderSection
         colors={colors}
-        imageUrl={user.imageUrl}
-        name={user.name}
+        imageUrl={imageUrl}
+        name={fullName}
         handleEditProfile={handleGoEditProfile}
         handleGoSettings={handleGoSettings}
       />
