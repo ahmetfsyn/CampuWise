@@ -1,27 +1,22 @@
 import { useTheme } from "@react-navigation/native";
-import { Box } from "./ui/box";
 import { Text } from "./ui/text";
-import { EventListCardProps } from "@/types/props";
 import { Image } from "expo-image";
-import { useRouter } from "expo-router";
-import { useCallback } from "react";
+import { EventListCardProps } from "@/types/props";
 import { TouchableOpacity } from "react-native";
+import { Box } from "./ui/box";
+import { memo } from "react";
 
 const EventListCard = ({
   title,
   date,
   place,
-  id,
   imageUrl,
+  onPress,
 }: EventListCardProps) => {
-  const router = useRouter();
   const { colors } = useTheme();
-  const handleEventDetails = useCallback(() => {
-    router.push(`/${id}`);
-  }, [router, id]);
 
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={handleEventDetails}>
+    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
       <Box className="mb-4 rounded-xl overflow-hidden h-64 relative">
         <Image
           source={{ uri: imageUrl || "https://picsum.photos/200/200" }}
@@ -55,4 +50,4 @@ const EventListCard = ({
   );
 };
 
-export default EventListCard;
+export default memo(EventListCard);

@@ -12,7 +12,7 @@ export default function HomeLayout() {
       />
 
       <Stack.Screen
-        name="(events)"
+        name="events"
         options={{
           headerShown: false,
         }}

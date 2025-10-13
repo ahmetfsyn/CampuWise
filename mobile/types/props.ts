@@ -14,4 +14,13 @@ export type MarkerCardProps = {
 };
 
 export type EventDeadLineCardProps = Event & {};
-export type EventListCardProps = Event & {};
+export type EventListCardProps = Event & {
+  onPress: (eventId: string) => void;
+};
+export type ProfileHeaderSectionProps = {
+  colors: any;
+  imageUrl: string;
+  name: string;
+  handleEditProfile: () => void;
+  handleGoSettings: () => void;
+};
