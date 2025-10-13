@@ -251,7 +251,7 @@ const EventDetailsScreen = () => {
 
       <Box className="px-6 flex-row gap-2">
         <AnimatedButton
-          buttonClassName="h-16 rounded-xl"
+          buttonClassName="h-14 rounded-xl"
           onPress={handleShowReportModal}
           style={{
             backgroundColor: isReportedEvent
@@ -268,7 +268,7 @@ const EventDetailsScreen = () => {
         />
 
         <AnimatedButton
-          buttonClassName="flex-1 h-16 rounded-xl"
+          buttonClassName="flex-1 h-14 rounded-xl"
           textClassName="uppercase"
           style={{
             backgroundColor: isJoinedEvent
