@@ -104,10 +104,7 @@ const EventDetailsScreen = () => {
           contentFit="cover"
         />
         <Box className="absolute bottom-0 left-0 right-0 p-4 ">
-          <Text
-            style={{ color: colors.background }}
-            className="text-2xl font-bold  "
-          >
+          <Text className="text-2xl font-bold text-primary-0 ">
             {event?.title}
           </Text>
         </Box>
@@ -115,59 +112,42 @@ const EventDetailsScreen = () => {
 
       <Box className="p-6 gap-4">
         <Box className="gap-2">
-          <Text
-            style={{ color: colors.primary }}
-            className="text-md font-semibold"
-          >
+          <Text className="text-md font-semibold text-primary-500">
             Tarih & Saat
           </Text>
-          <Text style={{ color: colors.text }} className="text-lg font-medium">
+          <Text className="text-lg font-medium text-typography-0">
             {event?.date}
           </Text>
         </Box>
 
         <Box className="gap-2">
-          <Text
-            style={{ color: colors.primary }}
-            className="text-md font-semibold"
-          >
-            Konum
-          </Text>
-          <Text style={{ color: colors.text }} className="text-lg font-medium">
+          <Text className="text-md font-semibold text-primary-500">Konum</Text>
+          <Text className="text-lg font-medium text-typography-0">
             {event?.place}
           </Text>
         </Box>
 
         <Box className="gap-2">
-          <Text
-            style={{ color: colors.primary }}
-            className="text-md font-semibold"
-          >
+          <Text className="text-md font-semibold text-primary-500">
             Açıklama
           </Text>
-          <Text style={{ color: colors.text }} className="text-lg font-medium">
+          <Text className="text-lg font-medium text-typography-0">
             {event?.description}
           </Text>
         </Box>
 
         <Box className="gap-2">
-          <Text
-            style={{ color: colors.primary }}
-            className="text-md font-semibold"
-          >
+          <Text className="text-md font-semibold text-primary-500">
             Organizatör(ler)
           </Text>
-          <Text style={{ color: colors.text }} className="text-lg font-medium">
+          <Text className="text-lg font-medium text-typography-0">
             {event?.participants
               .map((participant) => participant.fullName)
               .join(", ")}
           </Text>
         </Box>
         <Box className="gap-2">
-          <Text
-            style={{ color: colors.primary }}
-            className="text-md font-semibold"
-          >
+          <Text className="text-md font-semibold text-primary-500">
             Katılımcılar
           </Text>
           <Box className="flex items-start justify-center">
@@ -201,15 +181,8 @@ const EventDetailsScreen = () => {
                     </Avatar>
                   ))}
                   {extraCount > 0 && (
-                    <Avatar
-                      size="md"
-                      className="-ml-3"
-                      style={{ backgroundColor: colors.primary }}
-                    >
-                      <Text
-                        className="font-semibold"
-                        style={{ color: colors.background }}
-                      >
+                    <Avatar size="md" className="-ml-3 bg-primary-500">
+                      <Text className="font-semibold text-typography-0">
                         +{extraCount}
                       </Text>
                     </Avatar>
@@ -220,27 +193,16 @@ const EventDetailsScreen = () => {
           </Box>
         </Box>
         <Box className="gap-2">
-          <Text
-            style={{ color: colors.primary }}
-            className="text-md font-semibold"
-          >
+          <Text className="text-md font-semibold text-primary-500">
             Etiketler
           </Text>
           <Box className="flex-row gap-2 flex-wrap">
             {event?.tags?.map((tag, index) => (
               <Badge
                 key={index}
-                className="gap-2 p-2 rounded-xl"
-                style={{
-                  backgroundColor: colors.primary,
-                }}
+                className="gap-2 p-2 rounded-xl bg-primary-500"
               >
-                <BadgeText
-                  style={{
-                    color: colors.background,
-                  }}
-                  className="uppercase  font-bold"
-                >
+                <BadgeText className="uppercase  font-bold text-typography-0">
                   {tag}
                 </BadgeText>
               </Badge>
@@ -251,30 +213,21 @@ const EventDetailsScreen = () => {
 
       <Box className="px-6 flex-row gap-2">
         <AnimatedButton
-          buttonClassName="h-14 rounded-xl"
           onPress={handleShowReportModal}
-          style={{
-            backgroundColor: isReportedEvent
-              ? colors.border
-              : colors.notification,
-          }}
+          action={"negative"}
+          className=" h-14 flex-[0.25]"
           icon={
             <MaterialCommunityIcons
               name="block-helper"
               size={24}
-              color={colors.background}
+              color={"white"}
             />
           }
         />
 
         <AnimatedButton
-          buttonClassName="flex-1 h-14 rounded-xl"
+          className=" h-14 flex-1"
           textClassName="uppercase"
-          style={{
-            backgroundColor: isJoinedEvent
-              ? colors.notification
-              : colors.primary,
-          }}
           onPress={handleJoinEvent}
         >
           {!isJoinedEvent ? "Hemen Katıl" : "Etkinlikten Ayrıl"}
@@ -289,12 +242,9 @@ const EventDetailsScreen = () => {
         size="lg"
       >
         <ModalBackdrop />
-        <ModalContent
-          className="border-0"
-          style={{ backgroundColor: colors.card }}
-        >
+        <ModalContent className="border-0 bg-primary-800 ">
           <ModalHeader>
-            <Heading style={{ color: colors.text }} size="lg">
+            <Heading className="text-typography-0" size="lg">
               Etkinliği Rapor Et
             </Heading>
             <ModalCloseButton>
@@ -303,13 +253,13 @@ const EventDetailsScreen = () => {
           </ModalHeader>
           <ModalBody>
             <Box className="gap-4">
-              <Text style={{ color: colors.text }}>
+              <Text className="text-typography-0">
                 Etkinlik hakkında bir sorun mu var ? Nedenini belirterek
                 incelememiz için bize rapor edebilirsin.
               </Text>
-              <Textarea isRequired size={"lg"}>
+              <Textarea isRequired size={"lg"} className="text-typography-0">
                 <TextareaInput
-                  style={{ color: colors.text }}
+                  className="text-typography-0"
                   value={reportText}
                   onChangeText={(text) => setReportText(text)}
                   placeholder="Raporlama nedeniniz..."
@@ -318,25 +268,11 @@ const EventDetailsScreen = () => {
             </Box>
           </ModalBody>
           <ModalFooter>
-            <AnimatedButton
-              className="rounded-xl"
-              style={{
-                backgroundColor: colors.secondary,
-              }}
-              onPress={handleCancelReport}
-            >
+            <AnimatedButton action={"secondary"} onPress={handleCancelReport}>
               Vazgeç
             </AnimatedButton>
 
-            <AnimatedButton
-              className="rounded-xl"
-              style={{
-                backgroundColor: colors.primary,
-              }}
-              onPress={handleReportEvent}
-            >
-              Gönder
-            </AnimatedButton>
+            <AnimatedButton onPress={handleReportEvent}>Gönder</AnimatedButton>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -346,51 +282,21 @@ const EventDetailsScreen = () => {
         size="lg"
       >
         <AlertDialogBackdrop />
-        <AlertDialogContent
-          style={{
-            backgroundColor: colors.card,
-          }}
-          className="border-0"
-        >
+        <AlertDialogContent className="border-0 bg-primary-800">
           <AlertDialogHeader>
-            <Heading
-              style={{
-                color: colors.text,
-              }}
-              className="text-typography-950 font-semibold"
-              size="lg"
-            >
+            <Heading className="text-typography-0 font-semibold" size="lg">
               Etkinlikten ayrılmak istediğinize emin misiniz ?
             </Heading>
           </AlertDialogHeader>
           <AlertDialogBody className="mt-3 mb-4">
-            <Text
-              style={{
-                color: colors.text,
-              }}
-              size="md"
-            >
+            <Text className="text-typography-0" size="md">
               Etkinlikten ayrılırsanız, katılımcılar arasından silineceksiniz.
               İsterseniz tekrar katılabilirsiniz.
             </Text>
           </AlertDialogBody>
           <AlertDialogFooter>
-            <AnimatedButton
-              className="rounded-xl"
-              style={{
-                backgroundColor: colors.notification,
-              }}
-              onPress={handleLeaveEvent}
-            >
-              Ayrıl
-            </AnimatedButton>
-            <AnimatedButton
-              className="rounded-xl"
-              style={{
-                backgroundColor: colors.secondary,
-              }}
-              onPress={handleCloseCancelJoiningDialog}
-            >
+            <AnimatedButton onPress={handleLeaveEvent}>Ayrıl</AnimatedButton>
+            <AnimatedButton onPress={handleCloseCancelJoiningDialog}>
               Vazgeç
             </AnimatedButton>
           </AlertDialogFooter>
@@ -401,5 +307,3 @@ const EventDetailsScreen = () => {
 };
 
 export default EventDetailsScreen;
-
-const styles = StyleSheet.create({});

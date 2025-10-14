@@ -35,13 +35,8 @@ const ProfileScreen = () => {
         />
       }
       renderItem={({ item }) => (
-        <Box
-          className="p-4 mb-3 rounded-xl shadow-md"
-          style={{ backgroundColor: colors.card }}
-        >
-          <Text style={{ color: colors.text }} className="font-medium">
-            {item.title}
-          </Text>
+        <Box className="p-4 mb-3 rounded-xl shadow-md">
+          <Text className="font-medium text-typography-0">{item.title}</Text>
         </Box>
       )}
     />

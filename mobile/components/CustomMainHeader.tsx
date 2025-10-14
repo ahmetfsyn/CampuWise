@@ -12,8 +12,6 @@ import { Platform, TouchableOpacity } from "react-native";
 import { Text } from "@/components/ui/text";
 import { useTheme } from "@react-navigation/native";
 const CustomMainHeader = () => {
-  const { colors } = useTheme();
-
   return (
     <LinearGradient
       colors={["#0a7ea4", "#38bdf8"]}
@@ -40,11 +38,7 @@ const CustomMainHeader = () => {
             activeOpacity={0.5}
             onPress={() => console.log("Bell clicked")}
           >
-            <MaterialCommunityIcons
-              name="bell"
-              size={24}
-              color={colors.background}
-            />
+            <MaterialCommunityIcons name="bell" size={24} color={"white"} />
           </TouchableOpacity>
           <Avatar size="md">
             <AvatarFallbackText>Jane Doe</AvatarFallbackText>

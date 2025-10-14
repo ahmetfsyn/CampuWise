@@ -16,6 +16,7 @@ export default function TabLayout() {
           borderTopWidth: 0,
           elevation: 0,
         },
+        animation: "none",
       }}
       tabBar={(props) => <CustomTabBar {...props} />}
     >
@@ -32,6 +33,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="map"
         options={{
+          header: (props) => <CustomInnerHeader {...props} />,
           title: "Harita",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="map-marker" color={color} size={24} />

@@ -56,7 +56,7 @@ const CustomCarousel = () => {
       <Pagination.Basic
         progress={progress}
         data={data}
-        dotStyle={{ backgroundColor: colors.primary, borderRadius: 50 }}
+        dotStyle={{ backgroundColor: "gray", borderRadius: 50 }}
         containerStyle={{ gap: 5, marginTop: 10 }}
         onPress={onPressPagination}
       />

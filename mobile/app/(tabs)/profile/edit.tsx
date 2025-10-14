@@ -37,23 +37,18 @@ const EditProfileScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      className="flex-1"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerClassName="p-6"
         showsVerticalScrollIndicator={false}
       >
         <Box className="items-center mb-6">
           <Avatar size="2xl" className="mb-3">
             <AvatarImage source={{ uri: imageUrl }} />
           </Avatar>
-          <AnimatedButton
-            size={"md"}
-            buttonClassName="rounded-xl"
-            onPress={handleChangeAvatar}
-            style={{ backgroundColor: colors.primary }}
-          >
+          <AnimatedButton size={"md"} onPress={handleChangeAvatar}>
             Resim Ekle
           </AnimatedButton>
         </Box>
@@ -69,19 +64,16 @@ const EditProfileScreen = () => {
                   variant="rounded"
                   isInvalid={errors.fullName ? true : false}
                   size="lg"
-                  className="h-14 rounded-xl"
-                  style={{ borderColor: colors.border }}
                 >
                   <InputField
                     value={value}
                     onChangeText={onChange}
                     placeholder="Ad-Soyad"
-                    style={{ color: colors.text }}
                   />
                 </Input>
                 {errors.fullName && (
                   <Box className="px-2">
-                    <Text style={{ color: "red" }}>
+                    <Text className="text-error-300">
                       {errors.fullName.message}
                     </Text>
                   </Box>
@@ -100,20 +92,19 @@ const EditProfileScreen = () => {
                   variant="rounded"
                   isInvalid={errors.email ? true : false}
                   size="lg"
-                  className="h-14 rounded-xl"
-                  style={{ borderColor: colors.border }}
                 >
                   <InputField
                     value={value}
                     onChangeText={onChange}
                     placeholder="Email"
-                    style={{ color: colors.text }}
                     keyboardType="email-address"
                   />
                 </Input>
                 {errors.email && (
-                  <Box className="mt-1">
-                    <Text style={{ color: "red" }}>{errors.email.message}</Text>
+                  <Box className="px-2">
+                    <Text className="text-error-300">
+                      {errors.email.message}
+                    </Text>
                   </Box>
                 )}
               </>
@@ -130,20 +121,17 @@ const EditProfileScreen = () => {
                   variant="rounded"
                   size="lg"
                   isInvalid={errors.phoneNumber ? true : false}
-                  className="h-14 rounded-xl"
-                  style={{ borderColor: colors.border }}
                 >
                   <InputField
                     value={value}
                     onChangeText={onChange}
                     placeholder="Telefon Numarası"
-                    style={{ color: colors.text }}
                     keyboardType="phone-pad"
                   />
                 </Input>
                 {errors.phoneNumber && (
-                  <Box className="mt-1">
-                    <Text style={{ color: "red" }}>
+                  <Box className="px-2">
+                    <Text className="text-error-300">
                       {errors.phoneNumber.message}
                     </Text>
                   </Box>
@@ -154,9 +142,7 @@ const EditProfileScreen = () => {
 
           <AnimatedButton
             size={"lg"}
-            buttonClassName="rounded-xl h-14 mt-6"
             onPress={handleSubmit(handleSave)}
-            style={{ backgroundColor: colors.primary }}
             textClassName="font-semibold"
             disabled={Object.keys(errors).length > 0 ? true : false}
           >

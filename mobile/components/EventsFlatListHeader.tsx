@@ -24,18 +24,11 @@ const EventsFlatListHeader = ({
   return (
     <Box className="flex mb-4 px-2 gap-2">
       <Box>
-        <Input
-          style={{
-            borderColor: colors.border,
-          }}
-          variant="rounded"
-          size="lg"
-        >
+        <Input variant="rounded" size="lg">
           <InputSlot className="pl-3">
             <InputIcon as={SearchIcon} />
           </InputSlot>
           <InputField
-            style={{ color: colors.text }}
             placeholder="Ara..."
             value={searchString}
             onChangeText={(text) => setSearchString(text)}
@@ -49,50 +42,32 @@ const EventsFlatListHeader = ({
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
         >
-          {eventFilters.map((item) => (
-            <TouchableOpacity
-              key={item.id}
-              activeOpacity={0.5}
-              onPress={() => setSelectedFilter(item)}
-            >
-              <Badge
-                className="gap-2 p-2 rounded-xl"
-                style={{
-                  borderWidth: selectedFilter.id === item.id ? 0 : 0.2,
-                  borderColor:
-                    selectedFilter.id === item.id
-                      ? colors.primary
-                      : colors.secondary,
-                  backgroundColor:
-                    selectedFilter.id === item.id
-                      ? colors.primary
-                      : colors.background,
-                }}
+          {eventFilters.map((item) => {
+            const isSelectedFilter = selectedFilter.id === item.id;
+            return (
+              <TouchableOpacity
+                key={item.id}
+                activeOpacity={0.5}
+                onPress={() => setSelectedFilter(item)}
               >
-                <BadgeText
-                  style={{
-                    color:
-                      item.id === selectedFilter.id
-                        ? colors.background
-                        : colors.primary,
-                  }}
-                  className="normal-case font-bold"
+                <Badge
+                  className={`gap-2 p-2 rounded-xl ${isSelectedFilter ? "bg-primary-500 border-0" : " bg-transparent border rounded-xl"}`}
                 >
-                  {item.displayName}
-                </BadgeText>
-                <MaterialCommunityIcons
-                  name={item.icon}
-                  size={16}
-                  color={
-                    selectedFilter.id === item.id
-                      ? colors.background
-                      : colors.primary
-                  }
-                  style={{ marginLeft: 4 }}
-                />
-              </Badge>
-            </TouchableOpacity>
-          ))}
+                  <BadgeText
+                    className={`normal-case font-bold ${isSelectedFilter ? "text-primary-0" : "text-typography-0"}`}
+                  >
+                    {item.displayName}
+                  </BadgeText>
+                  <MaterialCommunityIcons
+                    name={item.icon}
+                    size={16}
+                    color={"white"}
+                    style={{ marginLeft: 4 }}
+                  />
+                </Badge>
+              </TouchableOpacity>
+            );
+          })}
         </ScrollView>
       </Box>
     </Box>

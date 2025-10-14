@@ -23,39 +23,18 @@ const MarkerCard = (props: MarkerCardProps) => {
       <Card
         variant="outline"
         className={"p-4 rounded-xl flex-row items-center gap-4 border-[0.2px]"}
-        style={{
-          backgroundColor: colors.card,
-        }}
       >
-        <Box
-          className="w-12 h-12 rounded-full items-center justify-center"
-          style={{ backgroundColor: colors.primary }}
-        >
-          <MaterialCommunityIcons
-            name="map-marker"
-            size={24}
-            color={colors.background}
-          />
+        <Box className="w-12 h-12 rounded-full items-center justify-center bg-primary-500">
+          <MaterialCommunityIcons name="map-marker" size={24} color={"white"} />
         </Box>
         <Box className="flex-1">
-          <Heading
-            size="md"
-            className="font-medium"
-            style={{ color: colors.text }}
-          >
+          <Heading size="md" className="font-medium text-typography-0">
             {title}
           </Heading>
-          {/* <Text className="text-sm mt-1" style={{ color: colors.secondary }}>
-            {category}
-          </Text> */}
+
           <Box className="flex-row gap-2">
-            <Badge
-              className="rounded-full"
-              style={{ backgroundColor: colors.primary }}
-            >
-              <BadgeText style={{ color: colors.background }}>
-                {category}
-              </BadgeText>
+            <Badge className="rounded-full bg-primary-500">
+              <BadgeText className="text-primary-0">{category}</BadgeText>
             </Badge>
           </Box>
         </Box>

@@ -19,7 +19,6 @@ const PopularTopicPreviewCard = ({
   imageUrl,
   onPress,
 }: PopularTopicPreviewCardProps) => {
-  const { colors } = useTheme();
   return (
     <AnimatedPressableComponent onPress={onPress}>
       <Box
@@ -47,13 +46,8 @@ const PopularTopicPreviewCard = ({
         />
         <Box className="absolute flex items-center justify-center w-full h-full p-2">
           <Text
-            className="font-semibold text-2xl text-center flex-wrap"
+            className="font-semibold text-2xl text-center flex-wrap text-primary-0"
             numberOfLines={2}
-            style={{
-              color: colors.background,
-              textAlign: "center",
-              flexWrap: "wrap",
-            }}
           >
             {title}
           </Text>
