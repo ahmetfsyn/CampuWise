@@ -1,7 +1,6 @@
 import { Box } from "@/components/ui/box";
 import { Button, ButtonText, ButtonIcon } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
-import { useTheme } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { SettingsIcon } from "@/components/ui/icon";
 import { useCallback } from "react";
@@ -52,7 +51,6 @@ export const shortcuts = [
 ];
 
 export default function HomeScreen() {
-  const { colors } = useTheme();
   const router = useRouter();
 
   const handleCustomize = useCallback(() => {
@@ -89,13 +87,10 @@ export default function HomeScreen() {
     <ScrollView showsVerticalScrollIndicator={false} className="flex-1  p-4 ">
       <Box className=" p-2 mb-4 flex-row justify-between items-center">
         <Box>
-          <Text className="text-3xl font-bold" style={{ color: colors.text }}>
+          <Text className="text-3xl font-bold text-typography-0">
             Merhaba Ahmet
           </Text>
-          <Text
-            className="text-lg font-normal"
-            style={{ color: colors.secondary }}
-          >
+          <Text className="text-lg font-normal text-typography-200">
             CampuWise'a Hoşgeldin
           </Text>
         </Box>
@@ -115,7 +110,7 @@ export default function HomeScreen() {
       </Box>
 
       <Box className="flex-row mt-4   justify-between items-center">
-        <Text className="text-xl font-semibold" style={{ color: colors.text }}>
+        <Text className="text-xl font-semibold text-typography-0">
           Kısayollar
         </Text>
         <Button
@@ -123,8 +118,8 @@ export default function HomeScreen() {
           variant="outline"
           className="border-0"
         >
-          <ButtonText style={{ color: colors.primary }}>Özelleştir</ButtonText>
-          <ButtonIcon as={SettingsIcon} color={colors.primary} />
+          <ButtonText className="text-primary-500">Özelleştir</ButtonText>
+          <ButtonIcon as={SettingsIcon} className="text-primary-500" />
         </Button>
       </Box>
 
@@ -136,14 +131,14 @@ export default function HomeScreen() {
                 onPress={handleGoEvents}
                 {...shortcut}
                 key={shortcut.id}
-              ></ShortcutButton>
+              />
             )
           );
         })}
       </Box>
 
       <Box className="flex-row mt-4 mb-2 justify-between items-center">
-        <Text className="text-xl font-semibold" style={{ color: colors.text }}>
+        <Text className="text-xl font-semibold text-typography-0">
           Öğrenci Paylaşımları
         </Text>
         <Button
@@ -151,7 +146,7 @@ export default function HomeScreen() {
           variant="outline"
           className="border-0"
         >
-          <ButtonText style={{ color: colors.primary }}>Daha Fazla</ButtonText>
+          <ButtonText className="text-primary-500">Daha Fazla</ButtonText>
         </Button>
       </Box>
 
@@ -177,7 +172,7 @@ export default function HomeScreen() {
       />
 
       <Box className="flex-row mt-4 mb-2 justify-between items-center">
-        <Text className="text-xl font-semibold" style={{ color: colors.text }}>
+        <Text className="text-xl font-semibold text-typography-0">
           Yaklaşan Ekinlikler
         </Text>
         {events.length !== 0 && (
@@ -186,9 +181,7 @@ export default function HomeScreen() {
             variant="outline"
             className="border-0"
           >
-            <ButtonText style={{ color: colors.primary }}>
-              Daha Fazla
-            </ButtonText>
+            <ButtonText className="text-primary-500">Daha Fazla</ButtonText>
           </Button>
         )}
       </Box>

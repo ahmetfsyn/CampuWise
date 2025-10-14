@@ -13,46 +13,25 @@ const ProfileHeaderSection = ({
   handleEditProfile,
   handleGoSettings,
 }: ProfileHeaderSectionProps) => (
-  <Box
-    className="items-center rounded-xl p-6 shadow-md"
-    style={{ backgroundColor: colors.card }}
-  >
+  <Box className="items-center bg-primary-800 rounded-xl p-6 shadow-md">
     <Avatar size="2xl" className="mb-3">
       <AvatarImage source={{ uri: imageUrl }} />
     </Avatar>
 
-    <Text
-      style={{ color: colors.text }}
-      className="text-2xl font-bold text-center"
-    >
+    <Text className="text-2xl font-bold text-center text-typography-0">
       {name}
     </Text>
-    <Text style={{ color: colors.secondary }}>Bartın Üniversitesi</Text>
-    <Text style={{ color: colors.secondary }} className="mb-4">
-      Bilgisayar Mühendisliği
-    </Text>
+    <Text className="text-typography-200">Bartın Üniversitesi</Text>
+    <Text className="mb-4 text-typography-200">Bilgisayar Mühendisliği</Text>
 
     <Box className="flex-row items-center justify-center gap-3 ">
-      <AnimatedButton
-        buttonClassName="flex-1 h-14 rounded-xl"
-        textClassName="text-center font-semibold"
-        style={{ backgroundColor: colors.primary }}
-        onPress={handleEditProfile}
-      >
+      <AnimatedButton onPress={handleEditProfile}>
         Profilini Düzenle
       </AnimatedButton>
 
       <AnimatedButton
-        buttonClassName="h-full rounded-xl items-center justify-center"
-        style={{ backgroundColor: colors.primary }}
         onPress={handleGoSettings}
-        icon={
-          <MaterialCommunityIcons
-            name="cog"
-            size={24}
-            color={colors.background}
-          />
-        }
+        icon={<MaterialCommunityIcons name="cog" size={24} color={"white"} />}
       />
     </Box>
   </Box>

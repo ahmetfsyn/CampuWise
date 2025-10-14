@@ -55,11 +55,15 @@ const EventPreviewCard = ({
         <Box className="absolute flex-row gap-2 top-2 left-2 flex-wrap">
           {remainDays <= 2 && (
             <Badge size={"md"} className="rounded-full  bg-yellow-600/75">
-              <BadgeText>{remainDays + " gün kaldı"}</BadgeText>
+              <BadgeText className="text-primary-0">
+                {remainDays + " gün kaldı"}
+              </BadgeText>
             </Badge>
           )}
           <Badge size={"md"} className="rounded-full bg-blue-600/75">
-            <BadgeText>{participants.length + " kişi katıldı"}</BadgeText>
+            <BadgeText className="text-primary-0">
+              {participants.length + " kişi katıldı"}
+            </BadgeText>
           </Badge>
         </Box>
       </Box>

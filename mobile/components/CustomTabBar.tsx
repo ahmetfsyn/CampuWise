@@ -34,12 +34,7 @@ const TabItem = ({
       duration: 250,
       useNativeDriver: false,
     }).start();
-  }, [isFocused]);
-
-  const bgColor = bgAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ["transparent", colors.primary],
-  });
+  }, [bgAnim, scaleAnim, isFocused]);
 
   const onPress = () => {
     const event = navigation.emit({

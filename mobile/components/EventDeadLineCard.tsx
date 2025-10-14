@@ -1,23 +1,14 @@
 import { Box } from "./ui/box";
 import { Card } from "./ui/card";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useTheme } from "@react-navigation/native";
 import { Heading } from "./ui/heading";
 import { Text } from "./ui/text";
 import { StyleSheet } from "react-native";
 import { EventDeadLineCardProps } from "@/types/props";
 import AnimatedPressableComponent from "./AnimatedPressable";
 import { memo } from "react";
-import EmptyEventListComponent from "./EmptyEventListComponent";
 
-const EventDeadLineCard = ({
-  place,
-  title,
-  date,
-  imageUrl,
-}: EventDeadLineCardProps) => {
-  const { colors } = useTheme();
-
+const EventDeadLineCard = ({ place, title, date }: EventDeadLineCardProps) => {
   return (
     <AnimatedPressableComponent
       onPress={() => {
@@ -25,31 +16,22 @@ const EventDeadLineCard = ({
       }}
     >
       <Box className="">
-        <Card
-          style={[
-            styles.card,
-            { backgroundColor: colors.card, borderColor: colors.border },
-          ]}
-        >
+        <Card style={styles.card}>
           {/* Üst başlık alanı */}
           <Box className="flex-row items-center mb-2">
             <MaterialCommunityIcons
               name="calendar-clock"
               size={22}
-              color={colors.success}
+              color={"white"}
             />
-            <Heading
-              className="ml-2 text-lg font-semibold"
-              style={{ color: colors.success }}
-            >
+            <Heading className="ml-2 text-lg font-semibold text-success-500">
               Etkinlik Başlıyor
             </Heading>
           </Box>
 
           {/* Etkinlik Başlığı */}
           <Heading
-            className="text-xl font-medium mb-1"
-            style={{ color: colors.text }}
+            className="text-xl font-medium mb-1 text-typography-0"
             numberOfLines={1}
           >
             {title || "Etkinlik Adı"}
@@ -61,9 +43,9 @@ const EventDeadLineCard = ({
               <MaterialCommunityIcons
                 name="clock-outline"
                 size={18}
-                color={colors.text}
+                color={"white"}
               />
-              <Text style={{ color: colors.text, opacity: 0.8 }}>
+              <Text className=" text-typography-200">
                 {date
                   ? new Date(date).toLocaleDateString("tr-TR")
                   : "Tarih Yok"}
@@ -74,9 +56,9 @@ const EventDeadLineCard = ({
               <MaterialCommunityIcons
                 name="map-marker-outline"
                 size={18}
-                color={colors.text}
+                color={"white"}
               />
-              <Text style={{ color: colors.text, opacity: 0.8 }}>
+              <Text className=" text-typography-200">
                 {place || "Yer Belirtilmedi"}
               </Text>
             </Box>

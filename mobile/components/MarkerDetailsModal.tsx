@@ -15,9 +15,9 @@ import { Heading } from "./ui/heading";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
 import MapView from "react-native-maps";
-import { Marker } from "react-native-svg";
-import { Button, ButtonText } from "./ui/button";
+import { ButtonText } from "./ui/button";
 import { Link, LinkText } from "./ui/link";
+import AnimatedButton from "./AnimatedButton";
 
 export type MarkerDetailsModalProps = {
   setShowMarkerDetailsModal: (value: boolean) => void;
@@ -39,21 +39,14 @@ const MarkerDetailsModal = ({
       size={"lg"}
     >
       <ModalBackdrop />
-      <ModalContent
-        style={{
-          backgroundColor: colors.background,
-          borderWidth: 0,
-        }}
-        className="rounded-xl"
-      >
+      <ModalContent className="rounded-xl border-0">
         <ModalHeader>
           <ModalHeader>
             <Box className="flex-row justify-between items-start">
               <Box className="flex-1 pr-2">
                 <Heading
                   size="md"
-                  className="font-medium"
-                  style={{ color: colors.text }}
+                  className="font-medium text-typography-0"
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -61,8 +54,7 @@ const MarkerDetailsModal = ({
                 </Heading>
                 <Heading
                   size="sm"
-                  className="font-normal"
-                  style={{ color: colors.secondary }}
+                  className="font-normal text-typography-200"
                   numberOfLines={2}
                   ellipsizeMode="tail"
                 >
@@ -76,7 +68,7 @@ const MarkerDetailsModal = ({
                 <MaterialCommunityIcons
                   name="close"
                   size={24}
-                  color={colors.text}
+                  color={"white"}
                 />
               </ModalCloseButton>
             </Box>
@@ -95,68 +87,58 @@ const MarkerDetailsModal = ({
             <MaterialCommunityIcons
               name="clock-outline"
               size={20}
-              color={colors.primary}
+              color={"white"}
             />
-            <Text style={{ color: colors.text }}>
+            <Text className="text-typography-0">
               {markerDetails.workingHours || "Çalışma saatleri: Bilinmiyor"}
             </Text>
           </Box>
 
           <Box className="flex-row items-center gap-2">
-            <MaterialCommunityIcons
-              name="phone"
-              size={20}
-              color={colors.primary}
-            />
+            <MaterialCommunityIcons name="phone" size={20} color={"white"} />
 
-            {markerDetails.phone ? (
+            {markerDetails.phoneNumber ? (
               <Link
-                onPress={() => Linking.openURL(`tel:${markerDetails.phone}`)}
+                onPress={() =>
+                  Linking.openURL(`tel:${markerDetails.phoneNumber}`)
+                }
                 isExternal
               >
-                <LinkText size="lg" style={{ color: colors.primary }}>
-                  {markerDetails.phone}
+                <LinkText size="lg" className="text-primary-500">
+                  {markerDetails.phoneNumber}
                 </LinkText>
               </Link>
             ) : (
-              <Text style={{ color: colors.text }}>
-                {"İletişim bilgisi yok"}
-              </Text>
+              <Text className="text-typography-0">İletişim bilgisi yok</Text>
             )}
           </Box>
           <Box className="flex-row items-center gap-2">
             <MaterialCommunityIcons
               name="map-marker"
               size={20}
-              color={colors.primary}
+              color={"white"}
             />
             <Text
               numberOfLines={2}
+              className="text-typography-0"
               ellipsizeMode="tail"
-              style={{ color: colors.text, flexShrink: 1 }}
             >
               {markerDetails.address || "Adres bilgisi yok"}
             </Text>
           </Box>
         </ModalBody>
         <ModalFooter>
-          <Button
-            variant={"solid"}
-            size={"xl"}
-            style={{
-              backgroundColor: colors.primary,
-            }}
+          <AnimatedButton
+            size={"lg"}
             onPress={() =>
               Linking.openURL(
                 `https://www.google.com/maps?q=${markerDetails.coordinate.latitude},${markerDetails.coordinate.longitude}`
               )
             }
-            className="flex-1 rounded-xl"
+            className="flex-1"
           >
-            <ButtonText style={{ color: colors.background }}>
-              Yol Tarifi Al
-            </ButtonText>
-          </Button>
+            Yol Tarifi Al
+          </AnimatedButton>
         </ModalFooter>
       </ModalContent>
     </Modal>

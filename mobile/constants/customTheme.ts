@@ -3,9 +3,10 @@ import { Theme } from "@react-navigation/native";
 export const LightTheme: Theme = {
   dark: false,
   colors: {
-    background: "#F5F5F0", // ana arka plan
-    card: "#f8fafc", // header, tabbar card
-    text: "#11181c", // genel text
+    background: "#F5F5F0",
+    card: "#f8fafc",
+    text1: "#11181c",
+    text2: "#F5F5F0",
     secondary: "#687076",
     primary: "#0a7ea4", // buton, aktif tab, accent
     border: "lightgray", // ayırıcı çizgi
@@ -37,7 +38,8 @@ export const DarkTheme: Theme = {
   colors: {
     background: "#121d2c", // ana arka plan
     card: "#1f2a3c", // header, tabbar card
-    text: "#ececee", // genel text
+    text1: "#ececee", // genel text
+    text2: "#F5F5F0",
     secondary: "#9BA1A6",
     primary: "#38bdf8", // buton, aktif tab, accent
     border: "#1a4f73", // ayırıcı çizgi

@@ -1,6 +1,5 @@
 import { Badge, BadgeText } from "@/components/ui/badge";
 import { Box } from "@/components/ui/box";
-import { useTheme } from "@react-navigation/native";
 import { FlatList, ScrollView, TouchableOpacity } from "react-native";
 import MapView, { Marker, UrlTile } from "react-native-maps";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -10,7 +9,6 @@ import NoData from "@/assets/images/no-data.svg";
 import MarkerCard from "@/components/MarkerCard";
 import { mapFilters, markers } from "@/mocks/mockData";
 const MapScreen = () => {
-  const { colors } = useTheme();
   const [selectedFilter, setSelectedFilter] = useState(mapFilters[0]);
   const filteredMarkers = markers.filter(
     (marker) => marker.category === selectedFilter.name
@@ -47,50 +45,32 @@ const MapScreen = () => {
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
         >
-          {mapFilters.map((item) => (
-            <TouchableOpacity
-              key={item.id}
-              activeOpacity={0.5}
-              onPress={() => setSelectedFilter(item)}
-            >
-              <Badge
-                className="gap-2 p-2 rounded-xl"
-                style={{
-                  borderWidth: selectedFilter.id === item.id ? 0 : 0.2,
-                  borderColor:
-                    selectedFilter.id === item.id
-                      ? colors.primary
-                      : colors.secondary,
-                  backgroundColor:
-                    selectedFilter.id === item.id
-                      ? colors.primary
-                      : colors.background,
-                }}
+          {mapFilters.map((item) => {
+            const isSelectedFilter = item.id === selectedFilter.id;
+            return (
+              <TouchableOpacity
+                key={item.id}
+                activeOpacity={0.5}
+                onPress={() => setSelectedFilter(item)}
               >
-                <BadgeText
-                  style={{
-                    color:
-                      item.id === selectedFilter.id
-                        ? colors.background
-                        : colors.primary,
-                  }}
-                  className="normal-case font-bold"
+                <Badge
+                  className={`gap-2 p-2 rounded-xl ${isSelectedFilter ? "bg-primary-500 border-0" : " bg-transparent border rounded-xl"}`}
                 >
-                  {item.displayName}
-                </BadgeText>
-                <MaterialCommunityIcons
-                  name={item.icon}
-                  size={16}
-                  color={
-                    selectedFilter.id === item.id
-                      ? colors.background
-                      : colors.primary
-                  }
-                  style={{ marginLeft: 4 }}
-                />
-              </Badge>
-            </TouchableOpacity>
-          ))}
+                  <BadgeText
+                    className={`normal-case font-bold ${isSelectedFilter ? "text-primary-0" : "text-typography-0"}`}
+                  >
+                    {item.displayName}
+                  </BadgeText>
+                  <MaterialCommunityIcons
+                    name={item.icon}
+                    size={16}
+                    color={"white"}
+                    style={{ marginLeft: 4 }}
+                  />
+                </Badge>
+              </TouchableOpacity>
+            );
+          })}
         </ScrollView>
       </Box>
       <Box className="flex-[0.6]">
@@ -113,7 +93,7 @@ const MapScreen = () => {
               key={marker.id}
               coordinate={marker.coordinate}
               title={marker.title}
-              pinColor={colors.primary}
+              // pinColor={"white"}
             />
           ))}
         </MapView>
@@ -123,7 +103,7 @@ const MapScreen = () => {
           ListEmptyComponent={() => (
             <Box className="flex flex-col p-4 items-center gap-2 justify-center w-full">
               <NoData width={128} height={128} />
-              <Text style={{ color: colors.secondary }}>Konum bulunamadı</Text>
+              <Text className=" text-typography-200">Konum bulunamadı</Text>
             </Box>
           )}
           showsVerticalScrollIndicator={false}

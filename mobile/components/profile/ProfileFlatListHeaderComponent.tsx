@@ -36,10 +36,7 @@ const ProfileFlatListHeaderComponent = ({
       {/* POINT PROGRESS BAR */}
       <ProfilePointsSection colors={colors} />
 
-      <Text
-        className="text-lg font-semibold mb-3 mt-6"
-        style={{ color: colors.text }}
-      >
+      <Text className="text-lg font-semibold mb-3 mt-6 text-typography-0">
         Katıldığı Etkinlikler
       </Text>
     </>

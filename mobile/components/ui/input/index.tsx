@@ -34,7 +34,7 @@ cssInterop(PrimitiveIcon, {
 });
 
 const inputStyle = tva({
-  base: "border-background-300 flex-row overflow-hidden content-center data-[hover=true]:border-outline-400 data-[focus=true]:border-primary-700 data-[focus=true]:hover:border-primary-700 data-[disabled=true]:opacity-40 data-[disabled=true]:hover:border-background-300 items-center",
+  base: "border-background-300 flex-row overflow-hidden content-center data-[hover=true]:border-outline-400 data-[focus=true]:border-primary-500 data-[focus=true]:hover:border-primary-700 data-[disabled=true]:opacity-40 data-[disabled=true]:hover:border-background-300 items-center",
 
   variants: {
     size: {
@@ -112,7 +112,11 @@ const Input = React.forwardRef<React.ComponentRef<typeof UIInput>, IInputProps>(
       <UIInput
         ref={ref}
         {...props}
-        className={inputStyle({ variant, size, class: className })}
+        className={inputStyle({
+          variant,
+          size,
+          class: "rounded-xl h-14 " + className,
+        })}
         context={{ variant, size }}
       />
     );
@@ -203,7 +207,7 @@ const InputField = React.forwardRef<
           variant: parentVariant,
           size: parentSize,
         },
-        class: className,
+        class: ["text-typography-0", className],
       })}
     />
   );

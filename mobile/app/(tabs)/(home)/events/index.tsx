@@ -5,7 +5,6 @@ import { Box } from "@/components/ui/box";
 import { Fab, FabIcon, FabLabel } from "@/components/ui/fab";
 import { AddIcon } from "@/components/ui/icon";
 import { eventFilters, events } from "@/mocks/mockData";
-import { useTheme } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
 import { FlatList } from "react-native";
@@ -14,7 +13,6 @@ const EventsScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState(eventFilters[0]);
   const [searchString, setSearchString] = useState<string>("");
   const router = useRouter();
-  const { colors } = useTheme();
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const matchesSearch = event.title
@@ -67,18 +65,13 @@ const EventsScreen = () => {
         keyExtractor={(item) => item.id}
       />
       <Fab
-        style={{
-          backgroundColor: colors.primary,
-        }}
-        className="right-4 bottom-8"
+        className="right-4 bottom-8 bg-primary-500"
         size="md"
         placement="bottom right"
         onPress={handleCreateEvent}
       >
-        <FabIcon style={{ color: colors.background }} as={AddIcon} />
-        <FabLabel style={{ color: colors.background }}>
-          Etkinlik Oluştur
-        </FabLabel>
+        <FabIcon className="text-white" as={AddIcon} />
+        <FabLabel className="text-primary-0">Etkinlik Oluştur</FabLabel>
       </Fab>
     </Box>
   );
