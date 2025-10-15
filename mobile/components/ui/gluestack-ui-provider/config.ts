@@ -281,7 +281,7 @@ export const config = {
     "--color-outline-950": "253 254 254",
 
     /* Background */
-    "--color-background-0": "18 29 44",
+    "--color-background-0": "0 46 75",
     "--color-background-50": "39 38 37",
     "--color-background-100": "65 64 64",
     "--color-background-200": "83 82 82",

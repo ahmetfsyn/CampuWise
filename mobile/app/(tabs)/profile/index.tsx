@@ -35,7 +35,7 @@ const ProfileScreen = () => {
         />
       }
       renderItem={({ item }) => (
-        <Box className="p-4 mb-3 rounded-xl shadow-md">
+        <Box className="p-4 mb-3 rounded-xl shadow-md bg-background-0">
           <Text className="font-medium text-typography-0">{item.title}</Text>
         </Box>
       )}

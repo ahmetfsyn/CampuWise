@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Box } from "@/components/ui/box";
@@ -13,15 +12,15 @@ import {
   CheckboxLabel,
   CheckboxIcon,
 } from "@/components/ui/checkbox";
-import { CheckIcon } from "@/components/ui/icon";
+import { CheckIcon, Icon } from "@/components/ui/icon";
 import { useCallback, useState } from "react";
 import AnimatedButton from "@/components/AnimatedButton";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import useAppStore from "@/store/useAppStore";
 import { Controller, useForm } from "react-hook-form";
 import { loginFormSchema } from "@/validations/login-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import { Moon, Sun, SunMoon } from "lucide-react-native";
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -73,10 +72,10 @@ const LoginScreen = () => {
               onPress={handleToggleTheme}
               variant={"solid"}
               icon={
-                <MaterialCommunityIcons
-                  name="theme-light-dark"
+                <Icon
+                  as={theme === "dark" ? Sun : Moon}
                   size={24}
-                  color={"#f5f5f5"}
+                  className="text-primary-0"
                 />
               }
             />

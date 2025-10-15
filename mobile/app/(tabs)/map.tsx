@@ -2,12 +2,14 @@ import { Badge, BadgeText } from "@/components/ui/badge";
 import { Box } from "@/components/ui/box";
 import { FlatList, ScrollView, TouchableOpacity } from "react-native";
 import MapView, { Marker, UrlTile } from "react-native-maps";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect, useRef, useState } from "react";
 import { Text } from "@/components/ui/text";
 import NoData from "@/assets/images/no-data.svg";
 import MarkerCard from "@/components/MarkerCard";
 import { mapFilters, markers } from "@/mocks/mockData";
+import {} from "lucide-react-native";
+import { Icon } from "@/components/ui/icon";
+
 const MapScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState(mapFilters[0]);
   const filteredMarkers = markers.filter(
@@ -54,18 +56,19 @@ const MapScreen = () => {
                 onPress={() => setSelectedFilter(item)}
               >
                 <Badge
-                  className={`gap-2 p-2 rounded-xl ${isSelectedFilter ? "bg-primary-500 border-0" : " bg-transparent border rounded-xl"}`}
+                  className={`gap-2 p-2 rounded-xl ${isSelectedFilter ? "bg-primary-500 border-0" : " bg-transparent border border-primary-500 rounded-xl"}`}
                 >
                   <BadgeText
                     className={`normal-case font-bold ${isSelectedFilter ? "text-primary-0" : "text-typography-0"}`}
                   >
                     {item.displayName}
                   </BadgeText>
-                  <MaterialCommunityIcons
-                    name={item.icon}
-                    size={16}
-                    color={"white"}
-                    style={{ marginLeft: 4 }}
+
+                  <Icon
+                    as={item.icon}
+                    className={
+                      isSelectedFilter ? "text-primary-0" : "text-typography-0"
+                    }
                   />
                 </Badge>
               </TouchableOpacity>

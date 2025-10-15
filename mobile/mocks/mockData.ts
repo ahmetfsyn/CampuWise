@@ -1,34 +1,119 @@
-import { Event, Marker, MarkerCategory, Topic, User } from "@/types/models";
+import {
+  Event,
+  EventCategory,
+  Marker,
+  MarkerCategory,
+  Topic,
+  User,
+} from "@/types/models";
+import {
+  Coffee,
+  School,
+  Library,
+  Dumbbell,
+  Hospital,
+  BookOpen,
+  Building2,
+  Utensils,
+  LucideIcon,
+  List,
+  Music,
+  Palette,
+  Laptop,
+} from "lucide-react-native";
+export type MapFilter = {
+  id: string;
+  name: MarkerCategory;
+  displayName: string;
+  icon: LucideIcon;
+};
+
+export type EventFilter = {
+  id: string;
+  name: EventCategory;
+  displayName: string;
+  icon: LucideIcon;
+};
+
+// EVENT FILTERS
+export const eventFilters: EventFilter[] = [
+  {
+    id: "0",
+    name: EventCategory.All,
+    displayName: "Hepsi",
+    icon: List,
+  },
+  {
+    id: "1",
+    name: EventCategory.Music,
+    displayName: "Müzik",
+    icon: Music,
+  },
+  {
+    id: "2",
+    name: EventCategory.Art,
+    displayName: "Sanat",
+    icon: Palette,
+  },
+  {
+    id: "3",
+    name: EventCategory.Technology,
+    displayName: "Teknoloji",
+    icon: Laptop,
+  },
+  {
+    id: "4",
+    name: EventCategory.Sport,
+    displayName: "Spor",
+    icon: Dumbbell,
+  },
+];
 
 // MAP FILTERS
-export const mapFilters = [
-  { id: "1", name: "Food", displayName: "Yemekler", icon: "food" },
-  { id: "2", name: "Cafe", displayName: "Kafeler", icon: "coffee" },
-  { id: "3", name: "Faculties", displayName: "Fakülteler", icon: "school" },
-  { id: "4", name: "Library", displayName: "Kütüphaneler", icon: "library" },
-  { id: "5", name: "Sport", displayName: "Spor Yerleri", icon: "football" },
+export const mapFilters: MapFilter[] = [
+  {
+    id: "1",
+    name: MarkerCategory.Food,
+    displayName: "Yemekler",
+    icon: Utensils,
+  },
+  { id: "2", name: MarkerCategory.Cafe, displayName: "Kafeler", icon: Coffee },
+  {
+    id: "3",
+    name: MarkerCategory.Faculties,
+    displayName: "Fakülteler",
+    icon: School,
+  },
+  {
+    id: "4",
+    name: MarkerCategory.Library,
+    displayName: "Kütüphaneler",
+    icon: Library,
+  },
+  {
+    id: "5",
+    name: MarkerCategory.Sport,
+    displayName: "Spor Yerleri",
+    icon: Dumbbell,
+  },
   {
     id: "6",
-    name: "Hospital",
+    name: MarkerCategory.Hospital,
     displayName: "Hastaneler & Sağlık Ocakları",
-    icon: "hospital-building",
+    icon: Hospital,
   },
   {
     id: "7",
-    name: "BookStore",
+    name: MarkerCategory.BookStore,
     displayName: "Sahaflar & Kırtasiyeler",
-    icon: "book",
+    icon: BookOpen,
   },
-  { id: "8", name: "Dorm", displayName: "Yurtlar", icon: "office-building" },
-];
-
-// EVENT FILTERS
-export const eventFilters = [
-  { id: "0", name: "all", displayName: "Hepsi", icon: "format-list-bulleted" },
-  { id: "1", name: "music", displayName: "Müzik", icon: "music-note" },
-  { id: "2", name: "art", displayName: "Sanat", icon: "artstation" },
-  { id: "3", name: "technology", displayName: "Teknoloji", icon: "laptop" },
-  { id: "4", name: "sports", displayName: "Spor", icon: "basketball" },
+  {
+    id: "8",
+    name: MarkerCategory.Dorm,
+    displayName: "Yurtlar",
+    icon: Building2,
+  },
 ];
 
 // MARKERS

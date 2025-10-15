@@ -1,14 +1,15 @@
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { memo } from "react";
+import { Icon } from "./ui/icon";
+import { LucideIcon } from "lucide-react-native";
 
 export type ShortcutButtonProps = {
   id: string;
   name: string;
   title: string;
-  icon: string;
+  icon: LucideIcon;
   onPress: () => void;
 };
 
@@ -20,8 +21,7 @@ const ShortcutButton = ({ icon, title, onPress }: ShortcutButtonProps) => {
       onPress={onPress}
     >
       <Box className="bg-primary-500 p-6 rounded-xl items-center justify-center gap-4">
-        <MaterialCommunityIcons name={icon} size={32} color="white" />
-
+        <Icon as={icon} size={24} className="text-primary-0" />
         <Text
           className="text-lg text-center font-semibold flex-wrap text-primary-0"
           numberOfLines={1}

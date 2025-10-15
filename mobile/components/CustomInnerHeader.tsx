@@ -1,4 +1,3 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { Text } from "@/components/ui/text";
 import { StackHeaderProps } from "@react-navigation/stack";
@@ -6,9 +5,10 @@ import { useCallback } from "react";
 import { HStack } from "./ui/hstack";
 import { Box } from "./ui/box";
 import useAppStore from "@/store/useAppStore";
-
+import { Icon } from "./ui/icon";
+import { ArrowLeft, LogOut } from "lucide-react-native";
 export type CustomInnerHeaderProps = StackHeaderProps & {
-  className?: string; // opsiyonel ekstra className
+  className?: string;
 };
 
 const CustomInnerHeader = ({
@@ -32,9 +32,6 @@ const CustomInnerHeader = ({
   // Header arka planını temaya göre ayarla
   const headerBgClass = theme === "dark" ? "bg-primary-700" : "bg-primary-500";
 
-  // Geri buton rengi
-  const backIconColor = theme === "dark" ? "#fff" : "#000";
-
   return (
     <HStack
       className={`${headerBgClass} h-[90px] px-4 pt-8 rounded-b-[32px] items-center justify-between`}
@@ -44,11 +41,7 @@ const CustomInnerHeader = ({
         disabled={!canGoBack}
         style={{ padding: 4, opacity: canGoBack ? 1 : 0 }}
       >
-        <MaterialCommunityIcons
-          name="arrow-left"
-          size={24}
-          color={backIconColor}
-        />
+        <Icon as={ArrowLeft} size={24} className="text-primary-0" />
       </TouchableOpacity>
 
       <Text
@@ -61,11 +54,7 @@ const CustomInnerHeader = ({
 
       {isProfileScreen ? (
         <TouchableOpacity onPress={handleLogOut} style={{ padding: 4 }}>
-          <MaterialCommunityIcons
-            name="logout"
-            size={24}
-            color={theme === "dark" ? "#fff" : "#000"}
-          />
+          <Icon as={LogOut} size={24} className="text-primary-0" />
         </TouchableOpacity>
       ) : (
         <Box className="w-[28px]" />

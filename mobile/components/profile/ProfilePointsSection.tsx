@@ -4,7 +4,7 @@ import { Text } from "@/components/ui/text";
 import { Progress, ProgressFilledTrack } from "@/components/ui/progress";
 
 const ProfilePointsSection = () => (
-  <Box className="rounded-xl p-4 mt-6 shadow-md bg-primary-800">
+  <Box className="rounded-xl p-4 mt-6 shadow-md bg-background-0">
     <Text className="text-lg font-semibold mb-2 text-typography-0">Puan</Text>
     <Progress value={60}>
       <ProgressFilledTrack className="bg-primary-500" />

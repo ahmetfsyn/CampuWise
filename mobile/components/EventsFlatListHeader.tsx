@@ -2,9 +2,7 @@ import { Box } from "./ui/box";
 import { Input, InputField, InputIcon, InputSlot } from "./ui/input";
 import { ScrollView, TouchableOpacity } from "react-native";
 import { Badge, BadgeText } from "./ui/badge";
-import { SearchIcon } from "./ui/icon";
-import { useTheme } from "@react-navigation/native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Icon, SearchIcon } from "./ui/icon";
 import { eventFilters } from "@/mocks/mockData";
 
 export type EventsFlatListHeaderProps = {
@@ -20,7 +18,6 @@ const EventsFlatListHeader = ({
   setSearchString,
   setSelectedFilter,
 }: EventsFlatListHeaderProps) => {
-  const { colors } = useTheme();
   return (
     <Box className="flex mb-4 px-2 gap-2">
       <Box>
@@ -51,18 +48,19 @@ const EventsFlatListHeader = ({
                 onPress={() => setSelectedFilter(item)}
               >
                 <Badge
-                  className={`gap-2 p-2 rounded-xl ${isSelectedFilter ? "bg-primary-500 border-0" : " bg-transparent border rounded-xl"}`}
+                  className={`gap-2 p-2 rounded-xl ${isSelectedFilter ? "bg-primary-500 border-0" : " bg-transparent border border-primary-500 rounded-xl"}`}
                 >
                   <BadgeText
                     className={`normal-case font-bold ${isSelectedFilter ? "text-primary-0" : "text-typography-0"}`}
                   >
                     {item.displayName}
                   </BadgeText>
-                  <MaterialCommunityIcons
-                    name={item.icon}
-                    size={16}
-                    color={"white"}
-                    style={{ marginLeft: 4 }}
+
+                  <Icon
+                    as={item.icon}
+                    className={
+                      isSelectedFilter ? "text-primary-0" : "text-typography-0"
+                    }
                   />
                 </Badge>
               </TouchableOpacity>

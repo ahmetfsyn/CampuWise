@@ -1,4 +1,4 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {} from "@expo/vector-icons";
 import { Box } from "@/components/ui/box";
 import {
   Avatar,
@@ -10,7 +10,8 @@ import Logo from "@/assets/images/campuwise-logo-transparent.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import { Platform, TouchableOpacity } from "react-native";
 import { Text } from "@/components/ui/text";
-import { useTheme } from "@react-navigation/native";
+import { Icon } from "./ui/icon";
+import { Bell } from "lucide-react-native";
 const CustomMainHeader = () => {
   return (
     <LinearGradient
@@ -38,7 +39,7 @@ const CustomMainHeader = () => {
             activeOpacity={0.5}
             onPress={() => console.log("Bell clicked")}
           >
-            <MaterialCommunityIcons name="bell" size={24} color={"white"} />
+            <Icon as={Bell} size={24} className="text-primary-0 " />
           </TouchableOpacity>
           <Avatar size="md">
             <AvatarFallbackText>Jane Doe</AvatarFallbackText>

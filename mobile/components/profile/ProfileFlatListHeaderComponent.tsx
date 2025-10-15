@@ -17,24 +17,22 @@ const ProfileFlatListHeaderComponent = ({
   handleGoEditProfile,
   handleGoSettings,
 }: ProfileFlatListHeaderComponentProps) => {
-  const { colors } = useTheme();
   const { fullName, imageUrl } = users[0];
 
   return (
     <>
       {/* PROFILE HEADER */}
       <ProfileHeaderSection
-        colors={colors}
         imageUrl={imageUrl}
         name={fullName}
         handleEditProfile={handleGoEditProfile}
         handleGoSettings={handleGoSettings}
       />
       {/* ABOUT ME SECTION */}
-      <ProfileAboutSection colors={colors} />
+      <ProfileAboutSection />
 
       {/* POINT PROGRESS BAR */}
-      <ProfilePointsSection colors={colors} />
+      <ProfilePointsSection />
 
       <Text className="text-lg font-semibold mb-3 mt-6 text-typography-0">
         Katıldığı Etkinlikler
