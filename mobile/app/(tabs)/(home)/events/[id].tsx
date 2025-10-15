@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Box } from "@/components/ui/box";
 import { Image } from "expo-image";
@@ -14,7 +14,6 @@ import {
 import { Badge, BadgeText } from "@/components/ui/badge";
 import { useCallback, useState } from "react";
 import AnimatedButton from "@/components/AnimatedButton";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Modal,
   ModalBackdrop,
@@ -35,6 +34,7 @@ import {
   AlertDialogBody,
   AlertDialogBackdrop,
 } from "@/components/ui/alert-dialog";
+import { Ban } from "lucide-react-native";
 
 const EventDetailsScreen = () => {
   const { id } = useLocalSearchParams();
@@ -202,7 +202,7 @@ const EventDetailsScreen = () => {
                 key={index}
                 className="gap-2 p-2 rounded-xl bg-primary-500"
               >
-                <BadgeText className="uppercase  font-bold text-typography-0">
+                <BadgeText className="uppercase  font-bold text-primary-0">
                   {tag}
                 </BadgeText>
               </Badge>
@@ -215,14 +215,8 @@ const EventDetailsScreen = () => {
         <AnimatedButton
           onPress={handleShowReportModal}
           action={"negative"}
-          className=" h-14 flex-[0.25]"
-          icon={
-            <MaterialCommunityIcons
-              name="block-helper"
-              size={24}
-              color={"white"}
-            />
-          }
+          className=" h-14 "
+          icon={<Icon as={Ban} size={24} className="text-primary-0" />}
         />
 
         <AnimatedButton
@@ -242,7 +236,7 @@ const EventDetailsScreen = () => {
         size="lg"
       >
         <ModalBackdrop />
-        <ModalContent className="border-0 bg-primary-800 ">
+        <ModalContent className="border-0 bg-background-0 rounded-xl">
           <ModalHeader>
             <Heading className="text-typography-0" size="lg">
               Etkinliği Rapor Et
@@ -282,7 +276,7 @@ const EventDetailsScreen = () => {
         size="lg"
       >
         <AlertDialogBackdrop />
-        <AlertDialogContent className="border-0 bg-primary-800">
+        <AlertDialogContent className="border-0 bg-background-0 rounded-xl">
           <AlertDialogHeader>
             <Heading className="text-typography-0 font-semibold" size="lg">
               Etkinlikten ayrılmak istediğinize emin misiniz ?
@@ -296,7 +290,10 @@ const EventDetailsScreen = () => {
           </AlertDialogBody>
           <AlertDialogFooter>
             <AnimatedButton onPress={handleLeaveEvent}>Ayrıl</AnimatedButton>
-            <AnimatedButton onPress={handleCloseCancelJoiningDialog}>
+            <AnimatedButton
+              action={"secondary"}
+              onPress={handleCloseCancelJoiningDialog}
+            >
               Vazgeç
             </AnimatedButton>
           </AlertDialogFooter>

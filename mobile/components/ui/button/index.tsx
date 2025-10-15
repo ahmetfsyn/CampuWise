@@ -150,7 +150,7 @@ const buttonTextStyle = tva({
       variant: "solid",
       action: "primary",
       class:
-        "text-typography-0 data-[hover=true]:text-typography-0 data-[active=true]:text-typography-0",
+        "text-typography-0 data-[hover=true]:text-primary-0 data-[active=true]:text-primary-0",
     },
     {
       variant: "solid",

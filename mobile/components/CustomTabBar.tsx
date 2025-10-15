@@ -1,9 +1,10 @@
 import { Animated, Platform, Pressable, View } from "react-native";
 import { useEffect, useRef } from "react";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTheme } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import { Icon } from "./ui/icon";
+import { Dot } from "lucide-react-native";
 
 const TabItem = ({
   route,
@@ -77,11 +78,7 @@ const TabItem = ({
                 size: 28,
               })
             ) : (
-              <MaterialCommunityIcons
-                name="circle"
-                color={colors.background}
-                size={28}
-              />
+              <Icon as={Dot} size={24} className="text-primary-0" />
             )}
           </LinearGradient>
         ) : (
@@ -98,11 +95,7 @@ const TabItem = ({
                 size: 28,
               })
             ) : (
-              <MaterialCommunityIcons
-                name="circle"
-                color="lightgray"
-                size={28}
-              />
+              <Icon as={Dot} size={24} className="text-primary-0" />
             )}
           </View>
         )}

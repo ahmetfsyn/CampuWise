@@ -3,8 +3,9 @@ import { Box } from "@/components/ui/box";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Text } from "@/components/ui/text";
 import AnimatedButton from "@/components/AnimatedButton";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ProfileHeaderSectionProps } from "@/types/props";
+import { Icon } from "../ui/icon";
+import { Cog } from "lucide-react-native";
 
 const ProfileHeaderSection = ({
   colors,
@@ -13,7 +14,7 @@ const ProfileHeaderSection = ({
   handleEditProfile,
   handleGoSettings,
 }: ProfileHeaderSectionProps) => (
-  <Box className="items-center bg-primary-800 rounded-xl p-6 shadow-md">
+  <Box className="items-center bg-background-0 rounded-xl p-6 shadow-md">
     <Avatar size="2xl" className="mb-3">
       <AvatarImage source={{ uri: imageUrl }} />
     </Avatar>
@@ -31,7 +32,7 @@ const ProfileHeaderSection = ({
 
       <AnimatedButton
         onPress={handleGoSettings}
-        icon={<MaterialCommunityIcons name="cog" size={24} color={"white"} />}
+        icon={<Icon as={Cog} size={24} className="text-primary-0" />}
       />
     </Box>
   </Box>

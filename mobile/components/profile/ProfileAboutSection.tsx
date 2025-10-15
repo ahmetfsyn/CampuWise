@@ -3,7 +3,7 @@ import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 
 const ProfileAboutSection = () => (
-  <Box className="rounded-xl p-4 mt-6 shadow-md bg-primary-800">
+  <Box className="rounded-xl p-4 mt-6 shadow-md bg-background-0">
     <Text className="text-lg font-semibold mb-2 text-typography-0">
       Hakkımda
     </Text>

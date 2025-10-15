@@ -1,21 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
 import useAppStore from "@/store/useAppStore";
 import AnimatedButton from "@/components/AnimatedButton";
-import { useTheme } from "@react-navigation/native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import { Moon, Sun } from "lucide-react-native";
+import { Icon } from "@/components/ui/icon";
 const SettingsScreen = () => {
-  const { toggleTheme: handleToggleTheme } = useAppStore((state) => state);
+  const { theme, toggleTheme: handleToggleTheme } = useAppStore(
+    (state) => state
+  );
   return (
     <View>
       <Text>SettingsScreen</Text>
       <AnimatedButton
         onPress={handleToggleTheme}
         icon={
-          <MaterialCommunityIcons
-            name="theme-light-dark"
+          <Icon
+            as={theme === "dark" ? Sun : Moon}
             size={24}
-            color={"white"}
+            className="text-primary-0"
           />
         }
       />

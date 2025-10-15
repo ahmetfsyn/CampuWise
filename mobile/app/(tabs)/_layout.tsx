@@ -1,12 +1,8 @@
 import { Tabs } from "expo-router";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CustomTabBar from "@/components/CustomTabBar";
-import { TouchableOpacity, View } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { Text } from "@/components/ui/text";
-import CustomMainHeader from "@/components/CustomMainHeader";
 import CustomInnerHeader from "@/components/CustomInnerHeader";
-
+import { Icon } from "@/components/ui/icon";
+import { Home, MapPin, User2 } from "lucide-react-native";
 export default function TabLayout() {
   return (
     <Tabs
@@ -24,8 +20,14 @@ export default function TabLayout() {
         name="(home)"
         options={{
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={24} />
+          tabBarIcon: ({ color, focused }) => (
+            <Icon
+              as={Home}
+              size={24}
+              className={
+                focused ? "text-typography-900" : "text-typography-200"
+              }
+            />
           ),
         }}
       />
@@ -35,8 +37,14 @@ export default function TabLayout() {
         options={{
           header: (props) => <CustomInnerHeader {...props} />,
           title: "Harita",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="map-marker" color={color} size={24} />
+          tabBarIcon: ({ focused }) => (
+            <Icon
+              as={MapPin}
+              size={24}
+              className={
+                focused ? "text-typography-900" : "text-typography-200"
+              }
+            />
           ),
         }}
       />
@@ -45,8 +53,14 @@ export default function TabLayout() {
         name="profile"
         options={{
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={24} />
+          tabBarIcon: ({ focused }) => (
+            <Icon
+              as={User2}
+              size={24}
+              className={
+                focused ? "text-typography-900" : "text-typography-200"
+              }
+            />
           ),
         }}
       />

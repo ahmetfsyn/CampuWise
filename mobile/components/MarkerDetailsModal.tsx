@@ -9,15 +9,13 @@ import {
   ModalBody,
   ModalFooter,
 } from "@/components/ui/modal";
-import { useTheme } from "@react-navigation/native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Heading } from "./ui/heading";
 import { Box } from "./ui/box";
 import { Text } from "./ui/text";
-import MapView from "react-native-maps";
-import { ButtonText } from "./ui/button";
 import { Link, LinkText } from "./ui/link";
 import AnimatedButton from "./AnimatedButton";
+import { Icon } from "./ui/icon";
+import { ClockIcon, MapPin, Phone, X } from "lucide-react-native";
 
 export type MarkerDetailsModalProps = {
   setShowMarkerDetailsModal: (value: boolean) => void;
@@ -29,7 +27,6 @@ const MarkerDetailsModal = ({
   markerDetails,
   setShowMarkerDetailsModal,
 }: MarkerDetailsModalProps) => {
-  const { colors } = useTheme();
   return (
     <Modal
       isOpen={isOpen}
@@ -65,17 +62,13 @@ const MarkerDetailsModal = ({
               <ModalCloseButton
                 onPress={() => setShowMarkerDetailsModal(false)}
               >
-                <MaterialCommunityIcons
-                  name="close"
-                  size={24}
-                  color={"white"}
-                />
+                <Icon as={X} size={24} className="text-typography-0" />
               </ModalCloseButton>
             </Box>
           </ModalHeader>
         </ModalHeader>
         <ModalBody>
-          <Box className="mb-4 ">
+          <Box className="mb-4">
             <Image
               source={{ uri: markerDetails.imageUrl }}
               style={{ width: "100%", height: 180, borderRadius: 12 }}
@@ -83,48 +76,44 @@ const MarkerDetailsModal = ({
             />
           </Box>
 
-          <Box className="flex-row items-center gap-2">
-            <MaterialCommunityIcons
-              name="clock-outline"
-              size={20}
-              color={"white"}
-            />
-            <Text className="text-typography-0">
-              {markerDetails.workingHours || "Çalışma saatleri: Bilinmiyor"}
-            </Text>
-          </Box>
+          <Box className="gap-2">
+            <Box className="flex-row items-center gap-2">
+              <Icon as={ClockIcon} size={24} className="text-primary-0" />
 
-          <Box className="flex-row items-center gap-2">
-            <MaterialCommunityIcons name="phone" size={20} color={"white"} />
+              <Text className="text-typography-0">
+                {markerDetails.workingHours || "Çalışma saatleri: Bilinmiyor"}
+              </Text>
+            </Box>
 
-            {markerDetails.phoneNumber ? (
-              <Link
-                onPress={() =>
-                  Linking.openURL(`tel:${markerDetails.phoneNumber}`)
-                }
-                isExternal
+            <Box className="flex-row items-center gap-2">
+              <Icon as={Phone} size={24} className="text-primary-0" />
+
+              {markerDetails.phoneNumber ? (
+                <Link
+                  onPress={() =>
+                    Linking.openURL(`tel:${markerDetails.phoneNumber}`)
+                  }
+                  isExternal
+                >
+                  <LinkText size="lg" className="text-primary-500">
+                    {markerDetails.phoneNumber}
+                  </LinkText>
+                </Link>
+              ) : (
+                <Text className="text-typography-0">İletişim bilgisi yok</Text>
+              )}
+            </Box>
+            <Box className="flex-row items-center gap-2">
+              <Icon as={MapPin} size={24} className="text-primary-0" />
+
+              <Text
+                numberOfLines={2}
+                className="text-typography-0 shrink "
+                isTruncated
               >
-                <LinkText size="lg" className="text-primary-500">
-                  {markerDetails.phoneNumber}
-                </LinkText>
-              </Link>
-            ) : (
-              <Text className="text-typography-0">İletişim bilgisi yok</Text>
-            )}
-          </Box>
-          <Box className="flex-row items-center gap-2">
-            <MaterialCommunityIcons
-              name="map-marker"
-              size={20}
-              color={"white"}
-            />
-            <Text
-              numberOfLines={2}
-              className="text-typography-0"
-              ellipsizeMode="tail"
-            >
-              {markerDetails.address || "Adres bilgisi yok"}
-            </Text>
+                {markerDetails.address || "Adres bilgisi yok"}
+              </Text>
+            </Box>
           </Box>
         </ModalBody>
         <ModalFooter>

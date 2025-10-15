@@ -14,6 +14,14 @@ export enum MarkerCategory {
   Hospital = "Hospital",
 }
 
+export enum EventCategory {
+  All = "All",
+  Music = "Music",
+  Art = "Art",
+  Technology = "Technology",
+  Sport = "Sport",
+}
+
 export type Marker = {
   id: string;
   category: MarkerCategory;

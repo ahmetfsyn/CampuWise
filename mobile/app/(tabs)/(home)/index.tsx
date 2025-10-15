@@ -13,6 +13,7 @@ import EventPreviewCard from "@/components/EventPreviewCard";
 import PopularTopicPreviewCard from "@/components/PopularTopicPreviewCard";
 import EmptyEventListComponent from "@/components/EmptyEventListComponent";
 import EventDeadLineCard from "@/components/EventDeadLineCard";
+import { Calendar, Megaphone, Utensils, HelpCircle } from "lucide-react-native";
 
 const ITEM_WIDTH = 192;
 
@@ -21,33 +22,30 @@ export const shortcuts = [
     id: "1",
     name: "events",
     title: "Etkinlikler",
-    icon: "calendar",
+    icon: Calendar,
     link: "/events",
   },
   {
     id: "2",
     name: "announcements",
     title: "Duyurular",
-    icon: "bullhorn",
-  },
-  {
-    id: "4",
-    name: "reports",
-    title: "Üniversite Soruları",
-    icon: "share-variant",
+    icon: Megaphone,
+    link: "/announcements",
   },
   {
     id: "3",
     name: "discussions",
     title: "Yemek Paylaşımı",
-    icon: "food-fork-drink",
+    icon: Utensils, // "food-fork-drink" yerine
+    link: "/discussions",
   },
-  // {
-  //   id: "5",
-  //   name: "share-food",
-  //   title: "Yemek Paylaş",
-  //   icon: "food-fork-drink",
-  // },
+  {
+    id: "4",
+    name: "reports",
+    title: "Üniversite Soruları",
+    icon: HelpCircle, // rapor/soru temasına uygun
+    link: "/reports",
+  },
 ];
 
 export default function HomeScreen() {
@@ -85,7 +83,7 @@ export default function HomeScreen() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} className="flex-1  p-4 ">
-      <Box className=" p-2 mb-4 flex-row justify-between items-center">
+      <Box className=" p-2 mb-4 flex-row justify-between items-center ">
         <Box>
           <Text className="text-3xl font-bold text-typography-0">
             Merhaba Ahmet

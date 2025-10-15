@@ -5,6 +5,7 @@ import { Box } from "@/components/ui/box";
 import { Fab, FabIcon, FabLabel } from "@/components/ui/fab";
 import { AddIcon } from "@/components/ui/icon";
 import { eventFilters, events } from "@/mocks/mockData";
+import { EventCategory } from "@/types/models";
 import { useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
 import { FlatList } from "react-native";
@@ -18,8 +19,9 @@ const EventsScreen = () => {
       const matchesSearch = event.title
         .toLowerCase()
         .includes(searchString.toLowerCase());
+
       const matchesCategory =
-        selectedFilter.name === "all" ||
+        selectedFilter.name.toLowerCase() === EventCategory.All.toLowerCase() ||
         event.category?.toLowerCase() === selectedFilter.name.toLowerCase();
 
       return matchesSearch && matchesCategory;
