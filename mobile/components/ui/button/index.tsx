@@ -43,7 +43,7 @@ const buttonStyle = tva({
       primary:
         "bg-primary-500 data-[hover=true]:bg-primary-600 data-[active=true]:bg-primary-700 border-primary-300 data-[hover=true]:border-primary-400 data-[active=true]:border-primary-500 data-[focus-visible=true]:web:ring-indicator-info",
       secondary:
-        "bg-secondary-500 border-secondary-300 data-[hover=true]:bg-secondary-600 data-[hover=true]:border-secondary-400 data-[active=true]:bg-secondary-700 data-[active=true]:border-secondary-700 data-[focus-visible=true]:web:ring-indicator-info",
+        "bg-secondary-500 border-secondary-700 data-[hover=true]:bg-secondary-600 data-[hover=true]:border-secondary-0 data-[active=true]:bg-secondary-700 data-[active=true]:border-secondary-700 data-[focus-visible=true]:web:ring-indicator-info",
       positive:
         "bg-success-500 border-success-300 data-[hover=true]:bg-success-600 data-[hover=true]:border-success-400 data-[active=true]:bg-success-700 data-[active=true]:border-success-500 data-[focus-visible=true]:web:ring-indicator-info",
       negative:
@@ -101,7 +101,7 @@ const buttonStyle = tva({
       action: "secondary",
       variant: "outline",
       class:
-        "bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:bg-transparent",
+        "bg-transparent data-[hover=true]:bg-background-50 data-[active=true]:border-secondary-950",
     },
     {
       action: "positive",
@@ -150,7 +150,7 @@ const buttonTextStyle = tva({
       variant: "solid",
       action: "primary",
       class:
-        "text-typography-0 data-[hover=true]:text-primary-0 data-[active=true]:text-primary-0",
+        "text-primary-0 data-[hover=true]:text-primary-0 data-[active=true]:text-primary-0",
     },
     {
       variant: "solid",
@@ -180,7 +180,7 @@ const buttonTextStyle = tva({
       variant: "outline",
       action: "secondary",
       class:
-        "text-typography-500 data-[hover=true]:text-primary-600 data-[active=true]:text-typography-700",
+        "text-secondary-950 data-[hover=true]:text-primary-600 data-[active=true]:text-secondary-950",
     },
     {
       variant: "outline",
