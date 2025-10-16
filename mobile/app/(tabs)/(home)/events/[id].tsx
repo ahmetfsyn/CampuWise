@@ -182,7 +182,7 @@ const EventDetailsScreen = () => {
                   ))}
                   {extraCount > 0 && (
                     <Avatar size="md" className="-ml-3 bg-primary-500">
-                      <Text className="font-semibold text-typography-0">
+                      <Text className="font-semibold text-primary-0">
                         +{extraCount}
                       </Text>
                     </Avatar>
@@ -220,7 +220,9 @@ const EventDetailsScreen = () => {
         />
 
         <AnimatedButton
-          className=" h-14 flex-1"
+          variant={isJoinedEvent ? "outline" : "solid"}
+          action={isJoinedEvent ? "secondary" : "primary"}
+          className={` h-14 flex-1 `}
           textClassName="uppercase"
           onPress={handleJoinEvent}
         >
@@ -242,7 +244,7 @@ const EventDetailsScreen = () => {
               Etkinliği Rapor Et
             </Heading>
             <ModalCloseButton>
-              <Icon as={CloseIcon} />
+              <Icon as={CloseIcon} className="text-typography-0" />
             </ModalCloseButton>
           </ModalHeader>
           <ModalBody>
@@ -262,7 +264,11 @@ const EventDetailsScreen = () => {
             </Box>
           </ModalBody>
           <ModalFooter>
-            <AnimatedButton action={"secondary"} onPress={handleCancelReport}>
+            <AnimatedButton
+              action={"secondary"}
+              variant={"outline"}
+              onPress={handleCancelReport}
+            >
               Vazgeç
             </AnimatedButton>
 
@@ -289,9 +295,12 @@ const EventDetailsScreen = () => {
             </Text>
           </AlertDialogBody>
           <AlertDialogFooter>
-            <AnimatedButton onPress={handleLeaveEvent}>Ayrıl</AnimatedButton>
+            <AnimatedButton action={"negative"} onPress={handleLeaveEvent}>
+              Ayrıl
+            </AnimatedButton>
             <AnimatedButton
               action={"secondary"}
+              variant={"outline"}
               onPress={handleCloseCancelJoiningDialog}
             >
               Vazgeç

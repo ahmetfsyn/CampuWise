@@ -78,7 +78,7 @@ const MarkerDetailsModal = ({
 
           <Box className="gap-2">
             <Box className="flex-row items-center gap-2">
-              <Icon as={ClockIcon} size={24} className="text-primary-0" />
+              <Icon as={ClockIcon} size={24} className="text-typography-0" />
 
               <Text className="text-typography-0">
                 {markerDetails.workingHours || "Çalışma saatleri: Bilinmiyor"}
@@ -86,7 +86,7 @@ const MarkerDetailsModal = ({
             </Box>
 
             <Box className="flex-row items-center gap-2">
-              <Icon as={Phone} size={24} className="text-primary-0" />
+              <Icon as={Phone} size={24} className="text-typography-0" />
 
               {markerDetails.phoneNumber ? (
                 <Link
@@ -104,7 +104,7 @@ const MarkerDetailsModal = ({
               )}
             </Box>
             <Box className="flex-row items-center gap-2">
-              <Icon as={MapPin} size={24} className="text-primary-0" />
+              <Icon as={MapPin} size={24} className="text-typography-0" />
 
               <Text
                 numberOfLines={2}

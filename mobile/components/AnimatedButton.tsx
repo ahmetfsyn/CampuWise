@@ -59,9 +59,7 @@ const AnimatedButton = ({
       )}
 
       {children && (
-        <ButtonText className={`${textClassName || ""} text-primary-0`}>
-          {children}
-        </ButtonText>
+        <ButtonText className={textClassName}>{children}</ButtonText>
       )}
 
       {icon && iconPosition === "right" && children && (
