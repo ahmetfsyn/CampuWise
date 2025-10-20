@@ -1,10 +1,12 @@
-import * as yup from "yup";
+import { z } from "zod";
 
-export const editProfileFormSchema = yup.object({
-  fullName: yup.string().required("Ad soyad zorunlu"),
-  email: yup
+export const editProfileFormSchema = z.object({
+  fullName: z.string().min(1, "Ad soyad zorunlu"),
+  email: z.string().email("Geçerli bir email girin"),
+  phoneNumber: z
     .string()
-    .email("Geçerli bir email girin")
-    .required("Email zorunlu"),
-  phoneNumber: yup.string().required("Telefon numarası zorunlu"),
+    .regex(/^[0-9]+$/, "Telefon numarası sadece rakamlardan oluşmalıdır")
+    .length(10, "Lütfen geçerli bir telefon numarası girin"),
 });
+
+export type EditProfileFormValues = z.infer<typeof editProfileFormSchema>;

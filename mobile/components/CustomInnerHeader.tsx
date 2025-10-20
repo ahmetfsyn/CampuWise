@@ -1,12 +1,11 @@
 import { TouchableOpacity } from "react-native";
 import { Text } from "@/components/ui/text";
 import { StackHeaderProps } from "@react-navigation/stack";
-import { useCallback } from "react";
 import { HStack } from "./ui/hstack";
 import { Box } from "./ui/box";
 import useAppStore from "@/store/useAppStore";
 import { Icon } from "./ui/icon";
-import { ArrowLeft, LogOut } from "lucide-react-native";
+import { ArrowLeft } from "lucide-react-native";
 export type CustomInnerHeaderProps = StackHeaderProps & {
   className?: string;
 };
@@ -18,14 +17,6 @@ const CustomInnerHeader = ({
 }: CustomInnerHeaderProps) => {
   const theme = useAppStore((state) => state.theme);
   const title = options?.title ?? route?.name ?? "Başlık";
-
-  const handleLogOut = useCallback(() => {
-    console.log("Logout oldu");
-    // TODO: auth logout logic
-  }, []);
-
-  const isProfileScreen =
-    typeof title === "string" && title.toLocaleLowerCase("tr-TR") === "hesabım";
 
   const canGoBack = navigation?.canGoBack?.() ?? false;
 
@@ -52,13 +43,7 @@ const CustomInnerHeader = ({
         {title}
       </Text>
 
-      {isProfileScreen ? (
-        <TouchableOpacity onPress={handleLogOut} style={{ padding: 4 }}>
-          <Icon as={LogOut} size={24} className="text-primary-0" />
-        </TouchableOpacity>
-      ) : (
-        <Box className="w-[28px]" />
-      )}
+      <Box className="w-[28px]" />
     </HStack>
   );
 };

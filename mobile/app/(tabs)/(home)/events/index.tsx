@@ -29,7 +29,7 @@ const EventsScreen = () => {
   }, [selectedFilter, searchString]);
 
   const handleCreateEvent = useCallback(() => {
-    router.push("/events/create-event");
+    router.push("/events/create");
   }, [router]);
 
   const handleGoEventDetails = useCallback(

@@ -2,16 +2,15 @@ import { Box } from "@/components/ui/box";
 import { Input, InputField } from "@/components/ui/input";
 import AnimatedButton from "@/components/AnimatedButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { useTheme } from "@react-navigation/native";
 import { ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { users } from "@/mocks/mockData";
 import { editProfileFormSchema } from "@/validations/edit-profile-form";
 import { Text } from "@/components/ui/text";
+import showMessage from "@/utils/showMessage";
 
 const EditProfileScreen = () => {
-  const { colors } = useTheme();
   const { email, fullName, phoneNumber, imageUrl } = users[0];
 
   const {
@@ -27,8 +26,14 @@ const EditProfileScreen = () => {
     resolver: yupResolver(editProfileFormSchema),
   });
 
-  const handleSave = (data: any) => {
+  const handleSave = async (data: any) => {
     console.log("Profile saved:", data);
+
+    showMessage({
+      type: "success",
+      text1: "Profil Güncellendi 🎉",
+      text2: "Bilgilerin başarıyla kaydedildi.",
+    });
   };
 
   const handleChangeAvatar = () => {
@@ -126,6 +131,7 @@ const EditProfileScreen = () => {
                     value={value}
                     onChangeText={onChange}
                     placeholder="Telefon Numarası"
+                    maxLength={10}
                     keyboardType="phone-pad"
                   />
                 </Input>
@@ -144,7 +150,7 @@ const EditProfileScreen = () => {
             size={"lg"}
             onPress={handleSubmit(handleSave)}
             textClassName="font-semibold"
-            disabled={Object.keys(errors).length > 0 ? true : false}
+            isDisabled={Object.keys(errors).length > 0}
           >
             Kaydet
           </AnimatedButton>
