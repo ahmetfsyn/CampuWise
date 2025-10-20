@@ -20,13 +20,19 @@ import { Controller, useForm } from "react-hook-form";
 import { loginFormSchema } from "@/validations/login-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
-import { Moon, Sun, SunMoon } from "lucide-react-native";
+import { SunMoon } from "lucide-react-native";
+import showMessage from "@/utils/showMessage";
 
 const LoginScreen = () => {
   const router = useRouter();
   const handleLogin = async () => {
     // backend'den token alındığını varsayalım
     // await AsyncStorage.setItem("token", "fake_token");
+    showMessage({
+      type: "success",
+      text1: "Hoşgeldin 🎉",
+      text2: "Seni tekrar görmek harika!",
+    });
     router.replace("(tabs)");
     // todo: backend'den token alınacak
 
@@ -54,7 +60,6 @@ const LoginScreen = () => {
     console.log("i forgot password");
   }, []);
 
-  // todo: theme renkleri bazı yerlerde sıkıntılı siyah olması gerekirken beyaz olması gibi
   // todo: formlar için keyboard avoidng ayarla
 
   return (
@@ -71,13 +76,7 @@ const LoginScreen = () => {
             <AnimatedButton
               onPress={handleToggleTheme}
               variant={"solid"}
-              icon={
-                <Icon
-                  as={theme === "dark" ? Sun : Moon}
-                  size={24}
-                  className="text-primary-0"
-                />
-              }
+              icon={<Icon as={SunMoon} size={24} className="text-primary-0" />}
             />
           </Box>
 
@@ -103,20 +102,64 @@ const LoginScreen = () => {
               <Controller
                 name="email"
                 control={control}
-                render={({ field, formState, fieldState }) => (
-                  <Input variant="rounded" size="xl">
-                    <InputField placeholder="E-mail" />
-                  </Input>
+                render={({
+                  field: { onChange, value },
+                  formState,
+                  fieldState,
+                }) => (
+                  <>
+                    <Input
+                      variant="rounded"
+                      size="xl"
+                      isInvalid={errors.email ? true : false}
+                    >
+                      <InputField
+                        placeholder="E-mail"
+                        value={value}
+                        onChangeText={onChange}
+                      />
+                    </Input>
+
+                    {errors.email && (
+                      <Box className="px-2">
+                        <Text className="text-error-500">
+                          {errors.email.message}
+                        </Text>
+                      </Box>
+                    )}
+                  </>
                 )}
               />
 
               <Controller
                 name="password"
                 control={control}
-                render={({ field, formState, fieldState }) => (
-                  <Input variant="rounded" size="xl">
-                    <InputField placeholder="Şifre" />
-                  </Input>
+                render={({
+                  field: { onChange, value },
+                  formState,
+                  fieldState,
+                }) => (
+                  <>
+                    <Input
+                      variant="rounded"
+                      size="xl"
+                      isInvalid={errors.password ? true : false}
+                    >
+                      <InputField
+                        placeholder="Şifre"
+                        value={value}
+                        secureTextEntry
+                        onChangeText={onChange}
+                      />
+                    </Input>
+                    {errors.password && (
+                      <Box className="px-2">
+                        <Text className="text-error-500">
+                          {errors.password.message}
+                        </Text>
+                      </Box>
+                    )}
+                  </>
                 )}
               />
             </Box>
@@ -143,7 +186,12 @@ const LoginScreen = () => {
               </Button>
             </Box>
 
-            <AnimatedButton onPress={handleLogin} size={"xl"} className="h-14 ">
+            <AnimatedButton
+              onPress={handleSubmit(handleLogin)}
+              size={"xl"}
+              className="h-14 "
+              isDisabled={Object.keys(errors).length > 0}
+            >
               Giriş Yap
             </AnimatedButton>
 

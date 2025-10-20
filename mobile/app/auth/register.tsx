@@ -13,11 +13,18 @@ import AnimatedButton from "@/components/AnimatedButton";
 import useAppStore from "@/store/useAppStore";
 import { Button, ButtonText } from "@/components/ui/button";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
+import showMessage from "@/utils/showMessage";
 
 const RegisterScreen = () => {
   const router = useRouter();
   const handleRegister = useCallback(() => {
     console.log("kayıt oldu");
+
+    showMessage({
+      type: "success",
+      text1: "Kayıt Başarılı 🎉",
+      text2: "Aramıza hoş geldin!",
+    });
     // router.push("/(tabs)/(home)");
   }, [router]);
   const { theme, toggleTheme: handleToggleTheme } = useAppStore(
@@ -68,48 +75,123 @@ const RegisterScreen = () => {
               <Controller
                 control={control}
                 name="fullName"
-                render={() => (
-                  <Input variant="rounded" size="xl">
-                    <InputField placeholder="Ad-Soyad" />
-                  </Input>
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Input
+                      variant="rounded"
+                      isInvalid={errors.fullName ? true : false}
+                      size="lg"
+                    >
+                      <InputField
+                        value={value}
+                        onChangeText={onChange}
+                        placeholder="Ad-Soyad"
+                        keyboardType="default"
+                      />
+                    </Input>
+                    {errors.fullName && (
+                      <Box className="px-2">
+                        <Text className="text-error-300">
+                          {errors.fullName.message}
+                        </Text>
+                      </Box>
+                    )}
+                  </>
                 )}
               />
 
               <Controller
                 control={control}
                 name="email"
-                render={() => (
-                  <Input variant="rounded" size="xl">
-                    <InputField placeholder="E-mail" />
-                  </Input>
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Input
+                      variant="rounded"
+                      isInvalid={errors.email ? true : false}
+                      size="lg"
+                    >
+                      <InputField
+                        value={value}
+                        onChangeText={onChange}
+                        placeholder="Email"
+                        keyboardType="email-address"
+                      />
+                    </Input>
+                    {errors.email && (
+                      <Box className="px-2">
+                        <Text className="text-error-300">
+                          {errors.email.message}
+                        </Text>
+                      </Box>
+                    )}
+                  </>
                 )}
               />
 
               <Controller
                 control={control}
                 name="password"
-                render={() => (
-                  <Input variant="rounded" size="xl">
-                    <InputField placeholder="Şifre" />
-                  </Input>
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Input
+                      variant="rounded"
+                      isInvalid={errors.password ? true : false}
+                      size="lg"
+                    >
+                      <InputField
+                        type="password"
+                        secureTextEntry
+                        textContentType="password"
+                        value={value}
+                        onChangeText={onChange}
+                        placeholder="Şifre"
+                      />
+                    </Input>
+                    {errors.password && (
+                      <Box className="px-2">
+                        <Text className="text-error-300">
+                          {errors.password.message}
+                        </Text>
+                      </Box>
+                    )}
+                  </>
                 )}
               />
 
               <Controller
                 control={control}
                 name="repeatPassword"
-                render={() => (
-                  <Input variant="rounded" size="xl">
-                    <InputField placeholder="Şifre Tekrar" />
-                  </Input>
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Input
+                      variant="rounded"
+                      isInvalid={errors.repeatPassword ? true : false}
+                      size="lg"
+                    >
+                      <InputField
+                        value={value}
+                        secureTextEntry
+                        onChangeText={onChange}
+                        placeholder="Tekrar Şifre"
+                      />
+                    </Input>
+                    {errors.repeatPassword && (
+                      <Box className="px-2">
+                        <Text className="text-error-300">
+                          {errors.repeatPassword.message}
+                        </Text>
+                      </Box>
+                    )}
+                  </>
                 )}
               />
             </Box>
 
             <AnimatedButton
-              onPress={handleRegister}
+              onPress={handleSubmit(handleRegister)}
               size={"xl"}
               className="h-14 mb-4"
+              isDisabled={Object.keys(errors).length > 0}
             >
               Kayıt Ol
             </AnimatedButton>

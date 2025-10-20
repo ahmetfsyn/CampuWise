@@ -1,14 +1,17 @@
 import "react-native-reanimated";
+import "@/global.css";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import "@/global.css";
 import { DarkTheme, LightTheme } from "@/constants/customTheme";
 import SplashScreen from "@/components/SplashScreen";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useAppStore from "@/store/useAppStore";
+import * as Localization from "expo-localization";
+import Toast from "react-native-toast-message";
+import toastConfig from "@/configs/toastConfig";
 
 export const unstable_settings = {
   initialRouteName: "auth",
@@ -16,7 +19,9 @@ export const unstable_settings = {
 };
 export default function RootLayout() {
   const colorScheme = useAppStore((state) => state.theme);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(true);
+  const localization = Localization.useLocales()[0];
 
   const [showSplash, setShowSplash] = useState<boolean>(false);
 
@@ -49,6 +54,7 @@ export default function RootLayout() {
           )}
         </Stack>
         <StatusBar style={"auto"} />
+        <Toast config={toastConfig} />
       </GluestackUIProvider>
     </ThemeProvider>
   );
