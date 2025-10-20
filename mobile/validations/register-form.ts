@@ -1,14 +1,17 @@
 import { z } from "zod";
+import i18n from "@/configs/i18n.config";
 
 export const registerFormSchema = z
   .object({
-    fullName: z.string().min(1, "Ad soyad zorunlu"),
-    email: z.email("Geçerli bir email girin"),
-    password: z.string().min(6, "Şifre en az 6 karakter olmalı"),
-    repeatPassword: z.string().min(1, "Şifre tekrarı zorunlu"),
+    fullName: z.string().nonempty(i18n.t("register.fullNameRequired")),
+    email: z.email("register.emailInvalid"),
+    password: z.string().min(6, i18n.t("register.passwordMinLength")),
+    repeatPassword: z
+      .string()
+      .min(1, i18n.t("register.repeatPasswordRequired")),
   })
   .refine((data) => data.password === data.repeatPassword, {
-    message: "Şifreler eşleşmiyor",
+    message: i18n.t("register.passwordsNotMatch"),
     path: ["repeatPassword"],
   });
 

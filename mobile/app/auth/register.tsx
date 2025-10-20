@@ -8,15 +8,17 @@ import { useCallback } from "react";
 import { useRouter } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
 import { registerFormSchema } from "@/validations/register-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import AnimatedButton from "@/components/AnimatedButton";
 import useAppStore from "@/store/useAppStore";
 import { Button, ButtonText } from "@/components/ui/button";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import showMessage from "@/utils/showMessage";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 
 const RegisterScreen = () => {
   const router = useRouter();
+  const { t } = useTranslation("auth");
   const handleRegister = useCallback(() => {
     console.log("kayıt oldu");
 
@@ -27,9 +29,7 @@ const RegisterScreen = () => {
     });
     // router.push("/(tabs)/(home)");
   }, [router]);
-  const { theme, toggleTheme: handleToggleTheme } = useAppStore(
-    (state) => state
-  );
+  const { theme } = useAppStore((state) => state);
   const handleAlreadyHaveAnAccount = useCallback(() => {
     return router.push("/auth/login");
   }, [router]);
@@ -39,8 +39,13 @@ const RegisterScreen = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {},
-    resolver: yupResolver(registerFormSchema),
+    defaultValues: {
+      email: "",
+      fullName: "",
+      password: "",
+      repeatPassword: "",
+    },
+    resolver: zodResolver(registerFormSchema),
   });
 
   return (
@@ -64,10 +69,10 @@ const RegisterScreen = () => {
           <Box className="gap-4">
             <Box className="gap-2 mb-4">
               <Text className="text-3xl font-bold text-typography-0">
-                Buralarda Yeniysen 👋
+                {t("register.title")}
               </Text>
               <Text className="text-lg font-normal text-typography-200">
-                Kayıt ol ve aramıza katıl
+                {t("register.subtitle")}
               </Text>
             </Box>
 
@@ -85,14 +90,14 @@ const RegisterScreen = () => {
                       <InputField
                         value={value}
                         onChangeText={onChange}
-                        placeholder="Ad-Soyad"
+                        placeholder={t("register.fullNamePlaceholder")}
                         keyboardType="default"
                       />
                     </Input>
                     {errors.fullName && (
                       <Box className="px-2">
-                        <Text className="text-error-300">
-                          {errors.fullName.message}
+                        <Text className="text-error-500">
+                          {t(errors.fullName.message)}
                         </Text>
                       </Box>
                     )}
@@ -113,14 +118,14 @@ const RegisterScreen = () => {
                       <InputField
                         value={value}
                         onChangeText={onChange}
-                        placeholder="Email"
+                        placeholder={t("register.emailPlaceholder")}
                         keyboardType="email-address"
                       />
                     </Input>
                     {errors.email && (
                       <Box className="px-2">
-                        <Text className="text-error-300">
-                          {errors.email.message}
+                        <Text className="text-error-500">
+                          {t(errors.email.message)}
                         </Text>
                       </Box>
                     )}
@@ -144,13 +149,13 @@ const RegisterScreen = () => {
                         textContentType="password"
                         value={value}
                         onChangeText={onChange}
-                        placeholder="Şifre"
+                        placeholder={t("register.passwordPlaceholder")}
                       />
                     </Input>
                     {errors.password && (
                       <Box className="px-2">
-                        <Text className="text-error-300">
-                          {errors.password.message}
+                        <Text className="text-error-500">
+                          {t(errors.password.message)}
                         </Text>
                       </Box>
                     )}
@@ -172,13 +177,13 @@ const RegisterScreen = () => {
                         value={value}
                         secureTextEntry
                         onChangeText={onChange}
-                        placeholder="Tekrar Şifre"
+                        placeholder={t("register.repeatPasswordPlaceholder")}
                       />
                     </Input>
                     {errors.repeatPassword && (
                       <Box className="px-2">
-                        <Text className="text-error-300">
-                          {errors.repeatPassword.message}
+                        <Text className="text-error-500">
+                          {t(errors.repeatPassword.message)}
                         </Text>
                       </Box>
                     )}
@@ -193,12 +198,12 @@ const RegisterScreen = () => {
               className="h-14 mb-4"
               isDisabled={Object.keys(errors).length > 0}
             >
-              Kayıt Ol
+              {t("register.registerButton")}
             </AnimatedButton>
 
             <Box className="flex-row gap-2 items-center justify-center">
               <Text className="text-typography-0">
-                Zaten bir hesabın var mı ?
+                {t("register.alreadyHaveAccount")}
               </Text>
 
               <Button
@@ -206,7 +211,9 @@ const RegisterScreen = () => {
                 onPress={handleAlreadyHaveAnAccount}
                 size={"md"}
               >
-                <ButtonText className="text-primary-500">Giriş Yap</ButtonText>
+                <ButtonText className="text-primary-500">
+                  {t("register.loginButton")}
+                </ButtonText>
               </Button>
             </Box>
           </Box>

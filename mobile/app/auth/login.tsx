@@ -13,21 +13,26 @@ import {
   CheckboxIcon,
 } from "@/components/ui/checkbox";
 import { CheckIcon, Icon } from "@/components/ui/icon";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import AnimatedButton from "@/components/AnimatedButton";
 import useAppStore from "@/store/useAppStore";
 import { Controller, useForm } from "react-hook-form";
 import { loginFormSchema } from "@/validations/login-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { SunMoon } from "lucide-react-native";
 import showMessage from "@/utils/showMessage";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 
 const LoginScreen = () => {
   const router = useRouter();
-  const handleLogin = async () => {
+  const { t } = useTranslation("auth");
+  const handleLogin = async (data: any) => {
     // backend'den token alındığını varsayalım
     // await AsyncStorage.setItem("token", "fake_token");
+
+    console.log(data);
+
     showMessage({
       type: "success",
       text1: "Hoşgeldin 🎉",
@@ -38,7 +43,6 @@ const LoginScreen = () => {
 
     console.log("Giriş yapıldı");
   };
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
   const handleNewAccount = () => {
     return router.push("/auth/register");
   };
@@ -48,8 +52,12 @@ const LoginScreen = () => {
     control,
     formState: { errors },
   } = useForm({
-    defaultValues: {},
-    resolver: yupResolver(loginFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
+    resolver: zodResolver(loginFormSchema),
   });
 
   const { theme, toggleTheme: handleToggleTheme } = useAppStore(
@@ -59,8 +67,6 @@ const LoginScreen = () => {
   const handleForgotPassword = useCallback(() => {
     console.log("i forgot password");
   }, []);
-
-  // todo: formlar için keyboard avoidng ayarla
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -91,10 +97,10 @@ const LoginScreen = () => {
           <Box className="gap-4 ">
             <Box className="gap-2">
               <Text className="text-3xl font-bold text-typography-0">
-                Seni Bekliyorduk 👋
+                {t("login.title")}
               </Text>
               <Text className="text-lg font-normal text-typography-200">
-                Bağlantı kurmak için giriş yap
+                {t("login.subtitle")}
               </Text>
             </Box>
 
@@ -102,11 +108,7 @@ const LoginScreen = () => {
               <Controller
                 name="email"
                 control={control}
-                render={({
-                  field: { onChange, value },
-                  formState,
-                  fieldState,
-                }) => (
+                render={({ field: { onChange, value } }) => (
                   <>
                     <Input
                       variant="rounded"
@@ -114,7 +116,7 @@ const LoginScreen = () => {
                       isInvalid={errors.email ? true : false}
                     >
                       <InputField
-                        placeholder="E-mail"
+                        placeholder={t("login.email")}
                         value={value}
                         onChangeText={onChange}
                       />
@@ -123,7 +125,7 @@ const LoginScreen = () => {
                     {errors.email && (
                       <Box className="px-2">
                         <Text className="text-error-500">
-                          {errors.email.message}
+                          {t(errors.email.message)}
                         </Text>
                       </Box>
                     )}
@@ -134,11 +136,7 @@ const LoginScreen = () => {
               <Controller
                 name="password"
                 control={control}
-                render={({
-                  field: { onChange, value },
-                  formState,
-                  fieldState,
-                }) => (
+                render={({ field: { onChange, value } }) => (
                   <>
                     <Input
                       variant="rounded"
@@ -146,7 +144,7 @@ const LoginScreen = () => {
                       isInvalid={errors.password ? true : false}
                     >
                       <InputField
-                        placeholder="Şifre"
+                        placeholder={t("login.password")}
                         value={value}
                         secureTextEntry
                         onChangeText={onChange}
@@ -155,7 +153,7 @@ const LoginScreen = () => {
                     {errors.password && (
                       <Box className="px-2">
                         <Text className="text-error-500">
-                          {errors.password.message}
+                          {t(errors.password.message)}
                         </Text>
                       </Box>
                     )}
@@ -165,23 +163,26 @@ const LoginScreen = () => {
             </Box>
 
             <Box className="flex-row justify-between items-center">
-              <Checkbox
-                isDisabled={false}
-                isInvalid={false}
-                size="md"
-                value={rememberMe}
-                onValueChange={(val: boolean) => setRememberMe(val)}
-                className="flex-row items-center gap-2"
-              >
-                <CheckboxIndicator>
-                  <CheckboxIcon as={CheckIcon} />
-                </CheckboxIndicator>
-                <CheckboxLabel>Beni Hatırla</CheckboxLabel>
-              </Checkbox>
+              <Controller
+                control={control}
+                name="rememberMe"
+                render={({ field: { onChange, value } }) => (
+                  <Checkbox
+                    isChecked={!!value}
+                    onChange={(isSelected) => onChange(isSelected)}
+                    value="rememberMe"
+                  >
+                    <CheckboxIndicator>
+                      <CheckboxIcon as={CheckIcon} />
+                    </CheckboxIndicator>
+                    <CheckboxLabel>{t("login.rememberMe")}</CheckboxLabel>
+                  </Checkbox>
+                )}
+              />
 
               <Button onPress={handleForgotPassword} variant="link" size={"md"}>
                 <ButtonText className=" text-primary-500">
-                  Şifremi Unuttum
+                  {t("login.forgotPassword")}
                 </ButtonText>
               </Button>
             </Box>
@@ -192,13 +193,15 @@ const LoginScreen = () => {
               className="h-14 "
               isDisabled={Object.keys(errors).length > 0}
             >
-              Giriş Yap
+              {t("login.loginButton")}
             </AnimatedButton>
 
             <Box className="flex-row gap-2 items-center justify-center">
-              <Text className="text-typography-0">Hesabın yok mu ?</Text>
+              <Text className="text-typography-0">{t("login.noAccount")}</Text>
               <Button variant="link" onPress={handleNewAccount} size={"md"}>
-                <ButtonText className=" text-primary-500">Kayıt Ol</ButtonText>
+                <ButtonText className=" text-primary-500">
+                  {t("login.register")}
+                </ButtonText>
               </Button>
             </Box>
           </Box>

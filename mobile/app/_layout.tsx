@@ -1,3 +1,4 @@
+import "@/configs/i18n.config";
 import "react-native-reanimated";
 import "@/global.css";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
@@ -9,9 +10,8 @@ import SplashScreen from "@/components/SplashScreen";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useAppStore from "@/store/useAppStore";
-import * as Localization from "expo-localization";
 import Toast from "react-native-toast-message";
-import toastConfig from "@/configs/toastConfig";
+import toastConfig from "@/configs/toast.config";
 
 export const unstable_settings = {
   initialRouteName: "auth",
@@ -20,8 +20,7 @@ export const unstable_settings = {
 export default function RootLayout() {
   const colorScheme = useAppStore((state) => state.theme);
 
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(true);
-  const localization = Localization.useLocales()[0];
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(false);
 
   const [showSplash, setShowSplash] = useState<boolean>(false);
 

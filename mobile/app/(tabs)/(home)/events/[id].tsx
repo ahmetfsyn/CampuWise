@@ -4,7 +4,6 @@ import { Box } from "@/components/ui/box";
 import { Image } from "expo-image";
 import { events } from "@/mocks/mockData";
 import { Text } from "@/components/ui/text";
-import { useTheme } from "@react-navigation/native";
 import {
   Avatar,
   AvatarFallbackText,
@@ -35,19 +34,30 @@ import {
   AlertDialogBackdrop,
 } from "@/components/ui/alert-dialog";
 import { Ban } from "lucide-react-native";
+import showMessage from "@/utils/showMessage";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { reportEventFormSchema } from "@/validations/report-event-form";
 
 const EventDetailsScreen = () => {
   const { id } = useLocalSearchParams();
-  const { colors } = useTheme();
   const [isJoinedEvent, setJoinedEvent] = useState<boolean>(false);
   const [isReportedEvent, setIsReportedEvent] = useState<boolean>(false);
   const [showReportModal, setShowReportModal] = useState<boolean>(false);
   const [showCancelJoiningDialog, setShowCancelJoiningDialog] =
     useState<boolean>(false);
-
-  const [reportText, setReportText] = useState<string>("");
-
   const event = events.find((event) => event.id === id);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      content: "",
+    },
+    resolver: zodResolver(reportEventFormSchema),
+  });
 
   const handleCloseCancelJoiningDialog = useCallback(() => {
     setShowCancelJoiningDialog(false);
@@ -57,12 +67,22 @@ const EventDetailsScreen = () => {
     setJoinedEvent(false);
     setShowCancelJoiningDialog(false);
     console.log("You have left the event. Thank u");
+    showMessage({
+      type: "success",
+      text1: "Etkinlikten Ayrıldın",
+      text2: "Umarım seni tekrar aramızda görebiliriz.",
+    });
   }, []);
 
   const handleJoinEvent = useCallback(() => {
     if (!isJoinedEvent) {
       setJoinedEvent(true);
       console.log("You have joined the event. Thank u");
+      showMessage({
+        type: "success",
+        text1: "Tebrikler 🎉",
+        text2: "Etkinliğe Başarıyla Katıldın!",
+      });
     } else {
       // setJoinedEvent(false);
       setShowCancelJoiningDialog(true);
@@ -77,13 +97,12 @@ const EventDetailsScreen = () => {
     }
   }, [isReportedEvent]);
 
-  const handleReportEvent = useCallback(() => {
-    if (reportText) {
-      console.log("event is reported. Thank u");
-      setIsReportedEvent(true);
-      setShowReportModal(false);
-    }
-  }, [reportText]);
+  const handleReportEvent = useCallback((data: any) => {
+    console.log(data);
+    console.log("event is reported. Thank u");
+    setIsReportedEvent(true);
+    setShowReportModal(false);
+  }, []);
 
   const handleCancelReport = useCallback(() => {
     setShowReportModal(false);
@@ -253,14 +272,31 @@ const EventDetailsScreen = () => {
                 Etkinlik hakkında bir sorun mu var ? Nedenini belirterek
                 incelememiz için bize rapor edebilirsin.
               </Text>
-              <Textarea isRequired size={"lg"} className="text-typography-0">
-                <TextareaInput
-                  className="text-typography-0"
-                  value={reportText}
-                  onChangeText={(text) => setReportText(text)}
-                  placeholder="Raporlama nedeniniz..."
-                />
-              </Textarea>
+              <Controller
+                control={control}
+                name="content"
+                render={({ field: { onChange, value } }) => (
+                  <>
+                    <Textarea
+                      isInvalid={!!errors.content}
+                      size={"lg"}
+                      className="text-typography-0"
+                    >
+                      <TextareaInput
+                        className="text-typography-0"
+                        value={value}
+                        onChangeText={onChange}
+                        placeholder="Raporlama nedeniniz..."
+                      />
+                    </Textarea>
+                    {errors.content && (
+                      <Text className="text-error-300">
+                        {errors.content.message}
+                      </Text>
+                    )}
+                  </>
+                )}
+              ></Controller>
             </Box>
           </ModalBody>
           <ModalFooter>
@@ -272,10 +308,16 @@ const EventDetailsScreen = () => {
               Vazgeç
             </AnimatedButton>
 
-            <AnimatedButton onPress={handleReportEvent}>Gönder</AnimatedButton>
+            <AnimatedButton
+              isDisabled={Object.keys(errors).length > 0}
+              onPress={handleSubmit(handleReportEvent)}
+            >
+              Gönder
+            </AnimatedButton>
           </ModalFooter>
         </ModalContent>
       </Modal>
+
       <AlertDialog
         isOpen={showCancelJoiningDialog}
         onClose={handleCloseCancelJoiningDialog}

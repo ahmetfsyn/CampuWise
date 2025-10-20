@@ -101,7 +101,7 @@ export default function HomeScreen() {
         </Avatar>
       </Box>
 
-      <EventDeadLineCard {...events[0]} />
+      {/* <EventDeadLineCard {...events[0]} /> */}
 
       <Box className="items-center my-4">
         <Carousel />
