@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { Animated } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "@/assets/images/campuwise-logo-transparent.svg";
+import useAppStore from "@/store/useAppStore";
+import i18n from "@/configs/i18n.config";
 
 const AnimatedLogo = Animated.createAnimatedComponent(Logo);
 
@@ -10,37 +12,38 @@ const SplashScreen = ({ onFinish }: { onFinish: () => void }) => {
   const opacityAnim = useRef(new Animated.Value(1)).current; // başlangıç opacity
 
   useEffect(() => {
-    // giriş animasyonu
-    Animated.parallel([
-      Animated.spring(scaleAnim, {
-        toValue: 1,
-        friction: 5,
-        useNativeDriver: true,
-      }),
-      Animated.timing(opacityAnim, {
-        toValue: 1,
-        duration: 800,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
-      // 2 saniye bekle, sonra çıkış animasyonu
-      setTimeout(() => {
-        Animated.parallel([
-          Animated.timing(scaleAnim, {
-            toValue: 0.8,
-            duration: 300,
-            useNativeDriver: true,
-          }),
-          Animated.timing(opacityAnim, {
-            toValue: 0,
-            duration: 300,
-            useNativeDriver: true,
-          }),
-        ]).start(() => {
-          onFinish();
-        });
-      }, 2000);
-    });
+    const lang = useAppStore.getState().language;
+    i18n.changeLanguage(lang);
+  }, []);
+
+  useEffect(() => {
+    Animated.sequence([
+      Animated.parallel([
+        Animated.spring(scaleAnim, {
+          toValue: 1,
+          friction: 5,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacityAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+      ]),
+      Animated.delay(2000),
+      Animated.parallel([
+        Animated.timing(scaleAnim, {
+          toValue: 0.8,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacityAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]),
+    ]).start(onFinish);
   }, []);
 
   return (

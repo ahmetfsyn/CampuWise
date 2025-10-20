@@ -26,7 +26,13 @@ import {
   SelectPortal,
   SelectTrigger,
 } from "@/components/ui/select";
-// todo : Seçili olan dile göre selectboxı guncellemek gerek gösterirken labelı gostermem lazım . tasarımı eksik olan sayfaları ypamaya basla. mesela etkinlik olustur sayfasını yap ve hook form u entegre et
+// todo : Seçili olan dile göre selectboxı guncellemek gerek gösterirken labelı gostermem lazım . tasarımı eksik olan sayfaları ypamaya basla. Suanda etkinlik ile ilgili gereken şeyleri bitirdigimi dusnuyorum bu yüzden artık backende geç ve etkinlik ile ilgili ne grekiyorsa onu kodla.
+
+const languageOptions = [
+  { label: "Türkçe", value: "tr" },
+  { label: "İngilizce", value: "en" },
+];
+
 const SettingsScreen = () => {
   const {
     theme,
@@ -38,6 +44,10 @@ const SettingsScreen = () => {
   const handleLogOut = useCallback(() => {
     console.log("cikis yapildi");
   }, []);
+
+  const selectedLanguageLabel = languageOptions.find(
+    (opt) => opt.value === language
+  )?.label;
 
   const DATA = [
     {
@@ -72,13 +82,13 @@ const SettingsScreen = () => {
           title: "Dil",
           rightNode: (
             <Select
-              selectedLabel={language}
-              // selectedValue={language}
+              selectedValue={language}
               onValueChange={(val) => handleChangeLanguage(val)}
             >
               <SelectTrigger variant="underlined" size="lg">
                 <SelectInput
                   placeholder="Dil"
+                  value={selectedLanguageLabel}
                   className="text-typography-500"
                 />
                 <Icon

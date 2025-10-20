@@ -4,17 +4,19 @@ import AnimatedButton from "@/components/AnimatedButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { users } from "@/mocks/mockData";
 import { editProfileFormSchema } from "@/validations/edit-profile-form";
 import { Text } from "@/components/ui/text";
 import showMessage from "@/utils/showMessage";
+import pickImage from "@/utils/pickImage";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const EditProfileScreen = () => {
   const { email, fullName, phoneNumber, imageUrl } = users[0];
 
   const {
     control,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -22,8 +24,9 @@ const EditProfileScreen = () => {
       fullName: fullName,
       email: email,
       phoneNumber: phoneNumber,
+      imageUrl: imageUrl,
     },
-    resolver: yupResolver(editProfileFormSchema),
+    resolver: zodResolver(editProfileFormSchema),
   });
 
   const handleSave = async (data: any) => {
@@ -36,8 +39,12 @@ const EditProfileScreen = () => {
     });
   };
 
-  const handleChangeAvatar = () => {
-    console.log("Change Avatar pressed");
+  const handleChangeAvatar = async () => {
+    const image = await pickImage({
+      allowsEditing: true,
+      aspect: [1, 1],
+    });
+    setValue("imageUrl", image?.uri);
   };
 
   return (
@@ -50,12 +57,20 @@ const EditProfileScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <Box className="items-center mb-6">
-          <Avatar size="2xl" className="mb-3">
-            <AvatarImage source={{ uri: imageUrl }} />
-          </Avatar>
-          <AnimatedButton size={"md"} onPress={handleChangeAvatar}>
-            Resim Ekle
-          </AnimatedButton>
+          <Controller
+            control={control}
+            name="imageUrl"
+            render={({ fieldState: { error }, field: { onChange, value } }) => (
+              <>
+                <Avatar size="2xl" className="mb-4">
+                  <AvatarImage source={{ uri: value }} />
+                </Avatar>
+                <AnimatedButton onPress={handleChangeAvatar}>
+                  Resim Ekle
+                </AnimatedButton>
+              </>
+            )}
+          ></Controller>
         </Box>
 
         <Box className="gap-4">
@@ -149,7 +164,7 @@ const EditProfileScreen = () => {
           <AnimatedButton
             size={"lg"}
             onPress={handleSubmit(handleSave)}
-            textClassName="font-semibold"
+            className="h-14"
             isDisabled={Object.keys(errors).length > 0}
           >
             Kaydet
