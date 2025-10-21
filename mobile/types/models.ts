@@ -3,6 +3,8 @@ export type Coordinate = {
   longitude: number;
 };
 
+export type LanguageCode = "en" | "tr";
+
 export enum MarkerCategory {
   Food = "Food",
   Cafe = "Cafe",

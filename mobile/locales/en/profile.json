@@ -1,0 +1,36 @@
+{
+    "settings": {
+        "notificationPreferences": "Notification Preferences",
+        "emailNotifications": "Email Notifications",
+        "appNotifications": "App Notifications",
+        "appPreferences": "App Preferences",
+        "theme": "Theme",
+        "language": "Language",
+        "supportAndAbout": "Support & About",
+        "help": "Help",
+        "version": "Version",
+        "logout": "Log Out",
+        "languageOptions": {
+            "tr": "Turkish",
+            "en": "English"
+        }
+    },
+    "editProfile": {
+        "addPhoto": "Add Photo",
+        "placeholders": {
+            "fullName": "Full Name",
+            "email": "Email",
+            "phone": "Phone Number"
+        },
+        "validation": {
+            "fullName": "Please enter a valid full name.",
+            "email": "Please enter a valid email address.",
+            "phone": "Please enter a valid phone number."
+        },
+        "saveButton": "Save",
+        "toast": {
+            "successTitle": "Profile Updated 🎉",
+            "successMessage": "Your information has been saved successfully."
+        }
+    }
+}

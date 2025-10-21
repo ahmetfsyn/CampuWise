@@ -12,7 +12,6 @@ import { events, topics } from "@/mocks/mockData";
 import EventPreviewCard from "@/components/EventPreviewCard";
 import PopularTopicPreviewCard from "@/components/PopularTopicPreviewCard";
 import EmptyEventListComponent from "@/components/EmptyEventListComponent";
-import EventDeadLineCard from "@/components/EventDeadLineCard";
 import { Calendar, Megaphone, Utensils, HelpCircle } from "lucide-react-native";
 
 const ITEM_WIDTH = 192;

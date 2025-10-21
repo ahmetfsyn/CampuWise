@@ -29,7 +29,7 @@ const LoginScreen = () => {
   const { t } = useTranslation("auth");
   const handleLogin = async (data: any) => {
     // backend'den token alındığını varsayalım
-    // await AsyncStorage.setItem("token", "fake_token");
+    await useAppStore.getState().login("authToken");
 
     console.log(data);
 

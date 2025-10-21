@@ -14,7 +14,7 @@ import { Icon } from "@/components/ui/icon";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import AnimatedButton from "@/components/AnimatedButton";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import {
   Select,
   SelectBackdrop,
@@ -26,12 +26,11 @@ import {
   SelectPortal,
   SelectTrigger,
 } from "@/components/ui/select";
-// todo : Seçili olan dile göre selectboxı guncellemek gerek gösterirken labelı gostermem lazım . tasarımı eksik olan sayfaları ypamaya basla. Suanda etkinlik ile ilgili gereken şeyleri bitirdigimi dusnuyorum bu yüzden artık backende geç ve etkinlik ile ilgili ne grekiyorsa onu kodla.
+import { useTranslation } from "react-i18next";
+import { LanguageCode } from "@/types/models";
+import { router } from "expo-router";
 
-const languageOptions = [
-  { label: "Türkçe", value: "tr" },
-  { label: "İngilizce", value: "en" },
-];
+// todo :Dil entegrasyonunu bitir. Tasarımı eksik olan sayfaları ypamaya basla. Suanda etkinlik ile ilgili gereken şeyleri bitirdigimi dusnuyorum bu yüzden artık backende geç ve etkinlik ile ilgili ne grekiyorsa onu kodla.
 
 const SettingsScreen = () => {
   const {
@@ -41,94 +40,124 @@ const SettingsScreen = () => {
     changeLanguage: handleChangeLanguage,
   } = useAppStore((state) => state);
 
-  const handleLogOut = useCallback(() => {
+  const { t } = useTranslation("profile");
+
+  const handleLogOut = useCallback(async () => {
     console.log("cikis yapildi");
+    await useAppStore.getState().logout();
+    router.replace("/auth/login");
   }, []);
+
+  const languageOptions = useMemo(
+    () => [
+      { label: t("settings.languageOptions.en"), value: "en" as LanguageCode },
+      { label: t("settings.languageOptions.tr"), value: "tr" as LanguageCode },
+    ],
+    [t]
+  );
 
   const selectedLanguageLabel = languageOptions.find(
     (opt) => opt.value === language
   )?.label;
 
-  const DATA = [
-    {
-      title: "Bildirim Terchileri",
-      data: [
-        {
-          title: "Email Bildirimleri",
-          rightNode: <Switch />,
-          icon: Mail,
-        },
-        {
-          title: "Uygulama Bildirimleri",
-          rightNode: <Switch />,
-          icon: Bell,
-        },
-      ],
-    },
-    {
-      title: "Uygulama Terchileri",
-      data: [
-        {
-          title: "Tema",
-          rightNode: (
-            <Switch
-              value={theme === "dark"}
-              onValueChange={handleToggleTheme}
-            />
-          ),
-          icon: SunMoon,
-        },
-        {
-          title: "Dil",
-          rightNode: (
-            <Select
-              selectedValue={language}
-              onValueChange={(val) => handleChangeLanguage(val)}
-            >
-              <SelectTrigger variant="underlined" size="lg">
-                <SelectInput
-                  placeholder="Dil"
-                  value={selectedLanguageLabel}
-                  className="text-typography-500"
-                />
-                <Icon
-                  className="mr-3 text-typography-500"
-                  as={ChevronDownIcon}
-                />
-              </SelectTrigger>
-              <SelectPortal>
-                <SelectBackdrop />
-                <SelectContent>
-                  <SelectDragIndicatorWrapper>
-                    <SelectDragIndicator />
-                  </SelectDragIndicatorWrapper>
-                  <SelectItem label="Türkçe" value="tr" />
-                  <SelectItem label="İngilizce" value="en" />
-                </SelectContent>
-              </SelectPortal>
-            </Select>
-          ),
-          icon: Globe,
-        },
-      ],
-    },
+  const DATA = useMemo(
+    () => [
+      {
+        title: t("settings.notificationPreferences"),
+        data: [
+          {
+            title: t("settings.emailNotifications"),
+            rightNode: <Switch />,
+            icon: Mail,
+          },
+          {
+            title: t("settings.appNotifications"),
+            rightNode: <Switch />,
+            icon: Bell,
+          },
+        ],
+      },
+      {
+        title: t("settings.appPreferences"),
+        data: [
+          {
+            title: t("settings.theme"),
+            rightNode: (
+              <Switch
+                value={theme === "dark"}
+                onValueChange={handleToggleTheme}
+              />
+            ),
+            icon: SunMoon,
+          },
+          {
+            title: t("settings.language"),
+            rightNode: (
+              <Select
+                selectedValue={language}
+                onValueChange={(val) => handleChangeLanguage(val)}
+              >
+                <SelectTrigger variant="underlined" size="lg">
+                  <SelectInput
+                    placeholder={t("settings.language")}
+                    value={selectedLanguageLabel}
+                    className="text-typography-500"
+                  />
+                  <Icon
+                    className="mr-3 text-typography-500"
+                    as={ChevronDownIcon}
+                  />
+                </SelectTrigger>
+                <SelectPortal>
+                  <SelectBackdrop />
+                  <SelectContent>
+                    <SelectDragIndicatorWrapper>
+                      <SelectDragIndicator />
+                    </SelectDragIndicatorWrapper>
+                    {languageOptions.map((opt) => (
+                      <SelectItem
+                        key={opt.value}
+                        label={opt.label}
+                        value={opt.value}
+                      />
+                    ))}
+                  </SelectContent>
+                </SelectPortal>
+              </Select>
+            ),
+            icon: Globe,
+          },
+        ],
+      },
+      {
+        title: t("settings.supportAndAbout"),
+        data: [
+          {
+            title: t("settings.help"),
+            rightNode: (
+              <Icon as={ChevronRight} className="text-typography-500" />
+            ),
+            icon: HelpCircle,
+          },
+          {
+            title: t("settings.version"),
+            rightNode: <Text className="text-typography-200">1.0</Text>,
+            icon: Info,
+          },
+        ],
+      },
+    ],
+    [
+      theme,
+      language,
+      t,
+      selectedLanguageLabel,
+      handleToggleTheme,
+      handleChangeLanguage,
+      languageOptions,
+    ]
+  );
 
-    {
-      title: "Destek & Hakkımızda",
-      data: [
-        {
-          title: "Yardım",
-          rightNode: <Icon as={ChevronRight} className="text-typography-500" />,
-          icon: HelpCircle,
-        },
-        {
-          title: "Sürüm",
-          rightNode: <Text className="text-typography-200">1.0</Text>,
-          icon: Info,
-        },
-      ],
-    },
-  ];
   return (
     <SectionList
       sections={DATA}
@@ -142,7 +171,7 @@ const SettingsScreen = () => {
           size={"lg"}
           onPress={handleLogOut}
         >
-          Çıkış Yap
+          {t("settings.logout")}
         </AnimatedButton>
       }
       renderSectionHeader={({ section: { title } }) => (
@@ -159,19 +188,7 @@ const SettingsScreen = () => {
           </Box>
         </Box>
       )}
-    >
-      {/* <Text>SettingsScreen</Text>
-      <AnimatedButton
-        onPress={handleToggleTheme}
-        icon={
-          <Icon
-            as={theme === "dark" ? Sun : Moon}
-            size={24}
-            className="text-primary-0"
-          />
-        }
-      /> */}
-    </SectionList>
+    ></SectionList>
   );
 };
 
