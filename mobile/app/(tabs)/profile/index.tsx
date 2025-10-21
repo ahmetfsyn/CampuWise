@@ -2,13 +2,11 @@ import { FlatList } from "react-native";
 import { Box } from "@/components/ui/box";
 import { events, users } from "@/mocks/mockData";
 import { Text } from "@/components/ui/text";
-import { useTheme } from "@react-navigation/native";
 import ProfileFlatListHeaderComponent from "@/components/profile/ProfileFlatListHeaderComponent";
 import { router } from "expo-router";
 import { useCallback } from "react";
 
 const ProfileScreen = () => {
-  const { colors } = useTheme();
   const userJoinedEvents = events
     .filter((event) => event.participants.includes(users[0]))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

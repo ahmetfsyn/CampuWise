@@ -10,6 +10,7 @@ import { Text } from "@/components/ui/text";
 import showMessage from "@/utils/showMessage";
 import pickImage from "@/utils/pickImage";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 
 const EditProfileScreen = () => {
   const { email, fullName, phoneNumber, imageUrl } = users[0];
@@ -28,14 +29,15 @@ const EditProfileScreen = () => {
     },
     resolver: zodResolver(editProfileFormSchema),
   });
+  const { t } = useTranslation("profile");
 
   const handleSave = async (data: any) => {
     console.log("Profile saved:", data);
 
     showMessage({
       type: "success",
-      text1: "Profil Güncellendi 🎉",
-      text2: "Bilgilerin başarıyla kaydedildi.",
+      text1: t("editProfile.toast.successTitle"),
+      text2: t("editProfile.toast.successMessage"),
     });
   };
 
@@ -66,11 +68,11 @@ const EditProfileScreen = () => {
                   <AvatarImage source={{ uri: value }} />
                 </Avatar>
                 <AnimatedButton onPress={handleChangeAvatar}>
-                  Resim Ekle
+                  {t("editProfile.addPhoto")}
                 </AnimatedButton>
               </>
             )}
-          ></Controller>
+          />
         </Box>
 
         <Box className="gap-4">
@@ -88,7 +90,7 @@ const EditProfileScreen = () => {
                   <InputField
                     value={value}
                     onChangeText={onChange}
-                    placeholder="Ad-Soyad"
+                    placeholder={t("editProfile.placeholders.fullName")}
                   />
                 </Input>
                 {errors.fullName && (
@@ -116,7 +118,7 @@ const EditProfileScreen = () => {
                   <InputField
                     value={value}
                     onChangeText={onChange}
-                    placeholder="Email"
+                    placeholder={t("editProfile.placeholders.email")}
                     keyboardType="email-address"
                   />
                 </Input>
@@ -145,7 +147,7 @@ const EditProfileScreen = () => {
                   <InputField
                     value={value}
                     onChangeText={onChange}
-                    placeholder="Telefon Numarası"
+                    placeholder={t("editProfile.placeholders.phone")}
                     maxLength={10}
                     keyboardType="phone-pad"
                   />
@@ -167,7 +169,7 @@ const EditProfileScreen = () => {
             className="h-14"
             isDisabled={Object.keys(errors).length > 0}
           >
-            Kaydet
+            {t("editProfile.saveButton")}
           </AnimatedButton>
         </Box>
       </ScrollView>

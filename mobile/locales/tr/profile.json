@@ -1,0 +1,37 @@
+{
+    "settings": {
+        "notificationPreferences": "Bildirim Tercihleri",
+        "emailNotifications": "Email Bildirimleri",
+        "appNotifications": "Uygulama Bildirimleri",
+        "appPreferences": "Uygulama Tercihleri",
+        "theme": "Tema",
+        "language": "Dil",
+        "supportAndAbout": "Destek & Hakkımızda",
+        "help": "Yardım",
+        "version": "Sürüm",
+        "logout": "Çıkış Yap",
+        "languageOptions": {
+            "tr": "Türkçe",
+            "en": "İngilizce"
+        }
+    },
+    "editProfile": {
+        "title": "Profili Düzenle",
+        "addPhoto": "Resim Ekle",
+        "placeholders": {
+            "fullName": "Ad Soyad",
+            "email": "E-posta",
+            "phone": "Telefon Numarası"
+        },
+        "validation": {
+            "fullName": "Lütfen geçerli bir ad-soyad giriniz.",
+            "email": "Geçerli bir e-posta adresi giriniz.",
+            "phone": "Geçerli bir telefon numarası giriniz."
+        },
+        "saveButton": "Kaydet",
+        "toast": {
+            "successTitle": "Profil Güncellendi 🎉",
+            "successMessage": "Bilgilerin başarıyla kaydedildi."
+        }
+    }
+}

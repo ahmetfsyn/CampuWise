@@ -6,47 +6,46 @@ import { ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { DarkTheme, LightTheme } from "@/constants/customTheme";
-import SplashScreen from "@/components/SplashScreen";
-import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect } from "react";
 import useAppStore from "@/store/useAppStore";
 import Toast from "react-native-toast-message";
 import toastConfig from "@/configs/toast.config";
+import SplashScreenUI from "@/components/SplashScreenUI";
 
 export const unstable_settings = {
   initialRouteName: "auth",
   anchor: "(tabs)",
 };
+
 export default function RootLayout() {
-  const colorScheme = useAppStore((state) => state.theme);
+  const { isSplashVisible, theme, isAuthenticated } = useAppStore();
+  const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
 
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(false);
-
-  const [showSplash, setShowSplash] = useState<boolean>(false);
-
+  // Uygulama açılışı: initialize ve splash
   useEffect(() => {
-    const checkAuth = async () => {
-      const token = await AsyncStorage.getItem("token");
-      setIsAuthenticated(false);
-      setShowSplash(false);
+    const initializeApp = async () => {
+      const store = useAppStore.getState();
+      await store.checkAuth(); // token kontrolü
+      await store.initialize(); // didInitialize = true ve async işlemler
     };
-    checkAuth();
+
+    initializeApp();
   }, []);
 
-  if (showSplash) {
-    return <SplashScreen onFinish={() => {}} />;
+  if (isSplashVisible) {
+    return <SplashScreenUI />;
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : LightTheme}>
-      <GluestackUIProvider mode={colorScheme}>
+    <ThemeProvider value={currentTheme}>
+      <GluestackUIProvider mode={theme}>
         <Stack
           screenOptions={{
-            animation: "none",
+            animation: "fade",
             headerShown: false,
           }}
         >
-          {isAuthenticated ? (
+          {!isAuthenticated ? (
             <Stack.Screen name="(tabs)" />
           ) : (
             <Stack.Screen name="auth" />
