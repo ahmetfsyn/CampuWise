@@ -1,0 +1,80 @@
+{
+    "placeholders": {
+        "searchPlaceholder": "Search events...",
+        "titlePlaceholder": "Title",
+        "descriptionPlaceholder": "Description",
+        "startingDatePlaceholder": "Starting Date",
+        "locationPlaceholder": "Location",
+        "categoryPlaceholder": "Category",
+        "uploadEventImagePlaceholder": "Upload Event Image",
+        "reportingReasonPlaceholder": "Reason for reporting"
+    },
+    "eventCategories": {
+        "all": "All",
+        "music": "Music",
+        "sport": "Sport",
+        "art": "Art",
+        "technology": "Technology",
+        "movie": "Movie"
+    },
+    "buttons": {
+        "createEventFAB": "New Event",
+        "createEvent": "Create Event",
+        "joinEvent": "Join Event",
+        "leaveEvent": "Leave Event"
+    },
+    "validations": {
+        "titleMinLength": "Title must be at least 3 characters",
+        "startingDateRequired": "Starting date is required",
+        "locationRequired": "Location is required",
+        "categoryRequired": "Category is required",
+        "reportReasonRequired": "Report reason is required"
+    },
+    "eventDetails": {
+        "dateAndTime": "Date & Time",
+        "location": "Location",
+        "description": "Description",
+        "participants": "Participants",
+        "tags": "Tags",
+        "organizer": "Organizer",
+        "reportEventModal": {
+            "title": "Report Event",
+            "subTitle": "Is there an issue with this event? Please let us know the reason by reporting it."
+        },
+        "leaveEventDialog": {
+            "title": "Are you sure you want to leave this event?",
+            "subTitle": "If you leave this event, you will be removed from the participants. You can join again later if you wish.",
+            "buttons": {
+                "leave": "Leave"
+            }
+        },
+        "toast": {
+            "success": {
+                "eventJoined": {
+                    "title": "Great 🎉",
+                    "subTitle": "You have successfully joined the event!"
+                },
+                "eventLeft": {
+                    "title": "Left Event 😭",
+                    "subTitle": "You have left the event. Hope to see you again!"
+                },
+                "eventReported": {
+                    "title": "Event Reported 📝",
+                    "subTitle": "Event reported. It will be reviewed soon."
+                }
+            },
+            "error": {
+                "eventJoinFailed": {
+                    "title": "Oops 😢",
+                    "subTitle": "Something went wrong while joining the event."
+                }
+            },
+            "info": {
+                "eventReminder": {
+                    "title": "Reminder ⏰",
+                    "subTitle": "Don't forget your upcoming event!"
+                }
+            }
+        }
+    }
+}

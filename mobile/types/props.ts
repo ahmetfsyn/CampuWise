@@ -1,8 +1,8 @@
-import { Event } from "./models";
+import { Event, MarkerCategory } from "./models";
 
 export type MarkerCardProps = {
   id: string;
-  category: string;
+  category: MarkerCategory;
   title: string;
   coordinate: {
     latitude: number;

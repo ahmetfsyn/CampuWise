@@ -38,6 +38,7 @@ import showMessage from "@/utils/showMessage";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { reportEventFormSchema } from "@/validations/report-event-form";
+import { useTranslation } from "react-i18next";
 
 const EventDetailsScreen = () => {
   const { id } = useLocalSearchParams();
@@ -47,7 +48,8 @@ const EventDetailsScreen = () => {
   const [showCancelJoiningDialog, setShowCancelJoiningDialog] =
     useState<boolean>(false);
   const event = events.find((event) => event.id === id);
-
+  const { t: tEvents } = useTranslation("events");
+  const { t: tCommon } = useTranslation("common");
   const {
     control,
     handleSubmit,
@@ -66,28 +68,26 @@ const EventDetailsScreen = () => {
   const handleLeaveEvent = useCallback(() => {
     setJoinedEvent(false);
     setShowCancelJoiningDialog(false);
-    console.log("You have left the event. Thank u");
     showMessage({
       type: "success",
-      text1: "Etkinlikten Ayrıldın",
-      text2: "Umarım seni tekrar aramızda görebiliriz.",
+      text1: tEvents("eventDetails.toast.success.eventLeft.title"),
+      text2: tEvents("eventDetails.toast.success.eventLeft.subTitle"),
     });
-  }, []);
+  }, [tEvents]);
 
   const handleJoinEvent = useCallback(() => {
     if (!isJoinedEvent) {
       setJoinedEvent(true);
-      console.log("You have joined the event. Thank u");
       showMessage({
         type: "success",
-        text1: "Tebrikler 🎉",
-        text2: "Etkinliğe Başarıyla Katıldın!",
+        text1: tEvents("eventDetails.toast.success.eventJoined.title"),
+        text2: tEvents("eventDetails.toast.success.eventJoined.subTitle"),
       });
     } else {
       // setJoinedEvent(false);
       setShowCancelJoiningDialog(true);
     }
-  }, [isJoinedEvent]);
+  }, [isJoinedEvent, tEvents]);
 
   const handleShowReportModal = useCallback(() => {
     if (!isReportedEvent) {
@@ -98,8 +98,11 @@ const EventDetailsScreen = () => {
   }, [isReportedEvent]);
 
   const handleReportEvent = useCallback((data: any) => {
-    console.log(data);
-    console.log("event is reported. Thank u");
+    showMessage({
+      type: "success",
+      text1: tEvents("eventDetails.toast.success.eventReported.title"),
+      text2: tEvents("eventDetails.toast.success.eventReported.subTitle"),
+    });
     setIsReportedEvent(true);
     setShowReportModal(false);
   }, []);
@@ -132,7 +135,7 @@ const EventDetailsScreen = () => {
       <Box className="p-6 gap-4">
         <Box className="gap-2">
           <Text className="text-md font-semibold text-primary-500">
-            Tarih & Saat
+            {tEvents("eventDetails.dateAndTime")}
           </Text>
           <Text className="text-lg font-medium text-typography-0">
             {event?.date}
@@ -140,34 +143,36 @@ const EventDetailsScreen = () => {
         </Box>
 
         <Box className="gap-2">
-          <Text className="text-md font-semibold text-primary-500">Konum</Text>
+          <Text className="text-md font-semibold text-primary-500">
+            {tEvents("eventDetails.location")}
+          </Text>
           <Text className="text-lg font-medium text-typography-0">
             {event?.place}
           </Text>
         </Box>
 
-        <Box className="gap-2">
-          <Text className="text-md font-semibold text-primary-500">
-            Açıklama
-          </Text>
-          <Text className="text-lg font-medium text-typography-0">
-            {event?.description}
-          </Text>
-        </Box>
+        {event?.description && (
+          <Box className="gap-2">
+            <Text className="text-md font-semibold text-primary-500">
+              {tEvents("eventDetails.description")}
+            </Text>
+            <Text className="text-lg font-medium text-typography-0">
+              {event.description}
+            </Text>
+          </Box>
+        )}
 
         <Box className="gap-2">
           <Text className="text-md font-semibold text-primary-500">
-            Organizatör(ler)
+            {tEvents("eventDetails.organizer")}
           </Text>
           <Text className="text-lg font-medium text-typography-0">
-            {event?.participants
-              .map((participant) => participant.fullName)
-              .join(", ")}
+            {event?.participants[0].fullName}
           </Text>
         </Box>
         <Box className="gap-2">
           <Text className="text-md font-semibold text-primary-500">
-            Katılımcılar
+            {tEvents("eventDetails.participants")}
           </Text>
           <Box className="flex items-start justify-center">
             {(() => {
@@ -213,7 +218,7 @@ const EventDetailsScreen = () => {
         </Box>
         <Box className="gap-2">
           <Text className="text-md font-semibold text-primary-500">
-            Etiketler
+            {tEvents("eventDetails.tags")}
           </Text>
           <Box className="flex-row gap-2 flex-wrap">
             {event?.tags?.map((tag, index) => (
@@ -245,7 +250,9 @@ const EventDetailsScreen = () => {
           textClassName="uppercase"
           onPress={handleJoinEvent}
         >
-          {!isJoinedEvent ? "Hemen Katıl" : "Etkinlikten Ayrıl"}
+          {!isJoinedEvent
+            ? tEvents("buttons.joinEvent")
+            : tEvents("buttons.leaveEvent")}
         </AnimatedButton>
       </Box>
 
@@ -260,7 +267,7 @@ const EventDetailsScreen = () => {
         <ModalContent className="border-0 bg-background-0 rounded-xl">
           <ModalHeader>
             <Heading className="text-typography-0" size="lg">
-              Etkinliği Rapor Et
+              {tEvents("eventDetails.reportEventModal.title")}
             </Heading>
             <ModalCloseButton>
               <Icon as={CloseIcon} className="text-typography-0" />
@@ -269,8 +276,7 @@ const EventDetailsScreen = () => {
           <ModalBody>
             <Box className="gap-4">
               <Text className="text-typography-0">
-                Etkinlik hakkında bir sorun mu var ? Nedenini belirterek
-                incelememiz için bize rapor edebilirsin.
+                {tEvents("eventDetails.reportEventModal.subTitle")}
               </Text>
               <Controller
                 control={control}
@@ -280,23 +286,25 @@ const EventDetailsScreen = () => {
                     <Textarea
                       isInvalid={!!errors.content}
                       size={"lg"}
-                      className="text-typography-0"
+                      className="text-typography-0 rounded-xl"
                     >
                       <TextareaInput
                         className="text-typography-0"
                         value={value}
                         onChangeText={onChange}
-                        placeholder="Raporlama nedeniniz..."
+                        placeholder={tEvents(
+                          "placeholders.reportingReasonPlaceholder"
+                        )}
                       />
                     </Textarea>
                     {errors.content && (
                       <Text className="text-error-300">
-                        {errors.content.message}
+                        {tEvents(errors.content.message as string)}
                       </Text>
                     )}
                   </>
                 )}
-              ></Controller>
+              />
             </Box>
           </ModalBody>
           <ModalFooter>
@@ -305,14 +313,14 @@ const EventDetailsScreen = () => {
               variant={"outline"}
               onPress={handleCancelReport}
             >
-              Vazgeç
+              {tCommon("buttons.cancel")}
             </AnimatedButton>
 
             <AnimatedButton
               isDisabled={Object.keys(errors).length > 0}
               onPress={handleSubmit(handleReportEvent)}
             >
-              Gönder
+              {tCommon("buttons.submit")}
             </AnimatedButton>
           </ModalFooter>
         </ModalContent>
@@ -327,25 +335,24 @@ const EventDetailsScreen = () => {
         <AlertDialogContent className="border-0 bg-background-0 rounded-xl">
           <AlertDialogHeader>
             <Heading className="text-typography-0 font-semibold" size="lg">
-              Etkinlikten ayrılmak istediğinize emin misiniz ?
+              {tEvents("eventDetails.leaveEventDialog.title")}
             </Heading>
           </AlertDialogHeader>
           <AlertDialogBody className="mt-3 mb-4">
             <Text className="text-typography-0" size="md">
-              Etkinlikten ayrılırsanız, katılımcılar arasından silineceksiniz.
-              İsterseniz tekrar katılabilirsiniz.
+              {tEvents("eventDetails.leaveEventDialog.subTitle")}
             </Text>
           </AlertDialogBody>
           <AlertDialogFooter>
             <AnimatedButton action={"negative"} onPress={handleLeaveEvent}>
-              Ayrıl
+              {tEvents("buttons.leaveEvent")}
             </AnimatedButton>
             <AnimatedButton
               action={"secondary"}
               variant={"outline"}
               onPress={handleCloseCancelJoiningDialog}
             >
-              Vazgeç
+              {tCommon("buttons.cancel")}
             </AnimatedButton>
           </AlertDialogFooter>
         </AlertDialogContent>

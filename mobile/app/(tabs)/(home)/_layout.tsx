@@ -1,7 +1,6 @@
 import CustomMainHeader from "@/components/CustomMainHeader";
 import useAppStore from "@/store/useAppStore";
 import { Stack } from "expo-router";
-import { Platform } from "react-native";
 
 export default function HomeLayout() {
   const theme = useAppStore((state) => state.theme);

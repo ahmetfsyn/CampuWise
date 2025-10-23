@@ -1,0 +1,80 @@
+{
+    "placeholders": {
+        "searchPlaceholder": "Etkinlik ara...",
+        "titlePlaceholder": "Başlık",
+        "descriptionPlaceholder": "Açıklama",
+        "startingDatePlaceholder": "Başlangıç Tarihi",
+        "locationPlaceholder": "Konum",
+        "categoryPlaceholder": "Kategori",
+        "uploadEventImagePlaceholder": "Etkinlik Görseli Yükle",
+        "reportingReasonPlaceholder": "Raporlama nedeni"
+    },
+    "eventCategories": {
+        "all": "Hepsi",
+        "music": "Müzik",
+        "sport": "Spor",
+        "art": "Sanat",
+        "technology": "Teknoloji",
+        "movie": "Film"
+    },
+    "buttons": {
+        "createEventFAB": "Yeni Etkinlik",
+        "createEvent": "Etkinlik Oluştur",
+        "joinEvent": "Etkinliğe Katıl",
+        "leaveEvent": "Etkinlikten Ayrıl"
+    },
+    "validations": {
+        "titleMinLength": "Başlık en az 3 karakter olmalı",
+        "startingDateRequired": "Başlangıç tarihi zorunlu",
+        "locationRequired": "Konum zorunlu",
+        "categoryRequired": "Kategori zorunlu",
+        "reportReasonRequired": "Raporlama nedeni zorunlu"
+    },
+    "eventDetails": {
+        "dateAndTime": "Tarih & Saat",
+        "location": "Konum",
+        "description": "Açıklama",
+        "participants": "Katılımcılar",
+        "tags": "Etiketler",
+        "organizer": "Organizatör",
+        "reportEventModal": {
+            "title": "Etkinliği Rapor Et",
+            "subTitle": "Bu etkinlikle ilgili bir sorun mu var? Lütfen nedenini belirterek rapor edin."
+        },
+        "leaveEventDialog": {
+            "title": "Bu etkinlikten ayrılmak istediğinizden emin misiniz?",
+            "subTitle": "Etkinlikten ayrılırsanız katılımcılar arasından silineceksiniz. İsterseniz tekrar katılabilirsiniz.",
+            "buttons": {
+                "leave": "Ayrıl"
+            }
+        },
+        "toast": {
+            "success": {
+                "eventJoined": {
+                    "title": "Harika 🎉",
+                    "subTitle": "Etkinliğe başarıyla katıldınız!"
+                },
+                "eventLeft": {
+                    "title": "Etkinlikten Ayrıldın 😭",
+                    "subTitle": "Etkinlikten ayrıldınız. Tekrar bekleriz!"
+                },
+                "eventReported": {
+                    "title": "Etkinlik Raporlandı 📝",
+                    "subTitle": "Etkinlik incelememiz için gönderildi."
+                }
+            },
+            "error": {
+                "eventJoinFailed": {
+                    "title": "Hata 😢",
+                    "subTitle": "Etkinliğe katılırken bir sorun oluştu."
+                }
+            },
+            "info": {
+                "eventReminder": {
+                    "title": "Hatırlatma ⏰",
+                    "subTitle": "Yaklaşan etkinliğinizi unutmayın!"
+                }
+            }
+        }
+    }
+}

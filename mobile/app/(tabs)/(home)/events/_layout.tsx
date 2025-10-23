@@ -1,6 +1,5 @@
 import { Stack } from "expo-router";
 import CustomInnerHeader from "@/components/CustomInnerHeader";
-import { Platform } from "react-native";
 import useAppStore from "@/store/useAppStore";
 
 export default function EventsLayout() {
@@ -17,11 +16,11 @@ export default function EventsLayout() {
         header: (props) => <CustomInnerHeader {...props} />,
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Etkinlikler" }} />
+      <Stack.Screen name="index" options={{ title: "events" }} />
 
-      <Stack.Screen name="create" options={{ title: "Etkinlik Oluştur" }} />
+      <Stack.Screen name="create" options={{ title: "createEvent" }} />
 
-      <Stack.Screen name="[id]" options={{ title: "Etkinlik Detayları" }} />
+      <Stack.Screen name="[id]" options={{ title: "eventDetails" }} />
     </Stack>
   );
 }

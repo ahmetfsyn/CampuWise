@@ -1,6 +1,7 @@
 import {
   Event,
   EventCategory,
+  MapFilter,
   Marker,
   MarkerCategory,
   Topic,
@@ -20,18 +21,13 @@ import {
   Music,
   Palette,
   Laptop,
+  Film,
 } from "lucide-react-native";
-export type MapFilter = {
-  id: string;
-  name: MarkerCategory;
-  displayName: string;
-  icon: LucideIcon;
-};
 
 export type EventFilter = {
   id: string;
-  name: EventCategory;
-  displayName: string;
+  category: EventCategory;
+  title: string;
   icon: LucideIcon;
 };
 
@@ -39,32 +35,38 @@ export type EventFilter = {
 export const eventFilters: EventFilter[] = [
   {
     id: "0",
-    name: EventCategory.All,
-    displayName: "Hepsi",
+    category: EventCategory.All,
+    title: "All",
     icon: List,
   },
   {
     id: "1",
-    name: EventCategory.Music,
-    displayName: "Müzik",
+    category: EventCategory.Music,
+    title: "Music",
     icon: Music,
   },
   {
     id: "2",
-    name: EventCategory.Art,
-    displayName: "Sanat",
+    category: EventCategory.Art,
+    title: "Art",
     icon: Palette,
   },
   {
     id: "3",
-    name: EventCategory.Technology,
-    displayName: "Teknoloji",
+    category: EventCategory.Technology,
+    title: "Technology",
     icon: Laptop,
   },
   {
+    id: "5",
+    category: EventCategory.Movie,
+    title: "Movie",
+    icon: Film,
+  },
+  {
     id: "4",
-    name: EventCategory.Sport,
-    displayName: "Spor",
+    category: EventCategory.Sport,
+    title: "Spor",
     icon: Dumbbell,
   },
 ];
@@ -73,45 +75,45 @@ export const eventFilters: EventFilter[] = [
 export const mapFilters: MapFilter[] = [
   {
     id: "1",
-    name: MarkerCategory.Food,
-    displayName: "Yemekler",
+    category: MarkerCategory.Food,
+    title: "foods",
     icon: Utensils,
   },
-  { id: "2", name: MarkerCategory.Cafe, displayName: "Kafeler", icon: Coffee },
+  { id: "2", category: MarkerCategory.Cafe, title: "cafes", icon: Coffee },
   {
     id: "3",
-    name: MarkerCategory.Faculties,
-    displayName: "Fakülteler",
+    category: MarkerCategory.Faculty,
+    title: "faculties",
     icon: School,
   },
   {
     id: "4",
-    name: MarkerCategory.Library,
-    displayName: "Kütüphaneler",
+    category: MarkerCategory.Library,
+    title: "libraries",
     icon: Library,
   },
   {
     id: "5",
-    name: MarkerCategory.Sport,
-    displayName: "Spor Yerleri",
+    category: MarkerCategory.Sport,
+    title: "sports",
     icon: Dumbbell,
   },
   {
     id: "6",
-    name: MarkerCategory.Hospital,
-    displayName: "Hastaneler & Sağlık Ocakları",
+    category: MarkerCategory.Hospital,
+    title: "hospitals",
     icon: Hospital,
   },
   {
     id: "7",
-    name: MarkerCategory.BookStore,
-    displayName: "Sahaflar & Kırtasiyeler",
+    category: MarkerCategory.Stationery,
+    title: "stationeries",
     icon: BookOpen,
   },
   {
     id: "8",
-    name: MarkerCategory.Dorm,
-    displayName: "Yurtlar",
+    category: MarkerCategory.Dorm,
+    title: "dorms",
     icon: Building2,
   },
 ];
@@ -143,7 +145,7 @@ export const markers: Marker[] = [
   },
   {
     id: "m3",
-    category: MarkerCategory.Faculties,
+    category: MarkerCategory.Faculty,
     title: "Mühendislik Fakültesi",
     coordinate: { latitude: 41.6348, longitude: 32.3495 },
     address: "Kutlubey Kampüsü, 74100 Bartın",
@@ -165,7 +167,7 @@ export const markers: Marker[] = [
   },
   {
     id: "m5",
-    category: MarkerCategory.BookStore,
+    category: MarkerCategory.Stationery,
     title: "Bartın Kırtasiye & Sahaf",
     coordinate: { latitude: 41.636, longitude: 32.3387 },
     address: "Cumhuriyet Cad. No:18, Merkez, 74100 Bartın",
@@ -466,7 +468,7 @@ export const events: Event[] = [
 export const topics: Topic[] = [
   {
     id: "t1",
-    title: "Yemek Paylaşımı",
+    name: "foodSharing",
     description:
       "Yemek hakkını paylaşarak yurt arkadaşlarına destek olabilirsin.",
     imageUrl:
@@ -474,49 +476,49 @@ export const topics: Topic[] = [
   },
   {
     id: "t2",
-    title: "Yurt Önerileri & Şikayetler",
+    name: "dormProblems",
     description: "Yurt ile ilgili öneri veya şikayette bulunabilirsin.",
     imageUrl:
       "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/dorm-problems-min.png",
   },
   {
     id: "t3",
-    title: "Üniversite Soruları",
+    name: "universityQs",
     description: "Üniversite ile ilgili sorularını sorabilirsin.",
     imageUrl:
       "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/frequenly-asks-abobut-university-min.png",
   },
   {
     id: "t4",
-    title: "Anketler",
+    name: "surveys",
     description: "Birçok konudan anketi buradan bulabilirsin.",
     imageUrl:
       "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/survey-min.png",
   },
   {
     id: "t5",
-    title: "Staj & İş Fırsatları",
+    name: "internshipsAndJobs",
     description: "Kariyerine yardımcı olacak fırsatları keşfet.",
     imageUrl:
       "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/internships-and-jobs-min.png",
   },
   {
     id: "t6",
-    title: "İkinci El Satış & Takas",
+    name: "secondhandAndSwap",
     description: "Kullanmadığın eşyaları satabilir veya takas edebilirsin.",
     imageUrl:
-      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/image-min.png",
+      "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/secondhand-and-swap.png",
   },
   {
     id: "t7",
-    title: "Ödev & Ders Yardımı",
+    name: "homeworkAndLesson",
     description: "Notlarını paylaşarak arkadaşlarına yardımcı olabilirsin.",
     imageUrl:
       "https://ik.imagekit.io/37qgyljxz/CampuWise/statics/university-asks-min.png",
   },
   {
     id: "t8",
-    title: "Geri Bildirim",
+    name: "feedback",
     description:
       "Uygulama hakkında geri bildirim vererek geliştirmeye yardımcı olabilirsin.",
     imageUrl:

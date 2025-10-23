@@ -4,6 +4,7 @@ import { ScrollView, TouchableOpacity } from "react-native";
 import { Badge, BadgeText } from "./ui/badge";
 import { Icon, SearchIcon } from "./ui/icon";
 import { eventFilters } from "@/mocks/mockData";
+import { useTranslation } from "react-i18next";
 
 export type EventsFlatListHeaderProps = {
   selectedFilter: (typeof eventFilters)[number];
@@ -18,6 +19,7 @@ const EventsFlatListHeader = ({
   setSearchString,
   setSelectedFilter,
 }: EventsFlatListHeaderProps) => {
+  const { t } = useTranslation("events");
   return (
     <Box className="flex mb-4 px-2 gap-2">
       <Box>
@@ -26,7 +28,7 @@ const EventsFlatListHeader = ({
             <InputIcon as={SearchIcon} />
           </InputSlot>
           <InputField
-            placeholder="Ara..."
+            placeholder={t("placeholders.searchPlaceholder")}
             value={searchString}
             onChangeText={(text) => setSearchString(text)}
           />
@@ -53,7 +55,7 @@ const EventsFlatListHeader = ({
                   <BadgeText
                     className={`normal-case font-bold ${isSelectedFilter ? "text-primary-0" : "text-typography-0"}`}
                   >
-                    {item.displayName}
+                    {t(`eventCategories.${item.category.toLowerCase()}`)}
                   </BadgeText>
 
                   <Icon

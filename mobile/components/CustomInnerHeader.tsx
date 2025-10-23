@@ -6,6 +6,7 @@ import { Box } from "./ui/box";
 import useAppStore from "@/store/useAppStore";
 import { Icon } from "./ui/icon";
 import { ArrowLeft } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 export type CustomInnerHeaderProps = StackHeaderProps & {
   className?: string;
 };
@@ -16,8 +17,9 @@ const CustomInnerHeader = ({
   route,
 }: CustomInnerHeaderProps) => {
   const theme = useAppStore((state) => state.theme);
-  const title = options?.title ?? route?.name ?? "Başlık";
-
+  const { t } = useTranslation("routes");
+  const title = t(options?.title as string) ?? route?.name ?? "Başlık";
+  console.log(route.name);
   const canGoBack = navigation?.canGoBack?.() ?? false;
 
   // Header arka planını temaya göre ayarla

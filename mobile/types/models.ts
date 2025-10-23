@@ -1,19 +1,28 @@
+import { LucideIcon } from "lucide-react-native";
+
 export type Coordinate = {
   latitude: number;
   longitude: number;
 };
 
+export type MapFilter = {
+  id: string;
+  category: MarkerCategory;
+  title: string;
+  icon: LucideIcon;
+};
+
 export type LanguageCode = "en" | "tr";
 
 export enum MarkerCategory {
-  Food = "Food",
-  Cafe = "Cafe",
-  Faculties = "Faculties",
-  Library = "Library",
-  BookStore = "BookStore",
-  Dorm = "Dorm",
-  Sport = "Sport",
-  Hospital = "Hospital",
+  Food = "Foods",
+  Cafe = "Cafes",
+  Faculty = "Faculties",
+  Library = "Libraries",
+  Stationery = "Stationeries",
+  Dorm = "Dorms",
+  Sport = "Sports",
+  Hospital = "Hospitals",
 }
 
 export enum EventCategory {
@@ -22,6 +31,7 @@ export enum EventCategory {
   Art = "Art",
   Technology = "Technology",
   Sport = "Sport",
+  Movie = "Movie",
 }
 
 export type Marker = {
@@ -51,7 +61,7 @@ export type Event = {
 
 export type Topic = {
   id: string;
-  title: string;
+  name: string;
   description: string;
   imageUrl?: string | undefined;
 };

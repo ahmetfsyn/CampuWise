@@ -1,0 +1,20 @@
+{
+    "mapCategories": {
+        "foods": "Yemekler",
+        "cafes": "Kafeler",
+        "faculties": "Fakülteler",
+        "libraries": "Kütüphaneler",
+        "hospitals": "Hastaneler",
+        "dorms": "Yurtlar",
+        "sports": "Spor Salonları",
+        "stationeries": "Kırtasiyeler"
+    },
+    "errors": {
+        "notFound": "Herhangi bir sonuç bulunamadı.",
+        "noAddress": "Gösterilecek bir adres bulunmuyor.",
+        "noContact": "Gösterilecek iletişim bilgisi bulunmuyor."
+    },
+    "markerDetails": {
+        "viewOnMapButton": "Haritada Göster"
+    }
+}

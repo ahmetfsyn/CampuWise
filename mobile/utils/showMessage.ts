@@ -16,6 +16,7 @@ const showMessage = (config: ToastShowParams) => {
       fontSize: 12,
       color: isDark ? "#DDD" : "#333",
     },
+
     props: {
       backgroundColor: isDark ? "#1C1C1C" : "#F5F5F5",
       borderColor: isDark ? "#333" : "#DDD",

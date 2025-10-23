@@ -1,0 +1,14 @@
+{
+    "buttons": {
+        "cancel": "Cancel",
+        "submit": "Submit",
+        "ok": "OK",
+        "save": "Save",
+        "delete": "Delete",
+        "showMore": "Show More"
+    },
+    "errors": {
+        "loading": "Loading...",
+        "error": "Something went wrong"
+    }
+}

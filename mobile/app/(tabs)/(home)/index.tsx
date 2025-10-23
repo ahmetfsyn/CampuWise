@@ -8,11 +8,12 @@ import ShortcutButton from "@/components/ShortcutButton";
 import { FlatList, ScrollView } from "react-native";
 import Carousel from "@/components/Carousel";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { events, topics } from "@/mocks/mockData";
+import { events, topics, users } from "@/mocks/mockData";
 import EventPreviewCard from "@/components/EventPreviewCard";
 import PopularTopicPreviewCard from "@/components/PopularTopicPreviewCard";
 import EmptyEventListComponent from "@/components/EmptyEventListComponent";
 import { Calendar, Megaphone, Utensils, HelpCircle } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 const ITEM_WIDTH = 192;
 
@@ -33,14 +34,14 @@ export const shortcuts = [
   },
   {
     id: "3",
-    name: "discussions",
+    name: "foodSharing",
     title: "Yemek Paylaşımı",
     icon: Utensils, // "food-fork-drink" yerine
     link: "/discussions",
   },
   {
     id: "4",
-    name: "reports",
+    name: "universityQuestions",
     title: "Üniversite Soruları",
     icon: HelpCircle, // rapor/soru temasına uygun
     link: "/reports",
@@ -49,6 +50,11 @@ export const shortcuts = [
 
 export default function HomeScreen() {
   const router = useRouter();
+
+  const user = users[0];
+
+  const { t: tHome } = useTranslation("home");
+  const { t: tCommon } = useTranslation("common");
 
   const handleCustomize = useCallback(() => {
     console.log("customized");
@@ -85,10 +91,10 @@ export default function HomeScreen() {
       <Box className=" p-2 mb-4 flex-row justify-between items-center ">
         <Box>
           <Text className="text-3xl font-bold text-typography-0">
-            Merhaba Ahmet
+            {`${tHome("greeting.title")} ${user.fullName.split(" ")[0]}`}
           </Text>
           <Text className="text-lg font-normal text-typography-200">
-            CampuWise'a Hoşgeldin
+            {tHome("greeting.subTitle")}
           </Text>
         </Box>
         <Avatar size={"lg"}>
@@ -108,14 +114,16 @@ export default function HomeScreen() {
 
       <Box className="flex-row mt-4   justify-between items-center">
         <Text className="text-xl font-semibold text-typography-0">
-          Kısayollar
+          {tHome("sectionTitles.shortcuts")}
         </Text>
         <Button
           onPress={handleCustomize}
           variant="outline"
           className="border-0"
         >
-          <ButtonText className="text-primary-500">Özelleştir</ButtonText>
+          <ButtonText className="text-primary-500">
+            {tHome("buttons.customize")}
+          </ButtonText>
           <ButtonIcon as={SettingsIcon} className="text-primary-500" />
         </Button>
       </Box>
@@ -136,14 +144,16 @@ export default function HomeScreen() {
 
       <Box className="flex-row mt-4 mb-2 justify-between items-center">
         <Text className="text-xl font-semibold text-typography-0">
-          Öğrenci Paylaşımları
+          {tHome("sectionTitles.popularTopics")}
         </Text>
         <Button
           onPress={handleShowMoreDiscussions}
           variant="outline"
           className="border-0"
         >
-          <ButtonText className="text-primary-500">Daha Fazla</ButtonText>
+          <ButtonText className="text-primary-500">
+            {tCommon("buttons.showMore")}
+          </ButtonText>
         </Button>
       </Box>
 
@@ -170,7 +180,7 @@ export default function HomeScreen() {
 
       <Box className="flex-row mt-4 mb-2 justify-between items-center">
         <Text className="text-xl font-semibold text-typography-0">
-          Yaklaşan Ekinlikler
+          {tHome("sectionTitles.upcomingEvents")}
         </Text>
         {events.length !== 0 && (
           <Button
@@ -178,7 +188,9 @@ export default function HomeScreen() {
             variant="outline"
             className="border-0"
           >
-            <ButtonText className="text-primary-500">Daha Fazla</ButtonText>
+            <ButtonText className="text-primary-500">
+              {tCommon("buttons.showMore")}
+            </ButtonText>
           </Button>
         )}
       </Box>

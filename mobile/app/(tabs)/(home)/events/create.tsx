@@ -39,10 +39,11 @@ import { Image } from "expo-image";
 import pickImage from "@/utils/pickImage";
 import { Icon } from "@/components/ui/icon";
 import { createEventAsync } from "@/services/eventService";
+import { useTranslation } from "react-i18next";
 
 const CreateEventScreen = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
+  const { t } = useTranslation("events");
   const {
     control,
     handleSubmit,
@@ -52,7 +53,7 @@ const CreateEventScreen = () => {
     defaultValues: {
       title: "",
       description: "",
-      startingDate: new Date(),
+      startingDate: null,
       location: "",
       category: "",
       imageUrl: "",
@@ -61,8 +62,6 @@ const CreateEventScreen = () => {
   });
 
   const handleCreateEvent = async (data: CreateEventFormValues) => {
-    // console.log("Etkinlik oluşturuldu:", data.startingDate);
-
     createEventAsync(data);
 
     showMessage({
@@ -114,11 +113,13 @@ const CreateEventScreen = () => {
                   <InputField
                     value={value}
                     onChangeText={onChange}
-                    placeholder="Başlık"
+                    placeholder={t("placeholders.titlePlaceholder")}
                   />
                 </Input>
                 {errors.title && (
-                  <Text className="text-error-300">{errors.title.message}</Text>
+                  <Text className="text-error-300">
+                    {t(errors.title.message as string)}
+                  </Text>
                 )}
               </>
             )}
@@ -134,7 +135,7 @@ const CreateEventScreen = () => {
                   <TextareaInput
                     onChangeText={onChange}
                     value={value}
-                    placeholder="Açıklama"
+                    placeholder={t("placeholders.descriptionPlaceholder")}
                   />
                 </Textarea>
                 {errors.description && (
@@ -163,12 +164,12 @@ const CreateEventScreen = () => {
                   <InputField
                     value={value}
                     onChangeText={onChange}
-                    placeholder="Konum"
+                    placeholder={t("placeholders.locationPlaceholder")}
                   />
                 </Input>
                 {errors.location && (
                   <Text className="text-error-300">
-                    {errors.location.message}
+                    {t(errors.location.message as string)}
                   </Text>
                 )}
               </>
@@ -193,7 +194,7 @@ const CreateEventScreen = () => {
                   >
                     <SelectInput
                       className="text-typography-0"
-                      placeholder="Kategori"
+                      placeholder={t("placeholders.categoryPlaceholder")}
                     />
                     <SelectIcon className="ml-auto mr-3" as={ChevronDownIcon} />
                   </SelectTrigger>
@@ -203,8 +204,8 @@ const CreateEventScreen = () => {
                       {eventFilters.slice(1).map((category, index) => (
                         <SelectItem
                           key={index}
-                          label={category.displayName}
-                          value={category.name}
+                          label={category.title}
+                          value={category.category}
                         />
                       ))}
                     </SelectContent>
@@ -212,7 +213,7 @@ const CreateEventScreen = () => {
                 </Select>
                 {errors.category && (
                   <Text className="text-error-300">
-                    {errors.category.message}
+                    {t(errors.category.message as string)}
                   </Text>
                 )}
               </>
@@ -234,7 +235,7 @@ const CreateEventScreen = () => {
                     <InputField
                       editable={false} // Kullanıcı yazı giremesin
                       value={value?.toLocaleString()}
-                      placeholder="Başlangıç Tarihi"
+                      placeholder={t("placeholders.startingDatePlaceholder")}
                     />
                     <InputSlot className="pr-3">
                       <InputIcon as={CalendarClock} />
@@ -247,9 +248,9 @@ const CreateEventScreen = () => {
                   onConfirm={handleConfirmDate}
                   onCancel={hideDatePicker}
                 />
-                {errors.imageUrl && (
+                {errors.startingDate && (
                   <Text className="text-error-300">
-                    {errors.imageUrl.message}
+                    {t(errors.startingDate.message as string)}
                   </Text>
                 )}
               </>
@@ -289,7 +290,7 @@ const CreateEventScreen = () => {
                             className="text-typography-500"
                           />
                           <Text className="text-typography-500 mt-2">
-                            Etkinlik görseli yükle
+                            {t("placeholders.uploadEventImagePlaceholder")}
                           </Text>
                         </Box>
                       )}
@@ -306,7 +307,7 @@ const CreateEventScreen = () => {
             isDisabled={Object.keys(errors).length > 0}
             onPress={handleSubmit(handleCreateEvent)}
           >
-            Oluştur
+            {t("buttons.createEvent")}
           </AnimatedButton>
         </Box>
       </ScrollView>

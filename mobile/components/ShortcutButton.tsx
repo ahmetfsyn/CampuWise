@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native";
 import { memo } from "react";
 import { Icon } from "./ui/icon";
 import { LucideIcon } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 export type ShortcutButtonProps = {
   id: string;
@@ -13,21 +14,23 @@ export type ShortcutButtonProps = {
   onPress: () => void;
 };
 
-const ShortcutButton = ({ icon, title, onPress }: ShortcutButtonProps) => {
+const ShortcutButton = ({ icon, onPress, name }: ShortcutButtonProps) => {
+  const { t } = useTranslation("home");
   return (
     <TouchableOpacity
       activeOpacity={0.5}
       style={{ width: "48%" }}
       onPress={onPress}
     >
-      <Box className="bg-primary-500 p-6 rounded-xl items-center justify-center gap-4">
+      <Box className="bg-primary-500 p-6 h-[128px] rounded-xl items-center justify-center gap-4">
         <Icon as={icon} size={24} className="text-primary-0" />
         <Text
           className="text-lg text-center font-semibold flex-wrap text-primary-0"
-          numberOfLines={1}
+          numberOfLines={2}
           ellipsizeMode="tail"
         >
-          {title}
+          {t(`shortcutButtons.${name}`)}
+          {/* {title} */}
         </Text>
       </Box>
     </TouchableOpacity>

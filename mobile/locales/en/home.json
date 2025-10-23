@@ -1,0 +1,30 @@
+{
+    "greeting": {
+        "title": "Hi",
+        "subTitle": "Welcome to CampuWise!"
+    },
+    "sectionTitles": {
+        "shortcuts": "Shortcuts",
+        "upcomingEvents": "Upcoming Events",
+        "popularTopics": "Popular Topics"
+    },
+    "buttons": {
+        "customize": "Customize"
+    },
+    "shortcutButtons": {
+        "events": "Events",
+        "announcements": "Announcements",
+        "foodSharing": "Food Sharing",
+        "universityQuestions": "University Qs"
+    },
+    "popularTopics": {
+        "foodSharing": "Food Sharing",
+        "dormProblems": "Dorm Suggestions & Complaints",
+        "universityQs": "University Qs",
+        "surveys": "Surveys",
+        "internshipsAndJobs": "Internships & Jobs",
+        "homeworkAndLesson": "Homework & Lessons",
+        "feedback": "Feedback",
+        "secondhandAndSwap": "Secondhand & Swap"
+    }
+}

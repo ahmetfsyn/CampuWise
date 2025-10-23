@@ -36,7 +36,7 @@ export default function TabLayout() {
         name="map"
         options={{
           header: (props) => <CustomInnerHeader {...props} />,
-          title: "Harita",
+          title: "map",
           tabBarIcon: ({ focused }) => (
             <Icon
               as={MapPin}
@@ -53,6 +53,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           headerShown: false,
+          title: "profile",
           tabBarIcon: ({ focused }) => (
             <Icon
               as={User2}
