@@ -8,12 +8,15 @@ import { eventFilters, events } from "@/mocks/mockData";
 import { EventCategory } from "@/types/models";
 import { useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FlatList } from "react-native";
 
 const EventsScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState(eventFilters[0]);
   const [searchString, setSearchString] = useState<string>("");
   const router = useRouter();
+  const { t } = useTranslation("events");
+
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {
       const matchesSearch = event.title
@@ -21,8 +24,9 @@ const EventsScreen = () => {
         .includes(searchString.toLowerCase());
 
       const matchesCategory =
-        selectedFilter.name.toLowerCase() === EventCategory.All.toLowerCase() ||
-        event.category?.toLowerCase() === selectedFilter.name.toLowerCase();
+        selectedFilter.category.toLowerCase() ===
+          EventCategory.All.toLowerCase() ||
+        event.category?.toLowerCase() === selectedFilter.category.toLowerCase();
 
       return matchesSearch && matchesCategory;
     });
@@ -72,8 +76,10 @@ const EventsScreen = () => {
         placement="bottom right"
         onPress={handleCreateEvent}
       >
-        <FabIcon className="text-white" as={AddIcon} />
-        <FabLabel className="text-primary-0">Etkinlik Oluştur</FabLabel>
+        <FabIcon className="text-primary-0 " as={AddIcon} size={"lg"} />
+        <FabLabel className="text-primary-0 font-semibold" numberOfLines={1}>
+          {t("buttons.createEventFAB")}
+        </FabLabel>
       </Fab>
     </Box>
   );

@@ -15,6 +15,11 @@
             "en": "İngilizce"
         }
     },
+    "header": {
+        "editProfile": "Profilini Düzenle",
+        "university": "Bartın Üniversitesi",
+        "department": "Bilgisayar Mühendisliği"
+    },
     "editProfile": {
         "title": "Profili Düzenle",
         "addPhoto": "Resim Ekle",
@@ -33,5 +38,12 @@
             "successTitle": "Profil Güncellendi 🎉",
             "successMessage": "Bilgilerin başarıyla kaydedildi."
         }
+    },
+    "about": {
+        "title": "Hakkımda",
+        "description": "Yazılım geliştirme alanında tutkulu, yeni teknolojileri öğrenmeye açık bir mühendis."
+    },
+    "joinedEvents": {
+        "title": "Katıldığı Etkinlikler"
     }
 }

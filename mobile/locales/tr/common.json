@@ -1,0 +1,14 @@
+{
+    "buttons": {
+        "cancel": "İptal",
+        "submit": "Gönder",
+        "ok": "Tamam",
+        "save": "Kaydet",
+        "delete": "Sil",
+        "showMore": "Daha Fazla"
+    },
+    "errors": {
+        "loading": "Yükleniyor...",
+        "error": "Bir şeyler yanlış gitti"
+    }
+}

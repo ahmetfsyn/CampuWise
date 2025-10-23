@@ -32,5 +32,17 @@
             "successTitle": "Profile Updated 🎉",
             "successMessage": "Your information has been saved successfully."
         }
+    },
+    "header": {
+        "editProfile": "Edit Profile",
+        "university": "Bartın University",
+        "department": "Computer Engineering"
+    },
+    "about": {
+        "title": "About Me",
+        "description": "A passionate engineer in software development, open to learning new technologies."
+    },
+    "joinedEvents": {
+        "title": "Joined Events"
     }
 }

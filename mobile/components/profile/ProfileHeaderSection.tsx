@@ -6,36 +6,39 @@ import AnimatedButton from "@/components/AnimatedButton";
 import { ProfileHeaderSectionProps } from "@/types/props";
 import { Icon } from "../ui/icon";
 import { Cog } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 const ProfileHeaderSection = ({
-  colors,
   imageUrl,
   name,
   handleEditProfile,
   handleGoSettings,
-}: ProfileHeaderSectionProps) => (
-  <Box className="items-center bg-background-0 rounded-xl p-6 shadow-md">
-    <Avatar size="2xl" className="mb-3">
-      <AvatarImage source={{ uri: imageUrl }} />
-    </Avatar>
+}: ProfileHeaderSectionProps) => {
+  const { t } = useTranslation("profile");
+  return (
+    <Box className="items-center bg-background-0 rounded-xl p-6 shadow-md">
+      <Avatar size="2xl" className="mb-3">
+        <AvatarImage source={{ uri: imageUrl }} />
+      </Avatar>
 
-    <Text className="text-2xl font-bold text-center text-typography-0">
-      {name}
-    </Text>
-    <Text className="text-typography-200">Bartın Üniversitesi</Text>
-    <Text className="mb-4 text-typography-200">Bilgisayar Mühendisliği</Text>
+      <Text className="text-2xl font-bold text-center text-typography-0">
+        {name}
+      </Text>
+      <Text className="text-typography-200">{t("header.university")}</Text>
+      <Text className="mb-4 text-typography-200">{t("header.department")}</Text>
 
-    <Box className="flex-row items-center justify-center gap-3 ">
-      <AnimatedButton onPress={handleEditProfile}>
-        Profilini Düzenle
-      </AnimatedButton>
+      <Box className="flex-row items-center justify-center gap-3 ">
+        <AnimatedButton onPress={handleEditProfile}>
+          {t("header.editProfile")}
+        </AnimatedButton>
 
-      <AnimatedButton
-        onPress={handleGoSettings}
-        icon={<Icon as={Cog} size={24} className="text-primary-0" />}
-      />
+        <AnimatedButton
+          onPress={handleGoSettings}
+          icon={<Icon as={Cog} size={24} className="text-primary-0" />}
+        />
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 export default memo(ProfileHeaderSection);

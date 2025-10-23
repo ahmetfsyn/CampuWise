@@ -16,6 +16,7 @@ import { Link, LinkText } from "./ui/link";
 import AnimatedButton from "./AnimatedButton";
 import { Icon } from "./ui/icon";
 import { ClockIcon, MapPin, Phone, X } from "lucide-react-native";
+import { useTranslation } from "react-i18next";
 
 export type MarkerDetailsModalProps = {
   setShowMarkerDetailsModal: (value: boolean) => void;
@@ -27,6 +28,8 @@ const MarkerDetailsModal = ({
   markerDetails,
   setShowMarkerDetailsModal,
 }: MarkerDetailsModalProps) => {
+  const { t } = useTranslation("map");
+
   return (
     <Modal
       isOpen={isOpen}
@@ -100,7 +103,9 @@ const MarkerDetailsModal = ({
                   </LinkText>
                 </Link>
               ) : (
-                <Text className="text-typography-0">İletişim bilgisi yok</Text>
+                <Text className="text-typography-0">
+                  {t("errors.noContact")}
+                </Text>
               )}
             </Box>
             <Box className="flex-row items-center gap-2">
@@ -111,7 +116,7 @@ const MarkerDetailsModal = ({
                 className="text-typography-0 shrink "
                 isTruncated
               >
-                {markerDetails.address || "Adres bilgisi yok"}
+                {markerDetails.address || t("errors.noAddress")}
               </Text>
             </Box>
           </Box>
@@ -126,7 +131,7 @@ const MarkerDetailsModal = ({
             }
             className="flex-1"
           >
-            Yol Tarifi Al
+            {t("markerDetails.viewOnMapButton")}
           </AnimatedButton>
         </ModalFooter>
       </ModalContent>

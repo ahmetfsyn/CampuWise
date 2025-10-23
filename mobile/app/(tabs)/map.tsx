@@ -9,11 +9,15 @@ import MarkerCard from "@/components/MarkerCard";
 import { mapFilters, markers } from "@/mocks/mockData";
 import {} from "lucide-react-native";
 import { Icon } from "@/components/ui/icon";
+import { useTranslation } from "react-i18next";
 
 const MapScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState(mapFilters[0]);
+
+  const { t } = useTranslation("map");
+
   const filteredMarkers = markers.filter(
-    (marker) => marker.category === selectedFilter.name
+    (marker) => marker.category === selectedFilter.category
   );
   const mapRef = useRef<MapView>(null);
 
@@ -61,7 +65,7 @@ const MapScreen = () => {
                   <BadgeText
                     className={`normal-case font-bold ${isSelectedFilter ? "text-primary-0" : "text-typography-0"}`}
                   >
-                    {item.displayName}
+                    {t(`mapCategories.${item.title}`)}
                   </BadgeText>
 
                   <Icon
@@ -106,14 +110,16 @@ const MapScreen = () => {
           ListEmptyComponent={() => (
             <Box className="flex flex-col p-4 items-center gap-2 justify-center w-full">
               <NoData width={128} height={128} />
-              <Text className=" text-typography-200">Konum bulunamadı</Text>
+              <Text className=" text-typography-200">
+                {t("errors.notFound")}
+              </Text>
             </Box>
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingVertical: 8, gap: 8, flexGrow: 1 }}
           keyExtractor={(item) => item.id}
           data={filteredMarkers}
-          renderItem={({ item }) => <MarkerCard {...item}></MarkerCard>}
+          renderItem={({ item }) => <MarkerCard {...item} />}
         />
       </Box>
     </Box>

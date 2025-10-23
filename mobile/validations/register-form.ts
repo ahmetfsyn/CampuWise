@@ -1,21 +1,16 @@
 import { z } from "zod";
-import i18n from "@/configs/i18n.config";
 
 export const registerFormSchema = z
   .object({
-    fullName: z
-      .string()
-      .nonempty(i18n.t("register.validations.fullNameRequired")),
+    fullName: z.string().nonempty("register.validations.fullNameRequired"),
     email: z.email("register.validations.emailInvalid"),
-    password: z
-      .string()
-      .min(6, i18n.t("register.validations.passwordMinLength")),
+    password: z.string().min(6, "register.validations.passwordMinLength"),
     repeatPassword: z
       .string()
-      .min(1, i18n.t("register.validations.repeatPasswordRequired")),
+      .min(1, "register.validations.repeatPasswordRequired"),
   })
   .refine((data) => data.password === data.repeatPassword, {
-    message: i18n.t("register.validations.passwordsNotMatch"),
+    message: "register.validations.passwordsNotMatch",
     path: ["repeatPassword"],
   });
 

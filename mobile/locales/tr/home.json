@@ -1,0 +1,30 @@
+{
+    "greeting": {
+        "title": "Merhaba",
+        "subTitle": "CampuWise'a Hoş Geldin!"
+    },
+    "sectionTitles": {
+        "shortcuts": "Kısayollar",
+        "upcomingEvents": "Yaklaşan Etkinlikler",
+        "popularTopics": "Popüler Konular"
+    },
+    "buttons": {
+        "customize": "Özelleştir"
+    },
+    "shortcutButtons": {
+        "events": "Etkinlikler",
+        "announcements": "Duyurular",
+        "foodSharing": "Yemek Paylaşımı",
+        "universityQuestions": "Üniversite Soruları"
+    },
+    "popularTopics": {
+        "foodSharing": "Yemek Paylaşımı",
+        "dormProblems": "Yurt Sorunları ve Önerileri",
+        "universityQs": "Üniversite Soruları",
+        "surveys": "Anketler",
+        "internshipsAndJobs": "Staj ve İş Fırsatları",
+        "homeworkAndLesson": "Ödev ve Ders Yardımı",
+        "feedback": "Geri Bildirim",
+        "secondhandAndSwap": "İkinci El ve Takas"
+    }
+}

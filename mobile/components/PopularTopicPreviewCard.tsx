@@ -3,22 +3,22 @@ import { Image } from "expo-image";
 import { Text } from "./ui/text";
 import { memo } from "react";
 import { Box } from "./ui/box";
-import { useTheme } from "@react-navigation/native";
 import AnimatedPressableComponent from "./AnimatedPressable";
+import { useTranslation } from "react-i18next";
 
 export type PopularTopicPreviewCardProps = {
-  title: string;
   description: string;
+  name: string;
   imageUrl?: string;
   onPress?: () => void;
 };
 
 const PopularTopicPreviewCard = ({
-  title,
-  description,
+  name,
   imageUrl,
   onPress,
 }: PopularTopicPreviewCardProps) => {
+  const { t } = useTranslation("home");
   return (
     <AnimatedPressableComponent onPress={onPress}>
       <Box
@@ -49,7 +49,7 @@ const PopularTopicPreviewCard = ({
             className="font-semibold text-2xl text-center flex-wrap text-primary-0"
             numberOfLines={2}
           >
-            {title}
+            {t(`popularTopics.${name}`)}
           </Text>
         </Box>
       </Box>

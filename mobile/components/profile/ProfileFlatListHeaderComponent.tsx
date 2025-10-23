@@ -5,6 +5,7 @@ import ProfilePointsSection from "./ProfilePointsSection";
 import ProfileHeaderSection from "./ProfileHeaderSection";
 import { users } from "@/mocks/mockData";
 import { User } from "@/types/models";
+import ProfileJoinedEvents from "./ProfileJoinedEvents";
 
 export type ProfileFlatListHeaderComponentProps = {
   handleGoEditProfile: () => void;
@@ -32,11 +33,9 @@ const ProfileFlatListHeaderComponent = ({
       <ProfileAboutSection />
 
       {/* POINT PROGRESS BAR */}
-      <ProfilePointsSection />
+      {/* <ProfilePointsSection /> */}
 
-      <Text className="text-lg font-semibold mb-3 mt-6 text-typography-0">
-        Katıldığı Etkinlikler
-      </Text>
+      <ProfileJoinedEvents />
     </>
   );
 };

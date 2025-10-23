@@ -1,0 +1,20 @@
+{
+    "mapCategories": {
+        "foods": "Foods",
+        "cafes": "Cafes",
+        "faculties": "Faculties",
+        "libraries": "Libraries",
+        "hospitals": "Hospitals",
+        "dorms": "Dorms",
+        "sports": "Sports",
+        "stationeries": "Stationeries"
+    },
+    "errors": {
+        "notFound": "There are no locations to display.",
+        "noAddress": "There is no address to display.",
+        "noContact": "There is no contact information to display."
+    },
+    "markerDetails": {
+        "viewOnMapButton": "View on Map"
+    }
+}
