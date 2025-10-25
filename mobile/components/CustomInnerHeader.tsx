@@ -18,11 +18,11 @@ const CustomInnerHeader = ({
 }: CustomInnerHeaderProps) => {
   const theme = useAppStore((state) => state.theme);
   const { t } = useTranslation("routes");
+
   const title = t(options?.title as string) ?? route?.name ?? "Başlık";
-  console.log(route.name);
+
   const canGoBack = navigation?.canGoBack?.() ?? false;
 
-  // Header arka planını temaya göre ayarla
   const headerBgClass = theme === "dark" ? "bg-primary-700" : "bg-primary-500";
 
   return (
