@@ -1,5 +1,4 @@
 using System.Threading.RateLimiting;
-using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace UserService.WebApi.Installers
@@ -9,16 +8,7 @@ namespace UserService.WebApi.Installers
         public static IServiceCollection AddExternalServices(this IServiceCollection services)
         {
             services.AddOpenApi();
-            services
-                .AddControllers()
-                .AddOData(opt =>
-                opt.Select()
-                    .Filter()
-                    .Count()
-                    .Expand()
-                    .OrderBy()
-                    .SetMaxTop(null)
-            );
+            services.AddControllers();
             services.AddRateLimiter(x =>
                 x.AddFixedWindowLimiter("fixed", cfg =>
                 {
@@ -28,11 +18,6 @@ namespace UserService.WebApi.Installers
                     cfg.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                 })
             );
-            // services.AddAuthentication(options =>
-            // {
-            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            // }).AddJwtBearer();
             services.AddAuthorization();
             services.AddResponseCompression(opt =>
             {

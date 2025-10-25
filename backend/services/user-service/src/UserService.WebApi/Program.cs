@@ -1,8 +1,23 @@
 using Scalar.AspNetCore;
+using Serilog;
 using UserService.WebApi.Installers;
 using UserService.WebApi.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    // .WriteTo.Elasticsearch(new Serilog.Sinks.Elasticsearch.ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
+    // {
+    //     AutoRegisterTemplate = true
+    // })
+    .CreateLogger();
+
+// Host’a Serilog bağla
+builder.Host.UseSerilog();
+
 
 builder.Services.AddInternalServices(builder.Configuration);
 

@@ -1,5 +1,6 @@
 using Flurl.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using UserService.Application.Interfaces;
 using UserService.Application.User.DTOs;
@@ -8,50 +9,59 @@ namespace UserService.Infrastructure
 {
     public class KeycloakService : IKeycloakService
     {
-        private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
 
-        public KeycloakService(HttpClient httpClient, IConfiguration configuration)
+        private readonly ILogger<KeycloakService> _logger;
+
+
+        public KeycloakService(ILogger<KeycloakService> logger, IConfiguration configuration)
         {
-            _httpClient = httpClient;
             _configuration = configuration;
+            _logger = logger;
+
         }
 
         public async Task<LoginResponseDto> LoginAsync(string email, string password)
         {
-            // Keycloak /token endpoint'i URL-encoded form bekler
-            var response = await $"{_configuration["Keycloak:BaseUrl"]}/realms/{_configuration["Keycloak:Realm"]}/protocol/openid-connect/token"
-                .PostUrlEncodedAsync(new
-                {
-                    grant_type = "password",
-                    client_id = _configuration["Keycloak:ClientId"],
-                    client_secret = _configuration["Keycloak:ClientSecret"],
-                    username = email,
-                    password
-                });
+            _logger.LogInformation("Starting Keycloak login for {Email}", email);
 
-            var responseBody = await response.ResponseMessage.Content.ReadAsStringAsync();
-
-            // var innerJson = JsonConvert.DeserializeObject<string>(responseBody);
-            System.Console.WriteLine(responseBody);
-
-            var settings = new JsonSerializerSettings
+            try
             {
-                ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver
+                var response = await $"{_configuration["Keycloak:BaseUrl"]}/realms/{_configuration["Keycloak:Realm"]}/protocol/openid-connect/token"
+                    .PostUrlEncodedAsync(new
+                    {
+                        grant_type = "password",
+                        client_id = _configuration["Keycloak:ClientId"],
+                        client_secret = _configuration["Keycloak:ClientSecret"],
+                        username = email,
+                        password
+                    });
+
+                var responseBody = await response.ResponseMessage.Content.ReadAsStringAsync();
+                _logger.LogDebug("Keycloak login response: {ResponseBody}", responseBody);
+
+                var settings = new JsonSerializerSettings
                 {
-                    NamingStrategy = new Newtonsoft.Json.Serialization.SnakeCaseNamingStrategy()
-                }
-            };
+                    ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver
+                    {
+                        NamingStrategy = new Newtonsoft.Json.Serialization.SnakeCaseNamingStrategy()
+                    }
+                };
 
-            var tokenDetails = JsonConvert.DeserializeObject<LoginResponseDto>(responseBody, settings);
+                var tokenDetails = JsonConvert.DeserializeObject<LoginResponseDto>(responseBody, settings);
 
+                if (tokenDetails?.AccessToken == null)
+                    throw new Exception("Keycloak login failed: empty access token");
 
-            if (tokenDetails?.AccessToken == null)
-                throw new Exception("Keycloak login failed: empty response");
-
-            return tokenDetails;
+                _logger.LogInformation("Keycloak login succeeded for {Email}", email);
+                return tokenDetails;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message + " for {Email}", email);
+                throw;
+            }
         }
-
         public async Task RegisterAsync(string fullName, string password, string email)
         {
             var (firstName, lastName) = GetFullNameAndLastName(fullName);
@@ -84,7 +94,6 @@ namespace UserService.Infrastructure
 
         private async Task<string> GetAdminTokenAsync()
         {
-            // Keycloak /token endpoint'i URL-encoded form bekler
             var response = await $"{_configuration["Keycloak:BaseUrl"]}/realms/{_configuration["Keycloak:Realm"]}/protocol/openid-connect/token"
                 .PostUrlEncodedAsync(new
                 {
@@ -94,12 +103,15 @@ namespace UserService.Infrastructure
                 });
 
             var responseBody = await response.ResponseMessage.Content.ReadAsStringAsync();
-            var tokenObj = JsonConvert.DeserializeObject<LoginResponseDto>(responseBody);
+            System.Console.WriteLine(responseBody);
 
-            if (tokenObj?.AccessToken == null)
+            var tokenObj = JsonConvert.DeserializeObject<dynamic>(responseBody);
+            string accessToken = tokenObj?.access_token;
+
+            if (string.IsNullOrEmpty(accessToken))
                 throw new Exception("Failed to get admin token");
 
-            return tokenObj.AccessToken;
+            return accessToken;
         }
 
         private (string FirstName, string LastName) GetFullNameAndLastName(string fullName)
@@ -112,3 +124,7 @@ namespace UserService.Infrastructure
         }
     }
 }
+
+// ! my-admin-client =  WAQi4v83RCrovOkjApTblfRaxCQ58raa
+
+// ! user-service-client = bXl4zp1916ISgGxq4FCMEcl77B3PKyYy
