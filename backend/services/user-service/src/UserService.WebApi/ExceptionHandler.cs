@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
 using TS.Result;
 
-public sealed class ExceptionHandler : IExceptionHandler
+public sealed class ExceptionHandler(ILogger<ExceptionHandler> _logger) : IExceptionHandler
 {
+
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
         httpContext.Response.ContentType = "application/json";
@@ -15,14 +16,17 @@ public sealed class ExceptionHandler : IExceptionHandler
         switch (exception)
         {
             case ValidationException validationEx:
+                _logger.LogWarning(validationEx, "Validation failed");
                 await HandleValidationExceptionAsync(httpContext, validationEx);
                 return true;
 
             case FlurlHttpException flurlEx:
+                _logger.LogError(flurlEx, "External service call failed");
                 await HandleFlurlHttpExceptionAsync(httpContext, flurlEx);
                 return true;
 
             default:
+                _logger.LogError(exception, "Unhandled exception");
                 errorResult = Result<string>.Failure(exception.Message);
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 await httpContext.Response.WriteAsJsonAsync(errorResult);

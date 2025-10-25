@@ -8,7 +8,9 @@ public static class InfrastructureRegistrar
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddHttpClient<IKeycloakService, KeycloakService>();
+
+        services.AddScoped<IKeycloakService, KeycloakService>();
+
         return services;
     }
 }

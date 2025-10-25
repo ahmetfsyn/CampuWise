@@ -1,0 +1,23 @@
+services:
+  keycloak:
+    build:
+      context: ../keycloak
+      dockerfile: Dockerfile
+    container_name: keycloak-campuwise
+    ports:
+      - "8080:8080"
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+
+  userservice:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: userservice
+    ports:
+      - "5001:5000"
+    env_file:
+      - ../docker/.env
+    depends_on:
+      - keycloak
