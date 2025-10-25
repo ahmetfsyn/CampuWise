@@ -1,0 +1,12 @@
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/bin/Debug/net9.0/UserService.Domain.deps.json
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/bin/Debug/net9.0/UserService.Domain.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/bin/Debug/net9.0/UserService.Domain.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/UserService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/UserService.Domain.AssemblyInfoInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/UserService.Domain.AssemblyInfo.cs
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/UserService.Domain.csproj.CoreCompileInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/UserService.Domain.sourcelink.json
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/UserService.Domain.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/refint/UserService.Domain.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/UserService.Domain.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Domain/obj/Debug/net9.0/ref/UserService.Domain.dll

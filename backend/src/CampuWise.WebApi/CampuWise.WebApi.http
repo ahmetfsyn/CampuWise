@@ -1,6 +1,0 @@
-@CampuWise.WebApi_HostAddress = http://localhost:5007
-
-GET {{CampuWise.WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -31,8 +31,6 @@ const LoginScreen = () => {
     // backend'den token alındığını varsayalım
     await useAppStore.getState().login("authToken");
 
-    console.log(data);
-
     showMessage({
       type: "success",
       text1: "Hoşgeldin 🎉",
