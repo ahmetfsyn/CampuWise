@@ -23,6 +23,16 @@ namespace UserService.WebApi.Modules
             })
             .Produces<Result<LoginResponseDto>>();
 
+            group.MapPost("/refresh-token", async (ISender sender, RefreshTokenRequestDto request, CancellationToken cancellationToken) =>
+            {
+                var command = request.Adapt<RefreshTokenCommand>();
+                var result = await sender.Send(command, cancellationToken);
+
+                return result.IsSuccessful
+                    ? Result<LoginResponseDto>.Succeed(result.Data)
+                    : Result<LoginResponseDto>.Failure("Refresh token failed");
+            });
+
 
             group.MapPost("/register", async (ISender sender, RegisterRequestDto request, CancellationToken cancellationToken) =>
             {
@@ -31,6 +41,8 @@ namespace UserService.WebApi.Modules
                 var result = await sender.Send(command, cancellationToken);
                 return result.IsSuccessful ? Results.Created() : Results.InternalServerError(result);
             });
+
+
         }
     }
 }

@@ -11,6 +11,8 @@ import useAppStore from "@/store/useAppStore";
 import Toast from "react-native-toast-message";
 import toastConfig from "@/configs/toast.config";
 import SplashScreenUI from "@/components/SplashScreenUI";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 
 export const unstable_settings = {
   initialRouteName: "auth",
@@ -21,12 +23,11 @@ export default function RootLayout() {
   const { isSplashVisible, theme, isAuthenticated } = useAppStore();
   const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
 
-  // Uygulama açılışı: initialize ve splash
   useEffect(() => {
     const initializeApp = async () => {
       const store = useAppStore.getState();
-      await store.checkAuth(); // token kontrolü
-      await store.initialize(); // didInitialize = true ve async işlemler
+      await store.checkAuth();
+      await store.initialize();
     };
 
     initializeApp();
@@ -39,20 +40,22 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={currentTheme}>
       <GluestackUIProvider mode={theme}>
-        <Stack
-          screenOptions={{
-            animation: "fade",
-            headerShown: false,
-          }}
-        >
-          {!isAuthenticated ? (
-            <Stack.Screen name="(tabs)" />
-          ) : (
-            <Stack.Screen name="auth" />
-          )}
-        </Stack>
-        <StatusBar style={"auto"} />
-        <Toast config={toastConfig} />
+        <QueryClientProvider client={queryClient}>
+          <Stack
+            screenOptions={{
+              animation: "fade",
+              headerShown: false,
+            }}
+          >
+            {isAuthenticated ? (
+              <Stack.Screen name="(tabs)" />
+            ) : (
+              <Stack.Screen name="auth" />
+            )}
+          </Stack>
+          <StatusBar style={"auto"} />
+          <Toast config={toastConfig} />
+        </QueryClientProvider>
       </GluestackUIProvider>
     </ThemeProvider>
   );

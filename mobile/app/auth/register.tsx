@@ -7,28 +7,30 @@ import { Input, InputField } from "@/components/ui/input";
 import { useCallback } from "react";
 import { useRouter } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
-import { registerFormSchema } from "@/validations/register-form";
+import {
+  registerFormSchema,
+  RegisterFormValues,
+} from "@/validations/register-form";
 import AnimatedButton from "@/components/AnimatedButton";
 import useAppStore from "@/store/useAppStore";
-import { Button, ButtonText } from "@/components/ui/button";
+import { Button, ButtonSpinner, ButtonText } from "@/components/ui/button";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
-import showMessage from "@/utils/showMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
+import useRegister from "@/hooks/auth/useRegister";
 
 const RegisterScreen = () => {
   const router = useRouter();
-  const { t } = useTranslation("auth");
-  const handleRegister = useCallback(() => {
-    console.log("kayıt oldu");
 
-    showMessage({
-      type: "success",
-      text1: "Kayıt Başarılı 🎉",
-      text2: "Aramıza hoş geldin!",
-    });
-    // router.push("/(tabs)/(home)");
-  }, [router]);
+  const { t } = useTranslation("auth");
+
+  const { handleRegister, isRegistering } = useRegister();
+
+  const onSubmit = async (values: RegisterFormValues) => {
+    await handleRegister(values);
+    return router.push("/auth/login");
+  };
+
   const { theme } = useAppStore((state) => state);
   const handleAlreadyHaveAnAccount = useCallback(() => {
     return router.push("/auth/login");
@@ -37,7 +39,7 @@ const RegisterScreen = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       email: "",
@@ -45,6 +47,7 @@ const RegisterScreen = () => {
       password: "",
       repeatPassword: "",
     },
+    mode: "onChange",
     resolver: zodResolver(registerFormSchema),
   });
 
@@ -97,7 +100,7 @@ const RegisterScreen = () => {
                     {errors.fullName && (
                       <Box className="px-2">
                         <Text className="text-error-500">
-                          {t(errors.fullName.message)}
+                          {t(errors.fullName.message as string)}
                         </Text>
                       </Box>
                     )}
@@ -125,7 +128,7 @@ const RegisterScreen = () => {
                     {errors.email && (
                       <Box className="px-2">
                         <Text className="text-error-500">
-                          {t(errors.email.message)}
+                          {t(errors.email.message as string)}
                         </Text>
                       </Box>
                     )}
@@ -155,7 +158,7 @@ const RegisterScreen = () => {
                     {errors.password && (
                       <Box className="px-2">
                         <Text className="text-error-500">
-                          {t(errors.password.message)}
+                          {t(errors.password.message as string)}
                         </Text>
                       </Box>
                     )}
@@ -183,7 +186,7 @@ const RegisterScreen = () => {
                     {errors.repeatPassword && (
                       <Box className="px-2">
                         <Text className="text-error-500">
-                          {t(errors.repeatPassword.message)}
+                          {t(errors.repeatPassword.message as string)}
                         </Text>
                       </Box>
                     )}
@@ -193,12 +196,16 @@ const RegisterScreen = () => {
             </Box>
 
             <AnimatedButton
-              onPress={handleSubmit(handleRegister)}
+              onPress={handleSubmit(onSubmit)}
               size={"xl"}
               className="h-14 mb-4"
-              isDisabled={Object.keys(errors).length > 0}
+              isDisabled={!isValid || isRegistering}
             >
-              {t("register.registerButton")}
+              {isRegistering ? (
+                <ButtonSpinner className="text-primary-0" size={24} />
+              ) : (
+                t("register.registerButton")
+              )}
             </AnimatedButton>
 
             <Box className="flex-row gap-2 items-center justify-center">
@@ -210,6 +217,7 @@ const RegisterScreen = () => {
                 variant="link"
                 onPress={handleAlreadyHaveAnAccount}
                 size={"md"}
+                isDisabled={isRegistering}
               >
                 <ButtonText className="text-primary-500">
                   {t("register.loginButton")}

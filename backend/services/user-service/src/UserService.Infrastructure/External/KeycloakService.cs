@@ -13,7 +13,6 @@ namespace UserService.Infrastructure
 
         private readonly ILogger<KeycloakService> _logger;
 
-
         public KeycloakService(ILogger<KeycloakService> logger, IConfiguration configuration)
         {
             _configuration = configuration;
@@ -62,6 +61,39 @@ namespace UserService.Infrastructure
                 throw;
             }
         }
+
+        public async Task<LoginResponseDto> RefreshTokenAsync(string refreshToken)
+        {
+            var response = await $"{_configuration["Keycloak:BaseUrl"]}/realms/{_configuration["Keycloak:Realm"]}/protocol/openid-connect/token"
+                .PostUrlEncodedAsync(new
+                {
+                    grant_type = "refresh_token",
+                    client_id = _configuration["Keycloak:ClientId"],
+                    client_secret = _configuration["Keycloak:ClientSecret"],
+                    refresh_token = refreshToken
+                });
+
+            var responseBody = await response.ResponseMessage.Content.ReadAsStringAsync();
+
+            _logger.LogDebug("Keycloak refresh token response: {ResponseBody}", responseBody);
+
+            var settings = new JsonSerializerSettings
+            {
+                ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver
+                {
+                    NamingStrategy = new Newtonsoft.Json.Serialization.SnakeCaseNamingStrategy()
+                }
+            };
+
+
+            var tokenDto = JsonConvert.DeserializeObject<LoginResponseDto>(responseBody, settings);
+
+            if (string.IsNullOrEmpty(tokenDto?.AccessToken))
+                throw new Exception("Failed to refresh token");
+
+            return tokenDto;
+        }
+
         public async Task RegisterAsync(string fullName, string password, string email)
         {
             var (firstName, lastName) = GetFullNameAndLastName(fullName);
@@ -73,10 +105,10 @@ namespace UserService.Infrastructure
                 email,
                 firstName,
                 lastName,
-                attributes = new Dictionary<string, string[]>
+                attributes = new Dictionary<string, string>
                 {
-                    { "phoneNumber", new[]{""} },
-                    { "avatarUrl", new[]{""} }
+                    { "phoneNumber", "" },
+                    { "avatarUrl" ,"" }
                 },
                 enabled = true,
                 emailVerified = false,
@@ -103,7 +135,6 @@ namespace UserService.Infrastructure
                 });
 
             var responseBody = await response.ResponseMessage.Content.ReadAsStringAsync();
-            System.Console.WriteLine(responseBody);
 
             var tokenObj = JsonConvert.DeserializeObject<dynamic>(responseBody);
             string accessToken = tokenObj?.access_token;
@@ -124,7 +155,3 @@ namespace UserService.Infrastructure
         }
     }
 }
-
-// ! my-admin-client =  WAQi4v83RCrovOkjApTblfRaxCQ58raa
-
-// ! user-service-client = bXl4zp1916ISgGxq4FCMEcl77B3PKyYy
