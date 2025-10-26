@@ -1,7 +1,13 @@
 import i18n from "@/configs/i18n.config";
-import { LanguageCode } from "@/types/models";
+import { LanguageCode, LoginResponseDto } from "@/types/models";
 import { asyncStorage } from "@/utils/asyncStorage";
-import { getToken, removeToken, saveToken } from "@/utils/secureStorage";
+import {
+  saveAccessToken,
+  saveRefreshToken,
+  removeTokens,
+  getAccessToken,
+  getAccessTokenExpiry,
+} from "@/utils/secureStorage";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import * as Localization from "expo-localization";
@@ -20,7 +26,9 @@ export type AppStoreState = {
   togglePushNotification: () => void;
   initialize: () => void;
   setSplash: (visible: boolean) => void;
-  login: (token: string) => Promise<void>;
+  login: (
+    tokenDetails: LoginResponseDto & { rememberMe: boolean }
+  ) => Promise<void>;
   logout: () => Promise<void>;
   checkAuth: () => Promise<void>;
 };
@@ -35,21 +43,34 @@ const useAppStore = create<AppStoreState>()(
       isSplashVisible: true,
       emailNotification: true,
       pushNotification: true,
-      login: async (token: string) => {
-        const expiry = Date.now() + 3600 * 1000;
-        await saveToken(token, expiry);
+      login: async (
+        tokenDetails: LoginResponseDto & { rememberMe: boolean }
+      ) => {
+        await saveAccessToken(tokenDetails.accessToken, tokenDetails.expiresIn);
+        console.info("AccessToken is saved");
+        if (tokenDetails.rememberMe) {
+          console.info("RefreshToken is saved");
+
+          await saveRefreshToken(tokenDetails.refreshToken);
+        }
         set({ isAuthenticated: true });
       },
 
       logout: async () => {
-        await removeToken();
+        await removeTokens();
         set({ isAuthenticated: false });
       },
 
       checkAuth: async () => {
-        const stored = await getToken();
-        if (!stored || Date.now() > stored.expiry) {
-          await removeToken();
+        console.log("checkAuth is started");
+        const accessToken = await getAccessToken();
+        console.log("Stored Access Token : ", accessToken);
+        const expiry = await getAccessTokenExpiry();
+
+        console.log("Stored Expiry : ", expiry);
+
+        if (!accessToken || !expiry || Date.now() > expiry) {
+          await removeTokens();
           set({ isAuthenticated: false });
         } else {
           set({ isAuthenticated: true });

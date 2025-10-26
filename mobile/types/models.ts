@@ -73,3 +73,9 @@ export type User = {
   phoneNumber?: string;
   imageUrl?: string;
 };
+
+export type LoginResponseDto = {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: number;
+};

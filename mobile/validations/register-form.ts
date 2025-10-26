@@ -4,7 +4,11 @@ export const registerFormSchema = z
   .object({
     fullName: z.string().nonempty("register.validations.fullNameRequired"),
     email: z.email("register.validations.emailInvalid"),
-    password: z.string().min(6, "register.validations.passwordMinLength"),
+    password: z
+      .string()
+      .min(6, "register.validations.passwordMinLength")
+      .regex(/\d/, "register.validations.passwordMustContainNumber")
+      .regex(/[A-Z]/, "register.validations.passwordMustContainUppercase"),
     repeatPassword: z
       .string()
       .min(1, "register.validations.repeatPasswordRequired"),

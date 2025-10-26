@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { Button, ButtonText } from "@/components/ui/button";
+import { Button, ButtonSpinner, ButtonText } from "@/components/ui/button";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import LightLogo from "@/assets/images/campuwise-logo-light-theme.svg";
@@ -17,30 +17,24 @@ import { useCallback } from "react";
 import AnimatedButton from "@/components/AnimatedButton";
 import useAppStore from "@/store/useAppStore";
 import { Controller, useForm } from "react-hook-form";
-import { loginFormSchema } from "@/validations/login-form";
+import { loginFormSchema, LoginFormValues } from "@/validations/login-form";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { SunMoon } from "lucide-react-native";
-import showMessage from "@/utils/showMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
-
+import useLogin from "@/hooks/auth/useLogin";
+// todo : burda kaldım. logini ayarla ve backend'den token al
 const LoginScreen = () => {
   const router = useRouter();
   const { t } = useTranslation("auth");
-  const handleLogin = async (data: any) => {
-    // backend'den token alındığını varsayalım
-    await useAppStore.getState().login("authToken");
 
-    showMessage({
-      type: "success",
-      text1: "Hoşgeldin 🎉",
-      text2: "Seni tekrar görmek harika!",
-    });
-    router.replace("(tabs)");
-    // todo: backend'den token alınacak
+  const { handleLogin, isLogining } = useLogin();
 
-    console.log("Giriş yapıldı");
+  const onSubmit = async (values: LoginFormValues) => {
+    await handleLogin(values);
+    router.push("/(tabs)/(home)");
   };
+
   const handleNewAccount = () => {
     return router.push("/auth/register");
   };
@@ -48,13 +42,15 @@ const LoginScreen = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       email: "",
       password: "",
       rememberMe: false,
     },
+
+    mode: "onChange",
     resolver: zodResolver(loginFormSchema),
   });
 
@@ -123,7 +119,7 @@ const LoginScreen = () => {
                     {errors.email && (
                       <Box className="px-2">
                         <Text className="text-error-500">
-                          {t(errors.email.message)}
+                          {t(errors.email.message as string)}
                         </Text>
                       </Box>
                     )}
@@ -151,7 +147,7 @@ const LoginScreen = () => {
                     {errors.password && (
                       <Box className="px-2">
                         <Text className="text-error-500">
-                          {t(errors.password.message)}
+                          {t(errors.password.message as string)}
                         </Text>
                       </Box>
                     )}
@@ -186,12 +182,16 @@ const LoginScreen = () => {
             </Box>
 
             <AnimatedButton
-              onPress={handleSubmit(handleLogin)}
+              onPress={handleSubmit(onSubmit)}
               size={"xl"}
               className="h-14 "
-              isDisabled={Object.keys(errors).length > 0}
+              isDisabled={!isValid || isLogining}
             >
-              {t("login.loginButton")}
+              {isLogining ? (
+                <ButtonSpinner className="text-primary-0" size={24} />
+              ) : (
+                t("login.loginButton")
+              )}
             </AnimatedButton>
 
             <Box className="flex-row gap-2 items-center justify-center">
