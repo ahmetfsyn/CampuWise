@@ -1,0 +1,12 @@
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/bin/Debug/net9.0/EventService.Domain.deps.json
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/bin/Debug/net9.0/EventService.Domain.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/bin/Debug/net9.0/EventService.Domain.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/EventService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/EventService.Domain.AssemblyInfoInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/EventService.Domain.AssemblyInfo.cs
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/EventService.Domain.csproj.CoreCompileInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/EventService.Domain.sourcelink.json
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/EventService.Domain.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/refint/EventService.Domain.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/EventService.Domain.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Domain/obj/Debug/net9.0/ref/EventService.Domain.dll

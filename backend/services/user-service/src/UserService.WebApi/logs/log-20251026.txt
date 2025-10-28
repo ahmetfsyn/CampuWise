@@ -1133,3 +1133,8 @@ Flurl.Http.FlurlHttpException: Call failed with status code 400 (Bad Request): P
 2025-10-26 14:50:42.134 +03:00 [INF] Keycloak login succeeded for f@f.com
 2025-10-26 14:50:42.138 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
 2025-10-26 14:50:42.138 +03:00 [INF] Request finished HTTP/1.1 POST http://b06b9dc85986.ngrok-free.app/auth/login - 200 null application/json; charset=utf-8 151.546ms
+2025-10-26 14:57:00.814 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-26 14:57:00.881 +03:00 [INF] Now listening on: http://localhost:5067
+2025-10-26 14:57:00.882 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-26 14:57:00.882 +03:00 [INF] Hosting environment: Development
+2025-10-26 14:57:00.882 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
