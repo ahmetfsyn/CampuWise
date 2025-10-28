@@ -16,6 +16,8 @@ namespace EventService.Infrastructure.Persistence.Configs
                    .HasForeignKey(ep => ep.EventId)
                    .OnDelete(DeleteBehavior.Cascade);
 
+            builder.HasIndex(ep => new { ep.EventId, ep.UserId }).IsUnique();
+
             // UserId Guid olduğu için ekstra ayar opsiyonel
             builder.Property(ep => ep.UserId)
                    .IsRequired();

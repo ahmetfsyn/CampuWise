@@ -158,9 +158,8 @@
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/obj/Debug/net9.0/EventService.WebApi.pdb
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/obj/Debug/net9.0/EventService.WebApi.genruntimeconfig.cache
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/obj/Debug/net9.0/ref/EventService.WebApi.dll
-/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/bin/Debug/net9.0/Ardalis.Specification.dll
-/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/bin/Debug/net9.0/Ardalis.Specification.EntityFrameworkCore.dll
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/bin/Debug/net9.0/Mapster.dll
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/bin/Debug/net9.0/Mapster.Core.dll
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/bin/Debug/net9.0/Cortex.Mediator.Behaviors.FluentValidation.dll
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/bin/Debug/net9.0/FluentValidation.DependencyInjectionExtensions.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi/bin/Debug/net9.0/GenericRepository.dll
