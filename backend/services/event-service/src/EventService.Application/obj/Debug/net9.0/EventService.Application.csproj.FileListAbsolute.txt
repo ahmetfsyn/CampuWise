@@ -1,0 +1,16 @@
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/bin/Debug/net9.0/EventService.Application.deps.json
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/bin/Debug/net9.0/EventService.Application.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/bin/Debug/net9.0/EventService.Application.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/bin/Debug/net9.0/EventService.Domain.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/bin/Debug/net9.0/EventService.Domain.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventService.Application.csproj.AssemblyReference.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventService.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventService.Application.AssemblyInfoInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventService.Application.AssemblyInfo.cs
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventService.Application.csproj.CoreCompileInputs.cache
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventService.Application.sourcelink.json
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventSer.38CB6A54.Up2Date
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventService.Application.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/refint/EventService.Application.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/EventService.Application.pdb
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.Application/obj/Debug/net9.0/ref/EventService.Application.dll
