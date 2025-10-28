@@ -1,4 +1,5 @@
 ﻿using EventService.Application;
+using EventService.Application.EventParticipants;
 using EventService.Application.Events;
 using EventService.Infrastructure.Persistence;
 using EventService.Infrastructure.Persistence.Repositories;
@@ -16,6 +17,7 @@ public static class InfrastructureRegistrar
         services.AddDbContext<EventDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("EventDb")).UseSnakeCaseNamingConvention());
 
         services.AddScoped<IEventRepository, EventRepository>();
+        services.AddScoped<IEventParticipantRepository, EventParticipantRepository>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

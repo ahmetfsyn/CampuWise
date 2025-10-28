@@ -1,5 +1,6 @@
 using EventService.Domain.Common;
 using EventService.Domain.EventParticipants;
+using EventService.Domain.EventParticipants.Exceptions;
 
 namespace EventService.Domain.Events
 {
@@ -15,5 +16,20 @@ namespace EventService.Domain.Events
         public string? ImageUrl { get; set; }
         public Guid? OrganizerId { get; set; }
         public ICollection<EventParticipant> Participants { get; set; } = new List<EventParticipant>();
+
+
+        public void AddParticipant(Guid userId)
+        {
+            if (Participants.Any(p => p.UserId == userId))
+                throw new DuplicateParticipantException(userId, Id);
+
+            Participants.Add(new EventParticipant { UserId = userId, EventId = Id });
+        }
+
+        public void RemoveParticipant(Guid userId)
+        {
+            var participant = Participants.FirstOrDefault(p => p.UserId == userId) ?? throw new ParticipantNotFoundException();
+            Participants.Remove(participant);
+        }
     }
 }

@@ -18,11 +18,11 @@ namespace EventService.Application.Events.commands
             await _unitOfWork.BeginTransactionAsync();
 
             var newEvent = command.Adapt<Event>();
-            var result = await _eventRepository.AddAsync(newEvent, cancellationToken);
 
+            _eventRepository.Add(newEvent);
             await _unitOfWork.CommitAsync(cancellationToken);
 
-            return result is not null ? Result<Guid>.Succeed(result.Id) : Result<Guid>.Failure("Event could not be created");
+            return Result<Guid>.Succeed(newEvent.Id);
         }
     }
 }

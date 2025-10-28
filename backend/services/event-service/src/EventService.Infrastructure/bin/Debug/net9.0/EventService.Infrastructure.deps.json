@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v9.0": {
       "EventService.Infrastructure/1.0.0": {
         "dependencies": {
-          "Ardalis.Specification.EntityFrameworkCore": "9.3.1",
           "EFCore.NamingConventions": "9.0.0",
           "EventService.Application": "1.0.0",
           "EventService.Domain": "1.0.0",
@@ -24,27 +23,6 @@
         },
         "runtime": {
           "EventService.Infrastructure.dll": {}
-        }
-      },
-      "Ardalis.Specification/9.3.1": {
-        "runtime": {
-          "lib/net9.0/Ardalis.Specification.dll": {
-            "assemblyVersion": "9.3.1.0",
-            "fileVersion": "9.3.1.0"
-          }
-        }
-      },
-      "Ardalis.Specification.EntityFrameworkCore/9.3.1": {
-        "dependencies": {
-          "Ardalis.Specification": "9.3.1",
-          "Microsoft.EntityFrameworkCore": "9.0.10",
-          "Microsoft.EntityFrameworkCore.Relational": "9.0.10"
-        },
-        "runtime": {
-          "lib/net9.0/Ardalis.Specification.EntityFrameworkCore.dll": {
-            "assemblyVersion": "9.3.1.0",
-            "fileVersion": "9.3.1.0"
-          }
         }
       },
       "Cortex.Mediator/2.1.0": {
@@ -774,6 +752,17 @@
         }
       },
       "System.Threading.Channels/7.0.0": {},
+      "TS.EntityFrameworkCore.GenericRepository/9.0.4": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "9.0.10"
+        },
+        "runtime": {
+          "lib/net9.0/GenericRepository.dll": {
+            "assemblyVersion": "9.0.4.0",
+            "fileVersion": "9.0.4.0"
+          }
+        }
+      },
       "TS.Result/9.0.1": {
         "runtime": {
           "lib/net9.0/TS.Result.dll": {
@@ -784,11 +773,11 @@
       },
       "EventService.Application/1.0.0": {
         "dependencies": {
-          "Ardalis.Specification": "9.3.1",
           "Cortex.Mediator": "2.1.0",
           "Cortex.Mediator.Behaviors.FluentValidation": "2.1.0",
           "EventService.Domain": "1.0.0",
           "Mapster": "7.4.0",
+          "TS.EntityFrameworkCore.GenericRepository": "9.0.4",
           "TS.Result": "9.0.1"
         },
         "runtime": {
@@ -813,20 +802,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "Ardalis.Specification/9.3.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-GWrE6BA0smWFLbN+XPU2l5rDF9Uzelfbb3w35jJ0CGIat+p1ChbtLcbkvYRMEculBHOAo12omwAAOm3VFWkoJQ==",
-      "path": "ardalis.specification/9.3.1",
-      "hashPath": "ardalis.specification.9.3.1.nupkg.sha512"
-    },
-    "Ardalis.Specification.EntityFrameworkCore/9.3.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-QbOo4E6HWdKXZ9QUrqcgiGN4EKtzt0kzGzqr2zc32q5QESzBrceJ3GX1ymWVdCCOzJO1+GPm+/a/5ovSkfrLoQ==",
-      "path": "ardalis.specification.entityframeworkcore/9.3.1",
-      "hashPath": "ardalis.specification.entityframeworkcore.9.3.1.nupkg.sha512"
     },
     "Cortex.Mediator/2.1.0": {
       "type": "package",
@@ -1205,6 +1180,13 @@
       "sha512": "sha512-qmeeYNROMsONF6ndEZcIQ+VxR4Q/TX/7uIVLJqtwIWL7dDWeh0l1UIqgo4wYyjG//5lUNhwkLDSFl+pAWO6oiA==",
       "path": "system.threading.channels/7.0.0",
       "hashPath": "system.threading.channels.7.0.0.nupkg.sha512"
+    },
+    "TS.EntityFrameworkCore.GenericRepository/9.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q0iXaUNx2q+dX5iIudAufUxqN9wZtGhhJqH/9FIIEFkMtA39scEqi15vJuPVZ22o7L5GoP0Znn84llWnwznphQ==",
+      "path": "ts.entityframeworkcore.genericrepository/9.0.4",
+      "hashPath": "ts.entityframeworkcore.genericrepository.9.0.4.nupkg.sha512"
     },
     "TS.Result/9.0.1": {
       "type": "package",
