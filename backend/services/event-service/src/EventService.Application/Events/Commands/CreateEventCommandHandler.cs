@@ -20,6 +20,9 @@ namespace EventService.Application.Events.commands
             var newEvent = command.Adapt<Event>();
 
             _eventRepository.Add(newEvent);
+
+            newEvent.AddParticipant(command.OrganizerId ?? throw new ArgumentNullException(nameof(command.OrganizerId)));
+
             await _unitOfWork.CommitAsync(cancellationToken);
 
             return Result<Guid>.Succeed(newEvent.Id);

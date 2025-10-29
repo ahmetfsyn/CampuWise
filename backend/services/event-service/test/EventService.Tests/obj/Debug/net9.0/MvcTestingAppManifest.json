@@ -1,0 +1,6 @@
+{
+  "EventService.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/ahmetsayan\/Desktop\/Projects\/CampuWise\/backend\/services\/event-service\/src\/EventService.Application",
+  "EventService.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/ahmetsayan\/Desktop\/Projects\/CampuWise\/backend\/services\/event-service\/src\/EventService.Domain",
+  "EventService.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/ahmetsayan\/Desktop\/Projects\/CampuWise\/backend\/services\/event-service\/src\/EventService.Infrastructure",
+  "EventService.WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/ahmetsayan\/Desktop\/Projects\/CampuWise\/backend\/services\/event-service\/src\/EventService.WebApi"
+}

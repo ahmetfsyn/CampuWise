@@ -28,7 +28,11 @@ namespace EventService.Domain.Events
 
         public void RemoveParticipant(Guid userId)
         {
+            if (userId == OrganizerId)
+                throw new CannotLeaveEventException("Organizer cannot leave their own event.");
+
             var participant = Participants.FirstOrDefault(p => p.UserId == userId) ?? throw new ParticipantNotFoundException();
+
             Participants.Remove(participant);
         }
     }

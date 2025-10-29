@@ -1,10 +1,12 @@
 
+
 namespace EventService.WebApi.Installers
 {
     public static class MiddlewareInstaller
     {
         public static void AddMiddlewares(this WebApplication app)
         {
+
             app.UseHttpsRedirection();
 
             app.UseCors(x => x
@@ -16,6 +18,8 @@ namespace EventService.WebApi.Installers
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            // app.UseMiddleware<UserClaimsMiddleware>();
 
             app.UseResponseCompression();
 
