@@ -42,6 +42,13 @@ public sealed class ExceptionHandler(ILogger<ExceptionHandler> logger) : IExcept
                 await httpContext.Response.WriteAsJsonAsync(errorResult, cancellationToken: cancellationToken);
                 return true;
 
+            case UnauthorizedAccessException uaEx:
+                _logger.LogWarning(uaEx, "Unauthorized access");
+                errorResult = Result<string>.Failure(StatusCodes.Status401Unauthorized, [uaEx.Message]);
+                httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                await httpContext.Response.WriteAsJsonAsync(errorResult, cancellationToken: cancellationToken);
+                return true;
+
             default:
                 _logger.LogError(exception, "Unhandled exception");
                 errorResult = Result<string>.Failure(exception.Message);

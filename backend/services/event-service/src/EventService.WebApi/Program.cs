@@ -44,8 +44,7 @@ app.AddMiddlewares();
 
 // Map endpoints
 app.MapControllers()
-   .RequireRateLimiting("fixed")
-   .RequireAuthorization();
+   .RequireRateLimiting("fixed");
 
 // Register custom feature routes
 app.RegisterRoutes();

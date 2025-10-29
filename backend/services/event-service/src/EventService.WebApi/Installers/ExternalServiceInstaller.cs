@@ -1,4 +1,6 @@
 using System.Threading.RateLimiting;
+using EventService.WebApi.Controllers;
+using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace EventService.WebApi.Installers
@@ -7,17 +9,24 @@ namespace EventService.WebApi.Installers
     {
         public static IServiceCollection AddExternalServices(this IServiceCollection services)
         {
+
             services.AddOpenApi();
             services
-                .AddControllers();
-            //     .AddOData(opt =>
-            //     opt.Select()
-            //         .Filter()
-            //         .Count()
-            //         .Expand()
-            //         .OrderBy()
-            //         .SetMaxTop(null)
-            // );
+                .AddControllers()
+                .AddOData(opt =>
+                {
+
+                    opt.EnableQueryFeatures();
+                    opt.AddRouteComponents("odata", EventsODataController.GetEdmModel());
+
+                })
+                .AddNewtonsoftJson(options =>
+                {
+                    // JSON serializer loop’u da engelle
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
+            services.AddEndpointsApiExplorer();
+
             services.AddRateLimiter(x =>
                 x.AddFixedWindowLimiter("fixed", cfg =>
                 {
@@ -27,12 +36,18 @@ namespace EventService.WebApi.Installers
                     cfg.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                 })
             );
-            // services.AddAuthentication(options =>
-            // {
-            //     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            // }).AddJwtBearer();
+
+            services.AddAuthentication("Bearer")
+            .AddJwtBearer("Bearer", options =>
+            {
+                options.Authority = "http://keycloak-campuwise:8080/realms/campuwise";
+                options.Audience = "account";
+                options.RequireHttpsMetadata = false;
+
+            });
+
             services.AddAuthorization();
+
             services.AddResponseCompression(opt =>
             {
                 opt.EnableForHttps = true;
