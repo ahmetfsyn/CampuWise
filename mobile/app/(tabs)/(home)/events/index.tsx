@@ -16,6 +16,9 @@ const EventsScreen = () => {
   const [searchString, setSearchString] = useState<string>("");
   const router = useRouter();
   const { t } = useTranslation("events");
+  
+  
+  // todo : organizatörlere ait bir sayfa yap. orada katılımcıları listeyeip excel pdf ya da csv tarzında cıktı alabilsin.
 
   const filteredEvents = useMemo(() => {
     return events.filter((event) => {

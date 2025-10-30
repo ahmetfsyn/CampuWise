@@ -1,7 +1,8 @@
 using Cortex.Mediator.Queries;
+using EventService.Application.Events.Queries;
 using EventService.Domain.Events;
 
-namespace EventService.Application.Events.Queries
+namespace EventService.Application.Events.Handlers
 {
     public class EventGetAllQueryHandler(
         IEventRepository eventRepository

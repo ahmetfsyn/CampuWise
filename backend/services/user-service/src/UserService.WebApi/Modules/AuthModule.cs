@@ -1,5 +1,5 @@
+using Cortex.Mediator;
 using Mapster;
-using MediatR;
 using TS.Result;
 using UserService.Application.User.Commands;
 using UserService.Application.User.DTOs;
@@ -14,19 +14,19 @@ namespace UserService.WebApi.Modules
             RouteGroupBuilder group = app.MapGroup("/auth").WithTags("Auth");
 
             group.MapPost("login",
-            async (ISender sender, LoginRequestDto request, CancellationToken cancellationToken) =>
-            {
+                     async (IMediator mediator, LoginRequestDto request, CancellationToken cancellationToken) =>
+                     {
 
-                var command = request.Adapt<LoginCommand>();
-                var result = await sender.Send(command, cancellationToken);
-                return result.IsSuccessful ? Result<LoginResponseDto>.Succeed(result.Data) : Result<LoginResponseDto>.Failure("Giriş Başarısız");
-            })
-            .Produces<Result<LoginResponseDto>>();
+                         var command = request.Adapt<LoginCommand>();
+                         var result = await mediator.SendCommandAsync<LoginCommand, Result<LoginResponseDto>>(command, cancellationToken);
+                         return result.IsSuccessful ? Result<LoginResponseDto>.Succeed(result.Data) : Result<LoginResponseDto>.Failure("Giriş Başarısız");
+                     })
+                     .Produces<Result<LoginResponseDto>>();
 
-            group.MapPost("/refresh-token", async (ISender sender, RefreshTokenRequestDto request, CancellationToken cancellationToken) =>
+            group.MapPost("/refresh-token", async (IMediator mediator, RefreshTokenRequestDto request, CancellationToken cancellationToken) =>
             {
                 var command = request.Adapt<RefreshTokenCommand>();
-                var result = await sender.Send(command, cancellationToken);
+                var result = await mediator.SendCommandAsync<RefreshTokenCommand, Result<LoginResponseDto>>(command, cancellationToken);
 
                 return result.IsSuccessful
                     ? Result<LoginResponseDto>.Succeed(result.Data)
@@ -34,11 +34,11 @@ namespace UserService.WebApi.Modules
             });
 
 
-            group.MapPost("/register", async (ISender sender, RegisterRequestDto request, CancellationToken cancellationToken) =>
+            group.MapPost("/register", async (IMediator mediator, RegisterRequestDto request, CancellationToken cancellationToken) =>
             {
 
                 var command = request.Adapt<RegisterCommand>();
-                var result = await sender.Send(command, cancellationToken);
+                var result = await mediator.SendCommandAsync<RegisterCommand, Result<string>>(command, cancellationToken);
                 return result.IsSuccessful ? Results.Created() : Results.InternalServerError(result);
             });
 

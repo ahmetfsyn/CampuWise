@@ -68,3 +68,9 @@
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Serilog.Sinks.Elasticsearch.dll
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Serilog.Sinks.File.dll
 /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Serilog.Sinks.PeriodicBatching.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Cortex.Mediator.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/bin/Debug/net9.0/Microsoft.Extensions.Primitives.dll

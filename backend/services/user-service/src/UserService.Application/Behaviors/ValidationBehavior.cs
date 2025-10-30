@@ -1,49 +1,33 @@
+using Cortex.Mediator.Commands;
 using FluentValidation;
-using FluentValidation.Results;
-using MediatR;
 
 namespace UserService.Application.Behaviors
 {
-    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-         where TRequest : class, IRequest<TResponse>
+    public sealed class ValidationBehavior<TCommand, TResult>(IEnumerable<IValidator<TCommand>> validators) : ICommandPipelineBehavior<TCommand, TResult>
+    where TCommand : ICommand<TResult>
     {
-        private readonly IEnumerable<IValidator<TRequest>> _validators;
+        private readonly IEnumerable<IValidator<TCommand>> _validators = validators ?? [];
 
-        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+        public async Task<TResult> Handle(TCommand command, CommandHandlerDelegate<TResult> next, CancellationToken cancellationToken)
         {
-            _validators = validators;
-        }
-
-        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
-        {
-            if (!_validators.Any())
+            if (_validators.Any())
             {
-                return await next();
-            }
+                var context = new ValidationContext<TCommand>(command);
+                var failures = _validators
+                    .Select(v => v.Validate(context))
+                    .SelectMany(r => r.Errors)
+                    .Where(f => f != null)
+                    .ToList();
 
-            var context = new ValidationContext<TRequest>(request);
-
-            var errorDictionary = _validators
-                .Select(s => s.Validate(context))
-                .SelectMany(s => s.Errors)
-                .Where(s => s != null)
-                .GroupBy(
-                s => s.PropertyName,
-                s => s.ErrorMessage, (propertyName, errorMessage) => new
+                if (failures.Count != 0)
                 {
-                    Key = propertyName,
-                    Values = errorMessage.Distinct().ToArray()
-                })
-                .ToDictionary(s => s.Key, s => s.Values[0]);
-
-            if (errorDictionary.Any())
-            {
-                var errors = errorDictionary.Select(s => new ValidationFailure
-                {
-                    PropertyName = s.Value,
-                    ErrorCode = s.Key
-                });
-                throw new ValidationException(errors);
+                    throw new Cortex.Mediator.Exceptions.ValidationException(
+                        failures.GroupBy(f => f.PropertyName)
+                                .ToDictionary(
+                                    g => g.Key,
+                                    g => g.Select(f => f.ErrorMessage).ToArray()
+                                ));
+                }
             }
 
             return await next();

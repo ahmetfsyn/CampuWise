@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UserService.Application.Interfaces;
+using UserService.Infrastructure.External;
 
 namespace UserService.Infrastructure;
 

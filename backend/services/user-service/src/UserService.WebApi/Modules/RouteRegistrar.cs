@@ -6,6 +6,8 @@ namespace UserService.WebApi.Modules
         public static void RegisterRoutes(this IEndpointRouteBuilder app)
         {
             app.RegisterAuthRoutes();
+            app.RegisterUserRoutes();
+
         }
     }
 }
