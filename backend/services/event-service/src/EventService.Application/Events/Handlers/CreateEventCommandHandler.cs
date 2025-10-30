@@ -1,9 +1,12 @@
+
+
 using Cortex.Mediator.Commands;
+using EventService.Application.Events.commands;
 using EventService.Domain.Events;
 using Mapster;
 using TS.Result;
 
-namespace EventService.Application.Events.commands
+namespace EventService.Application.Events.Handlers
 {
     public class CreateEventCommandHandler(
         IEventRepository eventRepository,

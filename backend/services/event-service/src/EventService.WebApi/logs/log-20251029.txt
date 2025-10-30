@@ -4388,3 +4388,38 @@ FROM events AS e
 2025-10-29 17:43:53.743 +03:00 [INF] Executed action EventService.WebApi.Controllers.EventsODataController.GetAllEvents (EventService.WebApi) in 13.4824ms
 2025-10-29 17:43:53.743 +03:00 [INF] Executed endpoint 'EventService.WebApi.Controllers.EventsODataController.GetAllEvents (EventService.WebApi)'
 2025-10-29 17:43:53.743 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/odata/events?%24select=title%2CstartDate%2CimageUrl - 200 null application/json; odata.metadata=minimal; odata.streaming=true; charset=utf-8 15.5035ms
+2025-10-29 20:18:25.277 +03:00 [INF] User profile is available. Using '/Users/ahmetsayan/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-10-29 20:18:25.356 +03:00 [INF] Now listening on: http://localhost:5293
+2025-10-29 20:18:25.357 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-29 20:18:25.357 +03:00 [INF] Hosting environment: Development
+2025-10-29 20:18:25.357 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/event-service/src/EventService.WebApi
+2025-10-29 20:18:38.404 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/scalar/ - null null
+2025-10-29 20:18:38.421 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-10-29 20:18:38.440 +03:00 [INF] Executing endpoint 'HTTP: GET /scalar/{documentName?}'
+2025-10-29 20:18:38.481 +03:00 [INF] Write content with HTTP Response ContentType of text/html
+2025-10-29 20:18:38.488 +03:00 [INF] Executed endpoint 'HTTP: GET /scalar/{documentName?}'
+2025-10-29 20:18:38.493 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/scalar/ - 200 null text/html 90.3211ms
+2025-10-29 20:18:38.507 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/scalar/scalar.aspnetcore.js - null null
+2025-10-29 20:18:38.507 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/scalar/scalar.js - null null
+2025-10-29 20:18:38.511 +03:00 [INF] Executing endpoint 'HTTP: GET /scalar/scalar.js'
+2025-10-29 20:18:38.511 +03:00 [INF] CORS policy execution successful.
+2025-10-29 20:18:38.540 +03:00 [INF] Executing endpoint 'HTTP: GET /scalar/scalar.aspnetcore.js'
+2025-10-29 20:18:38.542 +03:00 [INF] Sending file with download name ''.
+2025-10-29 20:18:38.542 +03:00 [INF] Sending file with download name ''.
+2025-10-29 20:18:38.543 +03:00 [INF] Executed endpoint 'HTTP: GET /scalar/scalar.aspnetcore.js'
+2025-10-29 20:18:38.543 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/scalar/scalar.aspnetcore.js - 200 1046 text/javascript 36.2955ms
+2025-10-29 20:18:38.549 +03:00 [INF] Executed endpoint 'HTTP: GET /scalar/scalar.js'
+2025-10-29 20:18:38.549 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/scalar/scalar.js - 200 926401 text/javascript 42.0878ms
+2025-10-29 20:18:38.680 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/openapi/v1.json - null null
+2025-10-29 20:18:38.681 +03:00 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-10-29 20:18:38.756 +03:00 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-10-29 20:18:38.756 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/openapi/v1.json - null null
+2025-10-29 20:18:38.756 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/openapi/v1.json - 200 null application/json;charset=utf-8 76.4239ms
+2025-10-29 20:18:38.757 +03:00 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-10-29 20:18:38.780 +03:00 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-10-29 20:18:38.780 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/openapi/v1.json - 200 null application/json;charset=utf-8 23.5117ms
+2025-10-29 20:18:39.037 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5293/scalar/favicon.svg - null null
+2025-10-29 20:18:39.038 +03:00 [INF] Executing endpoint 'HTTP: GET /scalar/favicon.svg'
+2025-10-29 20:18:39.038 +03:00 [INF] Sending file with download name ''.
+2025-10-29 20:18:39.038 +03:00 [INF] Executed endpoint 'HTTP: GET /scalar/favicon.svg'
+2025-10-29 20:18:39.039 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5293/scalar/favicon.svg - 200 533 image/svg+xml 1.3203ms

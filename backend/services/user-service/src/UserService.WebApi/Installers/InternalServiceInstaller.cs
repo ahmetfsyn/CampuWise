@@ -9,7 +9,7 @@ namespace UserService.WebApi.Installers
         public static IServiceCollection AddInternalServices(this IServiceCollection services, IConfiguration configuration)
         {
 
-            services.AddApplicationServices();
+            services.AddApplicationServices(configuration);
             services.AddInfrastructureServices(configuration);
             services.AddCors();
             services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();

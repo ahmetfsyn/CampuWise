@@ -48,7 +48,6 @@ namespace EventService.WebApi.Modules
                     var userId = httpContext.GetUserId();
                     var joinEventCommand = new JoinEventCommand(eventId, userId);
 
-                    // 4️⃣ Gönder
                     var response = await mediator.SendCommandAsync<JoinEventCommand, Result<string>>(joinEventCommand, cancellationToken);
                     return response;
                 })
@@ -91,13 +90,15 @@ namespace EventService.WebApi.Modules
 
 
             group.MapGet("/{eventId}", async (Guid eventId, IMediator mediator, CancellationToken cancellationToken) =>
-          {
-              var query = new GetEventByIdQuery(eventId);
+                {
+                    var query = new GetEventByIdQuery(eventId);
 
-              var response = await mediator.SendQueryAsync<GetEventByIdQuery, Result<Event>>(query, cancellationToken);
-              return response;
-          })
-          .Produces<Result<Event>>();
+                    // todo : yapmam gereken şey user-service http il istek atıp katılımcıların (yani userların) avatarUrl verisini eventDetailse eklemek ve öyle frontende gondermek.
+
+                    var response = await mediator.SendQueryAsync<GetEventByIdQuery, Result<GetEventByIdResponseDto>>(query, cancellationToken);
+                    return response;
+                })
+                .Produces<Result<Event>>();
 
         }
     }

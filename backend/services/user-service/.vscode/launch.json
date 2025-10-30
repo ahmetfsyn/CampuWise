@@ -1,0 +1,46 @@
+// .vscode/launch.json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug EventService",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/EventService.WebApi/bin/Debug/net9.0/EventService.WebApi.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/EventService.WebApi",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "Now listening on: (https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": "Debug UserService",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/UserService.WebApi/bin/Debug/net9.0/UserService.WebApi.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/UserService.WebApi",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "Now listening on: (https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Both Services",
+      "configurations": ["Debug EventService", "Debug UserService"]
+    }
+  ]
+}

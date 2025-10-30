@@ -1,11 +1,9 @@
-
-
 using Cortex.Mediator.Commands;
-using EventService.Application.Events.Dtos;
+using EventService.Application.Events.Commands;
 using EventService.Domain.Events.Exceptions;
 using TS.Result;
 
-namespace EventService.Application.Events.Commands
+namespace EventService.Application.Events.Handlers
 {
     public class DeleteEventCommandHandler(
         IEventRepository eventRepository,
