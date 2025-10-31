@@ -27,7 +27,7 @@ export default function RootLayout() {
     const initializeApp = async () => {
       const store = useAppStore.getState();
       await store.checkAuth();
-      await store.initialize();
+      store.initialize();
     };
 
     initializeApp();

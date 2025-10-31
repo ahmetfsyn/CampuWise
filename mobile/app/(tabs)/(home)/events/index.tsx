@@ -4,7 +4,9 @@ import EventsFlatListHeader from "@/components/EventsFlatListHeader";
 import { Box } from "@/components/ui/box";
 import { Fab, FabIcon, FabLabel } from "@/components/ui/fab";
 import { AddIcon } from "@/components/ui/icon";
-import { eventFilters, events } from "@/mocks/mockData";
+import { Spinner } from "@/components/ui/spinner";
+import useGetAllEvents from "@/hooks/events/useGetAllEvents";
+import { eventFilters } from "@/mocks/mockData";
 import { EventCategory } from "@/types/models";
 import { useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
@@ -16,12 +18,17 @@ const EventsScreen = () => {
   const [searchString, setSearchString] = useState<string>("");
   const router = useRouter();
   const { t } = useTranslation("events");
-  
-  
+  const {
+    data: events,
+    isLoading: isLoadingEvents,
+    isFetching: isFetchingEvents,
+    refetch: refreshEvents,
+  } = useGetAllEvents();
+
   // todo : organizatörlere ait bir sayfa yap. orada katılımcıları listeyeip excel pdf ya da csv tarzında cıktı alabilsin.
 
   const filteredEvents = useMemo(() => {
-    return events.filter((event) => {
+    return events?.filter((event) => {
       const matchesSearch = event.title
         .toLowerCase()
         .includes(searchString.toLowerCase());
@@ -33,7 +40,7 @@ const EventsScreen = () => {
 
       return matchesSearch && matchesCategory;
     });
-  }, [selectedFilter, searchString]);
+  }, [selectedFilter, searchString, events]);
 
   const handleCreateEvent = useCallback(() => {
     router.push("/events/create");
@@ -45,45 +52,63 @@ const EventsScreen = () => {
     },
     [router]
   );
-
   return (
     <Box className="flex-1 p-4">
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1 }}
-        ListHeaderComponent={
-          <EventsFlatListHeader
-            selectedFilter={selectedFilter}
-            setSelectedFilter={setSelectedFilter}
-            searchString={searchString}
-            setSearchString={setSearchString}
-          />
-        }
-        removeClippedSubviews
-        initialNumToRender={10}
-        maxToRenderPerBatch={10}
-        windowSize={5}
-        ListEmptyComponent={<EmptyEventListComponent />}
-        data={filteredEvents}
-        renderItem={({ item }) => (
-          <EventListCard
-            onPress={() => handleGoEventDetails(item.id)}
-            {...item}
-          />
+      <Box>
+        {isLoadingEvents ? (
+          <Spinner />
+        ) : (
+          <>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              style={{
+                height: "100%",
+              }}
+              contentContainerStyle={{
+                flexGrow: 1,
+                height: "auto",
+              }}
+              onRefresh={refreshEvents}
+              refreshing={isFetchingEvents}
+              ListHeaderComponent={
+                <EventsFlatListHeader
+                  selectedFilter={selectedFilter}
+                  setSelectedFilter={setSelectedFilter}
+                  searchString={searchString}
+                  setSearchString={setSearchString}
+                />
+              }
+              removeClippedSubviews
+              initialNumToRender={10}
+              maxToRenderPerBatch={10}
+              windowSize={5}
+              ListEmptyComponent={<EmptyEventListComponent />}
+              data={filteredEvents}
+              renderItem={({ item }) => (
+                <EventListCard
+                  onPress={() => handleGoEventDetails(item.id)}
+                  {...item}
+                />
+              )}
+              keyExtractor={(item) => item.id}
+            />
+            <Fab
+              className="right-4 bottom-8 bg-primary-500"
+              size="md"
+              placement="bottom right"
+              onPress={handleCreateEvent}
+            >
+              <FabIcon className="text-primary-0 " as={AddIcon} size={"lg"} />
+              <FabLabel
+                className="text-primary-0 font-semibold"
+                numberOfLines={1}
+              >
+                {t("buttons.createEventFAB")}
+              </FabLabel>
+            </Fab>
+          </>
         )}
-        keyExtractor={(item) => item.id}
-      />
-      <Fab
-        className="right-4 bottom-8 bg-primary-500"
-        size="md"
-        placement="bottom right"
-        onPress={handleCreateEvent}
-      >
-        <FabIcon className="text-primary-0 " as={AddIcon} size={"lg"} />
-        <FabLabel className="text-primary-0 font-semibold" numberOfLines={1}>
-          {t("buttons.createEventFAB")}
-        </FabLabel>
-      </Fab>
+      </Box>
     </Box>
   );
 };

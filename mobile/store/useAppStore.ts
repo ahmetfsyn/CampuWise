@@ -71,6 +71,7 @@ const useAppStore = create<AppStoreState>()(
 
         if (!accessToken || !expiry || Date.now() > expiry) {
           await removeTokens();
+          console.log("isAuth false oldu 1 ");
           set({ isAuthenticated: false });
         } else {
           set({ isAuthenticated: true });
