@@ -9,7 +9,7 @@ export const registerAsync = async ({
   password,
 }: RegisterFormValues) => {
   try {
-    const { data } = await api.post("/auth/register", {
+    const { data } = await api.post("/user-service/auth/register", {
       email,
       fullName,
       password,
@@ -28,7 +28,7 @@ export const loginAsync = async ({
   rememberMe,
 }: LoginFormValues): Promise<LoginResponseDto & { rememberMe: boolean }> => {
   try {
-    const { data } = await api.post("/auth/login", {
+    const { data } = await api.post("/user-service/auth/login", {
       email,
       password,
     });

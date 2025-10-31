@@ -5,10 +5,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Controller, useForm } from "react-hook-form";
-import {
-  createEventFormSchema,
-  CreateEventFormValues,
-} from "@/validations/create-event-form";
+import { createEventFormSchema } from "@/validations/create-event-form";
 import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
 import {
   Select,
@@ -24,7 +21,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import AnimatedButton from "@/components/AnimatedButton";
-import showMessage from "@/utils/showMessage";
 import {
   CalendarClock,
   ChevronDownIcon,
@@ -38,38 +34,38 @@ import { eventFilters } from "@/mocks/mockData";
 import { Image } from "expo-image";
 import pickImage from "@/utils/pickImage";
 import { Icon } from "@/components/ui/icon";
-import { createEventAsync } from "@/services/eventService";
 import { useTranslation } from "react-i18next";
+import useCreateEvent from "@/hooks/events/useCreateEvent";
+import { useRouter } from "expo-router";
 
 const CreateEventScreen = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const { t } = useTranslation("events");
+  const { handleCreateEvent, isCreating } = useCreateEvent();
+  const router = useRouter();
+  const onSubmit = async (data: any) => {
+    await handleCreateEvent(data);
+    // reset();
+    return router.canGoBack() && router.back();
+  };
+
   const {
     control,
     handleSubmit,
     setValue,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       title: "",
       description: "",
-      startingDate: null,
-      location: "",
+      startDate: null,
+      place: "",
       category: "",
       imageUrl: "",
     },
+    mode: "all",
     resolver: zodResolver(createEventFormSchema),
   });
-
-  const handleCreateEvent = async (data: CreateEventFormValues) => {
-    createEventAsync(data);
-
-    showMessage({
-      type: "success",
-      text1: "Tebrikler 🎉",
-      text2: "Etkinlik başarıyla oluşturuldu!",
-    });
-  };
 
   const showDatePicker = useCallback(() => {
     setDatePickerVisibility(true);
@@ -80,7 +76,7 @@ const CreateEventScreen = () => {
   }, []);
 
   const handleConfirmDate = (date: Date) => {
-    setValue("startingDate", date);
+    setValue("startDate", date, { shouldValidate: true });
     hideDatePicker();
   };
 
@@ -150,14 +146,10 @@ const CreateEventScreen = () => {
           {/* Location */}
           <Controller
             control={control}
-            name="location"
+            name="place"
             render={({ field: { onChange, value } }) => (
               <>
-                <Input
-                  variant="rounded"
-                  isInvalid={!!errors.location}
-                  size="lg"
-                >
+                <Input variant="rounded" isInvalid={!!errors.place} size="lg">
                   <InputSlot className="pl-3 ">
                     <InputIcon as={MapPin} />
                   </InputSlot>
@@ -167,9 +159,9 @@ const CreateEventScreen = () => {
                     placeholder={t("placeholders.locationPlaceholder")}
                   />
                 </Input>
-                {errors.location && (
+                {errors.place && (
                   <Text className="text-error-300">
-                    {t(errors.location.message as string)}
+                    {t(errors.place.message as string)}
                   </Text>
                 )}
               </>
@@ -223,17 +215,17 @@ const CreateEventScreen = () => {
           {/* Date */}
           <Controller
             control={control}
-            name="startingDate"
-            render={({ field: { onChange, value } }) => (
+            name="startDate"
+            render={({ field: { value } }) => (
               <>
                 <Pressable onPress={showDatePicker}>
                   <Input
-                    isInvalid={!!errors.startingDate}
+                    isInvalid={!!errors.startDate}
                     size={"lg"}
                     pointerEvents="none"
                   >
                     <InputField
-                      editable={false} // Kullanıcı yazı giremesin
+                      editable={false}
                       value={value?.toLocaleString()}
                       placeholder={t("placeholders.startingDatePlaceholder")}
                     />
@@ -248,9 +240,9 @@ const CreateEventScreen = () => {
                   onConfirm={handleConfirmDate}
                   onCancel={hideDatePicker}
                 />
-                {errors.startingDate && (
+                {errors.startDate && (
                   <Text className="text-error-300">
-                    {t(errors.startingDate.message as string)}
+                    {t(errors.startDate.message as string)}
                   </Text>
                 )}
               </>
@@ -304,8 +296,8 @@ const CreateEventScreen = () => {
           <AnimatedButton
             className="h-14 mt-4"
             textClassName="uppercase"
-            isDisabled={Object.keys(errors).length > 0}
-            onPress={handleSubmit(handleCreateEvent)}
+            isDisabled={isCreating || !isValid}
+            onPress={handleSubmit(onSubmit)}
           >
             {t("buttons.createEvent")}
           </AnimatedButton>

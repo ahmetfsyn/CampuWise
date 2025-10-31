@@ -1,0 +1,997 @@
+2025-10-31 10:02:44.260 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-31 10:02:44.317 +03:00 [INF] Now listening on: http://localhost:5067
+2025-10-31 10:02:44.319 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-31 10:02:44.319 +03:00 [INF] Hosting environment: Development
+2025-10-31 10:02:44.319 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
+2025-10-31 10:05:56.263 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 40
+2025-10-31 10:05:56.278 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-10-31 10:05:56.280 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:05:56.307 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:05:56.314 +03:00 [INF] Starting Keycloak login for c@c.com
+2025-10-31 10:05:56.450 +03:00 [ERR] Call failed. Connection refused (keycloak-campuwise:8080): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token for c@c.com
+Flurl.Http.FlurlHttpException: Call failed. Connection refused (keycloak-campuwise:8080): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+ ---> System.Net.Http.HttpRequestException: Connection refused (keycloak-campuwise:8080)
+ ---> System.Net.Sockets.SocketException (61): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+2025-10-31 10:05:56.458 +03:00 [ERR] Error executing command LoginCommand after 151 ms
+Flurl.Http.FlurlHttpException: Call failed. Connection refused (keycloak-campuwise:8080): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+ ---> System.Net.Http.HttpRequestException: Connection refused (keycloak-campuwise:8080)
+ ---> System.Net.Sockets.SocketException (61): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+2025-10-31 10:05:56.460 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:05:56.460 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+Flurl.Http.FlurlHttpException: Call failed. Connection refused (keycloak-campuwise:8080): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+ ---> System.Net.Http.HttpRequestException: Connection refused (keycloak-campuwise:8080)
+ ---> System.Net.Sockets.SocketException (61): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:05:56.463 +03:00 [ERR] External service call failed
+Flurl.Http.FlurlHttpException: Call failed. Connection refused (keycloak-campuwise:8080): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+ ---> System.Net.Http.HttpRequestException: Connection refused (keycloak-campuwise:8080)
+ ---> System.Net.Sockets.SocketException (61): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|285_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.DecompressionHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:05:56.471 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 500 null application/json; charset=utf-8 209.1675ms
+2025-10-31 10:07:20.187 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 40
+2025-10-31 10:07:20.190 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:07:20.192 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:07:20.192 +03:00 [INF] Starting Keycloak login for c@c.com
+2025-10-31 10:07:20.325 +03:00 [ERR] Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token for c@c.com
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+2025-10-31 10:07:20.325 +03:00 [ERR] Error executing command LoginCommand after 133 ms
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+2025-10-31 10:07:20.326 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:07:20.326 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:07:20.327 +03:00 [ERR] External service call failed
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:07:20.350 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 401 null application/json; charset=utf-8 165.2097ms
+2025-10-31 10:08:49.940 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 40
+2025-10-31 10:08:49.943 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:08:49.945 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:08:49.946 +03:00 [INF] Starting Keycloak login for c@c.com
+2025-10-31 10:08:50.072 +03:00 [ERR] Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token for c@c.com
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+2025-10-31 10:08:50.073 +03:00 [ERR] Error executing command LoginCommand after 127 ms
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+2025-10-31 10:08:50.073 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:08:50.074 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:08:50.074 +03:00 [ERR] External service call failed
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:08:50.076 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 401 null application/json; charset=utf-8 135.8321ms
+2025-10-31 10:09:10.721 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 40
+2025-10-31 10:09:10.722 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:09:10.723 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:09:10.723 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 10:09:10.870 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 10:09:10.870 +03:00 [INF] Command LoginCommand executed successfully in 147 ms
+2025-10-31 10:09:10.871 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:09:10.871 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 200 null application/json; charset=utf-8 150.998ms
+2025-10-31 10:20:07.696 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:20:07.699 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 2.3978ms
+2025-10-31 10:20:07.700 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:20:08.877 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:20:08.877 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 0.2718ms
+2025-10-31 10:20:08.877 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:20:11.027 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:20:11.027 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 0.6065ms
+2025-10-31 10:20:11.028 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:21:03.763 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 40
+2025-10-31 10:21:03.764 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:21:03.765 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:21:03.772 +03:00 [ERR] Error executing command LoginCommand after 6 ms
+Cortex.Mediator.Exceptions.ValidationException: Validation errors occurred
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 24
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+2025-10-31 10:21:03.774 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:21:03.774 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+Cortex.Mediator.Exceptions.ValidationException: Validation errors occurred
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 24
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:21:03.774 +03:00 [ERR] Unhandled exception
+Cortex.Mediator.Exceptions.ValidationException: Validation errors occurred
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 24
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:21:03.775 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 500 null application/json; charset=utf-8 11.676ms
+2025-10-31 10:21:07.659 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 41
+2025-10-31 10:21:07.660 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:21:07.661 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:21:07.661 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 10:21:07.833 +03:00 [ERR] Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token for a@a.com
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+2025-10-31 10:21:07.834 +03:00 [ERR] Error executing command LoginCommand after 172 ms
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+2025-10-31 10:21:07.834 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:21:07.834 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:21:07.835 +03:00 [ERR] External service call failed
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:21:07.836 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 401 null application/json; charset=utf-8 176.6357ms
+2025-10-31 10:21:16.565 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 40
+2025-10-31 10:21:16.565 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:21:16.565 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:21:16.565 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 10:21:16.596 +03:00 [ERR] Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token for a@a.com
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+2025-10-31 10:21:16.596 +03:00 [ERR] Error executing command LoginCommand after 30 ms
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+2025-10-31 10:21:16.596 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:21:16.596 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:21:16.596 +03:00 [ERR] External service call failed
+Flurl.Http.FlurlHttpException: Call failed with status code 401 (Unauthorized): POST http://keycloak-campuwise:8080/realms/campuwise/protocol/openid-connect/token
+   at Flurl.Http.FlurlClient.HandleExceptionAsync(FlurlCall call, Exception ex, CancellationToken token)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at Flurl.Http.FlurlClient.SendAsync(IFlurlRequest request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at UserService.Infrastructure.External.KeycloakService.LoginAsync(String email, String password) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Infrastructure/External/KeycloakService.cs:line 51
+   at UserService.Application.User.Handlers.LoginCommandHandler.Handle(LoginCommand request, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/User/Handlers/LoginCommandHandler.cs:line 16
+   at UserService.Application.Behaviors.ValidationBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.Application/Behaviors/ValidationBehavior.cs:line 33
+   at Cortex.Mediator.Behaviors.LoggingCommandBehavior`2.Handle(TCommand command, CommandHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at Cortex.Mediator.Mediator.SendCommandAsync[TCommand,TResult](TCommand command, CancellationToken cancellationToken)
+   at UserService.WebApi.Modules.AuthModule.<>c.<<RegisterAuthRoutes>b__0_0>d.MoveNext() in /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi/Modules/AuthModule.cs:line 21
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<ExecuteTaskOfTFast>g__ExecuteAwaited|131_0[T](Task`1 task, HttpContext httpContext, JsonTypeInfo`1 jsonTypeInfo)
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.<>c__DisplayClass101_2.<<HandleRequestBodyAndCompileRequestDelegateForJson>b__2>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2025-10-31 10:21:16.597 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 401 null application/json; charset=utf-8 32.1492ms
+2025-10-31 10:21:23.223 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 40
+2025-10-31 10:21:23.224 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:21:23.224 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:21:23.224 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 10:21:23.277 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 10:21:23.277 +03:00 [INF] Command LoginCommand executed successfully in 52 ms
+2025-10-31 10:21:23.277 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:21:23.277 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 200 null application/json; charset=utf-8 54.2053ms
+2025-10-31 10:21:28.088 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:21:28.089 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 1.0485ms
+2025-10-31 10:21:28.089 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:21:29.266 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:21:29.266 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 0.3202ms
+2025-10-31 10:21:29.266 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:21:31.517 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:21:31.518 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 0.6918ms
+2025-10-31 10:21:31.518 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:26:53.765 +03:00 [INF] Request starting HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - application/json 40
+2025-10-31 10:26:53.768 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:26:53.771 +03:00 [INF] Executing command LoginCommand
+2025-10-31 10:26:53.772 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 10:26:53.991 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 10:26:53.991 +03:00 [INF] Command LoginCommand executed successfully in 220 ms
+2025-10-31 10:26:53.992 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 10:26:53.992 +03:00 [INF] Request finished HTTP/1.1 POST http://d8ac3e910283.ngrok-free.app/auth/login - 200 null application/json; charset=utf-8 226.6034ms
+2025-10-31 10:26:56.299 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:26:56.300 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 0.5562ms
+2025-10-31 10:26:56.300 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:26:57.460 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:26:57.461 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 0.2853ms
+2025-10-31 10:26:57.461 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:26:59.619 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:26:59.620 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 0.2315ms
+2025-10-31 10:26:59.620 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:27:21.580 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - null null
+2025-10-31 10:27:21.581 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/events - 404 0 null 1.515ms
+2025-10-31 10:27:21.583 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/events, Response status code: 404
+2025-10-31 10:27:22.752 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:27:22.753 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.2618ms
+2025-10-31 10:27:22.753 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:27:24.934 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:27:24.934 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.3207ms
+2025-10-31 10:27:24.934 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:29:07.877 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:29:07.879 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 1.9572ms
+2025-10-31 10:29:07.879 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:29:09.109 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:29:09.109 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.2718ms
+2025-10-31 10:29:09.110 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:29:11.295 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:29:11.295 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.3784ms
+2025-10-31 10:29:11.296 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:29:22.314 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:29:22.314 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.3909ms
+2025-10-31 10:29:22.314 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:29:23.477 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:29:23.478 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.2308ms
+2025-10-31 10:29:23.478 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:29:25.641 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:29:25.642 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.7732ms
+2025-10-31 10:29:25.642 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:32:10.751 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:32:10.758 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 6.346ms
+2025-10-31 10:32:10.758 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:32:11.917 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:32:11.917 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.1857ms
+2025-10-31 10:32:11.917 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:32:14.064 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:32:14.065 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.4799ms
+2025-10-31 10:32:14.065 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:32:39.768 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:32:39.769 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 1.9817ms
+2025-10-31 10:32:39.770 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:32:40.932 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:32:40.933 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.5335ms
+2025-10-31 10:32:40.933 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:32:43.129 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:32:43.129 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.269ms
+2025-10-31 10:32:43.129 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:33:50.629 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:33:50.631 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 2.0505ms
+2025-10-31 10:33:50.632 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:33:51.791 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:33:51.791 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.1772ms
+2025-10-31 10:33:51.791 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:33:54.091 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:33:54.091 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.3145ms
+2025-10-31 10:33:54.091 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:34:53.051 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:34:53.053 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 1.7125ms
+2025-10-31 10:34:53.053 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:34:54.221 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:34:54.221 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.3706ms
+2025-10-31 10:34:54.221 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:34:56.448 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:34:56.448 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.4289ms
+2025-10-31 10:34:56.448 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:36:39.208 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:36:39.209 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 1.2595ms
+2025-10-31 10:36:39.210 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:36:40.434 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:36:40.435 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.3531ms
+2025-10-31 10:36:40.435 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:36:42.631 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - null null
+2025-10-31 10:36:42.631 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 0.1465ms
+2025-10-31 10:36:42.632 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:38:04.981 +03:00 [INF] Request starting HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - application/json 86
+2025-10-31 10:38:04.983 +03:00 [INF] Request finished HTTP/1.1 GET http://d8ac3e910283.ngrok-free.app/odata/events - 404 0 null 2.254ms
+2025-10-31 10:38:04.983 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://d8ac3e910283.ngrok-free.app/odata/events, Response status code: 404
+2025-10-31 10:41:45.679 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5067/odata/events - application/json 86
+2025-10-31 10:41:45.681 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5067/odata/events - 404 0 null 2.0445ms
+2025-10-31 10:41:45.681 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5067/odata/events, Response status code: 404
+2025-10-31 11:00:36.389 +03:00 [INF] Application is shutting down...
+2025-10-31 11:00:43.353 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-31 11:00:43.400 +03:00 [INF] Now listening on: http://localhost:5000
+2025-10-31 11:00:43.401 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-31 11:00:43.401 +03:00 [INF] Hosting environment: Development
+2025-10-31 11:00:43.401 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
+2025-10-31 11:06:38.693 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/events/events - null null
+2025-10-31 11:06:38.704 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-10-31 11:06:38.706 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/events/events - 404 0 null 13.7947ms
+2025-10-31 11:06:38.711 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/api/events/events, Response status code: 404
+2025-10-31 11:06:43.344 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/events - null null
+2025-10-31 11:06:43.346 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/events - 404 0 null 2.1069ms
+2025-10-31 11:06:43.347 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/api/events, Response status code: 404
+2025-10-31 11:07:43.476 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/events - null null
+2025-10-31 11:07:43.479 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/events - 404 0 null 3.2526ms
+2025-10-31 11:07:43.480 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/api/events, Response status code: 404
+2025-10-31 11:07:47.347 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/events/odata/events - null null
+2025-10-31 11:07:47.347 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/events/odata/events - 404 0 null 0.7541ms
+2025-10-31 11:07:47.348 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/api/events/odata/events, Response status code: 404
+2025-10-31 11:07:59.157 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/events/odata/events - null null
+2025-10-31 11:07:59.158 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/events/odata/events - 404 0 null 0.4096ms
+2025-10-31 11:07:59.158 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/api/events/odata/events, Response status code: 404
+2025-10-31 11:17:43.779 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/events - null null
+2025-10-31 11:17:43.781 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/events - 404 0 null 2.3123ms
+2025-10-31 11:17:43.782 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/api/events, Response status code: 404
+2025-10-31 11:17:47.919 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/events/odata/events - null null
+2025-10-31 11:17:47.919 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/events/odata/events - 404 0 null 0.4694ms
+2025-10-31 11:17:47.919 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/api/events/odata/events, Response status code: 404
+2025-10-31 11:18:02.264 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/events/odata/events - null null
+2025-10-31 11:18:02.265 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/events/odata/events - 404 0 null 0.8316ms
+2025-10-31 11:18:02.265 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/api/events/odata/events, Response status code: 404
+2025-10-31 11:19:54.395 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/events/odata/events - null null
+2025-10-31 11:19:54.397 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/events/odata/events - 404 0 null 1.6987ms
+2025-10-31 11:19:54.397 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/events/odata/events, Response status code: 404
+2025-10-31 11:21:20.773 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/odata/events - null null
+2025-10-31 11:21:20.773 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/odata/events - 404 0 null 0.4115ms
+2025-10-31 11:21:20.774 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/odata/events, Response status code: 404
+2025-10-31 11:22:55.726 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/users/auth/login - application/json 40
+2025-10-31 11:22:55.727 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/users/auth/login - 404 0 null 1.6412ms
+2025-10-31 11:22:55.728 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/api/users/auth/login, Response status code: 404
+2025-10-31 11:36:47.392 +03:00 [INF] Application is shutting down...
+2025-10-31 11:36:50.819 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-31 11:36:50.864 +03:00 [INF] Now listening on: http://localhost:5000
+2025-10-31 11:36:50.865 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-31 11:36:50.865 +03:00 [INF] Hosting environment: Development
+2025-10-31 11:36:50.865 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
+2025-10-31 11:57:17.100 +03:00 [INF] Application is shutting down...
+2025-10-31 11:57:21.685 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-31 11:57:21.740 +03:00 [INF] Now listening on: http://localhost:5000
+2025-10-31 11:57:21.741 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-31 11:57:21.741 +03:00 [INF] Hosting environment: Development
+2025-10-31 11:57:21.741 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
+2025-10-31 12:16:02.322 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 12:16:02.354 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-10-31 12:16:02.363 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 12:16:02.420 +03:00 [INF] Executing command LoginCommand
+2025-10-31 12:16:02.429 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 12:16:02.708 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 12:16:02.708 +03:00 [INF] Command LoginCommand executed successfully in 288 ms
+2025-10-31 12:16:02.714 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 12:16:02.716 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 396.3527ms
+2025-10-31 14:05:50.296 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 14:05:50.304 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 14:05:50.309 +03:00 [INF] Executing command LoginCommand
+2025-10-31 14:05:50.309 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 14:05:50.504 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 14:05:50.505 +03:00 [INF] Command LoginCommand executed successfully in 195 ms
+2025-10-31 14:05:50.506 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 14:05:50.506 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 210.6163ms
+2025-10-31 14:20:20.616 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 14:20:20.620 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 14:20:20.623 +03:00 [INF] Executing command LoginCommand
+2025-10-31 14:20:20.623 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 14:20:20.805 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 14:20:20.805 +03:00 [INF] Command LoginCommand executed successfully in 182 ms
+2025-10-31 14:20:20.805 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 14:20:20.805 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 189.9012ms
+2025-10-31 14:31:08.465 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 14:31:08.468 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 14:31:08.469 +03:00 [INF] Executing command LoginCommand
+2025-10-31 14:31:08.469 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 14:31:08.596 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 14:31:08.597 +03:00 [INF] Command LoginCommand executed successfully in 127 ms
+2025-10-31 14:31:08.597 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 14:31:08.597 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 132.6156ms
+2025-10-31 15:00:51.392 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 15:00:51.394 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 15:00:51.395 +03:00 [INF] Executing command LoginCommand
+2025-10-31 15:00:51.395 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 15:00:51.600 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 15:00:51.600 +03:00 [INF] Command LoginCommand executed successfully in 205 ms
+2025-10-31 15:00:51.601 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 15:00:51.601 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 209.2281ms
+2025-10-31 16:38:55.891 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 16:38:55.893 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 16:38:55.895 +03:00 [INF] Executing command LoginCommand
+2025-10-31 16:38:55.895 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 16:38:56.078 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 16:38:56.078 +03:00 [INF] Command LoginCommand executed successfully in 183 ms
+2025-10-31 16:38:56.079 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 16:38:56.079 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 188.1151ms
+2025-10-31 17:01:48.422 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 17:01:48.424 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 17:01:48.425 +03:00 [INF] Executing command LoginCommand
+2025-10-31 17:01:48.425 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 17:01:48.622 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 17:01:48.622 +03:00 [INF] Command LoginCommand executed successfully in 196 ms
+2025-10-31 17:01:48.622 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 17:01:48.622 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 200.8125ms
+2025-10-31 17:21:30.713 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 17:21:30.716 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 17:21:30.718 +03:00 [INF] Executing command LoginCommand
+2025-10-31 17:21:30.719 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 17:21:30.904 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 17:21:30.904 +03:00 [INF] Command LoginCommand executed successfully in 185 ms
+2025-10-31 17:21:30.904 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 17:21:30.905 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 191.5047ms
+2025-10-31 17:37:51.182 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 17:37:51.185 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 17:37:51.186 +03:00 [INF] Executing command LoginCommand
+2025-10-31 17:37:51.187 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 17:37:51.323 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 17:37:51.323 +03:00 [INF] Command LoginCommand executed successfully in 136 ms
+2025-10-31 17:37:51.323 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 17:37:51.323 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 141.8407ms
+2025-10-31 18:06:29.368 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 18:06:29.370 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:06:29.372 +03:00 [INF] Executing command LoginCommand
+2025-10-31 18:06:29.372 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 18:06:29.568 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 18:06:29.569 +03:00 [INF] Command LoginCommand executed successfully in 196 ms
+2025-10-31 18:06:29.569 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:06:29.569 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 201.3622ms
+2025-10-31 18:14:02.608 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 18:14:02.610 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:14:02.611 +03:00 [INF] Executing command LoginCommand
+2025-10-31 18:14:02.611 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 18:14:02.797 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 18:14:02.797 +03:00 [INF] Command LoginCommand executed successfully in 186 ms
+2025-10-31 18:14:02.798 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:14:02.798 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 190.6795ms
+2025-10-31 18:15:13.100 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 18:15:13.103 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:15:13.106 +03:00 [INF] Executing command LoginCommand
+2025-10-31 18:15:13.106 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 18:15:13.182 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 18:15:13.182 +03:00 [INF] Command LoginCommand executed successfully in 75 ms
+2025-10-31 18:15:13.182 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:15:13.182 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 82.6249ms
+2025-10-31 18:17:10.377 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 18:17:10.380 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:17:10.382 +03:00 [INF] Executing command LoginCommand
+2025-10-31 18:17:10.382 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 18:17:10.528 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 18:17:10.528 +03:00 [INF] Command LoginCommand executed successfully in 146 ms
+2025-10-31 18:17:10.529 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:17:10.529 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 151.7952ms
+2025-10-31 18:23:14.542 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 18:23:14.545 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:23:14.546 +03:00 [INF] Executing command LoginCommand
+2025-10-31 18:23:14.547 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 18:23:14.678 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 18:23:14.678 +03:00 [INF] Command LoginCommand executed successfully in 132 ms
+2025-10-31 18:23:14.679 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:23:14.679 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 136.9423ms
+2025-10-31 18:25:12.303 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 18:25:12.304 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:25:12.306 +03:00 [INF] Executing command LoginCommand
+2025-10-31 18:25:12.306 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 18:25:12.426 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 18:25:12.427 +03:00 [INF] Command LoginCommand executed successfully in 120 ms
+2025-10-31 18:25:12.428 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:25:12.428 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 124.704ms
+2025-10-31 18:32:48.047 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 18:32:48.050 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:32:48.051 +03:00 [INF] Executing command LoginCommand
+2025-10-31 18:32:48.051 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 18:32:48.168 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 18:32:48.168 +03:00 [INF] Command LoginCommand executed successfully in 117 ms
+2025-10-31 18:32:48.168 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:32:48.169 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 121.9598ms
+2025-10-31 18:33:03.696 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 18:33:03.697 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:33:03.698 +03:00 [INF] Executing command LoginCommand
+2025-10-31 18:33:03.698 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 18:33:03.777 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 18:33:03.777 +03:00 [INF] Command LoginCommand executed successfully in 78 ms
+2025-10-31 18:33:03.777 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 18:33:03.777 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 80.9702ms
+2025-10-31 22:15:13.111 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-31 22:15:13.160 +03:00 [INF] Now listening on: http://localhost:5000
+2025-10-31 22:15:13.161 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-31 22:15:13.161 +03:00 [INF] Hosting environment: Development
+2025-10-31 22:15:13.161 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
+2025-10-31 22:18:35.130 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 22:18:35.145 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-10-31 22:18:35.148 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 22:18:35.174 +03:00 [INF] Executing command LoginCommand
+2025-10-31 22:18:35.181 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 22:18:35.941 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 22:18:35.941 +03:00 [INF] Command LoginCommand executed successfully in 766 ms
+2025-10-31 22:18:35.947 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 22:18:35.950 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 820.5752ms
+2025-10-31 22:24:03.670 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-31 22:24:03.750 +03:00 [INF] Now listening on: http://localhost:5000
+2025-10-31 22:24:03.751 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-31 22:24:03.751 +03:00 [INF] Hosting environment: Development
+2025-10-31 22:24:03.751 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
+2025-10-31 22:24:04.065 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scalar/v1 - null null
+2025-10-31 22:24:04.096 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-10-31 22:24:04.101 +03:00 [INF] Executing endpoint 'HTTP: GET /scalar/{documentName?}'
+2025-10-31 22:24:04.157 +03:00 [INF] Write content with HTTP Response ContentType of text/html
+2025-10-31 22:24:04.168 +03:00 [INF] Executed endpoint 'HTTP: GET /scalar/{documentName?}'
+2025-10-31 22:24:04.170 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/scalar/v1 - 200 null text/html 110.1351ms
+2025-10-31 22:24:04.192 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scalar/scalar.js - null null
+2025-10-31 22:24:04.192 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scalar/scalar.aspnetcore.js - null null
+2025-10-31 22:24:04.193 +03:00 [INF] Executing endpoint 'HTTP: GET /scalar/scalar.js'
+2025-10-31 22:24:04.194 +03:00 [INF] CORS policy execution successful.
+2025-10-31 22:24:04.201 +03:00 [INF] Executing endpoint 'HTTP: GET /scalar/scalar.aspnetcore.js'
+2025-10-31 22:24:04.206 +03:00 [INF] Sending file with download name ''.
+2025-10-31 22:24:04.206 +03:00 [INF] Sending file with download name ''.
+2025-10-31 22:24:04.216 +03:00 [INF] Executed endpoint 'HTTP: GET /scalar/scalar.aspnetcore.js'
+2025-10-31 22:24:04.217 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/scalar/scalar.aspnetcore.js - 200 1046 text/javascript 26.3455ms
+2025-10-31 22:24:04.230 +03:00 [INF] Executed endpoint 'HTTP: GET /scalar/scalar.js'
+2025-10-31 22:24:04.231 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/scalar/scalar.js - 200 926401 text/javascript 40.4094ms
+2025-10-31 22:24:04.442 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/openapi/v1.json - null null
+2025-10-31 22:24:04.442 +03:00 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-10-31 22:24:04.501 +03:00 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-10-31 22:24:04.501 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/openapi/v1.json - null null
+2025-10-31 22:24:04.502 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/openapi/v1.json - 200 null application/json;charset=utf-8 59.8235ms
+2025-10-31 22:24:04.502 +03:00 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-10-31 22:24:04.503 +03:00 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-10-31 22:24:04.504 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/openapi/v1.json - 200 null application/json;charset=utf-8 2.0828ms
+2025-10-31 22:24:04.799 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/scalar/favicon.svg - null null
+2025-10-31 22:24:04.799 +03:00 [INF] Executing endpoint 'HTTP: GET /scalar/favicon.svg'
+2025-10-31 22:24:04.799 +03:00 [INF] Sending file with download name ''.
+2025-10-31 22:24:04.800 +03:00 [INF] Executed endpoint 'HTTP: GET /scalar/favicon.svg'
+2025-10-31 22:24:04.800 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/scalar/favicon.svg - 200 533 image/svg+xml 1.0535ms
+2025-10-31 22:25:01.840 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-31 22:25:01.932 +03:00 [INF] Now listening on: http://localhost:5000
+2025-10-31 22:25:01.933 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-31 22:25:01.934 +03:00 [INF] Hosting environment: Development
+2025-10-31 22:25:01.934 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
+2025-10-31 22:25:02.157 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-10-31 22:25:02.179 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-10-31 22:25:02.190 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 33.2237ms
+2025-10-31 22:25:02.198 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-10-31 22:30:37.512 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-10-31 22:30:37.562 +03:00 [INF] Now listening on: http://localhost:5000
+2025-10-31 22:30:37.563 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-31 22:30:37.563 +03:00 [INF] Hosting environment: Development
+2025-10-31 22:30:37.563 +03:00 [INF] Content root path: /Users/ahmetsayan/Desktop/Projects/CampuWise/backend/services/user-service/src/UserService.WebApi
+2025-10-31 22:32:04.045 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 22:32:04.056 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-10-31 22:32:04.058 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 22:32:04.086 +03:00 [INF] Executing command LoginCommand
+2025-10-31 22:32:04.095 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 22:32:04.338 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 22:32:04.339 +03:00 [INF] Command LoginCommand executed successfully in 252 ms
+2025-10-31 22:32:04.344 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 22:32:04.346 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 302.1433ms
+2025-10-31 22:35:40.995 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:35:41.026 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:35:41.056 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:35:41.296 +03:00 [INF] Command UserDetailsCommand executed successfully in 240 ms
+2025-10-31 22:35:41.298 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:35:41.298 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 306.62ms
+2025-10-31 22:35:50.081 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:35:50.082 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:35:50.083 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:35:50.116 +03:00 [INF] Command UserDetailsCommand executed successfully in 32 ms
+2025-10-31 22:35:50.116 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:35:50.116 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 35.5179ms
+2025-10-31 22:36:26.228 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:36:26.230 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:36:26.233 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:36:26.288 +03:00 [INF] Command UserDetailsCommand executed successfully in 54 ms
+2025-10-31 22:36:26.289 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:36:26.289 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 61.0264ms
+2025-10-31 22:36:55.922 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:36:55.923 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:36:55.924 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:36:55.989 +03:00 [INF] Command UserDetailsCommand executed successfully in 64 ms
+2025-10-31 22:36:55.992 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:36:55.992 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 70.2975ms
+2025-10-31 22:37:02.925 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:37:02.929 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:37:02.930 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:37:03.000 +03:00 [INF] Command UserDetailsCommand executed successfully in 69 ms
+2025-10-31 22:37:03.001 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:37:03.001 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 76.2449ms
+2025-10-31 22:37:06.381 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:37:06.381 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:37:06.381 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:37:06.405 +03:00 [INF] Command UserDetailsCommand executed successfully in 23 ms
+2025-10-31 22:37:06.405 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:37:06.405 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 24.8021ms
+2025-10-31 22:44:48.443 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:44:48.445 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:44:48.448 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:44:48.587 +03:00 [INF] Command UserDetailsCommand executed successfully in 138 ms
+2025-10-31 22:44:48.588 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:44:48.588 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 144.4049ms
+2025-10-31 22:48:58.889 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 22:48:58.893 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 22:48:58.902 +03:00 [INF] Executing command LoginCommand
+2025-10-31 22:48:58.902 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 22:48:59.219 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 22:48:59.219 +03:00 [INF] Command LoginCommand executed successfully in 317 ms
+2025-10-31 22:48:59.220 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 22:48:59.220 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 330.6175ms
+2025-10-31 22:49:16.677 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:49:16.678 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:49:16.679 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:49:16.748 +03:00 [INF] Command UserDetailsCommand executed successfully in 68 ms
+2025-10-31 22:49:16.748 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:49:16.748 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 71.222ms
+2025-10-31 22:53:08.459 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:53:08.460 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:53:08.461 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:53:08.578 +03:00 [INF] Command UserDetailsCommand executed successfully in 116 ms
+2025-10-31 22:53:08.578 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:53:08.578 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 119.345ms
+2025-10-31 22:55:01.664 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 22:55:01.665 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 22:55:01.668 +03:00 [INF] Executing command LoginCommand
+2025-10-31 22:55:01.669 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 22:55:01.834 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 22:55:01.834 +03:00 [INF] Command LoginCommand executed successfully in 166 ms
+2025-10-31 22:55:01.835 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 22:55:01.835 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 171.0916ms
+2025-10-31 22:55:05.537 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 22:55:05.537 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 22:55:05.537 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 22:55:05.563 +03:00 [INF] Command UserDetailsCommand executed successfully in 25 ms
+2025-10-31 22:55:05.563 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 22:55:05.563 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 26.6092ms
+2025-10-31 23:00:14.406 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 23:00:14.408 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:00:14.408 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:00:14.525 +03:00 [INF] Command UserDetailsCommand executed successfully in 116 ms
+2025-10-31 23:00:14.525 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:00:14.525 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 119.0415ms
+2025-10-31 23:05:29.951 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 23:05:29.952 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:05:29.953 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:05:30.083 +03:00 [INF] Command UserDetailsCommand executed successfully in 129 ms
+2025-10-31 23:05:30.083 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:05:30.083 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 132.851ms
+2025-10-31 23:07:04.764 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 23:07:04.766 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 23:07:04.767 +03:00 [INF] Executing command LoginCommand
+2025-10-31 23:07:04.768 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 23:07:04.938 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 23:07:04.938 +03:00 [INF] Command LoginCommand executed successfully in 170 ms
+2025-10-31 23:07:04.939 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 23:07:04.939 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 174.4265ms
+2025-10-31 23:10:25.887 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/register - application/json 66
+2025-10-31 23:10:25.889 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/register'
+2025-10-31 23:10:25.901 +03:00 [INF] Executing command RegisterCommand
+2025-10-31 23:10:26.316 +03:00 [INF] Command RegisterCommand executed successfully in 414 ms
+2025-10-31 23:10:26.318 +03:00 [INF] Setting HTTP status code 201.
+2025-10-31 23:10:26.318 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/register'
+2025-10-31 23:10:26.319 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/register - 201 0 null 431.4847ms
+2025-10-31 23:10:34.153 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 23:10:34.153 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 23:10:34.154 +03:00 [INF] Executing command LoginCommand
+2025-10-31 23:10:34.154 +03:00 [INF] Starting Keycloak login for b@b.com
+2025-10-31 23:10:34.215 +03:00 [INF] Keycloak login succeeded for b@b.com
+2025-10-31 23:10:34.215 +03:00 [INF] Command LoginCommand executed successfully in 61 ms
+2025-10-31 23:10:34.215 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 23:10:34.216 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 62.9067ms
+2025-10-31 23:10:47.117 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 48
+2025-10-31 23:10:47.118 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:10:47.119 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:10:47.172 +03:00 [INF] Command UserDetailsCommand executed successfully in 53 ms
+2025-10-31 23:10:47.173 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:10:47.173 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 56.3403ms
+2025-10-31 23:12:44.187 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:12:44.188 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:12:44.189 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:12:44.301 +03:00 [INF] Command UserDetailsCommand executed successfully in 111 ms
+2025-10-31 23:12:44.302 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:12:44.302 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 115.3463ms
+2025-10-31 23:15:41.957 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:15:41.958 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:15:41.959 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:15:42.169 +03:00 [INF] Command UserDetailsCommand executed successfully in 210 ms
+2025-10-31 23:15:42.170 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:15:42.170 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 213.7157ms
+2025-10-31 23:16:45.058 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json 40
+2025-10-31 23:16:45.059 +03:00 [INF] Executing endpoint 'HTTP: POST /auth/login'
+2025-10-31 23:16:45.061 +03:00 [INF] Executing command LoginCommand
+2025-10-31 23:16:45.061 +03:00 [INF] Starting Keycloak login for a@a.com
+2025-10-31 23:16:45.146 +03:00 [INF] Keycloak login succeeded for a@a.com
+2025-10-31 23:16:45.147 +03:00 [INF] Command LoginCommand executed successfully in 85 ms
+2025-10-31 23:16:45.147 +03:00 [INF] Executed endpoint 'HTTP: POST /auth/login'
+2025-10-31 23:16:45.147 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 200 null application/json; charset=utf-8 89.3542ms
+2025-10-31 23:16:48.544 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:16:48.544 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:16:48.544 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:16:48.572 +03:00 [INF] Command UserDetailsCommand executed successfully in 28 ms
+2025-10-31 23:16:48.573 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:16:48.573 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 29.0201ms
+2025-10-31 23:17:44.904 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:17:44.905 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:17:44.908 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:17:44.968 +03:00 [INF] Command UserDetailsCommand executed successfully in 59 ms
+2025-10-31 23:17:44.968 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:17:44.969 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 64.9075ms
+2025-10-31 23:17:51.296 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:17:51.296 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:17:51.297 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:17:51.325 +03:00 [INF] Command UserDetailsCommand executed successfully in 28 ms
+2025-10-31 23:17:51.326 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:17:51.326 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 29.5938ms
+2025-10-31 23:18:07.281 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:18:07.283 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:07.284 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:18:07.363 +03:00 [INF] Command UserDetailsCommand executed successfully in 78 ms
+2025-10-31 23:18:07.364 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:07.364 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 83.0321ms
+2025-10-31 23:18:12.485 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:18:12.486 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:12.486 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:18:12.514 +03:00 [INF] Command UserDetailsCommand executed successfully in 27 ms
+2025-10-31 23:18:12.515 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:12.515 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 30.3271ms
+2025-10-31 23:18:33.659 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:18:33.660 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:33.661 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:18:33.720 +03:00 [INF] Command UserDetailsCommand executed successfully in 58 ms
+2025-10-31 23:18:33.720 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:33.720 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 61.2211ms
+2025-10-31 23:18:44.614 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:18:44.615 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:44.615 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:18:44.645 +03:00 [INF] Command UserDetailsCommand executed successfully in 30 ms
+2025-10-31 23:18:44.646 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:44.646 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 31.6263ms
+2025-10-31 23:18:55.045 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:18:55.045 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:55.046 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:18:55.086 +03:00 [INF] Command UserDetailsCommand executed successfully in 39 ms
+2025-10-31 23:18:55.086 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:18:55.086 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 41.1712ms
+2025-10-31 23:19:29.128 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:19:29.130 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:19:29.131 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:19:29.190 +03:00 [INF] Command UserDetailsCommand executed successfully in 59 ms
+2025-10-31 23:19:29.191 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:19:29.191 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 63.9173ms
+2025-10-31 23:19:52.479 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:19:52.479 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:19:52.480 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:19:52.549 +03:00 [INF] Command UserDetailsCommand executed successfully in 68 ms
+2025-10-31 23:19:52.549 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:19:52.550 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 70.8638ms
+2025-10-31 23:20:06.333 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:20:06.335 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:20:06.335 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:20:06.405 +03:00 [INF] Command UserDetailsCommand executed successfully in 69 ms
+2025-10-31 23:20:06.407 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:20:06.407 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 74.0427ms
+2025-10-31 23:20:40.539 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:20:40.540 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:20:40.541 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:20:40.619 +03:00 [INF] Command UserDetailsCommand executed successfully in 78 ms
+2025-10-31 23:20:40.620 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:20:40.620 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 81.2256ms
+2025-10-31 23:20:43.885 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:20:43.885 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:20:43.885 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:20:43.908 +03:00 [INF] Command UserDetailsCommand executed successfully in 22 ms
+2025-10-31 23:20:43.909 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:20:43.909 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 23.4618ms
+2025-10-31 23:20:52.079 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/users/details - application/json; charset=UTF-8 87
+2025-10-31 23:20:52.079 +03:00 [INF] Executing endpoint 'HTTP: POST /users/details'
+2025-10-31 23:20:52.079 +03:00 [INF] Executing command UserDetailsCommand
+2025-10-31 23:20:52.101 +03:00 [INF] Command UserDetailsCommand executed successfully in 21 ms
+2025-10-31 23:20:52.101 +03:00 [INF] Executed endpoint 'HTTP: POST /users/details'
+2025-10-31 23:20:52.101 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/users/details - 200 null application/json; charset=utf-8 22.0094ms

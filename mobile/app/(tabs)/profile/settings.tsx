@@ -41,12 +41,12 @@ const SettingsScreen = () => {
   } = useAppStore((state) => state);
 
   const { t } = useTranslation("profile");
-
+  const logout = useAppStore((state) => state.logout);
   const handleLogOut = useCallback(async () => {
     console.log("cikis yapildi");
-    await useAppStore.getState().logout();
+    await logout();
     router.replace("/auth/login");
-  }, []);
+  }, [logout]);
 
   const languageOptions = useMemo(
     () => [

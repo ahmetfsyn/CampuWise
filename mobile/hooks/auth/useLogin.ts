@@ -19,11 +19,11 @@ const useLogin = () => {
       });
     },
     onError: (error: any) => {
-      console.error("Giriş hatası:", error.response?.data || error.message);
+      // console.error("Giriş hatası:", error.response?.data || error.message);
       showMessage({
         type: "error",
         text1: "Giriş Başarısız 😞",
-        text2: "Lütfen daha sonra tekrar deneyin.",
+        text2: "Email ve şifrenizi kontrol edin.",
       });
     },
   });

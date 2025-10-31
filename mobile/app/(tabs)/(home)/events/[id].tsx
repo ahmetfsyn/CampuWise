@@ -2,7 +2,6 @@ import { ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Box } from "@/components/ui/box";
 import { Image } from "expo-image";
-import { events } from "@/mocks/mockData";
 import { Text } from "@/components/ui/text";
 import {
   Avatar,
@@ -39,15 +38,26 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { reportEventFormSchema } from "@/validations/report-event-form";
 import { useTranslation } from "react-i18next";
+import useGetEventById from "@/hooks/events/useGetEventById";
+import { Spinner } from "@/components/ui/spinner";
+import useJoinEvent from "@/hooks/events/useJoinEvent";
+import useAppStore from "@/store/useAppStore";
 
 const EventDetailsScreen = () => {
   const { id } = useLocalSearchParams();
+  // todo : bu sayfada kullanıcı bilgilerini zustande kaydedip ordan çekip burda gerekli ayarlamaları yapmalısın mesela userId ye göre kişinin bu etkinliğe katılıp katılmadıgına göre butona tekrar basamasın gibi.
   const [isJoinedEvent, setJoinedEvent] = useState<boolean>(false);
   const [isReportedEvent, setIsReportedEvent] = useState<boolean>(false);
   const [showReportModal, setShowReportModal] = useState<boolean>(false);
   const [showCancelJoiningDialog, setShowCancelJoiningDialog] =
     useState<boolean>(false);
-  const event = events.find((event) => event.id === id);
+
+  const { data: event, isPending: isPendingEvent } = useGetEventById(
+    id as string
+  );
+
+  const { handleJoinEvent, isJoiningEvent } = useJoinEvent();
+
   const { t: tEvents } = useTranslation("events");
   const { t: tCommon } = useTranslation("common");
   const {
@@ -75,19 +85,15 @@ const EventDetailsScreen = () => {
     });
   }, [tEvents]);
 
-  const handleJoinEvent = useCallback(() => {
+  const onJoinEvent = useCallback(async () => {
     if (!isJoinedEvent) {
+      handleJoinEvent(event?.id as string);
       setJoinedEvent(true);
-      showMessage({
-        type: "success",
-        text1: tEvents("eventDetails.toast.success.eventJoined.title"),
-        text2: tEvents("eventDetails.toast.success.eventJoined.subTitle"),
-      });
     } else {
       // setJoinedEvent(false);
       setShowCancelJoiningDialog(true);
     }
-  }, [isJoinedEvent, tEvents]);
+  }, [isJoinedEvent, handleJoinEvent, event?.id]);
 
   const handleShowReportModal = useCallback(() => {
     if (!isReportedEvent) {
@@ -97,19 +103,30 @@ const EventDetailsScreen = () => {
     }
   }, [isReportedEvent]);
 
-  const handleReportEvent = useCallback((data: any) => {
-    showMessage({
-      type: "success",
-      text1: tEvents("eventDetails.toast.success.eventReported.title"),
-      text2: tEvents("eventDetails.toast.success.eventReported.subTitle"),
-    });
-    setIsReportedEvent(true);
-    setShowReportModal(false);
-  }, []);
+  const handleReportEvent = useCallback(
+    (data: any) => {
+      showMessage({
+        type: "success",
+        text1: tEvents("eventDetails.toast.success.eventReported.title"),
+        text2: tEvents("eventDetails.toast.success.eventReported.subTitle"),
+      });
+      setIsReportedEvent(true);
+      setShowReportModal(false);
+    },
+    [tEvents]
+  );
 
   const handleCancelReport = useCallback(() => {
     setShowReportModal(false);
   }, []);
+
+  if (isPendingEvent) {
+    return (
+      <Box className="flex-1 items-center justify-center">
+        <Spinner size={48} />
+      </Box>
+    );
+  }
 
   return (
     <ScrollView
@@ -138,7 +155,7 @@ const EventDetailsScreen = () => {
             {tEvents("eventDetails.dateAndTime")}
           </Text>
           <Text className="text-lg font-medium text-typography-0">
-            {event?.date}
+            {event?.startDate ? new Date(event.startDate).toLocaleString() : ""}
           </Text>
         </Box>
 
@@ -167,7 +184,7 @@ const EventDetailsScreen = () => {
             {tEvents("eventDetails.organizer")}
           </Text>
           <Text className="text-lg font-medium text-typography-0">
-            {event?.participants[0].fullName}
+            {event?.participants[0]!.fullName}
           </Text>
         </Box>
         <Box className="gap-2">
@@ -246,9 +263,10 @@ const EventDetailsScreen = () => {
         <AnimatedButton
           variant={isJoinedEvent ? "outline" : "solid"}
           action={isJoinedEvent ? "secondary" : "primary"}
-          className={` h-14 flex-1 `}
+          className={`h-14 flex-1 `}
           textClassName="uppercase"
-          onPress={handleJoinEvent}
+          isDisabled={isJoiningEvent}
+          onPress={onJoinEvent}
         >
           {!isJoinedEvent
             ? tEvents("buttons.joinEvent")

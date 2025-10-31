@@ -1,3 +1,9 @@
 {
-    "map": "Harita"
+    "map": "Harita",
+    "events": "Etkinlikler",
+    "settings": "Ayarlar",
+    "editProfile": "Profil Düzenle",
+    "eventDetails": "Etkinlik Detayları",
+    "createEvent": "Etkinlik Oluştur",
+    "profile": "Profil"
 }

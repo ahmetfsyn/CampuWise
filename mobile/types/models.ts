@@ -34,6 +34,12 @@ export enum EventCategory {
   Movie = "Movie",
 }
 
+export type Participant = {
+  id: string;
+  fullName: string;
+  imageUrl?: string;
+};
+
 export type Marker = {
   id: string;
   category: MarkerCategory;
@@ -51,12 +57,12 @@ export type Event = {
   id: string;
   place: string;
   title: string;
-  date: string;
+  startDate: string;
   category: string;
   description: string;
   imageUrl?: string;
   tags?: string[];
-  participants: User[];
+  participants: Participant[];
 };
 
 export type Topic = {
