@@ -29,8 +29,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { LanguageCode } from "@/types/models";
 import { router } from "expo-router";
-
-// todo :Dil entegrasyonunu bitir. Tasarımı eksik olan sayfaları ypamaya basla. Suanda etkinlik ile ilgili gereken şeyleri bitirdigimi dusnuyorum bu yüzden artık backende geç ve etkinlik ile ilgili ne grekiyorsa onu kodla.
+import { useAuthStore } from "@/store/useAuthStore";
 
 const SettingsScreen = () => {
   const {
@@ -41,11 +40,10 @@ const SettingsScreen = () => {
   } = useAppStore((state) => state);
 
   const { t } = useTranslation("profile");
-  const logout = useAppStore((state) => state.logout);
+  const logout = useAuthStore((state) => state.logout);
   const handleLogOut = useCallback(async () => {
     console.log("cikis yapildi");
     await logout();
-    router.replace("/auth/login");
   }, [logout]);
 
   const languageOptions = useMemo(
@@ -188,7 +186,7 @@ const SettingsScreen = () => {
           </Box>
         </Box>
       )}
-    ></SectionList>
+    />
   );
 };
 

@@ -67,6 +67,14 @@
                 "eventJoinFailed": {
                     "title": "Oops 😢",
                     "subTitle": "Something went wrong while joining the event."
+                },
+                "eventLeftFailed": {
+                    "title": "Oops 😢",
+                    "subTitle": "Something went wrong while leaving the event."
+                },
+                "organizerCanNotLeaveFromEvent": {
+                    "title": "Oops 😢",
+                    "subTitle": "Organizers cannot leave their own events."
                 }
             },
             "info": {

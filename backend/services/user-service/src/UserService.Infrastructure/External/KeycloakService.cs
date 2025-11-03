@@ -1,10 +1,12 @@
+using System.IdentityModel.Tokens.Jwt;
 using Flurl.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using UserService.Application.Interfaces;
 using UserService.Application.User.DTOs;
+using UserService.Domain.Users;
 
 namespace UserService.Infrastructure.External;
 
@@ -73,6 +75,23 @@ public class KeycloakService(ILogger<KeycloakService> logger, IConfiguration con
 
             if (tokenDetails?.AccessToken == null)
                 throw new Exception("Keycloak login failed: empty access token");
+
+
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(tokenDetails.AccessToken);
+
+            var user = new AuthUser
+            {
+                Id = Guid.TryParse(jwtToken.Subject, out var id) ? id : Guid.Empty,
+                Email = jwtToken.Claims.FirstOrDefault(c => c.Type == "email")?.Value,
+                FirstName = jwtToken.Claims.FirstOrDefault(c => c.Type == "given_name")?.Value,
+                LastName = jwtToken.Claims.FirstOrDefault(c => c.Type == "family_name")?.Value,
+                AvatarUrl = jwtToken.Claims.FirstOrDefault(c => c.Type == "avatarUrl")?.Value,
+            }.Adapt<AuthUserDto>();
+
+
+            tokenDetails.User = user;
+
 
             _logger.LogInformation("Keycloak login succeeded for {Email}", email);
             return tokenDetails;

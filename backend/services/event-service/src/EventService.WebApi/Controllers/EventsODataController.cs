@@ -1,6 +1,7 @@
 using Cortex.Mediator;
 using EventService.Application.Events.Dtos;
 using EventService.Application.Events.Queries;
+using EventService.Domain.EventParticipants;
 using EventService.Domain.Events;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -24,9 +25,19 @@ namespace EventService.WebApi.Controllers
 
         public static IEdmModel GetEdmModel()
         {
-            ODataConventionModelBuilder builder = new();
+            var builder = new ODataConventionModelBuilder();
             builder.EnableLowerCamelCase();
-            builder.EntitySet<Event>("events");
+
+            // EntitySet’leri oluştur
+            var events = builder.EntitySet<Event>("events");
+            var participants = builder.EntitySet<EventParticipant>("participants");
+
+            // Composite key
+            participants.EntityType.HasKey(ep => new { ep.EventId, ep.UserId });
+
+            // Navigation property
+            events.EntityType.HasMany(e => e.Participants);
+
             return builder.GetEdmModel();
         }
 

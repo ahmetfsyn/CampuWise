@@ -16,7 +16,6 @@ namespace UserService.WebApi.Modules
             group.MapPost("login",
                      async (IMediator mediator, LoginRequestDto request, CancellationToken cancellationToken) =>
                      {
-
                          var command = request.Adapt<LoginCommand>();
                          var result = await mediator.SendCommandAsync<LoginCommand, Result<LoginResponseDto>>(command, cancellationToken);
                          return result.IsSuccessful ? Result<LoginResponseDto>.Succeed(result.Data) : Result<LoginResponseDto>.Failure("Giriş Başarısız");

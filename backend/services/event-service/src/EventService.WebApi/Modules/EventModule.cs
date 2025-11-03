@@ -93,8 +93,6 @@ namespace EventService.WebApi.Modules
                 {
                     var query = new GetEventByIdQuery(eventId);
 
-                    // todo : yapmam gereken şey user-service http il istek atıp katılımcıların (yani userların) avatarUrl verisini eventDetailse eklemek ve öyle frontende gondermek.
-
                     var response = await mediator.SendQueryAsync<GetEventByIdQuery, Result<GetEventByIdResponseDto>>(query, cancellationToken);
                     return response;
                 })

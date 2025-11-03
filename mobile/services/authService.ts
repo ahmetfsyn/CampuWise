@@ -37,6 +37,7 @@ export const loginAsync = async ({
       accessToken: data.data.accessToken,
       refreshToken: data.data.refreshToken,
       expiresIn: data.data.expiresIn,
+      user: data.data.user,
     };
 
     return { ...tokenDetails, rememberMe };

@@ -1,10 +1,10 @@
 import { getAllEventsAsync } from "@/services/eventService";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetAllEvents = () => {
+const useGetAllEvents = (odataQuery?: string) => {
   return useQuery({
-    queryKey: ["events", "all"],
-    queryFn: getAllEventsAsync,
+    queryKey: ["events", "all", odataQuery],
+    queryFn: () => getAllEventsAsync(odataQuery),
     staleTime: 1000 * 60 * 5,
     retry: 2,
     refetchOnWindowFocus: false,

@@ -11,6 +11,7 @@ namespace EventService.Application.Events.Dtos
         string Place,
         DateTime? StartDate,
         string? ImageUrl,
+        Guid? OrganizerId,
         ICollection<ParticipantDetailsResponseDto> Participants
 
     );

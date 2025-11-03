@@ -52,63 +52,64 @@ const EventsScreen = () => {
     },
     [router]
   );
+
+  // todo: burda filtre her değşitignde flicker sorunu oluyor buna bir ara bak.
   return (
     <Box className="flex-1 p-4">
-      <Box>
-        {isLoadingEvents ? (
-          <Spinner />
-        ) : (
-          <>
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              style={{
-                height: "100%",
-              }}
-              contentContainerStyle={{
-                flexGrow: 1,
-                height: "auto",
-              }}
-              onRefresh={refreshEvents}
-              refreshing={isFetchingEvents}
-              ListHeaderComponent={
-                <EventsFlatListHeader
-                  selectedFilter={selectedFilter}
-                  setSelectedFilter={setSelectedFilter}
-                  searchString={searchString}
-                  setSearchString={setSearchString}
-                />
-              }
-              removeClippedSubviews
-              initialNumToRender={10}
-              maxToRenderPerBatch={10}
-              windowSize={5}
-              ListEmptyComponent={<EmptyEventListComponent />}
-              data={filteredEvents}
-              renderItem={({ item }) => (
-                <EventListCard
-                  onPress={() => handleGoEventDetails(item.id)}
-                  {...item}
-                />
-              )}
-              keyExtractor={(item) => item.id}
-            />
-            <Fab
-              className="right-4 bottom-8 bg-primary-500"
-              size="md"
-              placement="bottom right"
-              onPress={handleCreateEvent}
+      {isLoadingEvents && !events ? (
+        <Spinner />
+      ) : (
+        <>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            extraData={events}
+            style={{
+              height: "100%",
+            }}
+            contentContainerStyle={{
+              flexGrow: 1,
+              height: "auto",
+            }}
+            onRefresh={refreshEvents}
+            refreshing={isFetchingEvents}
+            ListHeaderComponent={
+              <EventsFlatListHeader
+                selectedFilter={selectedFilter}
+                setSelectedFilter={setSelectedFilter}
+                searchString={searchString}
+                setSearchString={setSearchString}
+              />
+            }
+            removeClippedSubviews
+            initialNumToRender={10}
+            maxToRenderPerBatch={10}
+            windowSize={5}
+            ListEmptyComponent={<EmptyEventListComponent />}
+            data={filteredEvents}
+            renderItem={({ item }) => (
+              <EventListCard
+                onPress={() => handleGoEventDetails(item.id)}
+                {...item}
+              />
+            )}
+            keyExtractor={(item) => item.id}
+          />
+          <Fab
+            className="right-4 bottom-8 bg-primary-500"
+            size="md"
+            placement="bottom right"
+            onPress={handleCreateEvent}
+          >
+            <FabIcon className="text-primary-0 " as={AddIcon} size={"lg"} />
+            <FabLabel
+              className="text-primary-0 font-semibold"
+              numberOfLines={1}
             >
-              <FabIcon className="text-primary-0 " as={AddIcon} size={"lg"} />
-              <FabLabel
-                className="text-primary-0 font-semibold"
-                numberOfLines={1}
-              >
-                {t("buttons.createEventFAB")}
-              </FabLabel>
-            </Fab>
-          </>
-        )}
-      </Box>
+              {t("buttons.createEventFAB")}
+            </FabLabel>
+          </Fab>
+        </>
+      )}
     </Box>
   );
 };

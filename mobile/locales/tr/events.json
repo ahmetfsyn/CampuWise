@@ -67,6 +67,14 @@
                 "eventJoinFailed": {
                     "title": "Hata 😢",
                     "subTitle": "Etkinliğe katılırken bir sorun oluştu."
+                },
+                "eventLeftFailed": {
+                    "title": "Hata 😢",
+                    "subTitle": "Etkinlikten ayrılırken bir sorun oluştu."
+                },
+                "organizerCanNotLeaveFromEvent": {
+                    "title": "Hata 😢",
+                    "subTitle": "Organizatörler kendi etkinliklerinden ayrılamaz."
                 }
             },
             "info": {

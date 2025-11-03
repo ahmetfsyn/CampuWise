@@ -23,7 +23,6 @@ import { SunMoon } from "lucide-react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import useLogin from "@/hooks/auth/useLogin";
-// todo : burda kaldım. logini ayarla ve backend'den token al
 const LoginScreen = () => {
   const router = useRouter();
   const { t } = useTranslation("auth");
@@ -32,7 +31,6 @@ const LoginScreen = () => {
 
   const onSubmit = async (values: LoginFormValues) => {
     await handleLogin(values);
-    router.push("/(tabs)/(home)");
   };
 
   const handleNewAccount = () => {
@@ -54,9 +52,7 @@ const LoginScreen = () => {
     resolver: zodResolver(loginFormSchema),
   });
 
-  const { theme, toggleTheme: handleToggleTheme } = useAppStore(
-    (state) => state
-  );
+  const { theme } = useAppStore((state) => state);
 
   const handleForgotPassword = useCallback(() => {
     console.log("i forgot password");
@@ -69,18 +65,10 @@ const LoginScreen = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollView
-          contentContainerClassName="p-6 my-auto"
+          contentContainerClassName="p-6 "
           showsVerticalScrollIndicator={false}
         >
-          <Box className="flex items-end ">
-            <AnimatedButton
-              onPress={handleToggleTheme}
-              variant={"solid"}
-              icon={<Icon as={SunMoon} size={24} className="text-primary-0" />}
-            />
-          </Box>
-
-          <Box className="flex items-center justify-center">
+          <Box className="flex-1 items-center h-64 justify-center ">
             {theme === "dark" ? (
               <DarkLogo width={256} />
             ) : (

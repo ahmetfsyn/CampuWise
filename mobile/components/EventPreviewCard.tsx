@@ -11,23 +11,22 @@ export type EventPreviewCardProps = Event & {
 
 const EventPreviewCard = ({
   imageUrl,
-  date,
+  startDate,
   participants,
   onPress,
 }: EventPreviewCardProps) => {
   const [remainDays, setRemainDays] = useState(-1);
 
   const getRemainingDays = useCallback(() => {
-    if (!date) return null;
+    if (!startDate) return null;
     const today = new Date();
-    const eventDate = new Date(date);
+    const eventDate = new Date(startDate);
 
     // Gün farkını hesapla
     const diffTime = eventDate.getTime() - today.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    // console.log(diffDays);
     setRemainDays(diffDays);
-  }, [date]);
+  }, [startDate]);
 
   useEffect(() => {
     getRemainingDays();

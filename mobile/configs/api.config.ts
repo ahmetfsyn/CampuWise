@@ -1,4 +1,4 @@
-import useAppStore from "@/store/useAppStore";
+import { useAuthStore } from "@/store/useAuthStore";
 import {
   getAccessToken,
   getRefreshToken,
@@ -37,9 +37,9 @@ api.interceptors.response.use(
       const refreshToken = await getRefreshToken();
 
       if (!refreshToken) {
-        const isAuth = useAppStore.getState().isAuthenticated;
-        await useAppStore.getState().logout();
-        router.replace("/auth/login");
+        const isAuth = useAuthStore.getState().isAuthenticated;
+        await useAuthStore.getState().logout();
+        // router.replace("/auth/login");
         console.log("logout oldu ve bura calisti api.config : ", isAuth);
         return Promise.reject(error);
       }
@@ -56,7 +56,7 @@ api.interceptors.response.use(
         return api.request(error.config);
       } catch (refreshError) {
         // Refresh token da geçersiz → logout
-        useAppStore.getState().logout();
+        useAuthStore.getState().logout();
         console.error("buraya geldii");
         return Promise.reject(refreshError);
       }

@@ -1,17 +1,29 @@
 import { FlatList } from "react-native";
 import { Box } from "@/components/ui/box";
-import { events, users } from "@/mocks/mockData";
+import { users } from "@/mocks/mockData";
 import { Text } from "@/components/ui/text";
 import ProfileFlatListHeaderComponent from "@/components/profile/ProfileFlatListHeaderComponent";
 import { router } from "expo-router";
 import { useCallback } from "react";
+import useGetAllEvents from "@/hooks/events/useGetAllEvents";
 
 const ProfileScreen = () => {
-  const userJoinedEvents = events
-    .filter((event) => event.participants.includes(users[0]))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 3);
   const user = users[0];
+
+  const { data: events } = useGetAllEvents();
+
+  const userJoinedEvents = events;
+  // ?.filter((event) => event.participants.includes())
+  // .sort(
+  //   (a, b) =>
+  //     new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+  // )
+  // .slice(0, 3);
+
+  // const userJoinedEvents = events?.filter(
+  //   (event) => event.participants.filter((p) => p.id === user.id).length > 0
+  // );
+
   const handleGoEditProfile = useCallback(() => {
     router.push("/profile/edit");
   }, []);

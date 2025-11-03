@@ -18,7 +18,6 @@ export type EventListCardProps = Event & {
   onPress: (eventId: string) => void;
 };
 export type ProfileHeaderSectionProps = {
-  colors: any;
   imageUrl: string;
   name: string;
   handleEditProfile: () => void;

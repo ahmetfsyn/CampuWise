@@ -41,7 +41,7 @@ const CustomMainHeader = () => {
           >
             <Icon as={Bell} size={24} className="text-primary-0 " />
           </TouchableOpacity>
-          <Avatar size="md">
+          {/* <Avatar size="md">
             <AvatarFallbackText>Jane Doe</AvatarFallbackText>
             <AvatarImage
               source={{
@@ -54,7 +54,7 @@ const CustomMainHeader = () => {
             >
               <Text>12</Text>
             </AvatarBadge>
-          </Avatar>
+          </Avatar> */}
         </Box>
       </Box>
     </LinearGradient>
