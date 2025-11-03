@@ -1,16 +1,15 @@
 import { loginAsync } from "@/services/authService";
-import useAppStore from "@/store/useAppStore";
+import { useAuthStore } from "@/store/useAuthStore";
 import { LoginResponseDto } from "@/types/models";
 import showMessage from "@/utils/showMessage";
 import { useMutation } from "@tanstack/react-query";
 
 const useLogin = () => {
-  const { login } = useAppStore();
+  const { login } = useAuthStore();
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: loginAsync,
     onSuccess: async (data: LoginResponseDto & { rememberMe: boolean }) => {
-      console.log(data);
       await login(data);
       showMessage({
         type: "success",

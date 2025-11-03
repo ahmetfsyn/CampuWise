@@ -8,12 +8,14 @@ import ShortcutButton from "@/components/ShortcutButton";
 import { FlatList, ScrollView } from "react-native";
 import Carousel from "@/components/Carousel";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { events, topics, users } from "@/mocks/mockData";
+import { topics } from "@/mocks/mockData";
 import EventPreviewCard from "@/components/EventPreviewCard";
 import PopularTopicPreviewCard from "@/components/PopularTopicPreviewCard";
 import EmptyEventListComponent from "@/components/EmptyEventListComponent";
 import { Calendar, Megaphone, Utensils, HelpCircle } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
+import { useAuthStore } from "@/store/useAuthStore";
+import useGetAllEvents from "@/hooks/events/useGetAllEvents";
 
 const ITEM_WIDTH = 192;
 
@@ -49,12 +51,14 @@ export const shortcuts = [
 ];
 
 export default function HomeScreen() {
-  const router = useRouter();
+  const user = useAuthStore((state) => state.user);
 
-  const user = users[0];
+  const router = useRouter();
 
   const { t: tHome } = useTranslation("home");
   const { t: tCommon } = useTranslation("common");
+
+  const { data: events } = useGetAllEvents("?$expand=participants");
 
   const handleCustomize = useCallback(() => {
     console.log("customized");
@@ -68,9 +72,13 @@ export default function HomeScreen() {
     console.log("show more discussions");
   }, []);
 
-  const upcomingEvents = events.filter(
-    (event) => new Date(event.date).getTime() >= Date.now()
+  const upcomingEvents = events?.filter(
+    (event) => new Date(event.startDate).getTime() >= Date.now()
   );
+
+  console.log("home is rendered");
+
+  // todo : eventsların hepsini çektiginde ve sonrasında katılımcı sayısı değiştiginde guncel sayıyı göstermiyor. buna care bul.
 
   const handleGoEvents = useCallback(() => {
     router.push("/events");
@@ -90,8 +98,8 @@ export default function HomeScreen() {
     <ScrollView showsVerticalScrollIndicator={false} className="flex-1  p-4 ">
       <Box className=" p-2 mb-4 flex-row justify-between items-center ">
         <Box>
-          <Text className="text-3xl font-bold text-typography-0">
-            {`${tHome("greeting.title")} ${user.fullName.split(" ")[0]}`}
+          <Text className="text-2xl font-bold text-typography-0">
+            {`${tHome("greeting.title")} ${user?.firstName}`}
           </Text>
           <Text className="text-lg font-normal text-typography-200">
             {tHome("greeting.subTitle")}
@@ -100,7 +108,7 @@ export default function HomeScreen() {
         <Avatar size={"lg"}>
           <AvatarImage
             source={{
-              uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+              uri: user?.avatarUrl,
             }}
           />
         </Avatar>
@@ -182,7 +190,7 @@ export default function HomeScreen() {
         <Text className="text-xl font-semibold text-typography-0">
           {tHome("sectionTitles.upcomingEvents")}
         </Text>
-        {events.length !== 0 && (
+        {events?.length !== 0 && (
           <Button
             onPress={handleShowMoreEvents}
             variant="outline"

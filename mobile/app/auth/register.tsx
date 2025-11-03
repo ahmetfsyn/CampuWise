@@ -58,10 +58,10 @@ const RegisterScreen = () => {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <ScrollView
-          contentContainerClassName="p-6 my-auto"
+          contentContainerClassName="p-6"
           showsVerticalScrollIndicator={false}
         >
-          <Box className="flex items-center justify-center mb-6">
+          <Box className="flex-1 h-64 items-center justify-center ">
             {theme === "dark" ? (
               <DarkLogo width={256} />
             ) : (

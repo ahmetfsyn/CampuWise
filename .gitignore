@@ -70,8 +70,10 @@ mobile/.yarn/*
 !mobile/.yarn/versions
 
 # .NET Core / ASP.NET
-backend/bin/
-backend/obj/
+backend/**/bin/
+backend/**/obj/
+backend/**/logs/
+
 backend/**/*.user
 backend/**/*.suo
 backend/**/*.vspscc
@@ -88,3 +90,13 @@ backend/**/*.pdb
 backend/**/*.exe
 backend/**/*.dll
 backend/**/*.appsettings*.json.local
+
+*.cache
+*.log
+*.tlog
+*.tmp
+*.bak
+*.swp
+*.lock
+*.pidb
+*.svclog

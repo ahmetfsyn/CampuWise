@@ -9,7 +9,11 @@ import { memo } from "react";
 import { Icon } from "@/components/ui/icon";
 import { MapPin, CalendarCheck, Clock } from "lucide-react-native";
 
-const EventDeadLineCard = ({ place, title, date }: EventDeadLineCardProps) => {
+const EventDeadLineCard = ({
+  place,
+  title,
+  startDate,
+}: EventDeadLineCardProps) => {
   return (
     <AnimatedPressableComponent
       onPress={() => {
@@ -43,7 +47,9 @@ const EventDeadLineCard = ({ place, title, date }: EventDeadLineCardProps) => {
             <Icon as={Clock} className="text-typography-0" />
 
             <Text className=" text-typography-200">
-              {date ? new Date(date).toLocaleDateString("tr-TR") : "Tarih Yok"}
+              {startDate
+                ? new Date(startDate).toLocaleDateString("tr-TR")
+                : "Tarih Yok"}
             </Text>
           </Box>
 

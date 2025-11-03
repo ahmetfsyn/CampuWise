@@ -1,7 +1,4 @@
-import { Text } from "@/components/ui/text";
-import { useTheme } from "@react-navigation/native";
 import ProfileAboutSection from "./ProfileAboutSection";
-import ProfilePointsSection from "./ProfilePointsSection";
 import ProfileHeaderSection from "./ProfileHeaderSection";
 import { users } from "@/mocks/mockData";
 import { User } from "@/types/models";
@@ -24,7 +21,7 @@ const ProfileFlatListHeaderComponent = ({
     <>
       {/* PROFILE HEADER */}
       <ProfileHeaderSection
-        imageUrl={imageUrl}
+        imageUrl={imageUrl as string}
         name={fullName}
         handleEditProfile={handleGoEditProfile}
         handleGoSettings={handleGoSettings}

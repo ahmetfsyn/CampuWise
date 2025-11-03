@@ -1,40 +1,37 @@
-import { joinEventAsync } from "@/services/eventService";
+import { leaveEventAsync } from "@/services/eventService";
 import showMessage from "@/utils/showMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
-const useJoinEvent = () => {
+const useLeaveEvent = () => {
   const { t: tEvents } = useTranslation("events");
   const queryClient = useQueryClient();
 
-  const { mutate: handleJoinEvent, isPending } = useMutation({
-    mutationFn: joinEventAsync,
+  const { mutate: handleLeaveEvent, isPending } = useMutation({
+    mutationFn: leaveEventAsync,
     onSuccess: (_, eventId) => {
       queryClient.invalidateQueries({ queryKey: ["events", "all"] });
-      console.log(eventId);
-      queryClient.invalidateQueries({
-        queryKey: ["events", eventId],
-      });
+      queryClient.invalidateQueries({ queryKey: ["events", eventId] });
 
       showMessage({
         type: "success",
-        text1: tEvents("eventDetails.toast.success.eventJoined.title"),
-        text2: tEvents("eventDetails.toast.success.eventJoined.subTitle"),
+        text1: tEvents("eventDetails.toast.success.eventLeft.title"),
+        text2: tEvents("eventDetails.toast.success.eventLeft.subTitle"),
       });
     },
     onError: () => {
       showMessage({
         type: "error",
-        text1: "Etkinliğe katılım başarısız 😞",
+        text1: "Etkinlikten ayrılamadın 😞",
         text2: "Lütfen daha sonra tekrar deneyin.",
       });
     },
   });
 
   return {
-    handleJoinEvent,
-    isJoiningEvent: isPending,
+    handleLeaveEvent,
+    isLeavingEvent: isPending,
   };
 };
 
-export default useJoinEvent;
+export default useLeaveEvent;

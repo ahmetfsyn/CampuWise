@@ -41,6 +41,7 @@ namespace EventService.Application.Events.Handlers
                 Place: @event.Place,
                 StartDate: @event.StartDate,
                 ImageUrl: @event.ImageUrl,
+                OrganizerId: @event.OrganizerId,
                 Participants: [.. participantDetails.Select(u => new ParticipantDetailsResponseDto(u.Id, u.AvatarUrl, u.FullName))]);
 
             return Result<GetEventByIdResponseDto>.Succeed(eventDto);

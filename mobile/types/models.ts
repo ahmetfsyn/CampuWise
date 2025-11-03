@@ -37,7 +37,17 @@ export enum EventCategory {
 export type Participant = {
   id: string;
   fullName: string;
-  imageUrl?: string;
+  avatarUrl?: string;
+};
+
+export type AuthUser = {
+  id: string;
+  username?: string;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  fullName?: string;
+  avatarUrl?: string;
 };
 
 export type Marker = {
@@ -60,6 +70,7 @@ export type Event = {
   startDate: string;
   category: string;
   description: string;
+  organizerId: string;
   imageUrl?: string;
   tags?: string[];
   participants: Participant[];
@@ -81,6 +92,7 @@ export type User = {
 };
 
 export type LoginResponseDto = {
+  user: AuthUser;
   accessToken: string;
   refreshToken: string;
   expiresIn: number;

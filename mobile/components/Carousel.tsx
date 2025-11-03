@@ -1,4 +1,3 @@
-import { useTheme } from "@react-navigation/native";
 import * as React from "react";
 import { Dimensions, Image, Text, View } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
@@ -14,7 +13,6 @@ const width = Dimensions.get("window").width - 32; // paddingLeft + paddingRight
 const CustomCarousel = () => {
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
-  const { colors } = useTheme();
   const onPressPagination = (index: number) => {
     ref.current?.scrollTo({
       count: index - progress.value,

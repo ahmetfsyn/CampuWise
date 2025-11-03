@@ -4,16 +4,19 @@ import { EventListCardProps } from "@/types/props";
 import { TouchableOpacity } from "react-native";
 import { Box } from "./ui/box";
 import { memo } from "react";
+import { formatDate } from "@/utils/formatDate";
 // todo : uygulama logout oldugunda tokenlar siliniyor ama zustanddeki isAuth false olsa ible root layoutta bu değişikliğe göre rerender olmuyor ve login ekranına gitmiyor bunu coz
+
 const EventListCard = ({
+  id,
   title,
-  date,
+  startDate,
   place,
   imageUrl,
   onPress,
 }: EventListCardProps) => {
   return (
-    <TouchableOpacity activeOpacity={0.5} onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.5} onPress={() => onPress(id)}>
       <Box className="mb-4 rounded-xl overflow-hidden h-64 relative">
         <Image
           source={{ uri: imageUrl || "https://picsum.photos/200/200" }}
@@ -34,7 +37,7 @@ const EventListCard = ({
             {title}
           </Text>
           <Text className=" text-sm text-secondary-950">
-            {date} · {place}
+            {formatDate(startDate)} · {place}
           </Text>
         </Box>
       </Box>
