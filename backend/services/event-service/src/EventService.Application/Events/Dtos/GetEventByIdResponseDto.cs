@@ -9,7 +9,7 @@ namespace EventService.Application.Events.Dtos
         string Title,
         string Description,
         string Place,
-        DateTime? StartDate,
+        DateTimeOffset? StartDate,
         string? ImageUrl,
         Guid? OrganizerId,
         ICollection<ParticipantDetailsResponseDto> Participants

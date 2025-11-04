@@ -5,7 +5,7 @@ namespace EventService.Application.Events.Dtos
     public record GetAllEventsResponseDto(
         Guid Id,
         string Title,
-        DateTime? StartDate,
+        DateTimeOffset? StartDate,
         string Description,
         string Place,
         ICollection<string>? Tags,

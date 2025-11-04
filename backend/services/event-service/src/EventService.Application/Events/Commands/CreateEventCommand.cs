@@ -9,7 +9,7 @@ public record CreateEventCommand(
     string Category,
     string Place,
     Guid? OrganizerId,
-    DateTime? StartDate,
+    DateTimeOffset? StartDate,
     List<string>? Tags = default,
     string? ImageUrl = default
     ) : ICommand<Result<Guid>>;

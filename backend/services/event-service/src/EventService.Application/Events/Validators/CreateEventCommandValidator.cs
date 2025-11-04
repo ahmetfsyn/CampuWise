@@ -20,7 +20,7 @@ public class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
         RuleFor(x => x.StartDate)
         .NotEmpty()
             .WithMessage("Start date is required.")
-            .Must(date => date > DateTime.UtcNow)
+            .Must(date => date > DateTimeOffset.UtcNow)
             .WithMessage("Start date must be in the future.");
 
         RuleFor(x => x.Place)

@@ -5,7 +5,6 @@ import {
   saveAccessToken,
 } from "@/utils/secureStorage";
 import axios from "axios";
-import { router } from "expo-router";
 
 const api = axios.create({
   baseURL: process.env.EXPO_PUBLIC_BASE_API_URL + "/api",

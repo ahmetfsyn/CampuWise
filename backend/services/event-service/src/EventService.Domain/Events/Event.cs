@@ -8,14 +8,14 @@ namespace EventService.Domain.Events
     {
         public string Title { get; set; } = default!;
         // StartDate normalde null gönderilmemesi gerekiyor. fakat fluent validation yakalasın diye nullable yaptım
-        public DateTime? StartDate { get; set; }
+        public DateTimeOffset? StartDate { get; set; }
         public string Description { get; set; } = default!;
         public string Place { get; set; } = default!;
         public Category Category { get; set; }
         public ICollection<string>? Tags { get; set; }
         public string? ImageUrl { get; set; }
         public Guid? OrganizerId { get; set; }
-        public ICollection<EventParticipant> Participants { get; set; } = new List<EventParticipant>();
+        public ICollection<EventParticipant> Participants { get; set; } = [];
 
 
         public void AddParticipant(Guid userId)

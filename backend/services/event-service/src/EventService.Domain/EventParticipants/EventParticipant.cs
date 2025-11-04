@@ -6,7 +6,7 @@ namespace EventService.Domain.EventParticipants
     {
         public Guid EventId { get; set; }
         public Guid UserId { get; set; }
-        public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
+        public DateTimeOffset JoinedAt { get; set; } = DateTimeOffset.UtcNow;
         public Event Event { get; set; } = default!;
 
 

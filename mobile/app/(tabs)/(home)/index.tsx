@@ -58,7 +58,17 @@ export default function HomeScreen() {
   const { t: tHome } = useTranslation("home");
   const { t: tCommon } = useTranslation("common");
 
-  const { data: events } = useGetAllEvents("?$expand=participants");
+  const currentDate = new Date().toISOString();
+  console.log(currentDate);
+
+  const { data } = useGetAllEvents({
+    $filter: `startDate ge ${currentDate}`,
+    $orderby: "startDate asc",
+    $expand: "participants",
+    // $top: 10,
+  });
+
+  const events = data?.pages.flat() ?? [];
 
   const handleCustomize = useCallback(() => {
     console.log("customized");
@@ -71,10 +81,6 @@ export default function HomeScreen() {
   const handleShowMoreDiscussions = useCallback(() => {
     console.log("show more discussions");
   }, []);
-
-  const upcomingEvents = events?.filter(
-    (event) => new Date(event.startDate).getTime() >= Date.now()
-  );
 
   console.log("home is rendered");
 
@@ -210,7 +216,7 @@ export default function HomeScreen() {
         contentContainerStyle={{
           flexGrow: 1,
         }}
-        data={upcomingEvents}
+        data={events}
         ListEmptyComponent={EmptyEventListComponent}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (

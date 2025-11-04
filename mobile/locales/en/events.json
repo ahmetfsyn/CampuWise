@@ -30,6 +30,9 @@
         "categoryRequired": "Category is required",
         "reportReasonRequired": "Report reason is required"
     },
+    "errors": {
+        "noEventsFound": "No events found."
+    },
     "eventDetails": {
         "dateAndTime": "Date & Time",
         "location": "Location",

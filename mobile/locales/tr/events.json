@@ -30,6 +30,9 @@
         "categoryRequired": "Kategori zorunlu",
         "reportReasonRequired": "Raporlama nedeni zorunlu"
     },
+    "errors": {
+        "noEventsFound": "Etkinlik bulunamadı."
+    },
     "eventDetails": {
         "dateAndTime": "Tarih & Saat",
         "location": "Konum",
