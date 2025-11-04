@@ -1,6 +1,5 @@
 # OSX
 #
-mobile/.DS_Store
 
 # Xcode
 #
@@ -22,6 +21,7 @@ mobile/*.ipa
 mobile/*.xcuserstate
 mobile/**/.xcode.env.local
 
+
 # Android/IntelliJ
 #
 mobile/build/
@@ -34,6 +34,8 @@ mobile/.cxx/
 mobile/*.keystore
 !mobile/debug.keystore
 mobile/.kotlin/
+
+
 
 # node.js
 #
@@ -50,6 +52,7 @@ mobile/**/fastlane/test_output
 
 # Bundle artifact
 mobile/*.jsbundle
+mobile/**/.env
 
 # Ruby / CocoaPods
 mobile/**/Pods/
@@ -69,18 +72,33 @@ mobile/.yarn/*
 !mobile/.yarn/sdks
 !mobile/.yarn/versions
 
+##############################
 # .NET Core / ASP.NET
+##############################
+
+backend/**/.DS_Store
+backend/**/*.cache.json
+
+
 backend/**/bin/
 backend/**/obj/
+backend/**/out/
 backend/**/logs/
+backend/**/Debug/
+backend/**/Release/
 
+# VS / VSCode / Rider
+backend/.vs/
+backend/.vscode/
+backend/**/.idea/
 backend/**/*.user
 backend/**/*.suo
 backend/**/*.vspscc
 backend/**/*.vssscc
 backend/**/*.csproj.user
-backend/.vs/
 backend/**/*.dbmdl
+
+# Cache, binaries, logs
 backend/**/*.log
 backend/**/*.ldf
 backend/**/*.mdf
@@ -91,6 +109,12 @@ backend/**/*.exe
 backend/**/*.dll
 backend/**/*.appsettings*.json.local
 
+# Entity Framework migrations (optional)
+backend/**/Migrations/
+
+##############################
+# Generic temp / system files
+##############################
 *.cache
 *.log
 *.tlog
@@ -100,3 +124,6 @@ backend/**/*.appsettings*.json.local
 *.lock
 *.pidb
 *.svclog
+Thumbs.db
+desktop.ini
+ehthumbs.db

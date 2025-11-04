@@ -5,7 +5,6 @@ import { TouchableOpacity } from "react-native";
 import { Box } from "./ui/box";
 import { memo } from "react";
 import { formatDate } from "@/utils/formatDate";
-// todo : uygulama logout oldugunda tokenlar siliniyor ama zustanddeki isAuth false olsa ible root layoutta bu değişikliğe göre rerender olmuyor ve login ekranına gitmiyor bunu coz
 
 const EventListCard = ({
   id,

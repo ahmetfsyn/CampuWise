@@ -27,7 +27,7 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-// todo : burda kladım. test et session süresi bittiginde (401 aldıgında) otomatik logout oluyor mu diye
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {

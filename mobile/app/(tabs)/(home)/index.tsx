@@ -78,8 +78,6 @@ export default function HomeScreen() {
 
   console.log("home is rendered");
 
-  // todo : eventsların hepsini çektiginde ve sonrasında katılımcı sayısı değiştiginde guncel sayıyı göstermiyor. buna care bul.
-
   const handleGoEvents = useCallback(() => {
     router.push("/events");
   }, [router]);
