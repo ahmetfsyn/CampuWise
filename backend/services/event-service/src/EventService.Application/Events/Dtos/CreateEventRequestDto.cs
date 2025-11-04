@@ -5,7 +5,7 @@ namespace EventService.Application.Events.Dtos
         string Description,
         string Category,
         string Place,
-        DateTime? StartDate,
+        DateTimeOffset? StartDate,
         List<string>? Tags = default,
         string? ImageUrl = default
         );

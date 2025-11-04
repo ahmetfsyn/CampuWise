@@ -59,16 +59,32 @@ export const getEventByIdAsync = async (eventId: string) => {
 };
 
 export const getAllEventsAsync = async (
-  odataQuery?: string
+  page: number,
+  pageSize: number,
+  odataParams: Record<string, string | number> = {}
 ): Promise<Event[]> => {
   try {
-    const response = await api.get(
-      EVENT_SERVICE_URL_PREFIX + "/odata/events" + (odataQuery ?? "")
-    );
-    const events: Event[] = response.data?.value;
+    const skip = page * pageSize;
 
+    const baseParams = Object.entries(odataParams)
+      .filter(([_, v]) => v !== undefined && v !== null)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
+
+    const finalQuery = `${baseParams}${
+      baseParams ? "&" : ""
+    }$top=${pageSize}&$skip=${skip}`;
+
+    console.log("finalQuery: ", finalQuery);
+
+    const response = await api.get(
+      `${EVENT_SERVICE_URL_PREFIX}/odata/events?${finalQuery}`
+    );
+
+    const events: Event[] = response.data?.value ?? [];
     return events;
   } catch (error: any) {
+    console.error("❌ getAllEventsAsync error:", error);
     throw error;
   }
 };
