@@ -1,6 +1,6 @@
 
 
-namespace EventService.Application.Interfaces
+namespace EventService.Application.EventParticipants.Dtos
 {
     public record ParticipantDetailsResponseDto(
         Guid Id,

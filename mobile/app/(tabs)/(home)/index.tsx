@@ -59,7 +59,6 @@ export default function HomeScreen() {
   const { t: tCommon } = useTranslation("common");
 
   const currentDate = new Date().toISOString();
-  console.log(currentDate);
 
   const { data } = useGetAllEvents({
     $filter: `startDate ge ${currentDate}`,

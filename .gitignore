@@ -78,6 +78,7 @@ mobile/.yarn/*
 
 backend/**/.DS_Store
 backend/**/*.cache.json
+backend/**/appsettings.Development.json
 
 
 backend/**/bin/

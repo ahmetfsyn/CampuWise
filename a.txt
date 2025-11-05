@@ -1,0 +1,23 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "EventDb": "Host=localhost;Port=5432;Database=campuwise_event_service;Username=event_service_user;Password=0102"
+  },
+  "Scalar": {
+    "Theme": "bluePlanet"
+  },
+  "UserService": {
+    "BaseUrl": "http://localhost:5000"
+  },
+  "ImageKit": {
+    "PublicKey": "public_YZNDATauyzB68mFyu0eLYeg8/BM=",
+    "PrivateKey": "private_WqYz2p1R/lXj5ZNAzB81UB0FYq0=",
+    "UrlEndpoint": "https://ik.imagekit.io/37qgyljxz",
+    "UploadEndpoint": "https://upload.imagekit.io/api/v1/files/upload"
+  }
+}
