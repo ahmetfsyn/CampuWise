@@ -27,6 +27,8 @@ public static class InfrastructureRegistrar
         });
 
         services.AddScoped<IEventParticipantRepository, EventParticipantRepository>();
+        services.AddScoped<IImageService, ImageService>();
+
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

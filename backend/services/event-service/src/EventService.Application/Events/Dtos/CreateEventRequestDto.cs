@@ -7,7 +7,6 @@ namespace EventService.Application.Events.Dtos
         string Place,
         DateTimeOffset? StartDate,
         List<string>? Tags = default,
-        string? ImageUrl = default
-        );
+        string? ImageBase64 = null);
 
 }

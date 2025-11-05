@@ -23,15 +23,45 @@ namespace EventService.WebApi.Modules
                 {
                     var organizerId = httpContext.GetUserId();
 
+                    byte[]? imageBytes = null;
+                    if (!string.IsNullOrEmpty(request.ImageBase64))
+                    {
+                        var base64 = request.ImageBase64;
+
+                        // data:image/jpeg;base64, kısmını at
+                        // var commaIndex = base64.IndexOf(',');
+                        // if (commaIndex >= 0)
+                        //     base64 = base64[(commaIndex + 1)..];
+
+                        // tüm boşlukları, satır sonlarını, kaçış karakterlerini temizle
+                        base64 = base64
+                            .Trim('"')                 // JSON’dan gelen " işaretlerini at
+                            .Replace("\\", "")          // escape karakterlerini kaldır
+                            .Replace(" ", "")           // boşluk varsa kaldır
+                            .Replace("\r", "")
+                            .Replace("\n", "");
+
+                        try
+                        {
+                            imageBytes = Convert.FromBase64String(base64);
+                        }
+                        catch (FormatException ex)
+                        {
+                            Console.WriteLine("❌ Base64 parse hatası: " + ex.Message);
+                            Console.WriteLine("🔍 İlk 100 karakter: " + base64.Substring(0, Math.Min(100, base64.Length)));
+                            throw;
+                        }
+                    }
+
                     var createEventCommand = new
                     {
                         OrganizerId = organizerId,
-                        request.Category,
                         request.Title,
                         request.Description,
-                        request.StartDate,
+                        request.Category,
                         request.Place,
-                        request.ImageUrl,
+                        request.StartDate,
+                        ImageBytes = imageBytes,
                         request.Tags
                     }.Adapt<CreateEventCommand>();
 

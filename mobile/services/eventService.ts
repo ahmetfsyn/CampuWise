@@ -6,14 +6,13 @@ const EVENT_SERVICE_URL_PREFIX = "/event-service";
 
 export const createEventAsync = async (event: CreateEventFormValues) => {
   try {
-    const eventDate = event.startDate.toLocaleString();
-
-    const response = await api.post(
-      EVENT_SERVICE_URL_PREFIX + "/events",
-      event
-    );
+    const response = await api.post(`${EVENT_SERVICE_URL_PREFIX}/events`, {
+      ...event,
+      imageBase64: event.image?.base64,
+    });
+    return response.data;
   } catch (error) {
-    console.error(error);
+    console.error("❌ createEventAsync error:", error);
     throw error;
   }
 };
@@ -23,7 +22,6 @@ export const leaveEventAsync = async (eventId: string) => {
     const response = await api.post(
       EVENT_SERVICE_URL_PREFIX + "/events/" + eventId + "/leave"
     );
-    console.log(response.data);
 
     return;
   } catch (error) {
@@ -37,7 +35,6 @@ export const joinEventAsync = async (eventId: string) => {
     const response = await api.post(
       EVENT_SERVICE_URL_PREFIX + "/events/" + eventId + "/join"
     );
-    console.log(response.data);
     return;
   } catch (error) {
     console.error(error);
@@ -74,8 +71,6 @@ export const getAllEventsAsync = async (
     const finalQuery = `${baseParams}${
       baseParams ? "&" : ""
     }$top=${pageSize}&$skip=${skip}`;
-
-    console.log("finalQuery: ", finalQuery);
 
     const response = await api.get(
       `${EVENT_SERVICE_URL_PREFIX}/odata/events?${finalQuery}`

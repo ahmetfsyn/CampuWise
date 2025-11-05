@@ -24,23 +24,28 @@ const EventsScreen = () => {
     isFetching: isFetchingEvents,
     refetch: refreshEvents,
   } = useGetAllEvents();
+  // selectedFilter.category === EventCategory.All
+  //   ? {}
+  //   : {
+  //       $filter: `category eq '${selectedFilter.category}'`,
+  //     }
 
   // todo : organizatörlere ait bir sayfa yap. orada katılımcıları listeyeip excel pdf ya da csv tarzında cıktı alabilsin.
 
-  // const filteredEvents = useMemo(() => {
-  //   return events?.filter((event) => {
-  //     const matchesSearch = event.title
-  //       .toLowerCase()
-  //       .includes(searchString.toLowerCase());
+  const filteredEvents = useMemo(() => {
+    return events?.pages.flat().filter((event) => {
+      const matchesSearch = event.title
+        .toLowerCase()
+        .includes(searchString.toLowerCase());
 
-  //     const matchesCategory =
-  //       selectedFilter.category.toLowerCase() ===
-  //         EventCategory.All.toLowerCase() ||
-  //       event.category?.toLowerCase() === selectedFilter.category.toLowerCase();
+      const matchesCategory =
+        selectedFilter.category.toLowerCase() ===
+          EventCategory.All.toLowerCase() ||
+        event.category?.toLowerCase() === selectedFilter.category.toLowerCase();
 
-  //     return matchesSearch && matchesCategory;
-  //   });
-  // }, [selectedFilter, searchString, events]);
+      return matchesSearch && matchesCategory;
+    });
+  }, [selectedFilter, searchString, events]);
 
   const handleCreateEvent = useCallback(() => {
     router.push("/events/create");
@@ -85,7 +90,7 @@ const EventsScreen = () => {
             maxToRenderPerBatch={10}
             windowSize={5}
             ListEmptyComponent={<EmptyEventListComponent />}
-            data={events?.pages.flat()}
+            data={filteredEvents}
             renderItem={({ item }) => (
               <EventListCard
                 onPress={() => handleGoEventDetails(item.id)}

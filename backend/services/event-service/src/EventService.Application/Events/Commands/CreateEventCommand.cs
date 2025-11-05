@@ -11,5 +11,5 @@ public record CreateEventCommand(
     Guid? OrganizerId,
     DateTimeOffset? StartDate,
     List<string>? Tags = default,
-    string? ImageUrl = default
+    byte[]? ImageBytes = default
     ) : ICommand<Result<Guid>>;

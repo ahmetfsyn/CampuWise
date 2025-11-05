@@ -37,6 +37,7 @@ import { Icon } from "@/components/ui/icon";
 import { useTranslation } from "react-i18next";
 import useCreateEvent from "@/hooks/events/useCreateEvent";
 import { useRouter } from "expo-router";
+import { ImagePickerAsset } from "expo-image-picker";
 
 const CreateEventScreen = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -61,7 +62,7 @@ const CreateEventScreen = () => {
       startDate: null,
       place: "",
       category: "",
-      imageUrl: "",
+      image: null,
     },
     mode: "all",
     resolver: zodResolver(createEventFormSchema),
@@ -80,14 +81,17 @@ const CreateEventScreen = () => {
     hideDatePicker();
   };
 
-  const handlePickImage = useCallback(async () => {
-    const image = await pickImage({
-      aspect: [4, 3],
-      allowsEditing: true,
-    });
+  // const handlePickImage = useCallback(async () => {
+  //   const image = await pickImage({
+  //     aspect: [4, 3],
+  //     allowsEditing: true,
+  //   });
 
-    setValue("imageUrl", image?.uri);
-  }, [setValue]);
+  //   if (image?.base64) {
+  //     const base64String = `data:${image.mimeType};base64,${image.base64}`;
+  //     setValue("image", base64String, { shouldValidate: true });
+  //   }
+  // }, [setValue]);
 
   return (
     <KeyboardAvoidingView
@@ -252,11 +256,26 @@ const CreateEventScreen = () => {
           {/* Event Image */}
           <Controller
             control={control}
-            name="imageUrl"
+            name="image"
             render={({ field: { onChange, value } }) => {
+              const handlePick = async () => {
+                const image = await pickImage({
+                  aspect: [4, 3],
+                  allowsEditing: true,
+                  base64: true,
+                });
+
+                if (image) {
+                  // const base64String = `data:${image.mimeType};base64,${image.base64}`;
+                  // console.log("base64String : ", base64String);
+
+                  onChange(image); // onChange ile form state'i güncelledik
+                }
+              };
+
               return (
                 <>
-                  <Pressable onPress={handlePickImage}>
+                  <Pressable onPress={handlePick}>
                     <Box
                       className={`h-48 rounded-xl justify-center items-center ${
                         value
@@ -272,7 +291,7 @@ const CreateEventScreen = () => {
                             height: "100%",
                             borderRadius: 12,
                           }}
-                          source={{ uri: value }}
+                          source={{ uri: value.uri }}
                         />
                       ) : (
                         <Box className="items-center rounded-xl">
