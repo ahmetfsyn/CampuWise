@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useState, useEffect, useCallback } from "react";
 import useGetEventById from "@/hooks/events/useGetEventById";
 import useJoinEvent from "@/hooks/events/useJoinEvent";
@@ -22,10 +22,54 @@ export const useEventDetails = () => {
   const user = useAuthStore((state) => state.user);
   const { t: tEvents } = useTranslation("events");
 
-  const [isJoinedEvent, setJoinedEvent] = useState(false);
-  const [isReportedEvent, setIsReportedEvent] = useState(false);
-  const [showReportModal, setShowReportModal] = useState(false);
-  const [showCancelJoiningDialog, setShowCancelJoiningDialog] = useState(false);
+  const [isJoinedEvent, setJoinedEvent] = useState<boolean>(false);
+  const [isReportedEvent, setIsReportedEvent] = useState<boolean>(false);
+  const [showReportModal, setShowReportModal] = useState<boolean>(false);
+  const [showCancelJoiningDialog, setShowCancelJoiningDialog] =
+    useState<boolean>(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
+
+  const isOrganizer = !!(event && user && event.organizerId === user.id);
+
+  const handleGoEditEvent = useCallback(() => {
+    router.push({
+      pathname: `/events/[id]/edit`,
+      params: {
+        id: event?.id as string,
+        event: JSON.stringify(event),
+      },
+    });
+  }, [event]);
+
+  const handleGoParticipants = useCallback(() => {
+    router.push({
+      pathname: `/events/[id]/participants`,
+      params: {
+        id: event?.id as string,
+        event: JSON.stringify(event),
+      },
+    });
+  }, [event]);
+
+  const handleShowReportModal = useCallback(() => {
+    setShowReportModal(true);
+  }, []);
+
+  const handleCloseMenu = useCallback(() => {
+    setShowMenu(false);
+  }, []);
+
+  const handleOpenMenu = useCallback(() => {
+    setShowMenu(true);
+  }, []);
+
+  const handlePressItem = useCallback(
+    (action: () => void) => {
+      action();
+      handleCloseMenu();
+    },
+    [handleCloseMenu]
+  );
 
   const {
     control,
@@ -91,7 +135,7 @@ export const useEventDetails = () => {
     [tEvents]
   );
 
-  const handleCancelReport = () => setShowReportModal(false);
+  const handleCancelReport = useCallback(() => setShowReportModal(false), []);
 
   return {
     event,
@@ -99,16 +143,24 @@ export const useEventDetails = () => {
     isRefetchingEvent,
     isJoinedEvent,
     isJoiningEvent,
+    showMenu,
+    isOrganizer,
     isLeavingEvent,
     showReportModal,
-    setShowReportModal,
     showCancelJoiningDialog,
+    control,
+    errors,
+    setShowReportModal,
+    handleGoParticipants,
     setShowCancelJoiningDialog,
+    handleGoEditEvent,
+    handleShowReportModal,
+    handlePressItem,
+    handleCloseMenu,
     onJoinEvent,
+    handleOpenMenu,
     onLeaveEvent,
     handleReportEvent: handleSubmit(handleReportEvent),
     handleCancelReport,
-    control,
-    errors,
   };
 };

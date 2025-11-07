@@ -1,5 +1,6 @@
 using Cortex.Mediator.Queries;
 using EventService.Application.EventParticipants;
+using EventService.Application.EventParticipants.Dtos;
 using EventService.Application.Events.Dtos;
 using EventService.Application.Events.Queries;
 using EventService.Application.Interfaces;
@@ -42,7 +43,7 @@ namespace EventService.Application.Events.Handlers
                 StartDate: @event.StartDate,
                 ImageUrl: @event.ImageUrl,
                 OrganizerId: @event.OrganizerId,
-                Participants: [.. participantDetails.Select(u => new ParticipantDetailsResponseDto(u.Id, u.AvatarUrl, u.FullName))]);
+                Participants: [.. participantDetails.Select(u => new ParticipantDetailsResponseDto(u.Id, u.AvatarUrl, u.FullName, u.Email))]);
 
             return Result<GetEventByIdResponseDto>.Succeed(eventDto);
 

@@ -1,4 +1,5 @@
 
+using EventService.Application.EventParticipants.Dtos;
 using EventService.Application.Interfaces;
 
 namespace EventService.Application.Events.Dtos

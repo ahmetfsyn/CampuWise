@@ -128,3 +128,8 @@ backend/**/Migrations/
 Thumbs.db
 desktop.ini
 ehthumbs.db
+
+
+# SQL Session Files
+
+backend/**/*.session.sql

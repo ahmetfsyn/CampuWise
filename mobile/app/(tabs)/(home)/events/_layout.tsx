@@ -20,7 +20,14 @@ export default function EventsLayout() {
 
       <Stack.Screen name="create" options={{ title: "createEvent" }} />
 
-      <Stack.Screen name="[id]" options={{ title: "eventDetails" }} />
+      <Stack.Screen name="[id]/index" options={{ title: "eventDetails" }} />
+
+      <Stack.Screen name="[id]/edit" options={{ title: "editEvent" }} />
+
+      <Stack.Screen
+        name="[id]/participants"
+        options={{ title: "participants" }}
+      />
     </Stack>
   );
 }

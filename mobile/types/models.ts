@@ -36,8 +36,9 @@ export enum EventCategory {
 
 export type Participant = {
   id: string;
-  fullName: string;
+  fullName?: string;
   avatarUrl?: string;
+  email?: string;
 };
 
 export type AuthUser = {
@@ -68,7 +69,7 @@ export type Event = {
   place: string;
   title: string;
   startDate: string;
-  category: string;
+  category: EventCategory;
   description: string;
   organizerId: string;
   imageUrl?: string;

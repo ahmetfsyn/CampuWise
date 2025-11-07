@@ -9,25 +9,33 @@ import EventActions from "@/components/events/EventActions";
 import ReportEventModal from "@/components/events/ReportEventModal";
 import LeaveEventDialog from "@/components/events/LeaveEventDialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import EventMenu from "@/components/events/EventMenu";
 
 const EventDetailsScreen = () => {
   const {
     event,
     isPendingEvent,
     isJoinedEvent,
-    onJoinEvent,
-    onLeaveEvent,
-    showReportModal,
-    isRefetchingEvent,
-    setShowReportModal,
-    showCancelJoiningDialog,
-    setShowCancelJoiningDialog,
-    handleReportEvent,
-    handleCancelReport,
+    isOrganizer,
     control,
+    showMenu,
     errors,
     isJoiningEvent,
     isLeavingEvent,
+    showReportModal,
+    isRefetchingEvent,
+    showCancelJoiningDialog,
+    setShowCancelJoiningDialog,
+    handleGoParticipants,
+    handleReportEvent,
+    handleOpenMenu,
+    handleGoEditEvent,
+    handleCloseMenu,
+    handleShowReportModal,
+    handleCancelReport,
+    handlePressItem,
+    onJoinEvent,
+    onLeaveEvent,
   } = useEventDetails();
 
   if (isPendingEvent)
@@ -37,9 +45,11 @@ const EventDetailsScreen = () => {
       </Box>
     );
 
+  // todo : bu sayfaya gelen eventta category yok nedenini çöz. bunun yuzunden edit sayfasına giden event objesinde de category olmadıgı için guncellemede sıknıtı yaratır.
+
   return (
     <ScrollView contentContainerClassName="pb-8">
-      <EventHeader event={event} />
+      <EventHeader handleOpenMenu={handleOpenMenu} event={event} />
       <EventInfo event={event} />
       <EventParticipants event={event} isRefetchingEvent={isRefetchingEvent} />
       <EventActions
@@ -47,7 +57,6 @@ const EventDetailsScreen = () => {
         isJoiningEvent={isJoiningEvent}
         isLeavingEvent={isLeavingEvent}
         onJoinEvent={onJoinEvent}
-        onShowReportModal={() => setShowReportModal(true)}
       />
       <ReportEventModal
         isOpen={showReportModal}
@@ -61,6 +70,15 @@ const EventDetailsScreen = () => {
         onClose={() => setShowCancelJoiningDialog(false)}
         onConfirm={onLeaveEvent}
         isLoading={isLeavingEvent}
+      />
+      <EventMenu
+        handleGoParticipants={handleGoParticipants}
+        handlePressItem={handlePressItem}
+        handleGoEditEvent={handleGoEditEvent}
+        handleShowReportModal={handleShowReportModal}
+        isOrganizer={isOrganizer}
+        handleCloseMenu={handleCloseMenu}
+        showMenu={showMenu}
       />
     </ScrollView>
   );

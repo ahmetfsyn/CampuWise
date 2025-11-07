@@ -21,7 +21,8 @@
         "createEventFAB": "Yeni Etkinlik",
         "createEvent": "Etkinlik Oluştur",
         "joinEvent": "Etkinliğe Katıl",
-        "leaveEvent": "Etkinlikten Ayrıl"
+        "leaveEvent": "Etkinlikten Ayrıl",
+        "editEvent": "Güncelle"
     },
     "validations": {
         "titleMinLength": "Başlık en az 3 karakter olmalı",
@@ -49,6 +50,13 @@
             "subTitle": "Etkinlikten ayrılırsanız katılımcılar arasından silineceksiniz. İsterseniz tekrar katılabilirsiniz.",
             "buttons": {
                 "leave": "Ayrıl"
+            }
+        },
+        "eventMenu": {
+            "buttons": {
+                "report": "Şikayet Et",
+                "edit": "Düzenle",
+                "showParticipants": "Katılımcılar"
             }
         },
         "toast": {

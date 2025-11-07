@@ -10,7 +10,6 @@ import {
   secureStoreStorage,
 } from "@/utils/secureStorage";
 import { LoginResponseDto, AuthUser } from "@/types/models";
-import { router } from "expo-router";
 
 type AuthState = {
   isAuthenticated: boolean;
@@ -31,7 +30,10 @@ export const useAuthStore = create<AuthState>()(
       login: async (tokenDetails) => {
         await saveAccessToken(tokenDetails.accessToken, tokenDetails.expiresIn);
         if (tokenDetails.rememberMe)
-          await saveRefreshToken(tokenDetails.refreshToken);
+          console.log("tokenDetails.rememberMe : ", tokenDetails.rememberMe);
+        await saveRefreshToken(tokenDetails.refreshToken);
+
+        console.log("saveRefreshToken is done", tokenDetails.refreshToken);
         set({ isAuthenticated: true, user: tokenDetails.user ?? null });
       },
 

@@ -27,7 +27,8 @@ namespace UserService.Application.User.Handlers
                 var user = new UserDetailsResponseDto(
                     Guid.Parse(json["id"]!.ToString()),
                     $"{json["firstName"]} {json["lastName"]}",
-                    json["attributes"]?["avatarUrl"]?.FirstOrDefault()?.ToString() ?? string.Empty
+                    json["attributes"]?["avatarUrl"]?.FirstOrDefault()?.ToString() ?? string.Empty,
+                    json["email"]?.ToString() ?? string.Empty
                 );
                 users.Add(user);
             }
