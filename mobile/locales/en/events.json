@@ -21,7 +21,8 @@
         "createEventFAB": "New Event",
         "createEvent": "Create Event",
         "joinEvent": "Join Event",
-        "leaveEvent": "Leave Event"
+        "leaveEvent": "Leave Event",
+        "editEvent": "Update Event"
     },
     "validations": {
         "titleMinLength": "Title must be at least 3 characters",
@@ -49,6 +50,13 @@
             "subTitle": "If you leave this event, you will be removed from the participants. You can join again later if you wish.",
             "buttons": {
                 "leave": "Leave"
+            }
+        },
+        "eventMenu": {
+            "buttons": {
+                "report": "Report",
+                "edit": "Edit",
+                "showParticipants": "Participants"
             }
         },
         "toast": {

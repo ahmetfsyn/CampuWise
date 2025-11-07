@@ -67,6 +67,8 @@ export default function HomeScreen() {
     // $top: 10,
   });
 
+  // todo : sorun su sanırım rememberMe işaretlendiğinde refreshToken kaydediliyor ama accessToken süresi bittiğinde otomatik logout mu oluyor bilmiyorm cunku user bilgisi gidiyor uygulama içinde . anasayfada Hi undefined yazıyor mesela . bu sorunu arastır. test edebilmek için bu durumu rememberMe ile giriş yapıp uygulamayı yenileyecek bir değşiklik yapmadan bekle en az 5 dk. daha sonrasında herhangi bir işlem yaptıgında buyuk ihtimalle user bilgisi gidecek. backendde refresh-token endpointinde sadece token dönüyordum sanırım user bbilgisi de eklemem lazım olabilir !
+
   const events = data?.pages.flat() ?? [];
 
   const handleCustomize = useCallback(() => {

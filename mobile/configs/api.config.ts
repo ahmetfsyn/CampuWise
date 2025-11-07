@@ -35,6 +35,8 @@ api.interceptors.response.use(
 
       const refreshToken = await getRefreshToken();
 
+      console.log("401 geldi ve stredan refreshtoken çekildi : ", refreshToken);
+
       if (!refreshToken) {
         const isAuth = useAuthStore.getState().isAuthenticated;
         await useAuthStore.getState().logout();
@@ -44,10 +46,12 @@ api.interceptors.response.use(
       }
 
       try {
-        const { data } = await api.post("/user-service/auth/refresh", {
+        const response = await api.post("/user-service/auth/refresh-token", {
           refreshToken,
         });
         // Yeni access token kaydet
+        const data = response.data.data;
+        console.log("backendden gelen yeni tokenlar datası : ", data);
         await saveAccessToken(data.accessToken, data.expiresIn);
 
         // Orijinal isteği tekrar dene

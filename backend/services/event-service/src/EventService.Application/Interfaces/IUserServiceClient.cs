@@ -1,4 +1,6 @@
 
+using EventService.Application.EventParticipants.Dtos;
+
 namespace EventService.Application.Interfaces
 {
     public interface IUserServiceClient

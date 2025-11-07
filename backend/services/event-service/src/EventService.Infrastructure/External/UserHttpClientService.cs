@@ -1,3 +1,4 @@
+using EventService.Application.EventParticipants.Dtos;
 using EventService.Application.Interfaces;
 using Flurl.Http;
 using Microsoft.Extensions.Configuration;

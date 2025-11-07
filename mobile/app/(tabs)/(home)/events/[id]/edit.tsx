@@ -5,7 +5,6 @@ import {
   ScrollView,
 } from "react-native";
 import { Controller, useForm } from "react-hook-form";
-import { createEventFormSchema } from "@/validations/create-event-form";
 import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
 import {
   Select,
@@ -36,19 +35,29 @@ import pickImage from "@/utils/pickImage";
 import { Icon } from "@/components/ui/icon";
 import { useTranslation } from "react-i18next";
 import useCreateEvent from "@/hooks/events/useCreateEvent";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { Spinner } from "@/components/ui/spinner";
+import { Event } from "@/types/models";
+import { editEventFormSchema } from "@/validations/edit-event-form";
+import { formatDate } from "@/utils/formatDate";
 
-const CreateEventScreen = () => {
+const EditEventScreen = () => {
+  const { event: eventString } = useLocalSearchParams();
+
+  const event: Event = JSON.parse(eventString as string);
+
+  console.log(event);
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const { t } = useTranslation("events");
   const { handleCreateEvent, isCreating } = useCreateEvent();
   const router = useRouter();
   const onSubmit = async (data: any) => {
     await handleCreateEvent(data);
-    // reset();
     return router.canGoBack() && router.back();
   };
+
+  console.log(event.category);
 
   const {
     control,
@@ -57,15 +66,15 @@ const CreateEventScreen = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      title: "",
-      description: "",
-      startDate: null,
-      place: "",
-      category: "",
-      image: null,
+      title: event.title || "",
+      description: event.description || "",
+      startDate: event.startDate || "",
+      place: event.place || "",
+      category: event.category || "",
+      image: event.imageUrl || null,
     },
     mode: "all",
-    resolver: zodResolver(createEventFormSchema),
+    resolver: zodResolver(editEventFormSchema),
   });
 
   const showDatePicker = useCallback(() => {
@@ -218,7 +227,7 @@ const CreateEventScreen = () => {
                   >
                     <InputField
                       editable={false}
-                      value={value?.toLocaleString()}
+                      value={formatDate(value as string)}
                       placeholder={t("placeholders.startingDatePlaceholder")}
                     />
                     <InputSlot className="pr-3">
@@ -279,7 +288,7 @@ const CreateEventScreen = () => {
                             height: "100%",
                             borderRadius: 12,
                           }}
-                          source={{ uri: value.uri }}
+                          source={{ uri: value?.uri || value }}
                         />
                       ) : (
                         <Box className="items-center rounded-xl">
@@ -306,7 +315,7 @@ const CreateEventScreen = () => {
             isDisabled={isCreating || !isValid}
             onPress={handleSubmit(onSubmit)}
           >
-            {isCreating ? <Spinner size={24} /> : t("buttons.createEvent")}
+            {isCreating ? <Spinner size={24} /> : t("buttons.editEvent")}
           </AnimatedButton>
         </Box>
       </ScrollView>
@@ -314,4 +323,4 @@ const CreateEventScreen = () => {
   );
 };
 
-export default CreateEventScreen;
+export default EditEventScreen;

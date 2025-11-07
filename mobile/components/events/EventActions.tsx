@@ -1,7 +1,5 @@
 import { Box } from "@/components/ui/box";
 import AnimatedButton from "@/components/AnimatedButton";
-import { Icon } from "@/components/ui/icon";
-import { Ban } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 import { Spinner } from "../ui/spinner";
 
@@ -10,7 +8,6 @@ interface Props {
   isJoiningEvent: boolean;
   isLeavingEvent: boolean;
   onJoinEvent: () => void;
-  onShowReportModal: () => void;
 }
 
 const EventActions = ({
@@ -18,19 +15,11 @@ const EventActions = ({
   isJoiningEvent,
   isLeavingEvent,
   onJoinEvent,
-  onShowReportModal,
 }: Props) => {
   const { t: tEvents } = useTranslation("events");
 
   return (
-    <Box className="px-6 flex-row gap-2">
-      <AnimatedButton
-        onPress={onShowReportModal}
-        action={"negative"}
-        className="h-14"
-        icon={<Icon as={Ban} size={24} className="text-primary-0" />}
-      />
-
+    <Box className="px-6 flex-row">
       <AnimatedButton
         variant={isJoinedEvent ? "outline" : "solid"}
         action={isJoinedEvent ? "secondary" : "primary"}

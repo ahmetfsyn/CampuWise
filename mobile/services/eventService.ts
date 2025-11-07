@@ -48,6 +48,10 @@ export const getEventByIdAsync = async (eventId: string) => {
       EVENT_SERVICE_URL_PREFIX + "/events/" + eventId
     );
     const data: Event = response.data?.data;
+
+    // todo : bu metodun backendinde category verisi düzgün gelmiyor. önce backende bak sonra mobile tarafına bak.
+
+    console.log("gelen event: ", data);
     return data;
   } catch (error) {
     console.error(error);
@@ -77,9 +81,19 @@ export const getAllEventsAsync = async (
     );
 
     const events: Event[] = response.data?.value ?? [];
+
     return events;
   } catch (error: any) {
     console.error("❌ getAllEventsAsync error:", error);
+    throw error;
+  }
+};
+
+export const updateEventAsync = async (updatedEvent: Event) => {
+  try {
+    // todo : backendde update isteği yap
+  } catch (error) {
+    console.error(error);
     throw error;
   }
 };

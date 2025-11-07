@@ -5,5 +5,7 @@
     "editProfile": "Edit Profile",
     "eventDetails": "Event Details",
     "createEvent": "New Event",
+    "editEvent": "Edit Event",
+    "participants": "Participants",
     "profile": "Profile"
 }
