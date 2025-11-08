@@ -41,15 +41,15 @@ export type Participant = {
   email?: string;
 };
 
-export type AuthUser = {
-  id: string;
-  username?: string;
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  fullName?: string;
-  avatarUrl?: string;
-};
+// export type AuthUser = {
+//   id: string;
+//   username?: string;
+//   email?: string;
+//   firstName?: string;
+//   lastName?: string;
+//   fullName?: string;
+//   avatarUrl?: string;
+// };
 
 export type Marker = {
   id: string;
@@ -86,14 +86,15 @@ export type Topic = {
 
 export type User = {
   id: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
+  readonly fullName: string;
   email: string;
   phoneNumber?: string;
-  imageUrl?: string;
+  avatarUrl?: string;
 };
 
 export type LoginResponseDto = {
-  user: AuthUser;
   accessToken: string;
   refreshToken: string;
   expiresIn: number;

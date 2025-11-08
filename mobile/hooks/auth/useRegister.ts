@@ -1,4 +1,4 @@
-import { registerAsync } from "@/services/authService";
+import { registerAsync } from "@/services/auth.service";
 import showMessage from "@/utils/showMessage";
 import { useMutation } from "@tanstack/react-query";
 

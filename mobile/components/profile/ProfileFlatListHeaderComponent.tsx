@@ -1,6 +1,5 @@
 import ProfileAboutSection from "./ProfileAboutSection";
 import ProfileHeaderSection from "./ProfileHeaderSection";
-import { users } from "@/mocks/mockData";
 import { User } from "@/types/models";
 import ProfileJoinedEvents from "./ProfileJoinedEvents";
 
@@ -15,13 +14,13 @@ const ProfileFlatListHeaderComponent = ({
   handleGoEditProfile,
   handleGoSettings,
 }: ProfileFlatListHeaderComponentProps) => {
-  const { fullName, imageUrl } = users[0];
+  const { fullName, avatarUrl } = user;
 
   return (
     <>
       {/* PROFILE HEADER */}
       <ProfileHeaderSection
-        imageUrl={imageUrl as string}
+        avatarUrl={avatarUrl || ""}
         name={fullName}
         handleEditProfile={handleGoEditProfile}
         handleGoSettings={handleGoSettings}

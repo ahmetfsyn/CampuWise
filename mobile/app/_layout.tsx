@@ -2,7 +2,7 @@ import "@/configs/i18n.config";
 import "react-native-reanimated";
 import "@/global.css";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { ThemeProvider, useTheme } from "@react-navigation/native";
+import { ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { DarkTheme, LightTheme } from "@/constants/customTheme";
@@ -23,7 +23,8 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const { isSplashVisible, theme, initialize } = useAppStore();
-  const { isAuthenticated, checkAuth, user } = useAuthStore();
+  const { isAuthenticated, checkAuth } = useAuthStore();
+
   const currentTheme = theme === "dark" ? DarkTheme : LightTheme;
   const [ready, setReady] = useState(false);
 

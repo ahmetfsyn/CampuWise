@@ -4,16 +4,18 @@ import AnimatedButton from "@/components/AnimatedButton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import { users } from "@/mocks/mockData";
 import { editProfileFormSchema } from "@/validations/edit-profile-form";
 import { Text } from "@/components/ui/text";
 import showMessage from "@/utils/showMessage";
 import pickImage from "@/utils/pickImage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
+import useUserStore from "@/store/useUserStore";
 
 const EditProfileScreen = () => {
-  const { email, fullName, phoneNumber, imageUrl } = users[0];
+  const { email, fullName, id, avatarUrl, phoneNumber } = useUserStore(
+    (state) => state.user!
+  );
 
   const {
     control,
@@ -25,11 +27,15 @@ const EditProfileScreen = () => {
       fullName: fullName,
       email: email,
       phoneNumber: phoneNumber,
-      imageUrl: imageUrl,
+      avatarUrl: avatarUrl,
     },
     resolver: zodResolver(editProfileFormSchema),
   });
   const { t } = useTranslation("profile");
+
+  const onSubmit = async (data: any) => {
+    await handleSave(data);
+  };
 
   const handleSave = async (data: any) => {
     console.log("Profile saved:", data);
@@ -46,7 +52,7 @@ const EditProfileScreen = () => {
       allowsEditing: true,
       aspect: [1, 1],
     });
-    setValue("imageUrl", image?.uri);
+    setValue("avatarUrl", image?.uri);
   };
 
   return (
@@ -61,7 +67,7 @@ const EditProfileScreen = () => {
         <Box className="items-center mb-6">
           <Controller
             control={control}
-            name="imageUrl"
+            name="avatarUrl"
             render={({ fieldState: { error }, field: { onChange, value } }) => (
               <>
                 <Avatar size="2xl" className="mb-4">
@@ -165,7 +171,7 @@ const EditProfileScreen = () => {
 
           <AnimatedButton
             size={"lg"}
-            onPress={handleSubmit(handleSave)}
+            onPress={handleSubmit(onSubmit)}
             className="h-14"
             isDisabled={Object.keys(errors).length > 0}
           >

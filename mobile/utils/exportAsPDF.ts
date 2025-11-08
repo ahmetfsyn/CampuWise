@@ -39,7 +39,6 @@ export const exportParticipantsToPDF = async (
     `;
 
     const { uri } = await Print.printToFileAsync({ html });
-    console.log("PDF created at:", uri);
 
     await Sharing.shareAsync(uri, {
       mimeType: "application/pdf",

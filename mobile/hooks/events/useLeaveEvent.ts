@@ -1,4 +1,4 @@
-import { leaveEventAsync } from "@/services/eventService";
+import { leaveEventAsync } from "@/services/event.service";
 import showMessage from "@/utils/showMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";

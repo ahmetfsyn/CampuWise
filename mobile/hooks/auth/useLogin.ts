@@ -1,4 +1,4 @@
-import { loginAsync } from "@/services/authService";
+import { loginAsync } from "@/services/auth.service";
 import { useAuthStore } from "@/store/useAuthStore";
 import { LoginResponseDto } from "@/types/models";
 import showMessage from "@/utils/showMessage";

@@ -4,6 +4,7 @@ using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UserService.Application.Interfaces;
 using UserService.Application.User.DTOs;
 using UserService.Domain.Users;
@@ -14,8 +15,6 @@ public class KeycloakService(ILogger<KeycloakService> logger, IConfiguration con
 {
     private readonly IConfiguration _configuration = configuration;
     private readonly ILogger<KeycloakService> _logger = logger;
-
-
 
     public async Task<List<string>> GetUsersDetailsAsync(List<Guid> userIds)
     {
@@ -44,6 +43,36 @@ public class KeycloakService(ILogger<KeycloakService> logger, IConfiguration con
         await Task.WhenAll(tasks);
         return results;
     }
+
+    public async Task<GetUserByIdResponseDto> GetUserByIdAsync(Guid userId)
+    {
+        var adminToken = await GetAdminTokenAsync();
+        var baseUrl = $"{_configuration["Keycloak:BaseUrl"]}/admin/realms/{_configuration["Keycloak:Realm"]}/users/{userId}";
+
+        var response = await baseUrl
+            .WithHeader("Authorization", $"Bearer {adminToken}")
+            .GetAsync();
+
+        var body = await response.ResponseMessage.Content.ReadAsStringAsync();
+
+        dynamic user = JsonConvert.DeserializeObject<dynamic>(body)
+            ?? throw new Exception("Failed to get user details");
+
+        var attributes = user.attributes != null
+            ? ((JObject)user.attributes).ToObject<Dictionary<string, string[]>>()
+            : [];
+
+        return new GetUserByIdResponseDto(
+            Id: Guid.Parse((string)user.id),
+            FullName: $"{(string?)user.firstName} {(string?)user.lastName}".Trim(),
+            FirstName: (string?)user.firstName,
+            LastName: (string?)user.lastName,
+            Email: (string?)user.email,
+            AvatarUrl: attributes.TryGetValue("avatarUrl", out var avatarArr) ? avatarArr.FirstOrDefault() : null,
+            PhoneNumber: attributes.TryGetValue("phoneNumber", out var phoneArr) ? phoneArr.FirstOrDefault() : null
+        );
+    }
+
     public async Task<LoginResponseDto> LoginAsync(string email, string password)
     {
         _logger.LogInformation("Starting Keycloak login for {Email}", email);
@@ -184,7 +213,7 @@ public class KeycloakService(ILogger<KeycloakService> logger, IConfiguration con
         var responseBody = await response.ResponseMessage.Content.ReadAsStringAsync();
 
         var tokenObj = JsonConvert.DeserializeObject<dynamic>(responseBody);
-        string accessToken = tokenObj?.access_token;
+        string accessToken = tokenObj?.access_token ?? string.Empty;
 
         if (string.IsNullOrEmpty(accessToken))
             throw new Exception("Failed to get admin token");

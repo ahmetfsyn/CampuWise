@@ -1,4 +1,5 @@
 using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace UserService.WebApi.Installers
@@ -9,6 +10,10 @@ namespace UserService.WebApi.Installers
         {
             services.AddOpenApi();
             services.AddControllers();
+
+            services.AddEndpointsApiExplorer();
+
+
             services.AddRateLimiter(x =>
                 x.AddFixedWindowLimiter("fixed", cfg =>
                 {
@@ -18,7 +23,16 @@ namespace UserService.WebApi.Installers
                     cfg.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                 })
             );
+            services.AddAuthentication("Bearer")
+                    .AddJwtBearer("Bearer", options =>
+                    {
+                        options.Authority = "http://keycloak-campuwise:8080/realms/campuwise";
+                        options.Audience = "account";
+                        options.RequireHttpsMetadata = false;
+
+                    });
             services.AddAuthorization();
+
             services.AddResponseCompression(opt =>
             {
                 opt.EnableForHttps = true;

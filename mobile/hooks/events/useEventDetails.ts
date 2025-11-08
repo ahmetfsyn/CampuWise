@@ -3,12 +3,12 @@ import { useState, useEffect, useCallback } from "react";
 import useGetEventById from "@/hooks/events/useGetEventById";
 import useJoinEvent from "@/hooks/events/useJoinEvent";
 import useLeaveEvent from "@/hooks/events/useLeaveEvent";
-import { useAuthStore } from "@/store/useAuthStore";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { reportEventFormSchema } from "@/validations/report-event-form";
 import showMessage from "@/utils/showMessage";
 import { useTranslation } from "react-i18next";
+import useUserStore from "@/store/useUserStore";
 
 export const useEventDetails = () => {
   const { id: eventId } = useLocalSearchParams();
@@ -19,7 +19,7 @@ export const useEventDetails = () => {
   } = useGetEventById(eventId as string);
   const { handleJoinEvent, isJoiningEvent } = useJoinEvent();
   const { handleLeaveEvent, isLeavingEvent } = useLeaveEvent();
-  const user = useAuthStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
   const { t: tEvents } = useTranslation("events");
 
   const [isJoinedEvent, setJoinedEvent] = useState<boolean>(false);

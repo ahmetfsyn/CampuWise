@@ -7,7 +7,7 @@ export const editProfileFormSchema = z.object({
     .string()
     .regex(/^[0-9]+$/, "Telefon numarası sadece rakamlardan oluşmalıdır")
     .length(10, "Lütfen geçerli bir telefon numarası girin"),
-  imageUrl: z.string().optional().or(z.literal("")),
+  avatarUrl: z.string().optional().or(z.literal("")),
 });
 
 export type EditProfileFormValues = z.infer<typeof editProfileFormSchema>;

@@ -10,8 +10,8 @@ using UserService.Infrastructure.Utilities;
 namespace UserService.Application.User.Handlers
 {
     public class UserDetailsCommandHandler(
-      IKeycloakService keycloakService
-  ) : ICommandHandler<UserDetailsCommand, Result<List<UserDetailsResponseDto>>>
+        IKeycloakService keycloakService
+        ) : ICommandHandler<UserDetailsCommand, Result<List<UserDetailsResponseDto>>>
     {
         private readonly IKeycloakService _keycloakService = keycloakService;
 
@@ -24,12 +24,19 @@ namespace UserService.Application.User.Handlers
             foreach (var rawUser in rawUsers)
             {
                 var json = JsonConvert.DeserializeObject<JObject>(rawUser, NewtonSoftJsonSettings.CamelCase);
+                if (json is null)
+                {
+                    return Result<List<UserDetailsResponseDto>>.Failure("User details not found");
+                }
                 var user = new UserDetailsResponseDto(
-                    Guid.Parse(json["id"]!.ToString()),
+                    Guid.Parse(json["id"]?.ToString() ?? string.Empty),
                     $"{json["firstName"]} {json["lastName"]}",
                     json["attributes"]?["avatarUrl"]?.FirstOrDefault()?.ToString() ?? string.Empty,
-                    json["email"]?.ToString() ?? string.Empty
-                );
+                    json["email"]?.ToString() ?? string.Empty,
+                    json["firstName"]?.ToString() ?? string.Empty,
+                    json["lastName"]?.ToString() ?? string.Empty,
+                    json["phoneNumber"]?.ToString() ?? string.Empty
+                    );
                 users.Add(user);
             }
 

@@ -1,4 +1,4 @@
-import { joinEventAsync } from "@/services/eventService";
+import { joinEventAsync } from "@/services/event.service";
 import showMessage from "@/utils/showMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,6 @@ const useJoinEvent = () => {
     mutationFn: joinEventAsync,
     onSuccess: (_, eventId) => {
       queryClient.invalidateQueries({ queryKey: ["events", "all"] });
-      console.log(eventId);
       queryClient.invalidateQueries({
         queryKey: ["events", eventId],
       });
