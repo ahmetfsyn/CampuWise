@@ -10,7 +10,8 @@ public static class InfrastructureRegistrar
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
 
-        services.AddScoped<IKeycloakService, KeycloakService>();
+		services.AddScoped<IKeycloakAuthService, KeycloakAuthService>();
+        services.AddScoped<IKeycloakUserService, KeycloakUserService>();
 
         return services;
     }

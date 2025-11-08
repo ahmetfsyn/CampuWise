@@ -13,9 +13,8 @@ import { useTranslation } from "react-i18next";
 import useUserStore from "@/store/useUserStore";
 
 const EditProfileScreen = () => {
-  const { email, fullName, id, avatarUrl, phoneNumber } = useUserStore(
-    (state) => state.user!
-  );
+  const { email, fullName, department, university, avatarUrl, phoneNumber } =
+    useUserStore((state) => state.user!);
 
   const {
     control,
@@ -28,6 +27,8 @@ const EditProfileScreen = () => {
       email: email,
       phoneNumber: phoneNumber,
       avatarUrl: avatarUrl,
+      department: department,
+      university: university,
     },
     resolver: zodResolver(editProfileFormSchema),
   });
@@ -90,6 +91,7 @@ const EditProfileScreen = () => {
               <>
                 <Input
                   variant="rounded"
+                  isDisabled
                   isInvalid={errors.fullName ? true : false}
                   size="lg"
                 >
@@ -119,6 +121,7 @@ const EditProfileScreen = () => {
                 <Input
                   variant="rounded"
                   isInvalid={errors.email ? true : false}
+                  isDisabled
                   size="lg"
                 >
                   <InputField
@@ -132,6 +135,60 @@ const EditProfileScreen = () => {
                   <Box className="px-2">
                     <Text className="text-error-300">
                       {errors.email.message}
+                    </Text>
+                  </Box>
+                )}
+              </>
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="department"
+            render={({ field: { onChange, value } }) => (
+              <>
+                <Input
+                  variant="rounded"
+                  isInvalid={errors.department ? true : false}
+                  size="lg"
+                >
+                  <InputField
+                    value={value}
+                    onChangeText={onChange}
+                    placeholder={t("editProfile.placeholders.department")}
+                  />
+                </Input>
+                {errors.department && (
+                  <Box className="px-2">
+                    <Text className="text-error-300">
+                      {errors.department.message}
+                    </Text>
+                  </Box>
+                )}
+              </>
+            )}
+          />
+
+          <Controller
+            control={control}
+            name="university"
+            render={({ field: { onChange, value } }) => (
+              <>
+                <Input
+                  variant="rounded"
+                  isInvalid={errors.university ? true : false}
+                  size="lg"
+                >
+                  <InputField
+                    value={value}
+                    onChangeText={onChange}
+                    placeholder={t("editProfile.placeholders.university")}
+                  />
+                </Input>
+                {errors.university && (
+                  <Box className="px-2">
+                    <Text className="text-error-300">
+                      {errors.university.message}
                     </Text>
                   </Box>
                 )}

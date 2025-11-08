@@ -26,7 +26,9 @@
         "placeholders": {
             "fullName": "Ad Soyad",
             "email": "E-posta",
-            "phone": "Telefon Numarası"
+            "phone": "Telefon Numarası",
+            "department": "Bölüm",
+            "university": "Üniversite"
         },
         "validation": {
             "fullName": "Lütfen geçerli bir ad-soyad giriniz.",

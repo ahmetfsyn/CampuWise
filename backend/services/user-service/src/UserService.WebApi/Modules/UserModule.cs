@@ -8,40 +8,113 @@ using UserService.WebApi.Extensions;
 
 namespace UserService.WebApi.Modules
 {
-    public static class UserModule
-    {
-        public static void RegisterUserRoutes(this IEndpointRouteBuilder app)
-        {
-            RouteGroupBuilder group = app.MapGroup("/users").WithTags("User");
+	public static class UserModule
+	{
+		public static void RegisterUserRoutes(this IEndpointRouteBuilder app)
+		{
+			RouteGroupBuilder group = app.MapGroup("/users").WithTags("User");
 
-            group.MapPost("details",
-                  async (IMediator mediator, UserDetailsRequestDto request, CancellationToken cancellationToken) =>
-                  {
+			group
+				.MapPost(
+					"details",
+					async (
+						IMediator mediator,
+						UserDetailsRequestDto request,
+						CancellationToken cancellationToken
+					) =>
+					{
+						UserDetailsCommand command = request.Adapt<UserDetailsCommand>();
+						var result = await mediator.SendCommandAsync<
+							UserDetailsCommand,
+							Result<List<UserDetailsResponseDto>>
+						>(command, cancellationToken);
 
-                      var command = request.Adapt<UserDetailsCommand>();
-                      var result = await mediator.SendCommandAsync<UserDetailsCommand, Result<List<UserDetailsResponseDto>>>(command, cancellationToken);
+						return result;
+					}
+				)
+				.Produces<Result<List<UserDetailsResponseDto>>>();
 
-                      return result;
-                  })
-                  .Produces<Result<List<UserDetailsResponseDto>>>();
+			group
+				.MapPatch(
+					"me",
+					async (
+						IMediator mediator,
+						UserUpdateRequestDto request,
+						HttpContext httpContext,
+						CancellationToken cancellationToken
+					) =>
+					{
+						// Kendi profilini güncelliyor
+						Guid requesterUserId = httpContext.GetUserId();
 
-            // todo : alttaki endpointin handlerını ve geri kalanını tamamla.
-            group.MapGet("me", async (IMediator mediator, HttpContext httpContext, CancellationToken cancellationToken) =>
-        {
-            var userId = httpContext.GetUserId();
+						var command = new UpdateUserProfileCommand(
+							Id: requesterUserId,
+							FirstName: request.FirstName,
+							LastName: request.LastName
+						);
 
-            var query = new GetUserByIdQuery(userId);
+						var result = await mediator.SendCommandAsync<
+							UpdateUserProfileCommand,
+							Result<UserProfileResponseDto>
+						>(command, cancellationToken);
 
-            var result = await mediator.SendQueryAsync<GetUserByIdQuery, Result<GetUserByIdResponseDto>>(query, cancellationToken);
+						return result;
+					}
+				)
+				.RequireAuthorization()
+				.Produces<Result<UserProfileResponseDto>>();
 
-            return result;
-        })
-        .RequireAuthorization()
-        .Produces<Result<GetUserByIdResponseDto>>();
+			group
+				.MapGet(
+					"me",
+					async (
+						IMediator mediator,
+						HttpContext httpContext,
+						CancellationToken cancellationToken
+					) =>
+					{
+						Guid userId = httpContext.GetUserId();
 
-            // todo : burada iki tane endpoin ekle biri /me biri de /{id} olacak.
-            // group.MapGet("/me", async())
+						var query = new GetUserProfileByIdQuery(
+							userId,
+							IncludePrivateAttributes: true
+						);
 
-        }
-    }
+						var result = await mediator.SendQueryAsync<
+							GetUserProfileByIdQuery,
+							Result<UserProfileResponseDto>
+						>(query, cancellationToken);
+
+						return result;
+					}
+				)
+				.RequireAuthorization()
+				.Produces<Result<UserProfileResponseDto>>();
+
+			group
+				.MapGet(
+					"{id}",
+					async (
+						Guid id,
+						IMediator mediator,
+						HttpContext httpContext,
+						CancellationToken cancellationToken
+					) =>
+					{
+						Guid requesterUserId = httpContext.GetUserId();
+
+						var query = new GetUserProfileByIdQuery(id);
+
+						var result = await mediator.SendQueryAsync<
+							GetUserProfileByIdQuery,
+							Result<UserProfileResponseDto>
+						>(query, cancellationToken);
+
+						return result;
+					}
+				)
+				.RequireAuthorization()
+				.Produces<Result<UserProfileResponseDto>>();
+		}
+	}
 }
