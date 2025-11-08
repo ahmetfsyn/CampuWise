@@ -1,6 +1,8 @@
-import api from "@/configs/api.config";
+import { createApi } from "@/configs/api.config";
 import { Event } from "@/types/models";
 import { CreateEventFormValues } from "@/validations/create-event-form";
+
+const api = createApi();
 
 const EVENT_SERVICE_URL_PREFIX = "/event-service";
 
@@ -51,7 +53,7 @@ export const getEventByIdAsync = async (eventId: string) => {
 
     // todo : bu metodun backendinde category verisi düzgün gelmiyor. önce backende bak sonra mobile tarafına bak.
 
-    console.log("gelen event: ", data);
+    // console.log("gelen event: ", data);
     return data;
   } catch (error) {
     console.error(error);

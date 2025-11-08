@@ -7,15 +7,15 @@ import { useCallback } from "react";
 import ShortcutButton from "@/components/ShortcutButton";
 import { FlatList, ScrollView } from "react-native";
 import Carousel from "@/components/Carousel";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { topics } from "@/mocks/mockData";
 import EventPreviewCard from "@/components/EventPreviewCard";
 import PopularTopicPreviewCard from "@/components/PopularTopicPreviewCard";
 import EmptyEventListComponent from "@/components/EmptyEventListComponent";
 import { Calendar, Megaphone, Utensils, HelpCircle } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
-import { useAuthStore } from "@/store/useAuthStore";
 import useGetAllEvents from "@/hooks/events/useGetAllEvents";
+import useUserStore from "@/store/useUserStore";
+import GreetingCard from "@/components/home/GreetingCard";
 
 const ITEM_WIDTH = 192;
 
@@ -51,7 +51,7 @@ export const shortcuts = [
 ];
 
 export default function HomeScreen() {
-  const user = useAuthStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
 
   const router = useRouter();
 
@@ -66,8 +66,6 @@ export default function HomeScreen() {
     $expand: "participants",
     // $top: 10,
   });
-
-  // todo : sorun su sanırım rememberMe işaretlendiğinde refreshToken kaydediliyor ama accessToken süresi bittiğinde otomatik logout mu oluyor bilmiyorm cunku user bilgisi gidiyor uygulama içinde . anasayfada Hi undefined yazıyor mesela . bu sorunu arastır. test edebilmek için bu durumu rememberMe ile giriş yapıp uygulamayı yenileyecek bir değşiklik yapmadan bekle en az 5 dk. daha sonrasında herhangi bir işlem yaptıgında buyuk ihtimalle user bilgisi gidecek. backendde refresh-token endpointinde sadece token dönüyordum sanırım user bbilgisi de eklemem lazım olabilir !
 
   const events = data?.pages.flat() ?? [];
 
@@ -101,25 +99,9 @@ export default function HomeScreen() {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} className="flex-1  p-4 ">
-      <Box className=" p-2 mb-4 flex-row justify-between items-center ">
-        <Box>
-          <Text className="text-2xl font-bold text-typography-0">
-            {`${tHome("greeting.title")} ${user?.firstName}`}
-          </Text>
-          <Text className="text-lg font-normal text-typography-200">
-            {tHome("greeting.subTitle")}
-          </Text>
-        </Box>
-        <Avatar size={"lg"}>
-          <AvatarImage
-            source={{
-              uri: user?.avatarUrl,
-            }}
-          />
-        </Avatar>
-      </Box>
-
       {/* <EventDeadLineCard {...events[0]} /> */}
+
+      <GreetingCard user={user} />
 
       <Box className="items-center my-4">
         <Carousel />

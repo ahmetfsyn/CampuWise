@@ -72,7 +72,7 @@ const ParticipantsScreen = () => {
       />
 
       <Fab onPress={handleOpenExportModal}>
-        <FabIcon as={MoreVertical} size={24} />
+        <FabIcon className="text-primary-0" as={MoreVertical} size={24} />
       </Fab>
 
       <Actionsheet

@@ -1,20 +1,22 @@
-import { useAuthStore } from "@/store/useAuthStore";
 import {
   getAccessToken,
   getRefreshToken,
   saveAccessToken,
+  saveRefreshToken,
 } from "@/utils/secureStorage";
-import axios from "axios";
+import { asyncStorage } from "@/utils/asyncStorage";
+import axios, { AxiosInstance, AxiosError } from "axios";
 
-const api = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_BASE_API_URL + "/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+export const createApi = (
+  onUnauthorized?: () => Promise<void>
+): AxiosInstance => {
+  const api = axios.create({
+    baseURL: process.env.EXPO_PUBLIC_BASE_API_URL + "/api",
+    headers: { "Content-Type": "application/json" },
+  });
 
-api.interceptors.request.use(
-  async (config) => {
+  // Request interceptor to add access token
+  api.interceptors.request.use(async (config) => {
     const token = await getAccessToken();
     if (token) {
       config.headers = {
@@ -23,49 +25,60 @@ api.interceptors.request.use(
       };
     }
     return config;
-  },
-  (error) => Promise.reject(error)
-);
+  });
 
-api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    if (error.response?.status === 401) {
-      // Access token expired
-
-      const refreshToken = await getRefreshToken();
-
-      console.log("401 geldi ve stredan refreshtoken çekildi : ", refreshToken);
-
-      if (!refreshToken) {
-        const isAuth = useAuthStore.getState().isAuthenticated;
-        await useAuthStore.getState().logout();
-        // router.replace("/auth/login");
-        console.log("logout oldu ve bura calisti api.config : ", isAuth);
-        return Promise.reject(error);
+  // Response interceptor to handle 401 errors
+  api.interceptors.response.use(
+    (response) => response,
+    async (error: AxiosError) => {
+      if (error.response?.status === 401 && onUnauthorized) {
+        await onUnauthorized();
+        // Optionally retry original request
+        if (error.config && error.config.headers) {
+          const newToken = await getAccessToken();
+          if (newToken) {
+            error.config.headers.Authorization = `Bearer ${newToken}`;
+            return api.request(error.config);
+          }
+        }
       }
-
-      try {
-        const response = await api.post("/user-service/auth/refresh-token", {
-          refreshToken,
-        });
-        // Yeni access token kaydet
-        const data = response.data.data;
-        console.log("backendden gelen yeni tokenlar datası : ", data);
-        await saveAccessToken(data.accessToken, data.expiresIn);
-
-        // Orijinal isteği tekrar dene
-        error.config.headers.Authorization = `Bearer ${data.accessToken}`;
-        return api.request(error.config);
-      } catch (refreshError) {
-        // Refresh token da geçersiz → logout
-        useAuthStore.getState().logout();
-        console.error("buraya geldii");
-        return Promise.reject(refreshError);
-      }
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
-  }
-);
+  );
 
-export default api;
+  return api;
+};
+
+// Example default onUnauthorized handler
+export const handleUnauthorized = async (): Promise<void> => {
+  const refreshToken = await getRefreshToken();
+  if (!refreshToken) {
+    console.log("refreshToken bulunamadi");
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      `${process.env.EXPO_PUBLIC_BASE_API_URL}/api/auth/refresh-token`,
+      { refreshToken }
+    );
+    const data = response.data.data;
+    console.log("refreshToken için istek atıldı ve gelen data : ", data);
+
+    await saveAccessToken(data.accessToken, data.expiresIn);
+    console.log("yeni accessToken storage a kaydedildi");
+
+    const rememberMe = await asyncStorage.getItem("rememberMe");
+
+    console.log("rememberMe değeri : ", rememberMe);
+
+    if (rememberMe === "true" && data.refreshToken) {
+      console.log("rememberMe değeri true geldi ve if e girdi");
+
+      await saveRefreshToken(data.refreshToken);
+      console.log("refreshToken storage a kaydedildi");
+    }
+  } catch {
+    // Logout or handle invalid refresh token externally
+  }
+};

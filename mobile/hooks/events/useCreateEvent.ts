@@ -1,4 +1,4 @@
-import { createEventAsync } from "@/services/eventService";
+import { createEventAsync } from "@/services/event.service";
 import showMessage from "@/utils/showMessage";
 import { useMutation } from "@tanstack/react-query";
 

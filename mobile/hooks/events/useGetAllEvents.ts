@@ -1,4 +1,4 @@
-import { getAllEventsAsync } from "@/services/eventService";
+import { getAllEventsAsync } from "@/services/event.service";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import type { Event } from "@/types/models";
 

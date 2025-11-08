@@ -11,6 +11,8 @@ namespace UserService.Application.Interfaces
         Task<LoginResponseDto> RefreshTokenAsync(string refreshToken);
         Task RegisterAsync(string fullName, string password, string email);
         Task<List<string>> GetUsersDetailsAsync(List<Guid> userIds);
+        Task<GetUserByIdResponseDto> GetUserByIdAsync(Guid userId);
+
 
 
         // Task<UserCustomAttributesDto> GetCustomAttributesAsync(string keycloakId);

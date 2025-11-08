@@ -1,5 +1,3 @@
-
-
 using Cortex.Mediator.Queries;
 using EventService.Application.Events.Dtos;
 using EventService.Domain.Events;

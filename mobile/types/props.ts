@@ -18,7 +18,7 @@ export type EventListCardProps = Event & {
   onPress: (eventId: string) => void;
 };
 export type ProfileHeaderSectionProps = {
-  imageUrl: string;
+  avatarUrl: string;
   name: string;
   handleEditProfile: () => void;
   handleGoSettings: () => void;

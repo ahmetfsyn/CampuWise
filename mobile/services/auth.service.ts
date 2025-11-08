@@ -1,7 +1,9 @@
 import { RegisterFormValues } from "@/validations/register-form";
 import { LoginFormValues } from "@/validations/login-form";
-import api from "@/configs/api.config";
+import { createApi } from "@/configs/api.config";
 import { LoginResponseDto } from "@/types/models";
+
+const api = createApi();
 
 export const registerAsync = async ({
   email,
@@ -28,17 +30,14 @@ export const loginAsync = async ({
   rememberMe,
 }: LoginFormValues): Promise<LoginResponseDto & { rememberMe: boolean }> => {
   try {
-    const { data } = await api.post("/user-service/auth/login", {
+    const response = await api.post("/user-service/auth/login", {
       email,
       password,
     });
 
-    const tokenDetails: LoginResponseDto = {
-      accessToken: data.data.accessToken,
-      refreshToken: data.data.refreshToken,
-      expiresIn: data.data.expiresIn,
-      user: data.data.user,
-    };
+    const data = response.data.data as LoginResponseDto;
+
+    const tokenDetails = data;
 
     return { ...tokenDetails, rememberMe };
   } catch (error) {

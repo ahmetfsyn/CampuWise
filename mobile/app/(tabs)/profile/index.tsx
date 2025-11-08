@@ -1,14 +1,14 @@
 import { FlatList } from "react-native";
 import { Box } from "@/components/ui/box";
-import { users } from "@/mocks/mockData";
 import { Text } from "@/components/ui/text";
 import ProfileFlatListHeaderComponent from "@/components/profile/ProfileFlatListHeaderComponent";
 import { router } from "expo-router";
 import { useCallback } from "react";
 import useGetAllEvents from "@/hooks/events/useGetAllEvents";
+import useUserStore from "@/store/useUserStore";
 
 const ProfileScreen = () => {
-  const user = users[0];
+  const user = useUserStore((state) => state.user);
 
   const { data: events } = useGetAllEvents();
 

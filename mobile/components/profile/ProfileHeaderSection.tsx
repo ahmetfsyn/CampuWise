@@ -9,7 +9,7 @@ import { Cog } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 
 const ProfileHeaderSection = ({
-  imageUrl,
+  avatarUrl,
   name,
   handleEditProfile,
   handleGoSettings,
@@ -18,7 +18,7 @@ const ProfileHeaderSection = ({
   return (
     <Box className="items-center bg-background-0 rounded-xl p-6 shadow-md">
       <Avatar size="2xl" className="mb-3">
-        <AvatarImage source={{ uri: imageUrl }} />
+        <AvatarImage source={{ uri: avatarUrl }} />
       </Avatar>
 
       <Text className="text-2xl font-bold text-center text-typography-0">

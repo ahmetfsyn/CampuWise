@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/select";
 import { useTranslation } from "react-i18next";
 import { LanguageCode } from "@/types/models";
-import { router } from "expo-router";
 import { useAuthStore } from "@/store/useAuthStore";
 
 const SettingsScreen = () => {
@@ -40,11 +39,10 @@ const SettingsScreen = () => {
   } = useAppStore((state) => state);
 
   const { t } = useTranslation("profile");
-  const logout = useAuthStore((state) => state.logout);
+  const manuelLogout = useAuthStore((state) => state.manuelLogout);
   const handleLogOut = useCallback(async () => {
-    console.log("cikis yapildi");
-    await logout();
-  }, [logout]);
+    await manuelLogout();
+  }, [manuelLogout]);
 
   const languageOptions = useMemo(
     () => [

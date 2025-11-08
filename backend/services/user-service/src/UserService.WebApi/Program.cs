@@ -17,31 +17,30 @@ Log.Logger = new LoggerConfiguration()
 // Host’a Serilog bağla
 builder.Host.UseSerilog();
 
-
 builder.Services.AddInternalServices(builder.Configuration);
-
 builder.Services.AddExternalServices();
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
 var app = builder.Build();
+var scalarOptions = builder.Configuration.GetSection("Scalar").Get<ScalarOptions>();
 
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
+    app.MapScalarApiReference(c =>
+       {
+           c.Theme = scalarOptions?.Theme;
+       });
 }
 
-app.MapScalarApiReference();
 
 // app.UseHttpsRedirection();
 
 app.AddMiddlewares();
 
-app.MapControllers().RequireRateLimiting("fixed").RequireAuthorization();
+app.MapControllers().RequireRateLimiting("fixed");
 
 app.RegisterRoutes();
 

@@ -46,7 +46,7 @@ const EditEventScreen = () => {
 
   const event: Event = JSON.parse(eventString as string);
 
-  console.log(event);
+  // console.log(event);
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const { t } = useTranslation("events");
@@ -57,7 +57,9 @@ const EditEventScreen = () => {
     return router.canGoBack() && router.back();
   };
 
-  console.log(event.category);
+  // console.log(event.category);
+
+  // todo : buraya gelen event objesinde nedense category gorunmuyor araştır ve duzlet.
 
   const {
     control,

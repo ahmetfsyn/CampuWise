@@ -9,37 +9,56 @@ import {
   getAccessTokenExpiry,
   secureStoreStorage,
 } from "@/utils/secureStorage";
-import { LoginResponseDto, AuthUser } from "@/types/models";
+import { LoginResponseDto } from "@/types/models";
+import { asyncStorage } from "@/utils/asyncStorage";
+import { getCurrentUserAsync } from "@/services/user.service";
+import useUserStore from "./useUserStore";
 
 type AuthState = {
   isAuthenticated: boolean;
-  user: AuthUser | null;
   login: (
     tokenDetails: LoginResponseDto & { rememberMe: boolean }
   ) => Promise<void>;
-  logout: () => Promise<void>;
+  manuelLogout: () => Promise<void>;
+  autoLogout: () => Promise<void>;
   checkAuth: () => Promise<void>;
 };
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isAuthenticated: false,
       user: null,
-
       login: async (tokenDetails) => {
+        // Tokenları kaydet
         await saveAccessToken(tokenDetails.accessToken, tokenDetails.expiresIn);
-        if (tokenDetails.rememberMe)
-          console.log("tokenDetails.rememberMe : ", tokenDetails.rememberMe);
-        await saveRefreshToken(tokenDetails.refreshToken);
 
-        console.log("saveRefreshToken is done", tokenDetails.refreshToken);
-        set({ isAuthenticated: true, user: tokenDetails.user ?? null });
+        if (tokenDetails.rememberMe) {
+          await asyncStorage.setItem("rememberMe", "true");
+          await saveRefreshToken(tokenDetails.refreshToken);
+        }
+
+        // ✅ Kullanıcının bilgilerini yükle
+        try {
+          const user = await getCurrentUserAsync();
+          useUserStore.getState().setUser(user);
+          set({ isAuthenticated: true });
+        } catch (err) {
+          console.error("Kullanıcı bilgisi alınamadı:", err);
+          // Token geçersiz olabilir, logout yap
+          await get().autoLogout();
+        }
       },
 
-      logout: async () => {
+      manuelLogout: async () => {
         await removeTokens();
-        set({ isAuthenticated: false, user: null });
+        await asyncStorage.removeItem("rememberMe");
+
+        set({ isAuthenticated: false });
+      },
+      autoLogout: async () => {
+        await removeTokens();
+        set((state) => ({ ...state, isAuthenticated: false }));
       },
 
       checkAuth: async () => {
@@ -47,13 +66,19 @@ export const useAuthStore = create<AuthState>()(
         const expiry = await getAccessTokenExpiry();
 
         if (!accessToken || !expiry || Date.now() > expiry) {
-          await removeTokens();
-          set({ isAuthenticated: false, user: null });
-        } else {
-          // Here we keep the user info if stored, otherwise null
-          set((state) => ({ isAuthenticated: true, user: state.user }));
+          await get().autoLogout();
+          return;
         }
-        console.log("checkAuth is done");
+
+        // ✅ Token hâlâ geçerli — kullanıcı bilgisini tekrar yükle
+        try {
+          const user = await getCurrentUserAsync();
+          useUserStore.getState().setUser(user);
+          set({ isAuthenticated: true });
+        } catch (err) {
+          console.error("checkAuth -> Kullanıcı yüklenemedi:", err);
+          await get().autoLogout();
+        }
       },
     }),
     {
