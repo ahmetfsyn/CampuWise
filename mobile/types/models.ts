@@ -92,6 +92,8 @@ export type User = {
   email: string;
   phoneNumber?: string;
   avatarUrl?: string;
+  department?: string;
+  university?: string;
 };
 
 export type LoginResponseDto = {

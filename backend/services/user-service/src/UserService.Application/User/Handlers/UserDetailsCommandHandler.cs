@@ -10,14 +10,13 @@ using UserService.Infrastructure.Utilities;
 namespace UserService.Application.User.Handlers
 {
     public class UserDetailsCommandHandler(
-        IKeycloakService keycloakService
+        IKeycloakUserService keycloakService
         ) : ICommandHandler<UserDetailsCommand, Result<List<UserDetailsResponseDto>>>
     {
-        private readonly IKeycloakService _keycloakService = keycloakService;
 
         public async Task<Result<List<UserDetailsResponseDto>>> Handle(UserDetailsCommand command, CancellationToken cancellationToken)
         {
-            var rawUsers = await _keycloakService.GetUsersDetailsAsync(command.Ids);
+            var rawUsers = await keycloakService.GetUsersDetailsAsync(command.Ids);
 
             var users = new List<UserDetailsResponseDto>();
 

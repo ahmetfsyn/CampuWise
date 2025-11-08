@@ -6,14 +6,13 @@ using UserService.Application.User.DTOs;
 
 namespace UserService.Application.User.Handlers
 {
-    public class RefreshTokenHandler(IKeycloakService keycloakService) : ICommandHandler<RefreshTokenCommand, Result<LoginResponseDto>>
+    public class RefreshTokenHandler(IKeycloakAuthService keycloakService) : ICommandHandler<RefreshTokenCommand, Result<LoginResponseDto>>
     {
-        private readonly IKeycloakService _keycloakService = keycloakService;
 
         public async Task<Result<LoginResponseDto>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
         {
 
-            var token = await _keycloakService.RefreshTokenAsync(request.RefreshToken);
+            var token = await keycloakService.RefreshTokenAsync(request.RefreshToken);
 
             return token.AccessToken != string.Empty
                 ? Result<LoginResponseDto>.Succeed(token)

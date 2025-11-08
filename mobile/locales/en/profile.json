@@ -20,7 +20,9 @@
         "placeholders": {
             "fullName": "Full Name",
             "email": "Email",
-            "phone": "Phone Number"
+            "phone": "Phone Number",
+            "department": "Department",
+            "university": "University"
         },
         "validation": {
             "fullName": "Please enter a valid full name.",
