@@ -67,6 +67,8 @@ export default function HomeScreen() {
     // $top: 10,
   });
 
+  console.log("data :  ", data);
+
   const events = data?.pages.flat() ?? [];
 
   const handleCustomize = useCallback(() => {

@@ -11,10 +11,12 @@ import pickImage from "@/utils/pickImage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import useUserStore from "@/store/useUserStore";
+import useUpdateUserById from "@/hooks/users/useUpdateUserById";
 
 const EditProfileScreen = () => {
-  const { email, fullName, department, university, avatarUrl, phoneNumber } =
-    useUserStore((state) => state.user!);
+  const { email, fullName, attributes } = useUserStore((state) => state.user!);
+
+  const { handleUpdateUserById, isUpdating } = useUpdateUserById();
 
   const {
     control,
@@ -25,21 +27,22 @@ const EditProfileScreen = () => {
     defaultValues: {
       fullName: fullName,
       email: email,
-      phoneNumber: phoneNumber,
-      avatarUrl: avatarUrl,
-      department: department,
-      university: university,
+      phoneNumber: attributes.phoneNumber,
+      avatarUrl: attributes.avatarUrl,
+      department: attributes.department,
+      university: attributes.university,
     },
     resolver: zodResolver(editProfileFormSchema),
   });
   const { t } = useTranslation("profile");
 
   const onSubmit = async (data: any) => {
-    await handleSave(data);
-  };
-
-  const handleSave = async (data: any) => {
-    console.log("Profile saved:", data);
+    await handleUpdateUserById({
+      phoneNumber: data.phoneNumber,
+      avatarUrl: data.avatarUrl,
+      department: data.department,
+      university: data.university,
+    });
 
     showMessage({
       type: "success",
@@ -230,7 +233,7 @@ const EditProfileScreen = () => {
             size={"lg"}
             onPress={handleSubmit(onSubmit)}
             className="h-14"
-            isDisabled={Object.keys(errors).length > 0}
+            isDisabled={isUpdating}
           >
             {t("editProfile.saveButton")}
           </AnimatedButton>

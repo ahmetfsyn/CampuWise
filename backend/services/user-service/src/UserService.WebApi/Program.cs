@@ -1,5 +1,6 @@
 using Scalar.AspNetCore;
 using Serilog;
+using UserService.WebApi.Configs;
 using UserService.WebApi.Installers;
 using UserService.WebApi.Modules;
 
@@ -20,6 +21,7 @@ builder.Host.UseSerilog();
 builder.Services.AddInternalServices(builder.Configuration);
 builder.Services.AddExternalServices();
 
+RegisterMapsterConfig.RegisterMappings();
 
 var app = builder.Build();
 var scalarOptions = builder.Configuration.GetSection("Scalar").Get<ScalarOptions>();

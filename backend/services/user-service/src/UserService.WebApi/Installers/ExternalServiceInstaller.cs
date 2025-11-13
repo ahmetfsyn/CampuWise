@@ -1,6 +1,6 @@
 using System.Threading.RateLimiting;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
+using UserService.WebApi.Configs;
 
 namespace UserService.WebApi.Installers
 {
@@ -13,16 +13,16 @@ namespace UserService.WebApi.Installers
 
             services.AddEndpointsApiExplorer();
 
+			services.AddRateLimiter(x =>
+				x.AddFixedWindowLimiter("fixed", cfg =>
+				{
+					cfg.QueueLimit = 100;
+					cfg.Window = TimeSpan.FromSeconds(1);
+					cfg.PermitLimit = 100;
+					cfg.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+				})
+			);
 
-            services.AddRateLimiter(x =>
-                x.AddFixedWindowLimiter("fixed", cfg =>
-                {
-                    cfg.QueueLimit = 100;
-                    cfg.Window = TimeSpan.FromSeconds(1);
-                    cfg.PermitLimit = 100;
-                    cfg.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-                })
-            );
             services.AddAuthentication("Bearer")
                     .AddJwtBearer("Bearer", options =>
                     {
@@ -33,10 +33,12 @@ namespace UserService.WebApi.Installers
                     });
             services.AddAuthorization();
 
-            services.AddResponseCompression(opt =>
-            {
-                opt.EnableForHttps = true;
-            });
+			services.AddResponseCompression(opt =>
+			{
+				opt.EnableForHttps = true;
+			});
+
+
             return services;
         }
     }

@@ -90,6 +90,10 @@ export type User = {
   lastName: string;
   readonly fullName: string;
   email: string;
+  attributes: UserAttributes;
+};
+
+export type UserAttributes = {
   phoneNumber?: string;
   avatarUrl?: string;
   department?: string;
