@@ -6,9 +6,10 @@ import { router } from "expo-router";
 import { useCallback } from "react";
 import useGetAllEvents from "@/hooks/events/useGetAllEvents";
 import useUserStore from "@/store/useUserStore";
+import { Event } from "@/types/models";
 
 const ProfileScreen = () => {
-  const user = useUserStore((state) => state.user);
+  const user = useUserStore((state) => state.user!);
 
   const { data: events } = useGetAllEvents();
 

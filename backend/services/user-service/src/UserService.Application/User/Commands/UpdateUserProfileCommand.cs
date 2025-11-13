@@ -7,8 +7,9 @@ namespace UserService.Application.User.Commands
 {
     public record UpdateUserProfileCommand(
         Guid Id,
-        string? FirstName = null,
-        string? LastName = null,
-        UserAttributes? Attributes = null
-    ) : ICommand<Result<UserProfileResponseDto>>;
+ 		string? PhoneNumber ,
+		string? AvatarUrl ,
+		string? University ,
+		string? Department
+		) : ICommand<Result<UserProfileResponseDto>>;
 }

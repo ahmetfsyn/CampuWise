@@ -6,20 +6,20 @@ namespace UserService.Infrastructure.Extensions
 {
     public static class MapsterExtensions
     {
-       public static void AdaptToTargetWithAttributes(this UpdateUserProfileCommand command, Dictionary<string, object[]> targetAttributes)
+       public static void AdaptToTargetWithAttributes(this UpdateUserProfileCommand command, Dictionary<string, string[]> targetAttributes)
 {
-    var attrs = command.Attributes;
-    if (!string.IsNullOrWhiteSpace(attrs?.PhoneNumber))
-        targetAttributes["phoneNumber"] = [attrs.PhoneNumber];
+    // var attrs = command.Attributes;
+    if (!string.IsNullOrWhiteSpace(command.PhoneNumber))
+        targetAttributes["phoneNumber"] = [command.PhoneNumber];
 
-    if (!string.IsNullOrWhiteSpace(attrs?.AvatarUrl))
-        targetAttributes["avatarUrl"] = [attrs.AvatarUrl];
+    if (!string.IsNullOrWhiteSpace(command.AvatarUrl))
+        targetAttributes["avatarUrl"] = [command.AvatarUrl];
 
-    if (!string.IsNullOrWhiteSpace(attrs?.University))
-        targetAttributes["university"] = [attrs.University];
+    if (!string.IsNullOrWhiteSpace(command.University))
+        targetAttributes["university"] = [command.University];
 
-    if (!string.IsNullOrWhiteSpace(attrs?.Department))
-        targetAttributes["department"] = [attrs.Department];
+    if (!string.IsNullOrWhiteSpace(command.Department))
+        targetAttributes["department"] = [command.Department];
 }
     }
 }

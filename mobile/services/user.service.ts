@@ -26,9 +26,13 @@ export const getCurrentUserAsync = async () => {
   }
 };
 
-export const updateUserByIdAsync = async () => {
+export const updateUserByIdAsync = async (data: any) => {
   try {
-    // todo : burayı tamamla backendini.
+    const response = await api.patch("/user-service/users/me", data);
+
+    const result = response.data.data;
+
+    return result;
   } catch (error) {
     console.error(error);
     throw error;

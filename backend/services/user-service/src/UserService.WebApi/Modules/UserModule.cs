@@ -47,11 +47,9 @@ namespace UserService.WebApi.Modules
 						// Kendi profilini güncelliyor
 						Guid requesterUserId = httpContext.GetUserId();
 
-						var command = new UpdateUserProfileCommand(
-							Id: requesterUserId,
-							FirstName: request.FirstName,
-							LastName: request.LastName
-						);
+						var command = request.Adapt<UpdateUserProfileCommand>();
+
+						command = command with { Id = requesterUserId };
 
 						var result = await mediator.SendCommandAsync<
 							UpdateUserProfileCommand,
