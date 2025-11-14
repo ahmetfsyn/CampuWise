@@ -12,14 +12,13 @@ import {
   CheckboxLabel,
   CheckboxIcon,
 } from "@/components/ui/checkbox";
-import { CheckIcon, Icon } from "@/components/ui/icon";
+import { CheckIcon } from "@/components/ui/icon";
 import { useCallback } from "react";
 import AnimatedButton from "@/components/AnimatedButton";
 import useAppStore from "@/store/useAppStore";
 import { Controller, useForm } from "react-hook-form";
 import { loginFormSchema, LoginFormValues } from "@/validations/login-form";
 import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
-import { SunMoon } from "lucide-react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import useLogin from "@/hooks/auth/useLogin";

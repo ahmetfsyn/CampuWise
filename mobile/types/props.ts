@@ -1,4 +1,4 @@
-import { Event, MarkerCategory } from "./models";
+import { Event, MarkerCategory, User } from "./models";
 
 export type MarkerCardProps = {
   id: string;
@@ -18,8 +18,7 @@ export type EventListCardProps = Event & {
   onPress: (eventId: string) => void;
 };
 export type ProfileHeaderSectionProps = {
-  avatarUrl: string;
-  name: string;
+  user: User;
   handleEditProfile: () => void;
   handleGoSettings: () => void;
 };

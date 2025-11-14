@@ -8,8 +8,6 @@ import { useTranslation } from "react-i18next";
 const GreetingCard = ({ user }: { user: User | null }) => {
   const { t: tHome } = useTranslation("home");
 
-  console.log(user);
-
   return (
     <Box className=" p-2 mb-4 flex-row justify-between items-center ">
       <Box>

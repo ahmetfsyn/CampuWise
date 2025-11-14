@@ -1,15 +1,18 @@
 import { registerAsync } from "@/services/auth.service";
 import showMessage from "@/utils/showMessage";
 import { useMutation } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 const useRegister = () => {
+  const { t } = useTranslation("auth");
+
   const { mutateAsync, isPending } = useMutation({
     mutationFn: registerAsync,
     onSuccess: () => {
       showMessage({
         type: "success",
-        text1: "Kayıt Başarılı 🎉",
-        text2: "Aramıza hoş geldin!",
+        text1: t("register.toast.registerSuccess.title"),
+        text2: t("register.toast.registerSuccess.subTitle"),
       });
     },
     onError: (error: any) => {

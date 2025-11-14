@@ -1,4 +1,4 @@
-import { getUserByIdAsync, getCurrentUserAsync } from "@/services/user.service";
+import { getCurrentUserAsync } from "@/services/user.service";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetUserById = (userId?: string) => {

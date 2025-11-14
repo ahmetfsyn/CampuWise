@@ -67,8 +67,6 @@ export default function HomeScreen() {
     // $top: 10,
   });
 
-  console.log("data :  ", data);
-
   const events = data?.pages.flat() ?? [];
 
   const handleCustomize = useCallback(() => {
@@ -82,8 +80,6 @@ export default function HomeScreen() {
   const handleShowMoreDiscussions = useCallback(() => {
     console.log("show more discussions");
   }, []);
-
-  console.log("home is rendered");
 
   const handleGoEvents = useCallback(() => {
     router.push("/events");

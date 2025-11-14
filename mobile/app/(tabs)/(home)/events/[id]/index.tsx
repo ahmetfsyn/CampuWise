@@ -8,7 +8,6 @@ import EventParticipants from "@/components/events/EventParticipants";
 import EventActions from "@/components/events/EventActions";
 import ReportEventModal from "@/components/events/ReportEventModal";
 import LeaveEventDialog from "@/components/events/LeaveEventDialog";
-import { Skeleton } from "@/components/ui/skeleton";
 import EventMenu from "@/components/events/EventMenu";
 
 const EventDetailsScreen = () => {
@@ -41,7 +40,7 @@ const EventDetailsScreen = () => {
   if (isPendingEvent)
     return (
       <Box className="flex-1 items-center justify-center">
-        <Spinner size={48} />
+        <Spinner className="text-primary-0" size={48} />
       </Box>
     );
 

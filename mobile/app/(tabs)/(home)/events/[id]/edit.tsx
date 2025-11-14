@@ -36,10 +36,10 @@ import { Icon } from "@/components/ui/icon";
 import { useTranslation } from "react-i18next";
 import useCreateEvent from "@/hooks/events/useCreateEvent";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Spinner } from "@/components/ui/spinner";
 import { Event } from "@/types/models";
 import { editEventFormSchema } from "@/validations/edit-event-form";
 import { formatDate } from "@/utils/formatDate";
+import { ButtonSpinner } from "@/components/ui/button";
 
 const EditEventScreen = () => {
   const { event: eventString } = useLocalSearchParams();
@@ -317,7 +317,11 @@ const EditEventScreen = () => {
             isDisabled={isCreating || !isValid}
             onPress={handleSubmit(onSubmit)}
           >
-            {isCreating ? <Spinner size={24} /> : t("buttons.editEvent")}
+            {isCreating ? (
+              <ButtonSpinner className="text-primary-0" size={24} />
+            ) : (
+              t("buttons.editEvent")
+            )}
           </AnimatedButton>
         </Box>
       </ScrollView>

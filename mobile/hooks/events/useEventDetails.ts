@@ -17,7 +17,9 @@ export const useEventDetails = () => {
     isPending: isPendingEvent,
     isRefetching: isRefetchingEvent,
   } = useGetEventById(eventId as string);
-  const { handleJoinEvent, isJoiningEvent } = useJoinEvent();
+  const { handleJoinEvent, isJoiningEvent } = useJoinEvent({
+    onSuccess: () => setJoinedEvent(true),
+  });
   const { handleLeaveEvent, isLeavingEvent } = useLeaveEvent();
   const user = useUserStore((state) => state.user);
   const { t: tEvents } = useTranslation("events");

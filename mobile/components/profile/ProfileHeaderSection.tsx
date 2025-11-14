@@ -9,23 +9,23 @@ import { Cog } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 
 const ProfileHeaderSection = ({
-  avatarUrl,
-  name,
+  user,
   handleEditProfile,
   handleGoSettings,
 }: ProfileHeaderSectionProps) => {
   const { t } = useTranslation("profile");
+  const { attributes, fullName } = user;
   return (
-    <Box className="items-center bg-background-0 rounded-xl p-6 shadow-md">
+    <Box className="items-center bg-background-0 rounded-xl p-4 shadow-md">
       <Avatar size="2xl" className="mb-3">
-        <AvatarImage source={{ uri: avatarUrl }} />
+        <AvatarImage source={{ uri: attributes?.avatarUrl }} />
       </Avatar>
 
       <Text className="text-2xl font-bold text-center text-typography-0">
-        {name}
+        {fullName}
       </Text>
-      <Text className="text-typography-200">{t("header.university")}</Text>
-      <Text className="mb-4 text-typography-200">{t("header.department")}</Text>
+      <Text className="text-typography-200">{attributes.university}</Text>
+      <Text className="mb-4 text-typography-200">{attributes.department}</Text>
 
       <Box className="flex-row items-center justify-center gap-3 ">
         <AnimatedButton onPress={handleEditProfile}>

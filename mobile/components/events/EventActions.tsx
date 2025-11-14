@@ -1,7 +1,7 @@
 import { Box } from "@/components/ui/box";
 import AnimatedButton from "@/components/AnimatedButton";
 import { useTranslation } from "react-i18next";
-import { Spinner } from "../ui/spinner";
+import { ButtonSpinner } from "../ui/button";
 
 interface Props {
   isJoinedEvent: boolean;
@@ -29,7 +29,7 @@ const EventActions = ({
         onPress={onJoinEvent}
       >
         {isJoiningEvent || isLeavingEvent ? (
-          <Spinner />
+          <ButtonSpinner className="text-primary-0" size={24} />
         ) : !isJoinedEvent ? (
           tEvents("buttons.joinEvent")
         ) : (
