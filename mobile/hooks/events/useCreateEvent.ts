@@ -1,11 +1,17 @@
 import { createEventAsync } from "@/services/event.service";
 import showMessage from "@/utils/showMessage";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useCreateEvent = () => {
+  const queryClient = useQueryClient();
+
   const { mutateAsync, isPending } = useMutation({
     mutationFn: createEventAsync,
     onSuccess: async () => {
+      queryClient.invalidateQueries({
+        queryKey: ["events", "infinite"],
+      });
+
       showMessage({
         type: "success",
         text1: "Etkinlik Oluşturuldu 🎉",

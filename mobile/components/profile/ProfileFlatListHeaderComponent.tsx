@@ -14,24 +14,17 @@ const ProfileFlatListHeaderComponent = ({
   handleGoEditProfile,
   handleGoSettings,
 }: ProfileFlatListHeaderComponentProps) => {
-  const { fullName, attributes } = user;
-
   return (
     <>
       {/* PROFILE HEADER */}
       <ProfileHeaderSection
-        avatarUrl={attributes.avatarUrl || ""}
-        name={fullName}
+        user={user}
         handleEditProfile={handleGoEditProfile}
         handleGoSettings={handleGoSettings}
       />
-      {/* ABOUT ME SECTION */}
-      <ProfileAboutSection />
 
       {/* POINT PROGRESS BAR */}
       {/* <ProfilePointsSection /> */}
-
-      <ProfileJoinedEvents />
     </>
   );
 };

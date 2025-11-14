@@ -1,9 +1,20 @@
 import { updateUserByIdAsync } from "@/services/user.service";
-import { useMutation } from "@tanstack/react-query";
+import useUserStore from "@/store/useUserStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useUpdateUserById = () => {
+  const queryClient = useQueryClient();
+  const { updateUser } = useUserStore((state) => state);
   const mutation = useMutation<any, Error, any>({
     mutationFn: updateUserByIdAsync,
+    onSuccess: (updatedUser) => {
+      queryClient.setQueryData(["user", "me"], updatedUser);
+      updateUser(updatedUser);
+
+      // queryClient.invalidateQueries({
+      //   queryKey: ["user", "me"],
+      // });
+    },
   });
 
   return {

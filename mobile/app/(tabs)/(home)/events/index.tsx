@@ -62,7 +62,7 @@ const EventsScreen = () => {
   return (
     <Box className="flex-1 p-4">
       {isLoadingEvents && !events ? (
-        <Spinner />
+        <Spinner className="text-primary-0" />
       ) : (
         <>
           <FlatList

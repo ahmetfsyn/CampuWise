@@ -37,7 +37,7 @@ import { Icon } from "@/components/ui/icon";
 import { useTranslation } from "react-i18next";
 import useCreateEvent from "@/hooks/events/useCreateEvent";
 import { useRouter } from "expo-router";
-import { Spinner } from "@/components/ui/spinner";
+import { ButtonSpinner } from "@/components/ui/button";
 
 const CreateEventScreen = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -306,7 +306,11 @@ const CreateEventScreen = () => {
             isDisabled={isCreating || !isValid}
             onPress={handleSubmit(onSubmit)}
           >
-            {isCreating ? <Spinner size={24} /> : t("buttons.createEvent")}
+            {isCreating ? (
+              <ButtonSpinner className="text-primary-0" size={24} />
+            ) : (
+              t("buttons.createEvent")
+            )}
           </AnimatedButton>
         </Box>
       </ScrollView>

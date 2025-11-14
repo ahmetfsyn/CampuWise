@@ -3,13 +3,15 @@ import showMessage from "@/utils/showMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
-const useJoinEvent = () => {
+const useJoinEvent = (options?: { onSuccess?: () => void }) => {
   const { t: tEvents } = useTranslation("events");
   const queryClient = useQueryClient();
 
   const { mutate: handleJoinEvent, isPending } = useMutation({
     mutationFn: joinEventAsync,
     onSuccess: (_, eventId) => {
+      options?.onSuccess?.();
+
       queryClient.invalidateQueries({ queryKey: ["events", "all"] });
       queryClient.invalidateQueries({
         queryKey: ["events", eventId],
@@ -21,7 +23,7 @@ const useJoinEvent = () => {
         text2: tEvents("eventDetails.toast.success.eventJoined.subTitle"),
       });
     },
-    onError: () => {
+    onError: (error) => {
       showMessage({
         type: "error",
         text1: "Etkinliğe katılım başarısız 😞",

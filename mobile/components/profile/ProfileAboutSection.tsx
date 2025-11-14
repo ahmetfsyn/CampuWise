@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const ProfileAboutSection = () => {
   const { t } = useTranslation("profile");
   return (
-    <Box className="rounded-xl p-4 mt-6 shadow-md bg-background-0">
+    <Box className="rounded-xl p-4 shadow-md bg-background-0">
       <Text className="text-lg font-semibold mb-2 text-typography-0">
         {t("about.title")}
       </Text>

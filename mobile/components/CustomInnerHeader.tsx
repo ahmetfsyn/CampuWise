@@ -8,7 +8,9 @@ import { Icon } from "./ui/icon";
 import { ArrowLeft } from "lucide-react-native";
 import { useTranslation } from "react-i18next";
 export type CustomInnerHeaderProps = StackHeaderProps & {
-  className?: string;
+  navigation: any;
+  route: any;
+  options: any;
 };
 
 const CustomInnerHeader = ({

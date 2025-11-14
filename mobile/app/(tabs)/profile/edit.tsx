@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import useUserStore from "@/store/useUserStore";
 import useUpdateUserById from "@/hooks/users/useUpdateUserById";
+import { ButtonSpinner } from "@/components/ui/button";
 
 const EditProfileScreen = () => {
   const { email, fullName, attributes } = useUserStore((state) => state.user!);
@@ -235,7 +236,11 @@ const EditProfileScreen = () => {
             className="h-14"
             isDisabled={isUpdating}
           >
-            {t("editProfile.saveButton")}
+            {isUpdating ? (
+              <ButtonSpinner className="text-primary-0" size={24} />
+            ) : (
+              t("editProfile.saveButton")
+            )}
           </AnimatedButton>
         </Box>
       </ScrollView>
