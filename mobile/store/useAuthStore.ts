@@ -16,6 +16,7 @@ import useUserStore from "./useUserStore";
 
 type AuthState = {
   isAuthenticated: boolean;
+  tempRefreshToken: string;
   login: (
     tokenDetails: LoginResponseDto & { rememberMe: boolean }
   ) => Promise<void>;
@@ -28,26 +29,23 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
       isAuthenticated: false,
-      user: null,
+      rememberMe: false,
+      tempRefreshToken: "",
       login: async (tokenDetails) => {
         // Tokenları kaydet
         await saveAccessToken(tokenDetails.accessToken, tokenDetails.expiresIn);
 
         if (tokenDetails.rememberMe) {
           await asyncStorage.setItem("rememberMe", "true");
+
           await saveRefreshToken(tokenDetails.refreshToken);
+        } else {
+          set({
+            tempRefreshToken: tokenDetails.refreshToken,
+          });
         }
 
-        // ✅ Kullanıcının bilgilerini yükle
-        try {
-          const user = await getCurrentUserAsync();
-          useUserStore.getState().setUser(user);
-          set({ isAuthenticated: true });
-        } catch (err) {
-          console.error("Kullanıcı bilgisi alınamadı:", err);
-          // Token geçersiz olabilir, logout yap
-          await get().autoLogout();
-        }
+        set({ isAuthenticated: true });
       },
 
       manuelLogout: async () => {
@@ -70,15 +68,7 @@ export const useAuthStore = create<AuthState>()(
           return;
         }
 
-        // ✅ Token hâlâ geçerli — kullanıcı bilgisini tekrar yükle
-        try {
-          const user = await getCurrentUserAsync();
-          useUserStore.getState().setUser(user);
-          set({ isAuthenticated: true });
-        } catch (err) {
-          console.error("checkAuth -> Kullanıcı yüklenemedi:", err);
-          await get().autoLogout();
-        }
+        // set({ isAuthenticated: true });
       },
     }),
     {

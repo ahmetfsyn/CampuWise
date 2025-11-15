@@ -22,6 +22,8 @@ import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import useLogin from "@/hooks/auth/useLogin";
+import useUserStore from "@/store/useUserStore";
+import { getCurrentUserAsync } from "@/services/user.service";
 const LoginScreen = () => {
   const router = useRouter();
   const { t } = useTranslation("auth");

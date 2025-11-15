@@ -254,10 +254,7 @@ const CreateEventScreen = () => {
                 });
 
                 if (image) {
-                  // const base64String = `data:${image.mimeType};base64,${image.base64}`;
-                  // console.log("base64String : ", base64String);
-
-                  onChange(image); // onChange ile form state'i güncelledik
+                  onChange(image);
                 }
               };
 

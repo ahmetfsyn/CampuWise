@@ -24,10 +24,10 @@
             "department": "Department",
             "university": "University"
         },
-        "validation": {
+        "validations": {
             "fullName": "Please enter a valid full name.",
             "email": "Please enter a valid email address.",
-            "phone": "Please enter a valid phone number."
+            "invalidPhoneNumber": "Please enter a valid phone number."
         },
         "saveButton": "Save",
         "toast": {
