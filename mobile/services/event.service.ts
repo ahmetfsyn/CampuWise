@@ -1,8 +1,6 @@
-import { createApi } from "@/configs/api.config";
+import { api } from "@/configs/api.config";
 import { Event } from "@/types/models";
 import { CreateEventFormValues } from "@/validations/create-event-form";
-
-const api = createApi();
 
 const EVENT_SERVICE_URL_PREFIX = "/event-service";
 

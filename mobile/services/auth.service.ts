@@ -1,9 +1,7 @@
 import { RegisterFormValues } from "@/validations/register-form";
 import { LoginFormValues } from "@/validations/login-form";
-import { createApi } from "@/configs/api.config";
+import { api } from "@/configs/api.config";
 import { LoginResponseDto } from "@/types/models";
-
-const api = createApi();
 
 export const registerAsync = async ({
   email,

@@ -1,5 +1,4 @@
-import { createApi } from "@/configs/api.config";
-const api = createApi();
+import { api } from "@/configs/api.config";
 
 export const getUserByIdAsync = async (userId: string) => {
   try {

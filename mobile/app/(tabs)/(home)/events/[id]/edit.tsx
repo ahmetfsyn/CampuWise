@@ -46,8 +46,6 @@ const EditEventScreen = () => {
 
   const event: Event = JSON.parse(eventString as string);
 
-  // console.log(event);
-
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const { t } = useTranslation("events");
   const { handleCreateEvent, isCreating } = useCreateEvent();
@@ -56,8 +54,6 @@ const EditEventScreen = () => {
     await handleCreateEvent(data);
     return router.canGoBack() && router.back();
   };
-
-  // console.log(event.category);
 
   // todo : buraya gelen event objesinde nedense category gorunmuyor araştır ve duzlet.
 
@@ -265,10 +261,7 @@ const EditEventScreen = () => {
                 });
 
                 if (image) {
-                  // const base64String = `data:${image.mimeType};base64,${image.base64}`;
-                  // console.log("base64String : ", base64String);
-
-                  onChange(image); // onChange ile form state'i güncelledik
+                  onChange(image);
                 }
               };
 

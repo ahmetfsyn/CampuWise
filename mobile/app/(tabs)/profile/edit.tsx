@@ -36,7 +36,7 @@ const EditProfileScreen = () => {
     resolver: zodResolver(editProfileFormSchema),
   });
   const { t } = useTranslation("profile");
-
+  // todo : burda kaldım. input errorları duzgun goster.
   const onSubmit = async (data: any) => {
     await handleUpdateUserById({
       phoneNumber: data.phoneNumber,
@@ -108,7 +108,7 @@ const EditProfileScreen = () => {
                 {errors.fullName && (
                   <Box className="px-2">
                     <Text className="text-error-300">
-                      {errors.fullName.message}
+                      {t(errors.fullName.message as string)}
                     </Text>
                   </Box>
                 )}
@@ -222,7 +222,7 @@ const EditProfileScreen = () => {
                 {errors.phoneNumber && (
                   <Box className="px-2">
                     <Text className="text-error-300">
-                      {errors.phoneNumber.message}
+                      {t(errors.phoneNumber.message as string)}
                     </Text>
                   </Box>
                 )}

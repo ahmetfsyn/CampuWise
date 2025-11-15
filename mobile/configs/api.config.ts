@@ -1,84 +1,68 @@
+import { useAuthStore } from "@/store/useAuthStore";
 import {
   getAccessToken,
   getRefreshToken,
+  removeTokens,
   saveAccessToken,
   saveRefreshToken,
 } from "@/utils/secureStorage";
-import { asyncStorage } from "@/utils/asyncStorage";
-import axios, { AxiosInstance, AxiosError } from "axios";
+import axios from "axios";
+import { router } from "expo-router";
 
-export const createApi = (
-  onUnauthorized?: () => Promise<void>
-): AxiosInstance => {
-  const api = axios.create({
-    baseURL: process.env.EXPO_PUBLIC_BASE_API_URL + "/api",
-    headers: { "Content-Type": "application/json" },
-  });
+export const api = axios.create({
+  baseURL: process.env.EXPO_PUBLIC_BASE_API_URL + "/api",
+  headers: { "Content-Type": "application/json" },
+});
 
-  // Request interceptor to add access token
-  api.interceptors.request.use(async (config) => {
-    const token = await getAccessToken();
-    if (token) {
-      config.headers = {
-        ...config.headers,
-        Authorization: `Bearer ${token}`,
-      };
-    }
-    return config;
-  });
+api.interceptors.request.use(async (request) => {
+  const token = await getAccessToken();
+  console.log("buraya girdi ve accessToken secureStorage dan alındı : ", token);
+  if (token) {
+    request.headers.Authorization = `Bearer ${token}`;
+  }
+  return request;
+});
 
-  // Response interceptor to handle 401 errors
-  api.interceptors.response.use(
-    (response) => response,
-    async (error: AxiosError) => {
-      if (error.response?.status === 401 && onUnauthorized) {
-        await onUnauthorized();
-        // Optionally retry original request
-        if (error.config && error.config.headers) {
-          const newToken = await getAccessToken();
-          if (newToken) {
-            error.config.headers.Authorization = `Bearer ${newToken}`;
-            return api.request(error.config);
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
+      try {
+        const refreshToken =
+          (await getRefreshToken()) || useAuthStore.getState().tempRefreshToken; // Retrieve the stored refresh token.
+        // Make a request to your auth server to refresh the token.
+        console.log("refreshToken : ", refreshToken);
+        const response = await axios.post(
+          process.env.EXPO_PUBLIC_BASE_API_URL +
+            "/api/user-service/auth/refresh-token",
+          {
+            refreshToken,
           }
-        }
+        );
+        const {
+          accessToken,
+          refreshToken: newRefreshToken,
+          expiresIn,
+        } = response.data.data;
+        // Store the new access and refresh tokens.
+
+        await saveAccessToken(accessToken, expiresIn);
+        await saveRefreshToken(newRefreshToken);
+
+        // Update the authorization header with the new access token.
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        return api(originalRequest);
+      } catch (refreshError) {
+        // Handle refresh token errors by clearing stored tokens and redirecting to the login page.
+        console.error("Token refresh failed:", refreshError);
+        removeTokens();
+        router.replace("/auth/login");
+        return Promise.reject(refreshError);
       }
-      return Promise.reject(error);
     }
-  );
-
-  return api;
-};
-
-// Example default onUnauthorized handler
-export const handleUnauthorized = async (): Promise<void> => {
-  const refreshToken = await getRefreshToken();
-  if (!refreshToken) {
-    console.log("refreshToken bulunamadi");
-    return;
+    return Promise.reject(error);
   }
-
-  try {
-    const response = await axios.post(
-      `${process.env.EXPO_PUBLIC_BASE_API_URL}/api/auth/refresh-token`,
-      { refreshToken }
-    );
-    const data = response.data.data;
-    console.log("refreshToken için istek atıldı ve gelen data : ", data);
-
-    await saveAccessToken(data.accessToken, data.expiresIn);
-    console.log("yeni accessToken storage a kaydedildi");
-
-    const rememberMe = await asyncStorage.getItem("rememberMe");
-
-    console.log("rememberMe değeri : ", rememberMe);
-
-    if (rememberMe === "true" && data.refreshToken) {
-      console.log("rememberMe değeri true geldi ve if e girdi");
-
-      await saveRefreshToken(data.refreshToken);
-      console.log("refreshToken storage a kaydedildi");
-    }
-  } catch {
-    // Logout or handle invalid refresh token externally
-  }
-};
+);

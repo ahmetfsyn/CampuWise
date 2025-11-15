@@ -7,8 +7,9 @@ export const editProfileFormSchema = z.object({
   university: z.string().optional().or(z.literal("")),
   phoneNumber: z
     .string()
-    .regex(/^[0-9]+$/, "Telefon numarası sadece rakamlardan oluşmalıdır")
-    .length(10, "Lütfen geçerli bir telefon numarası girin"),
+    .regex(/^[0-9]+$/, "editProfile.validations.invalidPhoneNumber")
+    .length(10, "editProfile.validations.invalidPhoneNumber")
+    .optional(),
   avatarUrl: z.string().optional().or(z.literal("")),
 });
 
